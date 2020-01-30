@@ -1,0 +1,58 @@
+/**index.wxss**/
+
+page {
+    background: #f6f6f6;
+}
+.audio-wrap {
+    text-align: center;
+    padding: 100rpx 0;
+}
+.audio-wrap .audio {
+    width: 80rpx;
+
+}
+.input-spans {
+    display: flex;
+    padding: 0 150rpx;
+    position: relative;
+    justify-content: center;
+}
+
+.input-spans .span {
+    width: 60rpx;
+    height: 60rpx;
+    border-bottom: 1px solid #999;
+    margin: 0 12rpx;
+    text-align: center;
+    font-size: 38rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bolder;
+    color: #4a4a4a;
+}
+.input-spans .span.error { color: #f7572a; }
+.input-spans .span.correct { color: #43C6AC; }
+
+.input {
+    position: absolute;
+    /* left: -100vw; */
+    opacity: 0;
+    /* background: red; */
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+.submit {
+    width: 60%;
+    /* height: 100rpx;   */
+    color: #fff;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 20rpx;
+    background-color: lightskyblue;
+    margin: 0 auto;
+}

@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+
+
+    <view class="form" bindsubmit="submitCode">
+        <view class="audio-wrap" bindtap="audioPlay">
+            <image class="audio" src="../../assets/images/audio@2x.png" mode="widthFix"></image>
+        </view>
+        <view class='input-spans'>
+            <view wx:for="{{answerLength}}" wx:key="index" catchtap='focusBox'
+                    class="span {{ spanClass }} ">
+                    {{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
+            <input class='input' bindinput="input" value="{{ inputValue }}" maxlength="{{answerLength}}" name="code" type='digit'  focus="{{focus}}"></input>    
+        </view>
+    </view>
+
+
+</view>
+
+<!-- 
+<wxs module="computed">
+module.exports.resolveClass = function(inputValue, answer) {
+    if (inputValue.length >= answer.length) return inputValue === answer ? 'correct' : 'error';
+    else return ''
+}
+</wxs> -->

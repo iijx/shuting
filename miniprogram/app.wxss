@@ -1,0 +1,6 @@
+/**app.wxss**/
+
+page {
+  background: #ededed;
+  min-height: 100%;
+}
