@@ -1,0 +1,15 @@
+<!--pages/level/level.wxml-->
+
+<view class="container">
+
+    <view class="level-list">
+        <view class="level level-{{ item.level }}"  wx:for="{{ levelList }}" wx:key="index" wx:item="item">
+            <view class="title">{{ item.title }}</view>
+
+            <view wx:if="{{item.isPro}}" class="isPro">PRO</view>
+            <view class="detail-note">{{ item.note }}</view>
+            <view class="select-btn" data-level="{{ item.level }}" bindtap="selectBtn">选择</view>
+        </view>
+    
+    </view>
+</view>

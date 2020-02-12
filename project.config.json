@@ -11,9 +11,10 @@
 	},
 	"appid": "wx11a23be8fd1b03f3",
 	"projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
-	"libVersion": "2.8.1",
+	"libVersion": "2.10.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -47,6 +48,20 @@
 					"id": -1,
 					"name": "pages/learn/learn",
 					"pathName": "pages/learn/learn",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/level",
+					"pathName": "pages/level/level",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my",
+					"pathName": "pages/my/my",
 					"scene": null
 				}
 			]

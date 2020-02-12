@@ -1,5 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+      "switch": "../../components/switch/switch",
+      "cell": "../../components/cell/cell"
+  },
   "navigationBarBackgroundColor": "#F9CE0D"
 
 }

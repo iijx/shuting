@@ -1,0 +1,50 @@
+<!--pages/my/my.wxml-->
+<view class="container">
+    <view class="top">
+        <view class="box1">
+        </view>
+        <view class="box2"></view>
+    </view>
+
+    
+
+    <view class="userInfo">
+        <!-- <button
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="avatar"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+    ></button> -->
+        <open-data class="avatar" type="userAvatarUrl"></open-data>
+        <open-data class="nickName" type="userNickName"></open-data>
+        <view class="member">
+            <view wx:if="{{isPro}}">暂未加入会员</view>
+            <view wx:else>暂未加入会员</view>
+            <view class="join-member">立即加入</view>
+        </view>
+
+
+    </view>
+
+    <view class="activity">
+        <view class="activity-note" >全力抗疫，在家充电，这个2月所有用户均可获赠1一个月会员</view>
+        <view class="get-member-btn" bindtap="getActivityMember">领取专属会员(仅2月可领)</view>
+    </view>
+
+
+    <view class="operators">
+        
+        <view class="operator">
+            <button class="contact-button" open-type="contact">建议/联系/留言</button>
+            <view class="arrow-right"></view>
+        </view>
+        <!-- <view class="operator" bindtap="wait">模板</view> -->
+        
+        <view class="operator" bindtap="pageToAbout">
+            <view>关于</view>
+            <view class="arrow-right"></view>
+        </view>
+        <!--<view class="operator" bindtap="wait">高级设置</view>-->
+    </view>
+</view>

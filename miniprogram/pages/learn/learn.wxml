@@ -4,15 +4,62 @@
 
     <view class="form" bindsubmit="submitCode">
         <view class="audio-wrap" bindtap="audioPlay">
-            <image class="audio" src="../../assets/images/audio@2x.png" mode="widthFix"></image>
+            <image class="audio" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
         </view>
         <view class='input-spans'>
             <view wx:for="{{answerLength}}" wx:key="index" catchtap='focusBox'
                     class="span {{ spanClass }} ">
                     {{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
-            <input class='input' bindinput="input" value="{{ inputValue }}" maxlength="{{answerLength}}" name="code" type='digit'  focus="{{focus}}"></input>    
+            <!-- <input class='input' bindinput="input" value="{{ inputValue }}" maxlength="{{answerLength}}" name="code" type='digit'  focus="{{focus}}"></input>     -->
         </view>
     </view>
+
+
+    <!-- 键盘 -->
+    <view class="keyboard-wrap">
+        <view class="prompt">
+            <image class="item show-answer" bindtap="promptBtn" src="../../assets/imgs/prompt.png"></image>
+        </view>
+        <view class="keyboard">
+            <view class="num-item-line">
+                <view class="num-item" data-value="1" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">1</view>
+                <view class="num-item" data-value="2" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">2</view>
+                <view class="num-item" data-value="3" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">3</view>
+            </view>
+            <view class="num-item-line">
+                <view class="num-item" data-value="4" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">4</view>
+                <view class="num-item" data-value="5" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">5</view>
+                <view class="num-item" data-value="6" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">6</view>
+            </view>
+            <view class="num-item-line">
+                <view class="num-item" data-value="7" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">7</view>
+                <view class="num-item" data-value="8" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">8</view>
+                <view class="num-item" data-value="9" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">9</view>
+            </view>
+            <view class="num-item-line">
+                <view class="num-item no-bg" data-value="." bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">.</view>
+                <view class="num-item" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
+                <view class="num-item no-bg" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">x</view>
+            </view>
+        </view>
+    </view>
+    <!-- <view>
+        <block wx:for="{{ nums }}" wx:for-item="n" wx:key="index">
+            <view class="{{ classes.number }}" wx:if="{{ index === 3 }}">
+                <view class="{{ classes.text }}" hover-class="{{ classes.hover }}" hover-start-time="20" hover-stay-time="170" wx:if="{{ showCancel }}" bindtap="hide">{{ cancelText }}</view>
+                <view class="{{ classes.text }}" hover-class="{{ classes.hover }}" hover-start-time="20" hover-stay-time="170" wx:else></view>
+                <block wx:for="{{ n }}" wx:for-item="m" wx:key="index">
+                    <view class="{{ classes.text }}" hover-class="{{ classes.hover }}" hover-start-time="20" hover-stay-time="170" data-value="{{ m }}" bindtap="increase">{{ m }}</view>
+                </block>
+                <view class="{{ classes.text }}" bindtap="decrease">×</view>
+            </view>
+            <view class="{{ classes.number }}" wx:else>
+                <block wx:for="{{ n }}" wx:for-item="m" wx:key="index">
+                    <view class="{{ classes.text }}" hover-class="{{ classes.hover }}" hover-start-time="20" hover-stay-time="170" data-value="{{ m }}" bindtap="increase">{{ m }}</view>
+                </block>
+            </view>
+        </block>
+    </view> -->
 
 
 </view>

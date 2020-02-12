@@ -1,5 +1,6 @@
 //index.js
 const { Util } = getApp()
+import { LevelList, SubLevelList } from '../../lib/level.js';
 const maxNumMap = {
     1: 10,
     2: 100,
@@ -14,9 +15,10 @@ const maxNumMap = {
     11: 100000000000,
 }
 let AudioContext = null;
+
 Page({
     data: {
-        maxDigitNum: 3, // 最多位数，例如2，表最多2位数，即最大值99
+        maxLength: 3, // 最多位数，例如2，表最多2位数，即最大值99
         type: 'number', // number || year || time || phone
 
         answer: 0,
@@ -25,29 +27,30 @@ Page({
         spanClass: '',
 
         allNums: [],
-        focus: false,
+
+        nums: [1, 2, 3, 4,5 ,6 ,7 ,8, 9, '.', 0, 'x']
     },
 
     onLoad: function (opt = {}) {
-        const { maxDigitNum = 4, type = 'number', } = opt;
+        console.log('learn options', opt);
+        let curSubLevel = SubLevelList.find(item => item.level === parseInt(opt.subLevel)) ;
+        console.log(curSubLevel);
+
+        const { maxLength = 4, type = 'number', } = curSubLevel;
         this.setData({
-            maxDigitNum,
+            maxLength,
             type
         });
         this.init();
     },
     init() {
-        this.data.allNums = Util.allNums.filter(num => num < maxNumMap[this.data.maxDigitNum]).sort(() => Math.random() - 0.5);
-        console.log(this.data.allNums);
+        this.data.allNums = Util.allNums.filter(num => num < maxNumMap[this.data.maxLength]).sort(() => Math.random() - 0.5);
         AudioContext = wx.createInnerAudioContext()
         this.next()
     },
     audioPlay() {
         AudioContext.src = `http://cdnword.iijx.site/assets/audio/numberAudio/${this.data.answer}.mp3`;
         AudioContext.play();
-        this.setData({
-            focus: true,
-        })
     },
    
     _preStartInit() {
@@ -106,20 +109,40 @@ Page({
             }
         }
     },
-    submitCode(e) {
-        if (e.detail.value.code.length < this.data.codeLength) {
-            wx.showToast({
-                title: '验证码没有填全哦~',
-                icon: "none",
-                duration: 1500
-            })
-        } else {
-            wx.showToast({
-                title: '登录成功',
-                duration: 1500
-            })
+    
+    promptBtn() {
+        if(this.data.inputValue.length >= this.data.answerLength) return;
+
+        let errorIndex = -1;
+        let answerStr = this.data.answer + '';
+        for(let i = 0; i < this.data.answerLength; i++) {
+            if(this.data.inputValue[i] !== answerStr[i]) {
+                errorIndex = i;
+                break;
+            }
         }
-        console.log(e.detail.value.code.length);
+        let newInputValue = answerStr.slice(0, errorIndex + 1);
+        this.setData({
+            inputValue: newInputValue
+        })
+
+        if(newInputValue.length >= this.data.answerLength) this.showAnswer();
     },
+    keyTap(e) {
+        const key = e.target.dataset.value;
+        const newValue = key === 'x' ? this.data.inputValue.slice(0, -1) : this.data.inputValue + key;
+
+        if (newValue.length > this.data.answerLength) return;
+        else {
+            this.setData({
+                spanClass: '',
+                inputValue: newValue
+            })
+
+            if (newValue.length >= this.data.answerLength) {
+                this.showAnswer();
+            }
+        }
+    }
 
 })

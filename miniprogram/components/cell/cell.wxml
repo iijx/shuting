@@ -1,0 +1,15 @@
+<!--components/cell/cell.wxml-->
+<view class="cell">
+    <view class="cell-hd">
+        <slot name="hd"></slot>
+    </view>
+
+    <view class="cell-bd">
+        <slot name="bd"></slot>
+    </view>
+
+    <view class="cell-ft">
+        <slot name="ft"></slot>
+    </view>
+    
+</view>
