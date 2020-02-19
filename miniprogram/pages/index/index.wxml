@@ -12,8 +12,9 @@
         <view class="title">正在练习「{{ curLevel.title || '暂无' }}」</view>
         <view class="body">
             <view class="levellist-wrap">
-                <view wx:for="{{ curSubLevelList }}" wx:key="index" wx:item="item" class="level-item">
-                    <view>{{ item.title }}</view>
+                <view wx:for="{{ curSubLevelList }}" wx:key="index" wx:item="item" class="level-item-wrap">
+                    <!-- <view>{{ item.title }}</view> -->
+                    <van-circle wux-class="level-item" value="100" color="#3D96D3">{{ item.title }}</van-circle>
                 </view>
                 <view wx:if="{{ curSubLevelList.length <= 0 }}">
                     <view></view>

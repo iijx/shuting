@@ -3,6 +3,10 @@
 page {
     background: #f6f6f6;
 }
+.container {
+    padding: 64rpx;
+    box-sizing: border-box;
+}
 .audio-wrap {
     text-align: center;
     padding: 100rpx 0;

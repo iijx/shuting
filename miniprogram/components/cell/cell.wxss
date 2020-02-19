@@ -2,18 +2,14 @@
 .cell {
     display: flex;
     align-items: center;
-    margin-bottom: 32rpx;
 }
 
 .cell-hd {
     color: #313f41;
-    font-weight: bold;
-    font-size: 30rpx;
 }
 .cell-bd {
     flex: 1;
 }
 .cell-ft {
     display: block;
-    font-size: 0;
 }

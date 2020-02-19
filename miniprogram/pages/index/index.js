@@ -53,7 +53,6 @@ Page({
         }
     },
     switchChange(e) {
-        console.log(e);
         if(e.detail.type === 'num') this.data.numSwitch.value = e.detail.value;
         else if(e.detail.type === 'time') this.data.timeSwitch.value = e.detail.value;
         else if(e.detail.type === 'phone') this.data.phoneSwitch.value = e.detail.value;

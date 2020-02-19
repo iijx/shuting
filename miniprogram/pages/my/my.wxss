@@ -1,6 +1,9 @@
 /* pages/my/my.wxss */
 
-
+.container {
+    /* background: #fff; */
+    min-height: 100vh;
+}
 .top {
     height: 50%;
     width: 100%;
@@ -35,6 +38,7 @@
     font-size: 28rpx;
     text-align: center;
     padding: 40rpx 60rpx 64rpx;
+    
 }
 .activity-note {
     font-size: 32rpx;
@@ -50,20 +54,20 @@
 }
 
 
-
-.userInfo {
+.user-wrap {
+    position: absolute;
     width: 684rpx;
+    left: 33rpx;
     background: rgba(255, 255, 255, 1);
-    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
-    opacity: 1;
     border-radius: 5px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 32rpx 40rpx;
-    display: flex;
-    background: #fff;
-    align-items: center;
     transform: translate(0, -50%);
+    padding: 32rpx 40rpx;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.userInfo {
+    display: flex;
+    align-items: center;
 }
 .userInfo .avatar {
     width: 120rpx;
@@ -81,23 +85,51 @@
 
 .userInfo .member {
     text-align: center;
+    font-size: 24rpx;
+    border: 1px solid #aaa;
+    background: #eaeaea;
+    color: #aaa;
+    border-radius: 10rpx;
+    line-height: 1.6;
+    padding: 0 8rpx;
 }
 
 .join-member {
     color: #D82C1E;
     font-size: 28rpx;
     text-decoration: underline;
-
+}
+.progress-wrap {
+    margin-top: 32rpx;
+}
+.progress-cell {
+    margin-top: 18rpx;
+}
+.progress-note {
+    font-size: 24rpx;
+    color: #c9c9cf;
+    justify-content: space-around
+}
+.progress-ft {
+    font-size: 24rpx;
+    color: #000;
+    margin-left: 20rpx;
 }
 
 
 
+
+
 .operators {
+    width: 683rpx;
+    margin: 0 auto;
     margin-top: 40rpx;
     background: #fff;
     padding-left: 28rpx;
-    border-top: 1rpx solid rgb(217, 217, 217);
-    border-bottom: 1rpx solid rgb(217, 217, 217);
+    border-radius: 10rpx;
+    /* border-top: 1rpx solid rgb(217, 217, 217); */
+    /* border-bottom: 1rpx solid rgb(217, 217, 217); */
+    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
 }
 .operators .operator {
     position: relative;
@@ -136,5 +168,4 @@
     border-top: solid 1px #c9c9cf;
     border-right: solid 1px #c9c9cf;
     transform: translateY(-50%) rotate(45deg); 
-
 }

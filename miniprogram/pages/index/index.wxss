@@ -6,6 +6,7 @@ page {
 
 .container {
     width: 100%;
+    
 }
 
 .top {
@@ -64,6 +65,7 @@ page {
 .mid .body {
     padding: 32rpx 40rpx;
     background: #fff;
+    background: rgba(0, 0, 0, .7);
 }
 .levellist-wrap {
     display: flex;
@@ -71,15 +73,10 @@ page {
     padding: 60rpx 0 120rpx;
 }
 .level-item {
-    width: 160rpx;
-    height: 160rpx;
-    border-radius: 50%;
-    background: #3D96D3;
-    display: flex;
+    /* border-radius: 50%; */
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 24rpx;
+    align-items: center; */
 
 }
 .item {

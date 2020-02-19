@@ -1,5 +1,5 @@
 <!--components/cell/cell.wxml-->
-<view class="cell">
+<view class="custom-class cell">
     <view class="cell-hd">
         <slot name="hd"></slot>
     </view>

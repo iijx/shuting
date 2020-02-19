@@ -1,5 +1,6 @@
 // components/cell/cell.js
 Component({
+    externalClasses: ['custom-class'],
     options: {
         multipleSlots: true
     },

@@ -3,13 +3,13 @@
 const app = getApp();
 
 Page({
-
     /**
      * Page initial data
      */
     data: {
         avatarUrl: '../../assets/imgs/user-unlogin.png',
-        userInfo: {}
+        userInfo: {},
+        progressValue: 10,
     },
 
     /**

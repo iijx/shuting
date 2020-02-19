@@ -1,0 +1,35 @@
+/* pages/buy/buy.wxss */
+.userInfo {
+    background: #f9ce0d;
+    color: #3e3f41;
+    opacity: 1;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 32rpx 40rpx;
+    display: flex;
+    align-items: center;
+}
+.userInfo .avatar {
+    width: 100rpx;
+    height: 100rpx;
+    display: block;
+    margin-right: 28rpx;
+    overflow: hidden;
+    border-radius: 50%;
+    background-size: cover;
+    background-color: white;
+}
+.userInfo .nickName {
+    flex: 1;
+}
+
+.userInfo .member {
+    text-align: center;
+}
+
+.join-member {
+    color: #D82C1E;
+    font-size: 28rpx;
+    text-decoration: underline;
+
+}

@@ -1,15 +1,21 @@
 <!--pages/level/level.wxml-->
 
 <view class="container">
-
     <view class="level-list">
-        <view class="level level-{{ item.level }}"  wx:for="{{ levelList }}" wx:key="index" wx:item="item">
-            <view class="title">{{ item.title }}</view>
+        <!-- <van-button type="default" custom-class="prompt">默认按钮</van-button> -->
+        <block wx:for="{{ levelList }}" wx:key="index" wx:item="item">
+            <cell wx:if="{{item.isPro && index === 1}}" custom-class="prompt">
+                <view slot="hd" style="width: 32rpx;"></view>
+                <view class="note" slot="bd">立即解锁高级训练课程</view>
+                <view slot="ft" class="arrow">></view>
+            </cell>
 
-            <view wx:if="{{item.isPro}}" class="isPro">PRO</view>
-            <view class="detail-note">{{ item.note }}</view>
-            <view class="select-btn" data-level="{{ item.level }}" bindtap="selectBtn">选择</view>
-        </view>
-    
+            <view class="level level-{{ item.level }}">
+                <view class="title">{{ item.title }}</view>
+                <view wx:if="{{item.isPro}}" class="isPro">Pro</view>
+                <view class="detail-note">{{ item.note }}</view>
+                <view class="select-btn" data-level="{{ item.level }}" bindtap="selectBtn">选择</view>
+            </view>
+        </block>
     </view>
 </view>

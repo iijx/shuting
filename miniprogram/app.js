@@ -1,5 +1,6 @@
 //app.js
 import * as Util from "./lib/util";
+import Config from './config.js'
 App({
     onLaunch: function() {
         if (!wx.cloud) {
@@ -29,9 +30,16 @@ App({
 
         this.globalData = {
             curLevel: wx.getStorageSync('l_curLevel'),
-            subLevelLearnedMap: {}
+            subLevelLearnedMap: JSON.parse(wx.getStorageSync('l_subLevelLearnedMap') || '{}'),
+            learnHistory: []
         }
     },
     Util,
-    globalData: {}
+    Config,
+    globalData: {},
+
+    setSingleSubLevelLearned(key, value) {
+        this.globalData.subLevelLearnedMap[key] = value;
+        wx.setStorageSync('l_subLevelLearnedMap', JSON.stringify(this.globalData.subLevelLearnedMap));
+    }
 })

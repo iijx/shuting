@@ -1,0 +1,49 @@
+/* pages/summary/summary.wxss */
+
+.container {
+    padding: 100rpx 0 0 0;
+}
+.main {
+    width: 686rpx;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    padding: 32rpx;
+    position: relative;
+}
+.award {
+    width: 100rpx;
+    height: 100rpx;
+}
+.avatar {
+    position: absolute;
+    top: 0;
+    right: 30rpx;
+    transform: translate(0, -50%);
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+}
+.nickName {
+    position: absolute;
+    text-align: center;
+    font-size: 34rpx;
+    width: 180rpx;
+    top: 70rpx;
+    right: 0;
+}
+.note {
+    position: absolute;
+    font-size: 34rpx;
+    right: 32rpx;
+    top: 130rpx;
+    color: #FF6947;
+}
+.content {
+    padding: 64rpx 0;
+    text-align: center;
+    line-height: 2.3;
+}

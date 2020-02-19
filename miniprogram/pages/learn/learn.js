@@ -1,5 +1,6 @@
 //index.js
-const { Util } = getApp()
+const app = getApp();
+const { Util, Config } = app;
 import { LevelList, SubLevelList } from '../../lib/level.js';
 const maxNumMap = {
     1: 10,
@@ -20,6 +21,8 @@ Page({
     data: {
         maxLength: 3, // 最多位数，例如2，表最多2位数，即最大值99
         type: 'number', // number || year || time || phone
+        curSubLevel: -1,
+        score: 0,
 
         answer: 0,
         answerLength: 0,
@@ -30,26 +33,42 @@ Page({
 
         nums: [1, 2, 3, 4,5 ,6 ,7 ,8, 9, '.', 0, 'x']
     },
-
+    // 
     onLoad: function (opt = {}) {
-        console.log('learn options', opt);
-        let curSubLevel = SubLevelList.find(item => item.level === parseInt(opt.subLevel)) ;
-        console.log(curSubLevel);
+        console.log("learn page 正在学习", opt);
+        if(!opt.subLevel) {
+            wx.showToast({
+                title: '无课程级别',
+                icon: 'warn',
+                duration: 2000
+            })
+            return;
+        }
 
-        const { maxLength = 4, type = 'number', } = curSubLevel;
+        let curSubLevel = SubLevelList.find(item => item.level === parseInt(opt.subLevel)) || {};
+        const { maxLength = 4, type = 'number', level } = curSubLevel;
+
         this.setData({
+            curSubLevel: level,
             maxLength,
-            type
+            type,
+            score: app.globalData.subLevelLearnedMap[level] || 0
         });
         this.init();
     },
     init() {
         this.data.allNums = Util.allNums.filter(num => num < maxNumMap[this.data.maxLength]).sort(() => Math.random() - 0.5);
         AudioContext = wx.createInnerAudioContext()
-        this.next()
+        this.nextWord()
+    },
+    _genAudioSrcByNumAndType(num, type) {
+        let dir = '';
+        if (type === 'number') dir = 'numberAudio';
+        else if (type === 'phone') dir = 'phoneAudio';
+        return `${Config.cdnDomain}/assets/audio/${dir}/${this.data.answer}.mp3`;
     },
     audioPlay() {
-        AudioContext.src = `http://cdnword.iijx.site/assets/audio/numberAudio/${this.data.answer}.mp3`;
+        AudioContext.src = this._genAudioSrcByNumAndType(this.data.answer, this.data.type);
         AudioContext.play();
     },
    
@@ -62,54 +81,59 @@ Page({
     _genAnswerByType() {
         if(this.data.type === 'number') {
             this.data.answer = this.data.allNums.pop();
-            this.audioPlay();
+        } else if (this.data.type === 'phone'){
+            this.data.answer = this.data.allPhones.pop();
         }
+
+        this.audioPlay();
         this.setData({
             answerLength: (this.data.answer + '').length
         })
     },
     showAnswer(autoNextIfCorrect = true) {
         if (this.data.inputValue+'' === this.data.answer+'' ) {
-            AudioContext.src = 'http://cdnword.iijx.site/assets/audio/commonAudio/rosetta_right.m4a';
+            this.data.score += Config.correctScore;
+            app.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
+            AudioContext.src = Config.correctAudioSrc;
             this.setData({
+                score: this.data.score,
                 spanClass: 'correct'
             })
             if (autoNextIfCorrect) {
-                Util.sleep(2000).then(() => this.next())
+                Util.sleep(2000).then(() => this.nextWord())
             }
         } else {
-            AudioContext.src = 'http://cdnword.iijx.site/assets/audio/commonAudio/rosetta_error.m4a';
+            AudioContext.src = errorAudioSrc;
+            this.data.score += Config.errorScore;
+            if (this.data.score < 0) this.data.score = 0; 
+
+            app.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
             this.setData({
+                score: this.data.score,
                 spanClass: 'error'
             })
             Util.sleep(1500).then(() => this.audioPlay())
         }
         AudioContext.play();
     },
-    next() {
-        this._preStartInit();
-        this._genAnswerByType()
+    _saveHistory() {
+        app.globalData.learnHistory.push({
+            word: this.data.answer,
+            type: this.data.type,
+            level: this.data.curSubLevel
+        });
     },
-    focusBox() {
-        this.setData({
-            isFocus: true
-        })
-    },
-    input(e) {
-        const value = e.detail.value.length > this.data.answerLength ? this.data.inputValue : e.detail.value;
-
-        if(value + '' === this.data.inputValue + '') return;
-        else {
-            this.setData({
-                spanClass: '',
-                inputValue: value
+    nextWord() {
+        this._saveHistory();
+        if (this.data.score >= 100) {
+            wx.redirectTo({
+                url: '../summary/summary',
             })
-            if(e.detail.value.length >= this.data.answerLength) {
-                this.showAnswer();
-            }
+        } else {
+            this._preStartInit();
+            this._genAnswerByType()
         }
     },
-    
     promptBtn() {
         if(this.data.inputValue.length >= this.data.answerLength) return;
 

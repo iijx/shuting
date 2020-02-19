@@ -4,10 +4,23 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"enhance": true
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"nodeModules": true
 	},
 	"appid": "wx11a23be8fd1b03f3",
 	"projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
@@ -62,6 +75,20 @@
 					"id": -1,
 					"name": "pages/my",
 					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "summary",
+					"pathName": "pages/summary/summary",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "buy",
+					"pathName": "pages/buy/buy",
 					"scene": null
 				}
 			]
