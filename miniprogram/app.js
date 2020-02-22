@@ -1,45 +1,47 @@
 //app.js
 import * as Util from "./lib/util";
+import XData from "./lib/xdata";
 import Config from './config.js'
+
+XData.init();
+console.log(XData);
+
 App({
-    onLaunch: function() {
+    onLaunch: function(opt) {
+        console.log(opt);
         if (!wx.cloud) {
             console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-            wx.redirectTo({
-                url: '../chooseLib/chooseLib',
-            })
         } else {
             wx.cloud.init({
                 env: 'dev-c7oqs', // env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源, 此处请填入环境 ID, 环境 ID 可打开云控制台查看
                 traceUser: true,
             })
-            // 调用云函数
-            wx.cloud.callFunction({
-                name: 'login',
-                data: {},
-                success: res => {
-                    console.log('[云函数] [login] user openid: ', res)
-                    this.globalData.openid = res.result.openid
-                    this.globalData.userId = res.result._id
-                },
-                fail: err => {
-                    console.error('[云函数] [login] 调用失败', err)
-                }
-            })
-        }
+            // 如果未登录过，则登录
+            if (!XData.user.openid) {
+                wx.cloud.callFunction({
+                    name: 'login',
+                    data: {
+                        fromOpenid: opt.query.fromOpenid
+                    },
+                    success: res => {
+                        console.log('[云函数] [login] user openid: ', res)
+                        XData.setUser({
+                            openid: res.result.openid,
+                            _id: res.result._id
+                        })
+                    },
+                    fail: err => {
+                        console.error('[云函数] [login] 调用失败', err)
+                    }
+                })
+            }
 
-        this.globalData = {
-            curLevel: wx.getStorageSync('l_curLevel'),
-            subLevelLearnedMap: JSON.parse(wx.getStorageSync('l_subLevelLearnedMap') || '{}'),
-            learnHistory: []
+            
+
+            
         }
     },
     Util,
     Config,
-    globalData: {},
-
-    setSingleSubLevelLearned(key, value) {
-        this.globalData.subLevelLearnedMap[key] = value;
-        wx.setStorageSync('l_subLevelLearnedMap', JSON.stringify(this.globalData.subLevelLearnedMap));
-    }
+    XData,
 })

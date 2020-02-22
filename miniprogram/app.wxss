@@ -1,6 +1,10 @@
 /**app.wxss**/
 
 page {
-  background: #ededed;
-  min-height: 100%;
+    background: #ededed;
+    min-height: 100%;
+
+    /* --button-primary-color: @white; */
+    --button-primary-background-color: #3D96D3;
+    --button-primary-border-color: #3D96D3;
 }

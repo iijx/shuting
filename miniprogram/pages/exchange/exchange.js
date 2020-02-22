@@ -1,31 +1,23 @@
-// pages/level/level.js
-
-const app = getApp();
-const { XData } = getApp();
-import { LevelList } from '../../lib/level.js';
-
+// pages/exchange/exchange.js
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        levelList: [...LevelList]
+        value: ''
     },
 
     /**
      * Lifecycle function--Called when page load
      */
-    onLoad: function (options) {
-        
-    },
-    selectBtn: function(e) {
-        let level = e.target.dataset.level;
-        XData.curLevel = level;
-        XData.curSubLevel = XData.subLevelLearnedMap[level];
-
-        wx.setStorageSync('l_curLevel', level);
-
+    onLoad: function (opt) {
+        console.log('opt', opt)
+        if(opt && opt.code) {
+            this.setData({
+                value: opt.code.trim()
+            })
+        }
     },
 
     /**
@@ -34,11 +26,16 @@ Page({
     onReady: function () {
 
     },
+    
 
     /**
      * Lifecycle function--Called when page show
      */
     onShow: function () {
+
+    },
+
+    onChange() {
 
     },
 

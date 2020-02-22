@@ -1,30 +1,26 @@
-// pages/level/level.js
-
-const app = getApp();
-const { XData } = getApp();
-import { LevelList } from '../../lib/level.js';
-
+// pages/message/message.js
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        levelList: [...LevelList]
+        list: [
+            {
+                type: 'exchangeCode',
+                title: '限时分享活动奖励',
+                content: '恭喜您获得在【限时分享活动】中获得一周会员奖励，会员兑换码为1234',
+                exchangeCode: '1234',
+                status: 1 // 1 未使用，2 已经使用
+
+            }
+        ]
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        
-    },
-    selectBtn: function(e) {
-        let level = e.target.dataset.level;
-        XData.curLevel = level;
-        XData.curSubLevel = XData.subLevelLearnedMap[level];
-
-        wx.setStorageSync('l_curLevel', level);
 
     },
 
@@ -42,6 +38,11 @@ Page({
 
     },
 
+    linkExchangeCode(e) {
+        wx.redirectTo({
+            url: '../exchange/exchange?code=' + e.currentTarget.dataset.code,
+        })
+    },
     /**
      * Lifecycle function--Called when page hide
      */

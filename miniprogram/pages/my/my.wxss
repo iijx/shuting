@@ -81,6 +81,7 @@
 }
 .userInfo .nickName {
     flex: 1;
+    color: #3D96D3;
 }
 
 .userInfo .member {
@@ -107,7 +108,7 @@
 }
 .progress-note {
     font-size: 24rpx;
-    color: #c9c9cf;
+    color: #3E3F41;
     justify-content: space-around
 }
 .progress-ft {

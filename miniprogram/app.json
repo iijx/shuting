@@ -6,7 +6,9 @@
         "pages/level/level",
         "pages/summary/summary",
         "pages/my/my",
-        "pages/buy/buy"
+        "pages/buy/buy",
+        "pages/message/message",
+        "pages/exchange/exchange"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -20,8 +22,12 @@
         "van-circle": "@vant/weapp/circle",
         "van-tab": "@vant/weapp/tab",
         "van-tabs": "@vant/weapp/tabs",
+        "van-button": "@vant/weapp/button",
+        "van-field": "@vant/weapp/field",
+        "van-panel": "@vant/weapp/panel",
         "cell": "/components/cell/cell"
     },
+    
     "sitemapLocation": "sitemap.json",
     "tabBar": {
         "color": "#929292",

@@ -9,9 +9,8 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
+		"nodeModules": true,
+		"autoAudits": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -20,7 +19,8 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"nodeModules": true
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false
 	},
 	"appid": "wx11a23be8fd1b03f3",
 	"projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
@@ -89,6 +89,14 @@
 					"id": -1,
 					"name": "buy",
 					"pathName": "pages/buy/buy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "index_from_user",
+					"pathName": "pages/index/index",
+					"query": "fromOpenid=123",
 					"scene": null
 				}
 			]

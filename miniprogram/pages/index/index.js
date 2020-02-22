@@ -1,5 +1,6 @@
 //index.js
 const app = getApp()
+const { XData } = app;
 import { LevelList, SubLevelList } from '../../lib/level.js';
 Page({
     data: {
@@ -26,7 +27,7 @@ Page({
         
     },
     onShow: function() {
-        let { curLevel, curSubLevel } = app.globalData;
+        let { curLevel, curSubLevel } = XData;
 
         if (curLevel) {
             let curSubLevelList = [...(SubLevelList.filter(item => item.pLevel === curLevel))];
@@ -65,9 +66,6 @@ Page({
     },
     // 用户点击右上角分享
     onShareAppMessage: function (res) {
-        return {
-            path: '/pages/index/index',
-            title: '我在数听英语提升听力',
-        }
+        return XData.getShareInfo();
     },
 })

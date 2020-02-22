@@ -1,0 +1,9 @@
+/* pages/exchange/exchange.wxss */
+.container {
+    padding: 32rpx;
+}
+.title {
+    color: #929292;
+    font-size: 29rpx;
+    line-height: 2.3;
+}

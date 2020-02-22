@@ -1,6 +1,6 @@
 //index.js
 const app = getApp();
-const { Util, Config } = app;
+const { Util, Config, XData } = app;
 import { LevelList, SubLevelList } from '../../lib/level.js';
 const maxNumMap = {
     1: 10,
@@ -52,7 +52,7 @@ Page({
             curSubLevel: level,
             maxLength,
             type,
-            score: app.globalData.subLevelLearnedMap[level] || 0
+            score: XData.subLevelLearnedMap[level] || 0
         });
         this.init();
     },
@@ -93,7 +93,7 @@ Page({
     showAnswer(autoNextIfCorrect = true) {
         if (this.data.inputValue+'' === this.data.answer+'' ) {
             this.data.score += Config.correctScore;
-            app.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
+            XData.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
             AudioContext.src = Config.correctAudioSrc;
             this.setData({
                 score: this.data.score,
@@ -107,7 +107,7 @@ Page({
             this.data.score += Config.errorScore;
             if (this.data.score < 0) this.data.score = 0; 
 
-            app.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
+            XData.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
             this.setData({
                 score: this.data.score,
                 spanClass: 'error'
@@ -116,15 +116,7 @@ Page({
         }
         AudioContext.play();
     },
-    _saveHistory() {
-        app.globalData.learnHistory.push({
-            word: this.data.answer,
-            type: this.data.type,
-            level: this.data.curSubLevel
-        });
-    },
     nextWord() {
-        this._saveHistory();
         if (this.data.score >= 100) {
             wx.redirectTo({
                 url: '../summary/summary',

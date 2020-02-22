@@ -8,7 +8,7 @@
     
     <view class="user-wrap">
         <view class="userInfo">
-            <!-- <button open-type="getUserInfo"  bindgetuserinfo="onGetUserInfo" class="avatar" style="background-image: url({{avatarUrl}})" size="default" ></button> -->
+            <!-- <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="avatar" style="background-image: url({{avatarUrl}})" size="default" ></button> -->
             <open-data class="avatar" type="userAvatarUrl"></open-data>
             <open-data class="nickName" type="userNickName"></open-data>
             <view class="member">
@@ -23,16 +23,16 @@
                 <van-progress slot="bd" show-pivot="{{false}}" color="#f9ce0d" percentage="{{progressValue}}" />
                 <view slot="ft" class="progress-ft">0/3</view>
             </cell>
-            <view class="progress-note">邀请3位新用户进入即可获赠7天会员, 可以累加噢!</view>
-            <view style="margin-top: 28rpx;"></view>
+            <view class="progress-note">[限时] 邀请3位新用户进入即可获赠7天会员, 可累加噢!</view>
+            <view style="margin-top: 38rpx;"></view>
 
             <view style="display: flex;">
                 <view style="flex: 1">
-                <van-button round size="small" color="#f9ce0d" custom-style="color: #4a4a4a; font-weight: bold;" block>立即分享给好友</van-button>            
+                    <van-button round size="small" color="#f9ce0d" open-type="share" custom-style="color: #4a4a4a; font-weight: bold;" block>立即分享给好友</van-button>            
                 </view>
                 <view style="width: 20rpx;"></view>
                 <view style="flex: 1; ">
-                <van-button round size="small" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
+                    <van-button round size="small" bind:click="openMemberBtn" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
                 </view>
             </view>
 
@@ -46,6 +46,17 @@
     </view> -->
 
 
+    <view class="operators">
+        <view class="operator" bindtap="pageToMsg">
+            <view>我的消息</view>
+            <view class="arrow-right"></view>
+        </view>
+
+        <view class="operator" bindtap="link" data-path="../exchange/exchange">
+            <view>会员兑换码</view>
+            <view class="arrow-right"></view>
+        </view>
+    </view>
     <view class="operators">
         
         <view class="operator">
