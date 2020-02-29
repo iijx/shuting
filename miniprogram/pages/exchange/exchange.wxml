@@ -7,7 +7,10 @@
     </van-cell-group>
 
     <view style="height: 34rpx;"></view>
-    <van-button type="primary" round block>确认兑换</van-button>
+    <van-button type="primary" loading="{{ isExchanging }}" round block bind:click="exchange" loading-type="spinner" loading-text="确认兑换">确认兑换</van-button>
 
-
+    <van-dialog id="van-dialog" />
+    <van-toast id="van-toast" />
+    <!-- <van-loading type="spinner" /> -->
+    
 </view>

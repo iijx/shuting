@@ -1,47 +1,47 @@
 //app.js
 import * as Util from "./lib/util";
-import XData from "./lib/xdata";
 import Config from './config.js'
+import UniApi from './lib/uniApi.js'
 
-XData.init();
-console.log(XData);
+import Dialog from '@vant/weapp/dialog/dialog';
+import Toast from '@vant/weapp/toast/toast';
+
+import { createStoreBindings } from 'mobx-miniprogram-bindings'
+import store from './lib/store'
+const Vant = {
+    Dialog,
+    Toast
+}
 
 App({
     onLaunch: function(opt) {
-        console.log(opt);
         if (!wx.cloud) {
-            console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-        } else {
-            wx.cloud.init({
-                env: 'dev-c7oqs', // env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源, 此处请填入环境 ID, 环境 ID 可打开云控制台查看
-                traceUser: true,
+            console.error('请使用 2.2.3 或以上的基础库以使用云能力');
+            wx.showLoading({
+                title: '请先更新微信',
             })
-            // 如果未登录过，则登录
-            if (!XData.user.openid) {
-                wx.cloud.callFunction({
-                    name: 'login',
-                    data: {
-                        fromOpenid: opt.query.fromOpenid
-                    },
-                    success: res => {
-                        console.log('[云函数] [login] user openid: ', res)
-                        XData.setUser({
-                            openid: res.result.openid,
-                            _id: res.result._id
-                        })
-                    },
-                    fail: err => {
-                        console.error('[云函数] [login] 调用失败', err)
-                    }
-                })
-            }
+        } else {
+            // 登录获取用户信息
+            UniApi.login(opt.query.fromOpenid || '');
+            // UniApi.cloud('login', {
+            //     fromOpenid: opt.query.fromOpenid
+            // }).then(res => {
+            //     store.setUser({
+            //         openid: res.openid,
+            //         _id: res._id
+            //     })
+            // }).catch(err => {
+            //     console.error('[云函数] [login] 调用失败', err)
+            // })
 
-            
-
-            
+            // UniApi.cloud('uploadFile')
         }
     },
     Util,
     Config,
-    XData,
+    UniApi,
+    Store: store,
+    CreateStoreBindings: createStoreBindings,
+
+    Vant,
 })

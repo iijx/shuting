@@ -1,11 +1,14 @@
 // pages/exchange/exchange.js
+const app = getApp();
+const { Util, UniApi, Store, Vant } = app;
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        value: ''
+        value: '',
+        isExchanging: false,
     },
 
     /**
@@ -35,9 +38,37 @@ Page({
 
     },
 
-    onChange() {
-
+    onChange(e) {
+        this.setData({
+            value: e.detail
+        })
     },
+
+    exchange: Util.throttle(function(){
+        if (!this.data.value) {
+            Vant.Toast('请输入兑换码');
+            return;
+        };
+        if (this.data.isExchanging) return;
+
+        this.setData({ isExchanging: true })
+        
+        UniApi.cloud('exchangeCode', { code: this.data.value })
+            .then(res => {
+                this.setData({ isExchanging: false })
+                if (res.success) {
+                    Vant.Dialog.alert({
+                        message: '您已兑换成功'
+                    })
+                    UniApi.login();
+                } else {
+                    Vant.Dialog.alert({
+                        message: res.msg || '兑换失败 ｜ 未知错误'
+                    })
+
+                }
+            })
+    }, 1000),
 
     /**
      * Lifecycle function--Called when page hide

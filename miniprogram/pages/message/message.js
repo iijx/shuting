@@ -1,27 +1,25 @@
 // pages/message/message.js
+const app = getApp();
+const { UniApi, Store, CreateStoreBindings } = app;
+
 Page({
 
     /**
      * Page initial data
      */
     data: {
-        list: [
-            {
-                type: 'exchangeCode',
-                title: '限时分享活动奖励',
-                content: '恭喜您获得在【限时分享活动】中获得一周会员奖励，会员兑换码为1234',
-                exchangeCode: '1234',
-                status: 1 // 1 未使用，2 已经使用
-
-            }
-        ]
+        
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'messages'],
+            actions: ['setMessages'],
+        })
     },
 
     /**
@@ -54,7 +52,7 @@ Page({
      * Lifecycle function--Called when page unload
      */
     onUnload: function () {
-
+        this.storeBindings.destroyStoreBindings()
     },
 
     /**
@@ -75,6 +73,6 @@ Page({
      * Called when user click on the top right corner to share
      */
     onShareAppMessage: function () {
-
+        return this.defaultShareInfo;
     }
 })

@@ -8,7 +8,10 @@ Component({
      * Component properties
      */
     properties: {
-
+        num: {
+            type: Number,
+            value: 0
+        }
     },
     
 

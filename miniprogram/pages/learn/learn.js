@@ -1,20 +1,6 @@
 //index.js
 const app = getApp();
-const { Util, Config, XData } = app;
-import { LevelList, SubLevelList } from '../../lib/level.js';
-const maxNumMap = {
-    1: 10,
-    2: 100,
-    3: 1000,
-    4: 10000,
-    5: 100000,
-    6: 1000000,
-    7: 10000000,
-    8: 100000000,
-    9: 1000000000,
-    10: 10000000000,
-    11: 100000000000,
-}
+const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
 let AudioContext = null;
 
 Page({
@@ -22,6 +8,7 @@ Page({
         maxLength: 3, // 最多位数，例如2，表最多2位数，即最大值99
         type: 'number', // number || year || time || phone
         curSubLevel: -1,
+        isComplete: false,
         score: 0,
 
         answer: 0,
@@ -29,46 +16,52 @@ Page({
         inputValue: '',
         spanClass: '',
 
-        allNums: [],
-
         nums: [1, 2, 3, 4,5 ,6 ,7 ,8, 9, '.', 0, 'x']
     },
     // 
     onLoad: function (opt = {}) {
-        console.log("learn page 正在学习", opt);
-        if(!opt.subLevel) {
-            wx.showToast({
-                title: '无课程级别',
-                icon: 'warn',
-                duration: 2000
-            })
-            return;
-        }
-
-        let curSubLevel = SubLevelList.find(item => item.level === parseInt(opt.subLevel)) || {};
-        const { maxLength = 4, type = 'number', level } = curSubLevel;
-
-        this.setData({
-            curSubLevel: level,
-            maxLength,
-            type,
-            score: XData.subLevelLearnedMap[level] || 0
+        // 数据绑定
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevelId', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
+            actions: ['setSingleSubLevelLearned']
         });
-        this.init();
+
+        Util.sleep(100).then(() => {
+            const { maxLength = 4, type = 'number', level } = this.data.curSubLevel;
+
+            let score = 0;
+            let subLevelLearned = this.data.subLevelLearnedMap.find(item => item.subLevelId === this.data.curSubLevel.levelId);
+            score = subLevelLearned ? subLevelLearned.score : 0;
+            this.setData({
+                maxLength,
+                type,
+                score: score >= 100 ? 0 : score,
+                isComplete: subLevelLearned && subLevelLearned.isComplete
+            });
+            this.init();
+        })
+
     },
     init() {
-        this.data.allNums = Util.allNums.filter(num => num < maxNumMap[this.data.maxLength]).sort(() => Math.random() - 0.5);
+        // 准备数据
         AudioContext = wx.createInnerAudioContext()
         this.nextWord()
     },
-    _genAudioSrcByNumAndType(num, type) {
-        let dir = '';
-        if (type === 'number') dir = 'numberAudio';
-        else if (type === 'phone') dir = 'phoneAudio';
-        return `${Config.cdnDomain}/assets/audio/${dir}/${this.data.answer}.mp3`;
+    _genAudioSrcByNumAndType(type) {
+        let path = '';
+        if (type === 'number') path = `numberAudio/${this.data.answer}.mp3`;
+        else if (type === 'phone') path = `phoneAudio/${this.data.answer}.${this.data.maxLength === 8 ? 'm4a' : 'mp3'}`;
+        else if(type === 'time') {
+            let h = this.data.answer.slice(0, 2);
+            let m = this.data.answer.slice(2);
+            path = `timeAudio/${h}_${m}.m4a`;
+        }
+        return `${Config.cdnDomain}/assets/audio/${path}`;
     },
     audioPlay() {
-        AudioContext.src = this._genAudioSrcByNumAndType(this.data.answer, this.data.type);
+        console.log(this._genAudioSrcByNumAndType(this.data.type));
+        AudioContext.src = this._genAudioSrcByNumAndType(this.data.type);
         AudioContext.play();
     },
    
@@ -78,22 +71,30 @@ Page({
             spanClass: ''
         })
     },
-    _genAnswerByType() {
+    _genOneAnswer() {
         if(this.data.type === 'number') {
-            this.data.answer = this.data.allNums.pop();
+            this.data.answer = Util.randomOneNum(this.data.maxLength);
         } else if (this.data.type === 'phone'){
-            this.data.answer = this.data.allPhones.pop();
+            this.data.answer = Util.randomOnePhone(this.data.maxLength)();
+        } else if (this.data.type === 'time') {
+            this.data.answer = Util.randomOneTime();
         }
 
         this.audioPlay();
         this.setData({
-            answerLength: (this.data.answer + '').length
+            answerLength: String(this.data.answer).length
         })
     },
+    _isCorrect() {
+        // if (this.data.type === 'time') {
+        //     return String(this.data.inputValue) === String(this.data.answer).replace('_', '');
+        // } else 
+        return String(this.data.inputValue) === String(this.data.answer);
+    },
     showAnswer(autoNextIfCorrect = true) {
-        if (this.data.inputValue+'' === this.data.answer+'' ) {
+        if (this._isCorrect()) {
             this.data.score += Config.correctScore;
-            XData.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
+            this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
             AudioContext.src = Config.correctAudioSrc;
             this.setData({
                 score: this.data.score,
@@ -103,11 +104,10 @@ Page({
                 Util.sleep(2000).then(() => this.nextWord())
             }
         } else {
-            AudioContext.src = errorAudioSrc;
+            AudioContext.src = Config.errorAudioSrc;
             this.data.score += Config.errorScore;
             if (this.data.score < 0) this.data.score = 0; 
-
-            XData.setSingleSubLevelLearned(this.data.curSubLevel, this.data.score);
+            this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
             this.setData({
                 score: this.data.score,
                 spanClass: 'error'
@@ -123,7 +123,7 @@ Page({
             })
         } else {
             this._preStartInit();
-            this._genAnswerByType()
+            this._genOneAnswer()
         }
     },
     promptBtn() {
@@ -159,6 +159,13 @@ Page({
                 this.showAnswer();
             }
         }
-    }
+    },
+
+    onUnload: function () {
+        this.storeBindings.destroyStoreBindings()
+    },
+    onShareAppMessage: function (res) {
+        return this.defaultShareInfo;
+    },
 
 })

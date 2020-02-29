@@ -1,5 +1,6 @@
 // pages/summary/summary.js
 const app = getApp();
+const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
 
 Page({
 
@@ -7,10 +8,31 @@ Page({
      * 页面的初始数据
      */
     data: {
-        list: []
+        levelTitle: '',
+        // canNextSubLevel: {
+        //     success: false,
+        //     msg: ''
+        // },
     },
     onLoad: function (opt) {
-        console.log(app.globalData);
+        // 数据绑定
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevelId', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
+            actions: ['autoNextSubLevel']
+        });
+
+        Util.sleep(200).then(() => {
+            this.setData({
+                levelTitle: this.data.curLevel.title + '·小节' + this.data.curSubLevel.index 
+            })
+
+            // 自动学习下一个小节
+            this.autoNextSubLevel();
+            // this.setData({
+            //     canNextSubLevel
+            // })
+        })
     },
 
     /**
@@ -26,6 +48,17 @@ Page({
     onShow: function () {
 
     },
+    toLearnNextSubLevel() {
+        wx.redirectTo({
+            url: '../learn/learn',
+        })
+        // if (this.data.canNextSubLevel.success) {
+        // } else {
+        //     Vant.Dialog.alert({
+        //         message: this.data.canNextSubLevel.msg,
+        //     })
+        // }
+    },
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -34,11 +67,8 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
     onUnload: function () {
-
+        this.storeBindings.destroyStoreBindings()
     },
 
     /**
@@ -55,10 +85,7 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
+    onShareAppMessage: function (res) {
+        return this.defaultShareInfo;
+    },
 })

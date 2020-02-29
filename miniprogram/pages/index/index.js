@@ -1,13 +1,9 @@
 //index.js
 const app = getApp()
-const { XData } = app;
+const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
 import { LevelList, SubLevelList } from '../../lib/level.js';
 Page({
     data: {
-        
-        curLevel: {},
-        curSubLevelList: [],
-        curSubLevel: {},
         numSwitch: {
             value: false,
             maxLength: 2,
@@ -24,20 +20,11 @@ Page({
         }
     },
     onLoad: function() {
-        
-    },
-    onShow: function() {
-        let { curLevel, curSubLevel } = XData;
-
-        if (curLevel) {
-            let curSubLevelList = [...(SubLevelList.filter(item => item.pLevel === curLevel))];
-
-            this.setData({
-                curLevel: { ...LevelList.find(item => item.level === curLevel) } || {},
-                curSubLevelList: [...curSubLevelList],
-                curSubLevel: curSubLevel ? { ...curSubLevel } : { ...curSubLevelList[0] }
-            })
-        }
+        // 数据绑定
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
+        })
     },
     genLearnParams: {
         
@@ -49,7 +36,7 @@ Page({
             })
         } else {
             wx.redirectTo({
-                url: '../learn/learn?subLevel=' + this.data.curSubLevel.level,
+                url: '../learn/learn',
             })
         }
     },
@@ -66,6 +53,9 @@ Page({
     },
     // 用户点击右上角分享
     onShareAppMessage: function (res) {
-        return XData.getShareInfo();
+        return this.defaultShareInfo;
     },
+    onUnload: function() {
+        this.storeBindings.destroyStoreBindings()
+    }
 })

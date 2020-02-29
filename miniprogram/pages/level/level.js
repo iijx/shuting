@@ -1,8 +1,8 @@
 // pages/level/level.js
 
 const app = getApp();
-const { XData } = getApp();
-import { LevelList } from '../../lib/level.js';
+const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
+import { LevelList, SubLevelList } from '../../lib/level.js';
 
 Page({
 
@@ -10,22 +10,80 @@ Page({
      * Page initial data
      */
     data: {
-        levelList: [...LevelList]
+        levelList: [...LevelList],
+        isShowLevelDetail: false,
+
+        // 正在查看的级别
+        lookingLevel: {},
+        // 正在查看的子级别列表
+        lookingSubLevelList: [],
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'user', 'curLevel'],
+            actions: ['setCurSubLevelId']
+        })
     },
     selectBtn: function(e) {
-        let level = e.target.dataset.level;
-        XData.curLevel = level;
-        XData.curSubLevel = XData.subLevelLearnedMap[level];
+        let level = e.currentTarget.dataset.level;
+        if (level.levelId === this.data.curLevel.levelId) return;
 
-        wx.setStorageSync('l_curLevel', level);
+        // 会员判定
 
+        let list = SubLevelList.filter(item => item.pLevelId === level.levelId).sort((a, b) => a.index - b.index);
+        console.log(list);
+
+        if (!this.data.user.isPro && list[0].isPro) {
+            Vant.Dialog.alert({
+                message: '会员专享内容，请先开通会员'
+            })
+        } else {
+            this.setCurSubLevelId(list[0].levelId);
+            Vant.Dialog.confirm({
+                title: '恭喜',
+                message: '选择成功，快去学习吧！',
+                confirmButtonText: '去学习',
+                cancelButtonText: '知道了'
+            }).then(() => {
+                wx.redirectTo({
+                    url: '../learn/learn',
+                })
+            }).catch(() => {
+                
+            })
+        }
+    },
+    // selectSubLevel(e) {
+    //     let subLevel = e.currentTarget.dataset.item;
+    //     if (subLevel.isPro && !this.data.user.isPro) {
+    //         Vant.Dialog.confirm({
+    //             message: '会员专享内容'
+    //         }).then(() => {
+
+    //         }).catch(() => {
+
+    //         })
+    //     } else {
+
+    //     }
+    // },
+    showDetail(e) {
+        let levelId =  e.currentTarget.dataset.id;
+        wx.hideTabBar({ animation: true });
+        this.setData({
+            isShowLevelDetail: true,
+            lookingLevel: LevelList.find(item => item.levelId === levelId),
+            lookingSubLevelList: SubLevelList.filter(item => item.pLevelId === levelId).sort((a, b) => a.index - b.index)
+        })
+    },
+    closeDetail() {
+        wx.showTabBar({ animation: true });
+        this.setData({ isShowLevelDetail: false });
     },
 
     /**
@@ -53,7 +111,7 @@ Page({
      * Lifecycle function--Called when page unload
      */
     onUnload: function () {
-
+        this.storeBindings.destroyStoreBindings()
     },
 
     /**
@@ -73,7 +131,8 @@ Page({
     /**
      * Called when user click on the top right corner to share
      */
-    onShareAppMessage: function () {
-
-    }
+    // 用户点击右上角分享
+    onShareAppMessage: function (res) {
+        return this.defaultShareInfo;
+    },
 })

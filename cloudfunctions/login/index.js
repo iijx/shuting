@@ -24,10 +24,7 @@ exports.main = async (event, context) => {
     // 获取 WX Context (微信调用上下文)，包括 OPENID、APPID、及 UNIONID（需满足 UNIONID 获取条件）等信息
     const wxContext = cloud.getWXContext()
 
-    let curUser = await db.collection('users').where({ openid: wxContext.OPENID }).limit(1).get().then(res => {
-        if(res.data && res.data.length > 0) return res.data[0];
-        else return null;
-    });
+    let curUser = await db.collection('users').where({ openid: wxContext.OPENID }).limit(1).get().then(res => res.data[0]);
 
     if(!curUser) {
         curUser = new User({
@@ -38,10 +35,8 @@ exports.main = async (event, context) => {
         });
 
         if (fromOpenid && fromOpenid !== wxContext.OPENID) {
-            const res = await cloud.callFunction({
-                // 要调用的云函数名称
+            const res = cloud.callFunction({
                 name: 'weappShare',
-                // 传递给云函数的参数
                 data: {
                     openid: wxContext.OPENID,
                     fromOpenid,
@@ -49,14 +44,9 @@ exports.main = async (event, context) => {
             })
         }
     }
-    console.log(curUser)
 
     return {
-        event,
         openid: wxContext.OPENID,
-        appid: wxContext.APPID,
-        unionid: wxContext.UNIONID,
-        env: wxContext.ENV,
         ...curUser
     }
 }
@@ -64,7 +54,6 @@ exports.main = async (event, context) => {
 class User {
     constructor(opt) {
         this.openid = opt.openid || '';
-        // this.userId = Date.now() + opt.openid.slice(-4);
         this.avatar = opt.avatar || '';
         this.nickName = opt.nickName || '';
         this.isPro = false;

@@ -13,3 +13,15 @@
 .cell-ft {
     display: block;
 }
+
+.cell-num {
+    width: 44rpx; 
+    height: 44rpx;
+    line-height: 44rpx;
+    background: #ee0a24; 
+    color: #fff; 
+    border-radius: 50%; 
+    text-align: center;
+    font-size: 28rpx;
+    font-weight: bold;
+}

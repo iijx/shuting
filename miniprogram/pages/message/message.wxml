@@ -1,23 +1,25 @@
 <!--pages/message/message.wxml-->
 
 <view class="container">
-    <block wx:for="{{list}}" wx:key="index" wx:item="item">
-        <van-panel title="{{ item.title }}" status="{{ comp.statusText(item.status) }}" use-footer-slot>
+    <block wx:for="{{messages}}" wx:key="index"  wx:item="item">
+        <van-panel title="{{ item.title }}" status="{{ item.createdAtFormat }}" use-footer-slot>
             <view style="padding: 32rpx;">{{ item.content }}</view>
             <view slot="footer">
-                <cell wx:if="{{item.type === 'exchangeCode'}}">
+                <cell wx:if="{{item.exchangeCode}}">
                     <view slot="bd"></view>
-                    <van-button slot="ft" disabled="{{ item.status !== 1}}" size="small" bind:click="linkExchangeCode" data-code="{{item.exchangeCode}}" type="warning">兑换</van-button>
+                    <van-button slot="ft" wx:if="{{ item.exchangeCodeStatus === 2}}"  size="small" bind:click="linkExchangeCode" data-code="{{item.exchangeCode}}" type="warning">兑换</van-button>
+                    <van-button slot="ft" wx:if="{{ item.exchangeCodeStatus === 3}}" disabled size="small" type="warning">已兑换</van-button>
                 </cell>
             </view>
         </van-panel>
+        <view style="height: 32rpx;"></view>
     </block>
 </view>
 
 <!--wxml-->
 <wxs module="comp">
 module.exports.statusText = function(status) {
-    if (status === 1) return "待兑换";
-    if (status === 2) return "已兑换";
+    if (status === 2) return "待兑换";
+    if (status === 3) return "已兑换";
 }
 </wxs>

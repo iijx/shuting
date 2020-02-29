@@ -7,7 +7,7 @@
     <view class="cell-bd">
         <slot name="bd"></slot>
     </view>
-
+    <view wx:if="{{num > 0}}" class="cell-num">{{ num }}</view>
     <view class="cell-ft">
         <slot name="ft"></slot>
     </view>

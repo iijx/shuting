@@ -16,7 +16,7 @@ page {
 }
 .input-spans {
     display: flex;
-    padding: 0 150rpx;
+    /* padding: 0 150rpx; */
     position: relative;
     justify-content: center;
 }

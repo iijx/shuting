@@ -25,6 +25,13 @@
         "van-button": "@vant/weapp/button",
         "van-field": "@vant/weapp/field",
         "van-panel": "@vant/weapp/panel",
+        "van-cell": "@vant/weapp/cell",
+        "van-cell-group": "@vant/weapp/cell-group",
+        "van-dialog": "@vant/weapp/dialog",
+        "van-action-sheet": "@vant/weapp/action-sheet",
+        "van-tag": "@vant/weapp/tag",
+        "van-loading": "@vant/weapp/loading",
+        "van-toast": "@vant/weapp/toast",
         "cell": "/components/cell/cell"
     },
     

@@ -47,6 +47,7 @@ page {
     border-radius: 5px;
     margin: 0 auto;
     box-sizing: border-box;
+    /* padding: 20rpx 30rpx; */
     
     transform: translate(0, -260rpx);
     /* transform: translate(0, -100rpx); */
@@ -57,6 +58,8 @@ page {
     height: 76rpx;
     width: 100%;
     font-weight: bold;
+    color: #3E3F41;
+    font-size: 26rpx;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +68,7 @@ page {
 .mid .body {
     padding: 32rpx 40rpx;
     background: #fff;
-    background: rgba(0, 0, 0, .7);
+    /* background: rgba(0, 0, 0, .7); */
 }
 .levellist-wrap {
     display: flex;

@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
     let { fromOpenid, openid }  = event;
 
     if (!openid) openid = wxContext.OPENID;
-    // 数据检查
+    // 数据检查, 检查不通过直接返回
     if (!openid || !fromOpenid || fromOpenid === openid) return {}
 
     
@@ -31,19 +31,25 @@ exports.main = async (event, context) => {
         openid: fromOpenid
     }).update({
         data: {
-            inviteeUsers: _.addToSet(inviteeUser)
+            inviteeUsers: _.addToSet(inviteeUser),
         }
     }).then(async res => {
+        console.log('updated res', res);
         // 如果没有更新到，则创建
         if(res.stats.updated <= 0) {
             return await t_weapp_share.add({
                 data: new ShareInfo({
                     openid: fromOpenid,
-                    inviteeUsers: [inviteeUser]
+                    inviteeUsers: [inviteeUser],
                 })
+            }).then(res => {
+                console.log('add res', res);
+                return res;
             })
         } else return res;
     })
+
+    // 
 
     return {
         event,
@@ -52,10 +58,6 @@ exports.main = async (event, context) => {
         unionid: wxContext.UNIONID,
     }
 }
-
-
-
-
 
 class InviteeUser {
     constructor(opt) {
@@ -70,5 +72,6 @@ class ShareInfo {
     constructor(opt) {
         this.openid = opt.openid;
         this.inviteeUsers = [...opt.inviteeUsers];
+        this.awardedInviteCount = 0; // 已经奖过了的邀请用户数（每个邀请都有奖，按人头算，
     }
 }

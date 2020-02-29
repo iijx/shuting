@@ -94,7 +94,11 @@
     line-height: 1.6;
     padding: 0 8rpx;
 }
-
+.userInfo .member.pro {
+    border: 1px solid #f9ce0d;
+    background: #f9ce0d;
+    color: #fff;
+}
 .join-member {
     color: #D82C1E;
     font-size: 28rpx;
@@ -111,6 +115,16 @@
     color: #3E3F41;
     justify-content: space-around
 }
+.progress-hd {
+    width: 30rpx;
+    height: 30rpx;
+    color: #fff;
+    background: #3D96D3;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 26rpx;
+    margin-right: 16rpx;
+}
 .progress-ft {
     font-size: 24rpx;
     color: #000;
@@ -118,21 +132,31 @@
 }
 
 
-
-
+.freeMember {
+    position: fixed;
+    right: 0;
+    bottom: 60rpx;
+    width: 189rpx;
+    padding: 0 !important;
+    height: 54rpx;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.freeMember .img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 
 .operators {
     width: 683rpx;
     margin: 0 auto;
     margin-top: 40rpx;
     background: #fff;
-    padding-left: 28rpx;
+    /* padding-left: 28rpx; */
     border-radius: 10rpx;
-    /* border-top: 1rpx solid rgb(217, 217, 217); */
-    /* border-bottom: 1rpx solid rgb(217, 217, 217); */
-    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
+    overflow: hidden;
 }
-.operators .operator {
+/* .operators .operator {
     position: relative;
     line-height: 92rpx !important;
     height: 92rpx !important;
@@ -169,4 +193,4 @@
     border-top: solid 1px #c9c9cf;
     border-right: solid 1px #c9c9cf;
     transform: translateY(-50%) rotate(45deg); 
-}
+} */

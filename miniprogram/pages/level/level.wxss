@@ -26,6 +26,15 @@
     position: absolute;
     bottom: 20rpx;
     font-size: 28rpx;
+    
+}
+.detail-btn {
+    position: absolute;
+    top: 30rpx;
+    right: 50rpx;
+    color: #fff;
+    text-decoration: underline;
+    font-size: 28rpx;
 }
 
 .select-btn {
@@ -34,11 +43,11 @@
     bottom: 20rpx;
     height: 64rpx;
     width: 160rpx;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     border-radius: 32rpx;
-    background: #fff;
+    /* background: #fff; */
     color: #3D96D3;
     font-size: 28rpx;
     

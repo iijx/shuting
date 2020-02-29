@@ -7,10 +7,16 @@
         <view class="audio-wrap" bindtap="audioPlay">
             <image class="audio" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
         </view>
-        <view class='input-spans'>
-            <view wx:for="{{answerLength}}" wx:key="index" catchtap='focusBox'
-                    class="span {{ spanClass }} ">
-                    {{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
+        <view wx:if="{{type !== 'time'}}" class='input-spans'>
+            <block wx:for="{{answerLength}}" wx:key="index">
+                <view  catchtap='focusBox'class="span {{ spanClass }} ">{{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
+            </block>
+        </view>
+        <view wx:else class='input-spans'>
+            <block wx:for="{{answerLength}}" wx:key="index">
+                <view wx:if="{{index === 2}}">:</view>
+                <view catchtap='focusBox'class="span {{ spanClass }} ">{{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
+            </block>
         </view>
     </view>
 
