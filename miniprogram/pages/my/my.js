@@ -77,37 +77,31 @@ Page({
     onReady: function () {
 
     },
-    // getActivityMember: function() {
-    //     const db = wx.cloud.database()
-    //     db.collection('users').doc(this.user._id).get()
-    //         .then(res => {
-    //             console.log('user', res);
-    //             if (!res.data.isGetedActivityMember) {
-    //                 console.log(1);
-    //                 wx.cloud.callFunction({
-    //                     name: 'addMemberActivity',
-    //                     data: {
-    //                         addDay: 30
-    //                     },
-    //                     success: res => {
-    //                         console.log('addMemberActivity res', res);
-    //                     }
-    //                 })
-
-    //             } else {
-    //                 console.log(2);
-    //             }
-    //         })
-        
-    // },
-
     onShow: function () {
         Util.sleep(100).then(res => this.setData({user: this.data.user}));
     },
 
     openMemberBtn() {
-        // wx.navigateTo({
-        //     url: '../buy/buy',
+        wx.navigateTo({
+            url: '../buy/buy',
+        })
+        // UniApi.cloud('getWxPayInfo').then(res => {
+        //     wx.navigateToMiniProgram({
+        //         appId: 'wx959c8c1fb2d877b5',
+        //         path: 'pages/pay',
+        //         extraData: res,
+        //         success: () => {
+        //           console.log('等待返回支付结果')
+        //           // 做已经点击过支付的标记
+        //           this.setData({
+        //               paying: true
+        //           })
+        //         },
+        //         fail: () => {
+        //           // 小程序跳转失败
+        //           // 做好错误处理
+        //         }
+        //       })
         // })
        
     },
@@ -168,6 +162,6 @@ Page({
      */
    
     onShareAppMessage: function (res) {
-        return this.defaultShareInfo;
+        return this.data.defaultShareInfo;
     },
 })

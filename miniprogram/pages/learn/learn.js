@@ -101,7 +101,7 @@ Page({
                 spanClass: 'correct'
             })
             if (autoNextIfCorrect) {
-                Util.sleep(2000).then(() => this.nextWord())
+                Util.sleep(1000).then(() => this.nextWord())
             }
         } else {
             AudioContext.src = Config.errorAudioSrc;
@@ -112,7 +112,7 @@ Page({
                 score: this.data.score,
                 spanClass: 'error'
             })
-            Util.sleep(1500).then(() => this.audioPlay())
+            Util.sleep(1000).then(() => this.audioPlay())
         }
         AudioContext.play();
     },
@@ -165,7 +165,7 @@ Page({
         this.storeBindings.destroyStoreBindings()
     },
     onShareAppMessage: function (res) {
-        return this.defaultShareInfo;
+        return this.data.defaultShareInfo;
     },
 
 })

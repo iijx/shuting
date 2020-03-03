@@ -55,7 +55,8 @@
                     <view slot="bd">我的消息</view>
                 </cell>
             </van-cell>
-            <van-cell title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link border="{{ false }}" />
+            <van-cell title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell title="复制 ID 号" size="large" />
         </van-cell-group>
     </view>
 
@@ -64,7 +65,6 @@
             <button open-type="contact" style="text-align: left; padding: 0; border: 0;">
                 <van-cell title="客服/建议" size="large" is-link></van-cell>
             </button>
-            <!-- <van-cell title="关于" size="large" border="{{ false }}" is-link /> -->
         </van-cell-group>
     </view>
 

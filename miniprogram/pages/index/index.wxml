@@ -9,19 +9,28 @@
     </view>
     
     <view class="mid">
-        <view class="title">{{ curLevel.title || '暂无' }}</view>
+        <view class="title">{{ curLevel.title }} </view>
         <view class="body">
-            <view class="levellist-wrap">
-                <view wx:for="{{ curSubLevelList }}" wx:key="index" wx:item="item" class="level-item-wrap">
-                    <!-- <view>{{ item.title }}</view> -->
-                    <view style="opacity: {{ item.levelId === curSubLevel.levelId ? 1 : 0.5}}">
-                        <van-circle wux-class="level-item" value="100" color="#3D96D3">{{ item.title }}</van-circle>
-                    </view>
-                </view>
-                <view wx:if="{{ curSubLevelList.length <= 0 }}">
-                    <view></view>
-                </view>
+            <cell>
+                <view slot="bd" class="sublevel-title">{{ curSubLevel.title }}</view>
+                <view slot="ft" >{{ curSubLevelScore }}%</view>
+            </cell>
+
+            <view style="padding: 0 0 60rpx 0;">
+                <view style="color: #848A8E; font-size: 24rpx; line-height: 2.3;">进度</view>
+                <van-progress percentage="{{ curSubLevelScore }}" color="#02AF42" stroke-width="9" show-pivot="{{ false }}" />
             </view>
+            <!-- <view class="levellist-wrap"> -->
+                <!-- <view wx:for="{{ curSubLevelList }}" wx:key="index" wx:item="item" class="level-item-wrap"> -->
+                    <!-- <view>{{ item.title }}</view> -->
+                    <!-- <view style="opacity: {{ item.levelId === curSubLevel.levelId ? 1 : 0.5}}">
+                        <van-circle wux-class="level-item" value="100" color="#3D96D3">{{ item.title }}</van-circle>
+                    </view> -->
+                <!-- </view> -->
+                <!-- <view wx:if="{{ curSubLevelList.length <= 0 }}">
+                    <view></view>
+                </view> -->
+            <!-- </view> -->
             <!-- <cell>
                 <view slot="hd">数字</view>
                 <switch slot="ft" value="{{numSwitch.value}}" type="num" bindchange="switchChange"></switch>
@@ -35,7 +44,27 @@
                 <view slot="hd">电话</view>
                 <switch slot="ft" value="{{phoneSwitch.value}}" type="phone" bindchange="switchChange"></switch>
             </cell> -->
-            <view class="learn-btn" bindtap="toLearn">{{ curSubLevelList.length <= 0 ? '选择练习级别' : '开始练习' }} </view>
+            <cell>
+                <image slot="hd" class="icon-clock" src="/assets/imgs/clock.png"></image>
+                <view slot="bd" style="color: #83898F; margin-left: 24rpx;">{{  computed.getMins(curSubLevelScore)  }} minutes</view>
+                <view slot="ft">
+                    <view class="learn-btn" bindtap="toLearn">{{ curSubLevelList.length <= 0 ? '选择练习级别' : '开始练习' }} </view>
+                </view>
+            </cell>
+
+            <!-- <van-row gutter="20">
+                <van-col span="16">span: 8</van-col>
+                <van-col span="16">
+                </van-col>
+            </van-row> -->
         </view>
     </view>
 </view>
+
+
+
+<wxs module="computed">
+module.exports.getMins = function(score) {
+    return parseInt((0.3 * (100 - parseInt(score))));
+}
+</wxs>

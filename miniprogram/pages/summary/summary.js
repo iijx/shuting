@@ -86,6 +86,6 @@ Page({
     },
 
     onShareAppMessage: function (res) {
-        return this.defaultShareInfo;
+        return this.data.defaultShareInfo;
     },
 })

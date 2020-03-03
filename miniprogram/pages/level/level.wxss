@@ -1,9 +1,107 @@
 /* pages/level/level.wxss */
-
+.container {
+    padding: 36rpx;
+    padding-bottom: 140rpx;
+    /* background-image: linear-gradient(0dergb(121, 157, 177)55), rgb(79, 172, 254) 40%); */
+    background-image: linear-gradient(0deg, #fae483, #faf7eb);
+}
+.curBook-wrap {
+    border-radius: 20rpx;
+    background: #fff;
+    overflow: hidden;
+    padding-bottom: 8rpx;
+}
+.curBook-wrap > .title,
+.levels > .title {
+    font-size: 26rpx;
+    display: flex;
+    padding-left: 30rpx;
+    line-height: 70rpx;
+    align-items: center;
+    background: #ffe7e7;
+}
+.curBookLocation {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 36rpx;
+    margin: 30rpx 0 26rpx;
+}
+.levels {
+    background-color: #fff;
+    margin-top: 30rpx;
+    margin: 32rpx 0 40rpx;
+    padding-bottom: 50rpx;
+    border-radius: 20rpx;
+    overflow: hidden;
+}
+/* 
 .level-list {
     padding: 32rpx;
+} */
+.level-title {
+    color: #000;
+    text-align: left;
+    font-size: 32rpx;
+    font-weight: 700;
+    /* margin-bottom: 32rpx; */
+    /* padding: 28rpx 32rpx; */
+}
+.icon-level {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 8rpx;
 }
 
+.unit {
+    padding: 20rpx 32rpx;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    
+}
+.unit .dot{
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+    background: rgb(117, 210, 55);
+}
+.unit .lock {
+    width: 26rpx;
+    height: 36rpx;
+    display: block;
+    opacity: .6;
+}
+.unit-title {
+    font-weight: bolder;
+    color: #333;
+    font-size: 34rpx;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.unit-status {
+    font-size: 30rpx;
+    color: #4a4a4a;
+    line-height: 1;
+}
+.unit-border {
+    margin: 0 32rpx;
+    height: 1rpx;
+    border-bottom: 1rpx solid #e2e2e2;
+}
+.unit-select-btn {
+    flex-shrink: 0;
+    color: #4facfe;
+    font-size: 30rpx;
+    font-weight: bolder;
+}
+/* 
 .level {
     margin-bottom: 68rpx;
     color: #fff;
@@ -43,11 +141,9 @@
     bottom: 20rpx;
     height: 64rpx;
     width: 160rpx;
-    /* display: flex;
     align-items: center;
-    justify-content: center; */
+    justify-content: center;
     border-radius: 32rpx;
-    /* background: #fff; */
     color: #3D96D3;
     font-size: 28rpx;
     
@@ -62,7 +158,7 @@
 }
 .level-3 {
     background: #4195D6;
-}
+} */
 
 
 .prompt {

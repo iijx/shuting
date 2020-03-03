@@ -40,9 +40,9 @@ export const randomOnePhone = length => {
 };
 
 export const randomOneNum = length => {
-    console.log(length)
-    console.log(gen10ExpNum(length - 1), gen10ExpNum(length));
-    if (length <= 5) return randomIntegerInRange(gen10ExpNum(length - 1), gen10ExpNum(length));
+    // 这里特殊处理一下，如果是1位数，让其包括0
+    let min = gen10ExpNum(length - 1);
+    if (length <= 5) return randomIntegerInRange(min === 1 ? 0 : min, gen10ExpNum(length));
 
     if (length === 6) return SixNums[randomIntegerInRange(0, SixNums.length)]
     else if (length === 7) return SixNums[randomIntegerInRange(0, SevenNums.length)]

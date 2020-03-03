@@ -23,8 +23,8 @@ Page({
         // 数据绑定
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
-        })
+            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap', 'curSubLevelScore'],
+        });
     },
     genLearnParams: {
         
@@ -53,7 +53,7 @@ Page({
     },
     // 用户点击右上角分享
     onShareAppMessage: function (res) {
-        return this.defaultShareInfo;
+        return this.data.defaultShareInfo;
     },
     onUnload: function() {
         this.storeBindings.destroyStoreBindings()

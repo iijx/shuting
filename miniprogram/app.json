@@ -17,7 +17,8 @@
         "navigationBarTitleText": "数听英语",
         "navigationBarTextStyle": "black"
     },
-   "usingComponents": {
+    "navigateToMiniProgramAppIdList": ["wx959c8c1fb2d877b5"],
+    "usingComponents": {
         "van-progress": "@vant/weapp/progress",
         "van-circle": "@vant/weapp/circle",
         "van-tab": "@vant/weapp/tab",
@@ -32,6 +33,11 @@
         "van-tag": "@vant/weapp/tag",
         "van-loading": "@vant/weapp/loading",
         "van-toast": "@vant/weapp/toast",
+        "van-col": "@vant/weapp/col",
+        "van-row": "@vant/weapp/row",
+        "van-radio-group": "@vant/weapp/radio-group",
+        "van-radio": "@vant/weapp/radio",
+        "van-submit-bar": "@vant/weapp/submit-bar",
         "cell": "/components/cell/cell"
     },
     

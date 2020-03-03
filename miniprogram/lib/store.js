@@ -46,6 +46,11 @@ const store = observable({
     get curSubLevelList() {
         return [...(SubLevelList.filter(item => item.pLevelId === this.curSubLevel.pLevelId))].sort((a, b) => a.index - b.index)
     },
+    get curSubLevelScore() {
+        let info = this.subLevelLearnedMap.find(item => item.subLevelId === this.curSubLevelId);
+        if (!info) return 0;
+        else return info.score;
+    },
 
 
     get defaultShareInfo() {

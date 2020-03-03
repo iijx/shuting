@@ -1,48 +1,84 @@
 <!--pages/level/level.wxml-->
 
 <view class="container">
-    <view class="level-list">
-        <!-- <van-button type="default" custom-class="prompt">默认按钮</van-button> -->
-        <block wx:for="{{ levelList }}" wx:key="index" wx:item="item">
-            <!-- <cell wx:if="{{ !user.isPro && index === 1}}" custom-class="prompt">
+
+	<view class="curBook-wrap">
+		<view class="title"><image class="icon-level" src="/assets/imgs/level.png"></image>当前选择</view>
+		<view class="curBookLocation">{{ curLevel.title }} · {{ curSubLevel.title }}</view>
+	</view>
+
+	<view class="levels">
+		<view class="title">
+			<image class="icon-level" src="/assets/imgs/levels.png"></image>级别单元列表
+		</view>
+		<view wx:for="{{ levelList }}" wx:key="index" wx:for-item="item">
+			<view style="padding: 28rpx 32rpx;">
+				<cell>
+					<view slot="hd" class="level-title">{{ item.title }}</view>
+					<view slot="bd" style="width: 300rpx; margin-left: 42rpx;">
+						<view style="color: #848A8E; font-size: 24rpx; line-height: 2.3;">进度</view>
+						<van-progress color="#02AF42" show-pivot="{{false}}" percentage="{{ item.score / item.unitList.length }}" />
+					</view>
+				</cell>
+			</view>
+			<view class="unit-border"></view>
+			<block wx:for="{{ item.unitList}}" wx:key="index" wx:for-item="unit">
+				<view class="unit" style="background: {{ curSubLevel.levelId === unit.levelId ? 'rgb(223, 241, 213)' : 'transparent'}}">
+					<view style="width: 40rpx;">
+						<view class="dot"></view>
+					</view>
+					<view style="flex: 1;">
+						<view class="unit-title">{{ unit.title }} </view>
+						<view class="unit-status">{{ unit.isComplete ? '已完成' : (unit.score > 0 ? '未学完' : '未学习')}}</view>
+					</view>
+					<view style="flex: 1">
+						<image wx:if="{{ unit.isPro && !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
+					</view>
+					<view class="unit-select-btn" data-level="{{ unit }}" size="small" color="#3D96D3" bindtap="selectBtn">{{ unit.isComplete ? '复习' : '学习' }}</view>
+				</view>
+				<view class="unit-border"></view>
+			</block>
+			<!-- <cell wx:if="{{ !user.isPro && index === 1}}" custom-class="prompt">
                 <view slot="hd" style="width: 32rpx;"></view>
                 <view class="note" slot="bd">立即解锁高级训练课程</view>
                 <view slot="ft" class="arrow">></view>
             </cell> -->
 
-            <view class="level level-{{ item.levelId }}"  >
-                <view class="title">{{ item.title }} <van-tag wx:if="{{index === 1 || index === 2}}" type="danger">会员</van-tag></view>
-                <view class="detail-btn" data-id="{{item.levelId}}" bindtap="showDetail">查看说明</view>
-                <view wx:if="{{item.isPro}}" class="isPro">Pro</view>
-                <view class="detail-note">{{ item.note }}</view>
-                <view class="select-btn">
-                    <van-button plain round disabled="{{curLevel.levelId === item.levelId}}" 
-                    data-level="{{ item }}" size="small" color="#3D96D3" catchtap="selectBtn" block>{{curLevel.levelId === item.levelId ? '当前' : ''}}选择</van-button>
-                </view>
-            </view>
-        </block>
-    </view>
+			<!-- <view class="level level-{{ item.levelId }}">
+				<view class="title">{{ item.title }}
+					<van-tag wx:if="{{index === 1 || index === 2}}" type="danger">会员</van-tag>
+				</view>
+				<view class="detail-btn" data-id="{{item.levelId}}" bindtap="showDetail">查看说明</view>
+				<view wx:if="{{item.isPro}}" class="isPro">Pro</view>
+				<view class="detail-note">{{ item.note }}</view>
+				<view class="select-btn">
+					<van-button plain round disabled="{{curLevel.levelId === item.levelId}}" data-level="{{ item }}" size="small" color="#3D96D3" catchtap="selectBtn" block>{{curLevel.levelId === item.levelId ? '当前' : ''}}选择</van-button>
+				</view>
+			</view> -->
+		</view>
 
-    <van-action-sheet show="{{ isShowLevelDetail }}" title="{{ lookingLevel.title }}" bind:close="closeDetail">
-        <view style="padding: 30rpx 0 50rpx;">
-            <van-cell-group border="{{false}}">
-                <van-cell  wx:for="{{ lookingSubLevelList }}" wx:key="index" wx:item="item">
-                    <cell slot="title">
-                        <view slot="hd" class="van-cell-text">{{item.index}}. {{ item.title}}</view>
-                        <van-tag wx:if="{{item.isPro}}" slot="bd" plain round type="danger" style="margin-left: 16rpx;">会员</van-tag>
-                    </cell>
-                    <!-- <view slot="right-icon" bindtap="selectSubLevel" data-item="{{ item }}"  style="font-weight: bold; color: #3D96D3; font-size: 26rpx;">去学习</view> -->
-                </van-cell>
-            </van-cell-group>
-            
-            <view style="margin: 0 32rpx;" >
-                <view wx:if="{{lookingLevel.levelId !== curLevel.levelId}}" style="margin-top: 32rpx;"></view>
-                <van-button wx:if="{{lookingLevel.levelId !== curLevel.levelId}}" plain color="#3D96D3" round  block  data-level="{{ lookingLevel }}"catchtap="selectBtn">学习这个级别</van-button>
-                <view style="margin-top: 32rpx;"></view>
-                <van-button   color="#3D96D3" round  block bind:click="closeDetail">好的，知道了</van-button>
-            </view>
-        </view>
-    </van-action-sheet>
+	</view>
 
-    <van-dialog id="van-dialog" />
+	<van-action-sheet show="{{ isShowLevelDetail }}" title="{{ lookingLevel.title }}" bind:close="closeDetail">
+		<view style="padding: 30rpx 0 50rpx;">
+			<van-cell-group border="{{false}}">
+				<van-cell wx:for="{{ lookingSubLevelList }}" wx:key="index" wx:item="item">
+					<cell slot="title">
+						<view slot="hd" class="van-cell-text">{{item.index}}. {{ item.title}}</view>
+						<van-tag wx:if="{{item.isPro}}" slot="bd" plain round type="danger" style="margin-left: 16rpx;">会员</van-tag>
+					</cell>
+					<!-- <view slot="right-icon" bindtap="selectSubLevel" data-item="{{ item }}"  style="font-weight: bold; color: #3D96D3; font-size: 26rpx;">去学习</view> -->
+				</van-cell>
+			</van-cell-group>
+
+			<view style="margin: 0 32rpx;">
+				<view wx:if="{{lookingLevel.levelId !== curLevel.levelId}}" style="margin-top: 32rpx;"></view>
+				<van-button wx:if="{{lookingLevel.levelId !== curLevel.levelId}}" plain color="#3D96D3" round block data-level="{{ lookingLevel }}" catchtap="selectBtn">学习这个级别</van-button>
+				<view style="margin-top: 32rpx;"></view>
+				<van-button color="#3D96D3" round block bind:click="closeDetail">好的，知道了</van-button>
+			</view>
+		</view>
+	</van-action-sheet>
+
+	<van-dialog id="van-dialog" />
 </view>
