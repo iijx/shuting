@@ -20,6 +20,7 @@ const db = cloud.database();
  */
 exports.main = async (event, context) => {
     const fromOpenid = event.fromOpenid;
+    console.log(event.fromOpenid);
 
     // 获取 WX Context (微信调用上下文)，包括 OPENID、APPID、及 UNIONID（需满足 UNIONID 获取条件）等信息
     const wxContext = cloud.getWXContext()
@@ -34,14 +35,17 @@ exports.main = async (event, context) => {
             return curUser._id = res._id;
         });
 
+        console.log('fromOpenid', fromOpenid);
+        
         if (fromOpenid && fromOpenid !== wxContext.OPENID) {
-            const res = cloud.callFunction({
+            const res = await cloud.callFunction({
                 name: 'weappShare',
                 data: {
                     openid: wxContext.OPENID,
                     fromOpenid,
                 }
-            })
+            });
+            console.log(res);
         }
     }
 
