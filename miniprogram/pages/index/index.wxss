@@ -75,13 +75,6 @@ page {
     justify-content: space-around;
     padding: 60rpx 0 120rpx;
 }
-.level-item {
-    /* border-radius: 50%; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-
-}
 .sublevel-title {
     /* text-align: center; */
     font-size: 40rpx;

@@ -13,6 +13,7 @@ const store = observable({
         proBeginDate: new Date('1970-01-01'),
         proEndDate: new Date('1970-01-01'),
     },
+    systemInfo: {},
     // 我的消息
     messages: [],
 
@@ -116,6 +117,10 @@ const store = observable({
         wx.setStorageSync('l_subLevelLearnedMap', JSON.stringify(this.subLevelLearnedMap));
     }),
 
+    setSystemInfo: action(function(info) {
+        this.systemInfo = {...info};
+    }),
+
 
     autoNextSubLevel: action(function() {
         console.log('autoNextSubLevel 1');
@@ -164,6 +169,14 @@ const store = observable({
 
     let l_subLevelLearnedMap = wx.getStorageSync('l_subLevelLearnedMap');
     if (l_subLevelLearnedMap) store.setSubLevelLearned(JSON.parse(wx.getStorageSync('l_subLevelLearnedMap')));
+
+    wx.getSystemInfo({
+        success (res) {
+            store.setSystemInfo({
+                platform: res.platform
+            })
+        }
+    })
     
 
 })();

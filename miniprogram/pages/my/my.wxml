@@ -13,13 +13,11 @@
             <view class="member {{ user.isPro ? 'pro' : ''}}">
                 <view wx:if="{{user.isPro}}">会员用户</view>
                 <view wx:else>暂未加入会员</view>
-                <!-- <view class="join-member">立即加入</view> -->
             </view>
         </view>
 
-        <view class="progress-wrap">
+        <view class="progress-wrap" wx:if="{{ !user.isPro }}">
             <cell custom-class="progress-cell">
-                <!-- <view slot="hd" wx:if="{{awardedNum > 0}}" class="progress-hd">{{ awardedNum }}</view> -->
                 <van-progress slot="bd" show-pivot="{{false}}" color="#f9ce0d" percentage="{{ remainInviteCount * 100 / CAN_AWARD_MIN_INVITE }}" />
                 <view slot="ft" class="progress-ft">{{ remainInviteCount }}/{{ CAN_AWARD_MIN_INVITE }}</view>
             </cell>
@@ -30,16 +28,13 @@
                 <view style="flex: 1">
                     <van-button round size="small" color="#f9ce0d" open-type="share" custom-style="color: #4a4a4a; font-weight: bold;" block>立即分享给好友</van-button>            
                 </view>
-                <!-- <view wx:if="{{!user.isPro}}" style="width: 20rpx;"></view>
-                <view wx:if="{{!user.isPro}}" style="flex: 1;">
+                <view style="width: 20rpx;"></view>
+                <view wx:if="{{systemInfo.platform === 'android'}}" style="flex: 1;">
                     <van-button round size="small" bind:click="openMemberBtn" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
-                </view> -->
+                </view>
             </view>
-
         </view>
     </view>
-
-    
 
     <view style="height: 220rpx;"></view>
     <!-- <view class="activity">
@@ -56,7 +51,7 @@
                 </cell>
             </van-cell>
             <van-cell title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
-            <van-cell title="复制 ID 号" size="large" />
+            <van-cell title="复制 ID 号" size="large" bind:click="copyOpenid"/>
         </van-cell-group>
     </view>
 
@@ -68,9 +63,9 @@
         </van-cell-group>
     </view>
 
-    <view class="freeMember" open-type="contact" bindtap="freeMemberBtn">
+    <!-- <view class="freeMember" open-type="contact" bindtap="freeMemberBtn">
         <image class="img" src="/assets/imgs/freeMember.png" ></image>
-    </view>
+    </view> -->
 
     <van-dialog id="van-dialog" use-slot>
         <view>

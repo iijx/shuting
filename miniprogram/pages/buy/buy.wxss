@@ -78,7 +78,16 @@
 
 
 
-
+.ios-submit-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 100rpx;
+    text-align: center;
+    background: #D82C1E;
+    color: #fff;
+}
 
 .signUpNum {
     position: absolute;

@@ -23,19 +23,25 @@ App({
         } else {
             // 登录获取用户信息
             UniApi.login(opt.query.fromOpenid || '');
-            // UniApi.cloud('login', {
-            //     fromOpenid: opt.query.fromOpenid
-            // }).then(res => {
-            //     store.setUser({
-            //         openid: res.openid,
-            //         _id: res._id
-            //     })
-            // }).catch(err => {
-            //     console.error('[云函数] [login] 调用失败', err)
-            // })
+      
 
             // UniApi.cloud('uploadFile')
         }
+    },
+    onShow: function (options) {
+        console.log('app onshow', options);
+        if (options.scene === 1038 && options.referrerInfo && options.referrerInfo.appId === 'wx959c8c1fb2d877b5') { 
+          // 还应判断请求路径
+          let extraData = options.referrerInfo.extraData
+          this.globalData.paySuccess = extraData.success
+          this.globalData.payjsOrderId = extraData.payjsOrderId
+        }
+    },
+    globalData: {
+        payjsOrderId: '',
+        out_trade_no: '',
+        paySuccess: false,
+
     },
     Util,
     Config,

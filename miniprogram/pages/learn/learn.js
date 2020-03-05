@@ -86,9 +86,6 @@ Page({
         })
     },
     _isCorrect() {
-        // if (this.data.type === 'time') {
-        //     return String(this.data.inputValue) === String(this.data.answer).replace('_', '');
-        // } else 
         return String(this.data.inputValue) === String(this.data.answer);
     },
     showAnswer(autoNextIfCorrect = true) {

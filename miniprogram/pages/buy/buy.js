@@ -1,6 +1,7 @@
 // pages/buy/buy.js
+const app = getApp();
+const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -16,6 +17,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['defaultShareInfo', 'user', 'systemInfo'],
+        })
         this.updateSignUpNumber();
     },
 
@@ -30,7 +35,58 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        // 标记：已经点击过支付
+        if (this.data.paying) { 
+            if (app.globalData.paySuccess) {
+                Vant.Toast.loading({
+                    mask: true,
+                    message: '查询支付中...'
+                });
+                let out_trade_no = app.globalData.out_trade_no
+                // 注意请求后端判断是否支付成功而非通过前端判断
+                let checkTimes = 0;
+                let that = this;
+                (function autoCheck() {
+                    checkTimes += 1;
+                    if (checkTimes >= 3) {
+                        Vant.Toast.clear();
+                        that.setData({ paying: false, })
+                        return;
+                    };
+                    UniApi.cloud('getOrderStatus', {
+                        out_trade_no,
+                    }).then(res => {
+                        if (String(res.status) === '2') {
+                            Vant.Toast.clear();
+                            UniApi.login().then(res => {
+                                Vant.Dialog.alert({
+                                    title: '恭喜',
+                                    message: '开通成功'
+                                }).then(res => {
+                                    wx.switchTab({
+                                      url: '../my/my',
+                                    })
+                                })
+                            })
+                        } else {
+                            Util.sleep(2000).then(res => autoCheck());
+                        }
+                    })
+                })();
+            } else {
+                this.setData({ paying: false });
+                Vant.Dialog.confirm({
+                    title: '提示',
+                    message: '支付失败',
+                    confirmButtonText: '重新支付',
+                    cancelButtonText: '取消支付',
+                }).then(res => {
+                    this.onSubmit();
+                }).catch(err => {
 
+                })
+            }
+        }
     },
     updateSignUpNumber() {
         let baseBumber = 10;
@@ -67,10 +123,16 @@ Page({
             price: String(name) === '1' ? 290 : 480
         });
     },
-    onSubmit() {
-        UniApi.cloud('getWxPayInfo', {
+    onSubmit: Util.throttle(function() {
+        Vant.Toast.loading({
+            mask: true,
+            message: ''
+        });
+        UniApi.cloud('createOrder', {
             memberType: this.data.radio + ''
         }).then(res => {
+            Vant.Toast.clear();
+            app.globalData.out_trade_no = res.out_trade_no;
             wx.navigateToMiniProgram({
                 appId: 'wx959c8c1fb2d877b5',
                 path: 'pages/pay',
@@ -88,7 +150,7 @@ Page({
                 }
               })
         })
-    },
+    }, 1000),
 
     /**
      * 生命周期函数--监听页面隐藏
