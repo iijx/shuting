@@ -2,6 +2,8 @@
 const app = getApp();
 const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
 
+let AudioContext = null;
+
 Page({
 
     /**
@@ -15,6 +17,7 @@ Page({
         // },
     },
     onLoad: function (opt) {
+        AudioContext = wx.createInnerAudioContext();
         // 数据绑定
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
@@ -24,7 +27,7 @@ Page({
 
         Util.sleep(200).then(() => {
             this.setData({
-                levelTitle: this.data.curLevel.title + '·小节' + this.data.curSubLevel.index 
+                levelTitle: this.data.curLevel.title + ' · 小节' + this.data.curSubLevel.index 
             })
 
             // 自动学习下一个小节
@@ -46,7 +49,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        Util.sleep(200).then(() => {
+            AudioContext.src = '/assets/audio/win.m4a';
+            AudioContext.play();
+        })
     },
     toLearnNextSubLevel() {
         wx.redirectTo({
@@ -58,6 +64,11 @@ Page({
         //         message: this.data.canNextSubLevel.msg,
         //     })
         // }
+    },
+    toIndex() {
+        wx.switchTab({
+          url: '../index/index',
+        });
     },
 
     /**

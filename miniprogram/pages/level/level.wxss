@@ -3,7 +3,7 @@
     padding: 36rpx;
     padding-bottom: 140rpx;
     /* background-image: linear-gradient(0dergb(121, 157, 177)55), rgb(79, 172, 254) 40%); */
-    background-image: linear-gradient(0deg, #fae483, #faf7eb);
+    background-image: linear-gradient(180deg, #f9ce0d, #f8ecba);
 }
 .curBook-wrap {
     border-radius: 20rpx;
@@ -18,7 +18,7 @@
     padding-left: 30rpx;
     line-height: 70rpx;
     align-items: center;
-    background: #ffe7e7;
+    background: #fddcdc;
 }
 .curBookLocation {
     text-align: center;
@@ -52,9 +52,12 @@
     height: 36rpx;
     margin-right: 8rpx;
 }
-
+.unit-wrap {
+    padding: 0 32rpx;
+}
 .unit {
-    padding: 20rpx 32rpx;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #e2e2e2;
     display: flex;
     align-items: center;
     flex-shrink: 0;

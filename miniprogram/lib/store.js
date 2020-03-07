@@ -14,6 +14,9 @@ const store = observable({
         proEndDate: new Date('1970-01-01'),
     },
     systemInfo: {},
+    get systemInfo_platform() {
+        return this.systemInfo.platform;
+    }, 
     // 我的消息
     messages: [],
 

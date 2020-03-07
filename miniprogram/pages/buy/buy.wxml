@@ -25,13 +25,13 @@
 			<van-cell-group border="{{ false }}">
 				<van-cell clickable data-name="1" bind:click="onRadioCellClick" use-label-slot>
 					<view slot="title" class="member-name">月度会员 · 30天</view>
-					<view wx:if="{{ systemInfo.platform === 'android' }}" slot="label" class="price">￥2.9 <text class="old-price">￥6</text></view>
+					<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥2.9 <text class="old-price">￥6</text></view>
 					<view wx:else slot="label" class="price">免费</view>
 					<van-radio slot="right-icon" name="1" />
 				</van-cell>
 				<van-cell clickable data-name="2" bind:click="onRadioCellClick" use-label-slot border="{{ false }}">
 					<view slot="title" class="member-name">终身会员<text style="color: #FE3F1D">（推荐）</text></view>
-					<view wx:if="{{ systemInfo.platform === 'android' }}" slot="label" class="price">￥4.8 <text class="old-price">￥9.9</text></view>
+					<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥4.8 <text class="old-price">￥9.9</text></view>
 					<view wx:else slot="label" class="price">免费</view>
 					<van-radio slot="right-icon" name="2" />
 				</van-cell>
@@ -41,7 +41,7 @@
 	</view>
 
 
-	<view class="ios-submit-bar" wx:if="{{ systemInfo.platform !== 'android' }}">平台限制，功能暂不支持</view>
+	<view class="ios-submit-bar" wx:if="{{ systemInfo_platform !== 'android' }}">平台限制，功能暂不支持</view>
 	<van-submit-bar wx:else loading="{{ paying }}" price="{{ price }}" tip="{{ true }}" button-text="立即开通" button-type="warning" bind:submit="onSubmit">
         <!-- <view slot="tip">
            该卡一旦售出，概不退换 

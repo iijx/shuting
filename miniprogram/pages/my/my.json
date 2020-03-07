@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#F9CE0D"
+  "navigationBarBackgroundColor": "#F9CE0D",
+  "enablePullDownRefresh": true
 }

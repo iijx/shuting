@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
     <!-- <view>距离完成还剩{{ 100 - score }}分</view> -->
-    <van-progress pivot-text="{{ score }}'" percentage="{{ score }}" />
+    <van-progress show-pivot="{{false}}" percentage="{{ score }}" stroke-width="10" pivot-color="#F1F4F7" color="linear-gradient(to right, #be99ff, #3D96D3)" />
     <view class="form" bindsubmit="submitCode">
         
         <view class="audio-wrap" bindtap="audioPlay">
@@ -14,7 +14,7 @@
         </view>
         <view wx:else class='input-spans'>
             <block wx:for="{{answerLength}}" wx:key="index">
-                <view wx:if="{{index === 2}}">:</view>
+                <view wx:if="{{index === 2}}" class="span {{ spanClass }} ">:</view>
                 <view catchtap='focusBox'class="span {{ spanClass }} ">{{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
             </block>
         </view>
@@ -45,7 +45,9 @@
             <view class="num-item-line">
                 <view class="num-item no-bg" data-value="." bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">.</view>
                 <view class="num-item" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
-                <view class="num-item no-bg" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">x</view>
+                <view class="num-item no-bg" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
+                    <image class="icon-del" data-value="x" mode="widthFix" src="/assets/imgs/icon-del.png"></image>
+                </view>
             </view>
         </view>
     </view>

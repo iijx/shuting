@@ -9,8 +9,6 @@ Page({
      * Page initial data
      */
     data: {
-        avatarUrl: '../../assets/imgs/user-unlogin.png',
-        userInfo: {},
         remainInviteCount: 0,
         awardedNum: 0,
 
@@ -26,49 +24,45 @@ Page({
             store: Store,
             fields: ['defaultShareInfo', 'user', 'messages', 'newMessageNum', 'systemInfo'],
             actions: ['setUser', 'setMessages'],
-        })
-        wx.showLoading({
-            title: '加载中...',
-        })
-        UniApi.cloud('updateShareAward').then(res => {
-            this.setData({
-                awardedNum: res.awardedNum,
-                remainInviteCount: res.inviteeCount - res.usedInviteCount
-            })
-            UniApi.cloud('getMessage').then(res => {
-                wx.hideLoading();
-                this.setMessages(res.msgList.map(item => ({
-                    ...item,
-                    createdAt: new Date(item.createdAt),
-                    createdAtFormat: Util.dateFormatter(new Date(item.createdAt), "YYYY-MM-DD hh:mm:ss")
-                })))
-            }).catch(err => {
-                wx.hideLoading();
-            });
-            
-        }).catch(err => {
-            wx.hideLoading();
-        })
-
-        // 获取用户信息
-        wx.getSetting({
-            success: res => {
-                if (res.authSetting['scope.userInfo']) {
-                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                    wx.getUserInfo({
-                        success: res => {
-                            this.setData({
-                                avatarUrl: res.userInfo.avatarUrl,
-                                userInfo: res.userInfo
-                            })
-                        }
-                    })
-                }
-            },
-            fail: err => {
-                console.log('暂未授权');
-            }
         });
+        wx.nextTick(() => {
+            if (!this.data.user.avatar) {
+                wx.getSetting({
+                    success: res => {
+                        if (res.authSetting['scope.userInfo']) { // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+                            this.onGetUserInfo();
+                        }
+                    },
+                    fail: err => {
+                        console.log('暂未授权');
+                    }
+                });
+            };
+        })
+        // wx.showLoading({
+        //     title: '加载中...',
+        // })
+        // UniApi.cloud('updateShareAward').then(res => {
+        //     this.setData({
+        //         awardedNum: res.awardedNum,
+        //         remainInviteCount: res.inviteeCount - res.usedInviteCount
+        //     })
+        //     UniApi.cloud('getMessage').then(res => {
+        //         wx.hideLoading();
+        //         this.setMessages(res.msgList.map(item => ({
+        //             ...item,
+        //             createdAt: new Date(item.createdAt),
+        //             createdAtFormat: Util.dateFormatter(new Date(item.createdAt), "YYYY-MM-DD hh:mm:ss")
+        //         })))
+        //     }).catch(err => {
+        //         wx.hideLoading();
+        //     });
+            
+        // }).catch(err => {
+        //     wx.hideLoading();
+        // })
+
+        
     },
 
     /**
@@ -78,7 +72,22 @@ Page({
 
     },
     onShow: function () {
-        Util.sleep(100).then(res => this.setData({user: this.data.user}));
+        UniApi.login();
+    },
+    onGetUserInfo() {
+        wx.getUserInfo({
+            success: res => {
+                this.setUser({
+                    avatar: res.userInfo.avatarUrl,
+                    nickName: res.userInfo.nickName,
+                });
+                this.setData({user: this.data.user});
+                UniApi.cloud('updateUserInfo', {
+                    avatar: res.userInfo.avatarUrl,
+                    nickName: res.userInfo.nickName,
+                })
+            }
+        })
     },
     copyOpenid() {
         wx.setClipboardData({
@@ -133,7 +142,8 @@ Page({
      * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
-
+        UniApi.login()
+        Util.sleep(1000).then(() => wx.stopPullDownRefresh());
     },
 
     /**

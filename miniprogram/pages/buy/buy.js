@@ -9,8 +9,8 @@ Page({
         radio: "1",
         price: 290,
         paying: false,
-        dujuImage: [],
-        signUpNumber: 10
+        signUpNumber: 10,
+        systemInfo_platform: ''
     },
 
     /**
@@ -19,7 +19,7 @@ Page({
     onLoad: function (options) {
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['defaultShareInfo', 'user', 'systemInfo'],
+            fields: ['systemInfo_platform'],
         })
         this.updateSignUpNumber();
     },
@@ -184,6 +184,6 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return Store.defaultShareInfo;
     }
 })

@@ -48,4 +48,13 @@ exports.main = async (event, context) => {
             updateAt: new Date(),
         }
     });
+
+    let user = await db.collection('users').where({ openid: order.openid }).limit(1).get().then(res => res.data[0]);
+
+    await db.collection('users').doc(user._id).update({
+        data: {
+            isPro: true,
+            updateAt: new Date(),
+        }
+    })
 }

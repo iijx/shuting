@@ -25,8 +25,30 @@ Page({
     onLoad: function (options) {
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap'],
+            fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap'],
             actions: ['setCurSubLevelId']
+        })
+        wx.nextTick(() => {
+            let levelList = LevelList.map(item => {
+                let unitList = SubLevelList.filter(unit => unit.pLevelId === item.levelId).sort((a, b) => a.index - b.index).map(item => {
+                    let subLevel = this.data.subLevelLearnedMap.find(subLevel => subLevel.subLevelId === item.levelId);
+                    let score = subLevel ? subLevel.score : 0; 
+                    return {
+                        ...item,
+                        score,
+                        isComplete: score >= 100
+                    }
+                });
+                return {
+                    ...item,
+                    score: unitList.reduce((ac, cur) => ac + cur.score, 0),
+                    unitList,
+                }
+            });
+
+            this.setData({
+                levelList
+            })
         })
         
        
@@ -113,26 +135,7 @@ Page({
      * Lifecycle function--Called when page show
      */
     onShow: function () {
-        wx.nextTick(() => {
-            let levelList = LevelList.map(item => {
-                let unitList = SubLevelList.filter(unit => unit.pLevelId === item.levelId).sort((a, b) => a.index - b.index).map(item => {
-                    let subLevel = this.data.subLevelLearnedMap.find(subLevel => subLevel.subLevelId === item.levelId);
-                    return {
-                        ...item,
-                        score: subLevel ? subLevel.score : 0
-                    }
-                });
-                return {
-                    ...item,
-                    score: unitList.reduce((ac, cur) => ac + cur.score, 0),
-                    unitList,
-                }
-            });
-
-            this.setData({
-                levelList
-            })
-        })
+        
     },
 
     /**
@@ -168,6 +171,6 @@ Page({
      */
     // 用户点击右上角分享
     onShareAppMessage: function (res) {
-        return this.data.defaultShareInfo;
+        return Store.defaultShareInfo;
     },
 })

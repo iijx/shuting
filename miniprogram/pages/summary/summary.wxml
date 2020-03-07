@@ -1,21 +1,28 @@
 <!--pages/summary/summary.wxml-->
 <view class="container">
+    <image class="bg" mode="center" src="/assets/imgs/firework.png"></image>
+
     <view class="main">
-        <image class="award" src="/assets/imgs/award.png"></image>
+        <image class="award" mode="widthFix" src="/assets/imgs/medal.png"></image>
         <open-data class="avatar" type="userAvatarUrl"></open-data>
         <open-data class="nickName" type="userNickName"></open-data>
         <view class="note">该小节已熟练掌握</view>
 
         <view class="content">
-            <view>{{ levelTitle }} </view>
-            <view style="width: 300rpx; margin: 0 auto;">
-                <van-button icon="success" round size="small" color="#FFD726" block>完成</van-button>
+            <view class="title">{{ levelTitle }}</view>
+        </view>
+        <view class="btn-wrap">
+            <view class="btn">
+                <van-button round plain size="default" bind:click="toIndex" color="#3D96D3" block>返回首页</van-button>
+            </view>
+            <view style="width: 20rpx;"></view>
+            <view class="btn">
+                <van-button round size="default" bind:click="toLearnNextSubLevel" color="#3D96D3" block>继续学习</van-button>
             </view>
         </view>
-        <view style="margin-top: 100rpx;">
-            <van-button round size="default" bind:click="toLearnNextSubLevel" color="#3D96D3" block>学习下一小节</van-button>
-        </view>
     </view>
+
+
 
     <van-dialog id="van-dialog" />
 </view>

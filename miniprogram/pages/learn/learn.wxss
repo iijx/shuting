@@ -1,10 +1,10 @@
 /**index.wxss**/
 
 page {
-    background: #f6f6f6;
+    background: #FEFFFE;
 }
 .container {
-    padding: 64rpx;
+    /* padding: 64rpx; */
     box-sizing: border-box;
 }
 .audio-wrap {
@@ -19,12 +19,21 @@ page {
     /* padding: 0 150rpx; */
     position: relative;
     justify-content: center;
+    background-color: #F1F4F7;
+    width: 86%;
+    margin: 0 auto;
+    padding: 30rpx 0;
+    border-radius: 16rpx;
+
 }
 
 .input-spans .span {
     width: 60rpx;
-    height: 60rpx;
-    border-bottom: 1px solid #999;
+    height: 66rpx;
+    /* border: 1px solid #999; */
+    /* border: 1px solid #D2D8DA; */
+    background: #D2D8DA;
+    border-radius: 6rpx;
     margin: 0 12rpx;
     text-align: center;
     font-size: 38rpx;
@@ -34,8 +43,8 @@ page {
     font-weight: bolder;
     color: #4a4a4a;
 }
-.input-spans .span.error { color: #f7572a; }
-.input-spans .span.correct { color: #43C6AC; }
+.input-spans .span.error { color: #FF406B; }
+.input-spans .span.correct { color: #02AF42; }
 
 .input {
     position: absolute;
@@ -55,6 +64,7 @@ page {
     width: 70rpx;
     height: 70rpx;
     color: #3D96D3;
+    color: rgb(153, 188, 212);
     display: inline-block;
 }
 .keyboard-wrap {
@@ -69,7 +79,9 @@ page {
     overflow:hidden;
     padding-left: 10rpx;
     padding-top: 10rpx;
-    background: #d0d3da;
+    /* background: #d0d3da; */
+    background: #FEFFFE;
+    box-shadow: rgb(211, 230, 250) 0 1px -1px;
     
 }
 .num-item-line {
@@ -78,7 +90,9 @@ page {
 .num-item {
     flex: 1;
     position:relative;
-    background: #fff;
+    /* background: #fff; */
+    background: #F1F4F7;
+    /* background: rgb(211, 230, 250); */
     height: 90rpx;
     margin-right: 16rpx;
     margin-bottom: 16rpx;
@@ -89,7 +103,8 @@ page {
     align-items: center;
     justify-content: center;
     font-size: 48rpx;
-    box-shadow: #868a8D 0 1px 1px;
+    /* box-shadow: #868a8D 0 1px 1px; */
+    /* box-shadow: rgb(211, 230, 250) 0 1px 1px; */
     color: #000;
 }
 .no-bg {
@@ -99,6 +114,12 @@ page {
 
 .num-item-hover {
     background: #b5c3d1;
+}
+
+.icon-del {
+    width: 70rpx;
+    /* height: 20rpx; */
+
 }
 
 

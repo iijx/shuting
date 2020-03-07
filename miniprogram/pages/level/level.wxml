@@ -23,20 +23,21 @@
 			</view>
 			<view class="unit-border"></view>
 			<block wx:for="{{ item.unitList}}" wx:key="index" wx:for-item="unit">
-				<view class="unit" style="background: {{ curSubLevel.levelId === unit.levelId ? 'rgb(223, 241, 213)' : 'transparent'}}">
-					<view style="width: 40rpx;">
-						<view class="dot"></view>
+				<view class="unit-wrap" style="background: {{ curSubLevel.levelId === unit.levelId ? 'rgb(223, 241, 213)' : 'transparent'}}">
+					<view class="unit" >
+						<view style="width: 40rpx;">
+							<view class="dot"></view>
+						</view>
+						<view style="flex: 1;">
+							<view class="unit-title">{{ unit.title }} </view>
+							<view class="unit-status">{{ unit.isComplete ? '已完成' : (unit.score > 0 ? '未学完...' : '未学习')}}</view>
+						</view>
+						<view style="flex: 1">
+							<image wx:if="{{ unit.isPro && !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
+						</view>
+						<view class="unit-select-btn" data-level="{{ unit }}" size="small" color="#3D96D3" bindtap="selectBtn">{{ unit.isComplete ? '复习' : '学习' }}</view>
 					</view>
-					<view style="flex: 1;">
-						<view class="unit-title">{{ unit.title }} </view>
-						<view class="unit-status">{{ unit.isComplete ? '已完成' : (unit.score > 0 ? '未学完' : '未学习')}}</view>
-					</view>
-					<view style="flex: 1">
-						<image wx:if="{{ unit.isPro && !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
-					</view>
-					<view class="unit-select-btn" data-level="{{ unit }}" size="small" color="#3D96D3" bindtap="selectBtn">{{ unit.isComplete ? '复习' : '学习' }}</view>
 				</view>
-				<view class="unit-border"></view>
 			</block>
 			<!-- <cell wx:if="{{ !user.isPro && index === 1}}" custom-class="prompt">
                 <view slot="hd" style="width: 32rpx;"></view>

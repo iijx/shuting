@@ -37,7 +37,7 @@ Page({
                 maxLength,
                 type,
                 score: score >= 100 ? 0 : score,
-                isComplete: subLevelLearned && subLevelLearned.isComplete
+                isComplete: Boolean(subLevelLearned && subLevelLearned.isComplete)
             });
             this.init();
         })
@@ -60,7 +60,6 @@ Page({
         return `${Config.cdnDomain}/assets/audio/${path}`;
     },
     audioPlay() {
-        console.log(this._genAudioSrcByNumAndType(this.data.type));
         AudioContext.src = this._genAudioSrcByNumAndType(this.data.type);
         AudioContext.play();
     },

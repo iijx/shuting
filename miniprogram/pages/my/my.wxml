@@ -7,16 +7,20 @@
 
     <view class="user-wrap">
         <view class="userInfo">
-            <!-- <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="avatar" style="background-image: url({{avatarUrl}})" size="default" ></button> -->
-            <open-data class="avatar" type="userAvatarUrl"></open-data>
-            <open-data class="nickName" type="userNickName"></open-data>
-            <view class="member {{ user.isPro ? 'pro' : ''}}">
+            <image class="avatar" mode="widthFix" src="{{ user.avatar ? user.avatar : '/assets/imgs/user-unlogin.png' }}"></image>
+            <block wx:if="{{!user.avatar}}">
+                <button class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">点击微信登录</button>
+            </block>
+            <block wx:else>
+                <view style="flex: 1">{{ user.nickName }}</view>
+            </block>
+            <view wx:if="{{ user.avatar }}" class="member {{ user.isPro ? 'pro' : ''}}">
                 <view wx:if="{{user.isPro}}">会员用户</view>
                 <view wx:else>暂未加入会员</view>
             </view>
         </view>
 
-        <view class="progress-wrap" wx:if="{{ !user.isPro }}">
+        <!-- <view class="progress-wrap" wx:if="{{ !user.isPro }}">
             <cell custom-class="progress-cell">
                 <van-progress slot="bd" show-pivot="{{false}}" color="#f9ce0d" percentage="{{ remainInviteCount * 100 / CAN_AWARD_MIN_INVITE }}" />
                 <view slot="ft" class="progress-ft">{{ remainInviteCount }}/{{ CAN_AWARD_MIN_INVITE }}</view>
@@ -29,14 +33,14 @@
                     <van-button round size="small" color="#f9ce0d" open-type="share" custom-style="color: #4a4a4a; font-weight: bold;" block>立即分享给好友</van-button>            
                 </view>
                 <view style="width: 20rpx;"></view>
-                <view wx:if="{{systemInfo.platform === 'android'}}" style="flex: 1;">
+                <view style="flex: 1;">
                     <van-button round size="small" bind:click="openMemberBtn" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
                 </view>
             </view>
-        </view>
+        </view> -->
     </view>
 
-    <view style="height: 220rpx;"></view>
+    <view style="height: 120rpx;"></view>
     <!-- <view class="activity">
         <view class="activity-note" >全力抗疫，在家充电，这个2月所有用户均可获赠1一个月会员</view>
         <view class="get-member-btn" bindtap="getActivityMember">领取专属会员(仅2月可领)</view>
@@ -44,6 +48,7 @@
 
 
     <view class="operators">
+        <!-- <van-cell title="版本预告" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  /> -->
         <van-cell-group>
             <van-cell size="large" link-type="navigateTo" url="/pages/message/message" is-link>
                 <cell slot="title" num="{{ newMessageNum }}">
@@ -51,15 +56,24 @@
                 </cell>
             </van-cell>
             <van-cell title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
-            <van-cell title="复制 ID 号" size="large" bind:click="copyOpenid"/>
+            
         </van-cell-group>
     </view>
 
+    <!-- <view class="operators">
+        <van-cell-group>
+            <van-cell title="班长计划" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+        </van-cell-group>
+    </view> -->
+    
+
     <view class="operators">
         <van-cell-group>
-            <button open-type="contact" style="text-align: left; padding: 0; border: 0;">
-                <van-cell title="客服/建议" size="large" is-link></van-cell>
+            <button class="contact-btn" open-type="contact" style="">
+                <van-cell title="人工客服/建议" size="large" is-link></van-cell>
             </button>
+
+            <van-cell title="复制 ID 号" size="large" bind:click="copyOpenid"/>
         </van-cell-group>
     </view>
 

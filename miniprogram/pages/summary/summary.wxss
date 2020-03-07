@@ -1,20 +1,35 @@
 /* pages/summary/summary.wxss */
 
 .container {
-    padding: 100rpx 0 0 0;
+    /* padding: 100rpx 0 0 0; */
+    height: 100vh;
+    position: relative;
+    /* display: flex; */
+    /* align-items: center; */
+    /* background: url('http://cdnword.iijx.site/assets/imgs/shuting/firework.png'); */
+    background-size: auto 100%;
+    /* filter: blur(1px); */
+
+}
+.bg {
+    width: 100%;
+    height: 100%;
 }
 .main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 686rpx;
-    margin: 0 auto;
     background: #fff;
     border-radius: 10rpx;
     box-sizing: border-box;
-    padding: 32rpx;
-    position: relative;
+    padding: 0 32rpx 32rpx;
+    /* opacity: .9; */
 }
 .award {
-    width: 100rpx;
-    height: 100rpx;
+    width: 200rpx;
+    /* height: 100rpx; */
 }
 .avatar {
     position: absolute;
@@ -34,16 +49,31 @@
     width: 180rpx;
     top: 70rpx;
     right: 0;
+    color: #272162;
 }
 .note {
     position: absolute;
     font-size: 34rpx;
+    line-height: 3;
     right: 32rpx;
     top: 130rpx;
-    color: #FF6947;
+    color: #FF406B;
 }
 .content {
     padding: 64rpx 0;
     text-align: center;
     line-height: 2.3;
+}
+.content .title {
+    font-size: 56rpx;
+    font-weight: bold;
+    color: #272162;
+}
+
+.btn-wrap {
+    padding: 64rpx 0;
+    display: flex;
+}
+.btn-wrap .btn {
+    flex: 1;
 }
