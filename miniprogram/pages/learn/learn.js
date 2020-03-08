@@ -51,7 +51,7 @@ Page({
     _genAudioSrcByNumAndType(type) {
         let path = '';
         if (type === 'number') path = `numberAudio/${this.data.answer}.mp3`;
-        else if (type === 'phone') path = `phoneAudio/${this.data.answer}.${this.data.maxLength === 8 ? 'm4a' : 'mp3'}`;
+        else if (type === 'phone') path = `phoneAudio/${this.data.answer}.m4a`;
         else if(type === 'time') {
             let h = this.data.answer.slice(0, 2);
             let m = this.data.answer.slice(2);

@@ -11,12 +11,6 @@ Page({
      */
     data: {
         levelList: [],
-        isShowLevelDetail: false,
-
-        // 正在查看的级别
-        lookingLevel: {},
-        // 正在查看的子级别列表
-        lookingSubLevelList: [],
     },
 
     /**
@@ -25,7 +19,7 @@ Page({
     onLoad: function (options) {
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap'],
+            fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap', 'systemInfo_platform'],
             actions: ['setCurSubLevelId']
         })
         wx.nextTick(() => {
@@ -96,39 +90,18 @@ Page({
         //     })
         // }
     },
-    // selectSubLevel(e) {
-    //     let subLevel = e.currentTarget.dataset.item;
-    //     if (subLevel.isPro && !this.data.user.isPro) {
-    //         Vant.Dialog.confirm({
-    //             message: '会员专享内容'
-    //         }).then(() => {
-
-    //         }).catch(() => {
-
-    //         })
-    //     } else {
-
-    //     }
-    // },
-    showDetail(e) {
-        let levelId =  e.currentTarget.dataset.id;
-        wx.hideTabBar({ animation: true });
-        this.setData({
-            isShowLevelDetail: true,
-            lookingLevel: LevelList.find(item => item.levelId === levelId),
-            lookingSubLevelList: SubLevelList.filter(item => item.pLevelId === levelId).sort((a, b) => a.index - b.index)
-        })
-    },
-    closeDetail() {
-        wx.showTabBar({ animation: true });
-        this.setData({ isShowLevelDetail: false });
-    },
-
     /**
      * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
 
+    },
+    buyBtn() {
+        // if (this.data.systemInfo_platform !== 'android') return;
+
+        wx.navigateTo({
+            url: '../buy/buy',
+        })
     },
 
     /**

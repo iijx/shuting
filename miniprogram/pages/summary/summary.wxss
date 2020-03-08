@@ -77,3 +77,11 @@
 .btn-wrap .btn {
     flex: 1;
 }
+
+
+.look-all {
+    text-align: center;
+    text-decoration: underline;
+    color: #3D96D3;
+    margin-bottom: 20rpx;
+}

@@ -20,6 +20,8 @@
                 <van-button round size="default" bind:click="toLearnNextSubLevel" color="#3D96D3" block>继续学习</van-button>
             </view>
         </view>
+
+        <view bindtap="lookAllBtn" class="look-all">查看全部小节</view>
     </view>
 
 

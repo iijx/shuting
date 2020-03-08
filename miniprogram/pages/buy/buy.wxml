@@ -41,7 +41,7 @@
 	</view>
 
 
-	<view class="ios-submit-bar" wx:if="{{ systemInfo_platform !== 'android' }}">平台限制，功能暂不支持</view>
+	<view class="ios-submit-bar" wx:if="{{ systemInfo_platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
 	<van-submit-bar wx:else loading="{{ paying }}" price="{{ price }}" tip="{{ true }}" button-text="立即开通" button-type="warning" bind:submit="onSubmit">
         <!-- <view slot="tip">
            该卡一旦售出，概不退换 

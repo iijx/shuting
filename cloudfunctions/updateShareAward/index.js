@@ -64,7 +64,7 @@ exports.main = async (event, context) => {
         const result = await db.runTransaction(async transaction => {
             // 发放兑换码
             // 1. 搜索可用的出来
-            console.log(1);
+            console.log(1, awardNum);
             let codeArr = await t_exchange_code.where({
                 type: 1,
                 status: 1,
