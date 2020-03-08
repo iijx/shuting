@@ -12,7 +12,7 @@ Page({
         remainInviteCount: 0,
         awardedNum: 0,
 
-        CAN_AWARD_MIN_INVITE: 3,
+        CAN_AWARD_MIN_INVITE: 10,
     },
 
     /**
@@ -22,7 +22,7 @@ Page({
         // 数据绑定
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['defaultShareInfo', 'user', 'messages', 'newMessageNum', 'systemInfo'],
+            fields: ['user', 'messages', 'newMessageNum', 'systemInfo', 'systemInfo_platform'],
             actions: ['setUser', 'setMessages'],
         });
         wx.nextTick(() => {
@@ -96,9 +96,15 @@ Page({
     },
 
     openMemberBtn() {
-        wx.navigateTo({
-            url: '../buy/buy',
-        })
+        if (this.data.systemInfo_platform === 'android') {
+            wx.navigateTo({
+                url: '../buy/buy',
+            })
+        } else {
+            wx.navigateTo({
+                url: '../iosBuyPrompt/iosBuyPrompt',
+            })
+        }
        
     },
     freeMemberBtn() {
@@ -158,6 +164,6 @@ Page({
      */
    
     onShareAppMessage: function (res) {
-        return this.data.defaultShareInfo;
+        return Store.defaultShareInfo;
     },
 })

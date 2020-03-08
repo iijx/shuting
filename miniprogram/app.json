@@ -7,7 +7,8 @@
         "pages/my/my",
         "pages/buy/buy",
         "pages/message/message",
-        "pages/exchange/exchange"
+        "pages/exchange/exchange",
+        "pages/iosBuyPrompt/iosBuyPrompt"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

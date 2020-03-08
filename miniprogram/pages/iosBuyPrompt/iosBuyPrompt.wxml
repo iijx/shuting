@@ -1,0 +1,10 @@
+<!--pages/iosBuyPrompt/iosBuyPrompt.wxml-->
+<view class="container">
+	<view class="main">
+		<view class="title">由于平台限制，ios小程序版本暂不支持开通</view>
+		<view style="height: 100rpx;"></view>
+        <view>请尝试【微信公众号】等其他途径</view>
+		<view style="height: 100rpx;"></view>
+		<view>如有疑问，可联系客服</view>
+	</view>
+</view>

@@ -20,12 +20,12 @@
             </view>
         </view>
 
-        <!-- <view class="progress-wrap" wx:if="{{ !user.isPro }}">
+        <view class="progress-wrap" wx:if="{{ !user.isPro }}">
             <cell custom-class="progress-cell">
                 <van-progress slot="bd" show-pivot="{{false}}" color="#f9ce0d" percentage="{{ remainInviteCount * 100 / CAN_AWARD_MIN_INVITE }}" />
                 <view slot="ft" class="progress-ft">{{ remainInviteCount }}/{{ CAN_AWARD_MIN_INVITE }}</view>
             </cell>
-            <view class="progress-note">[限时] 邀请3位新用户进入即可获赠7天会员, 可累加噢!</view>
+            <view class="progress-note">[限时] 邀请10位新用户进入即可获赠7天会员, 可累加噢!</view>
             <view style="margin-top: 38rpx;"></view>
 
             <view style="display: flex;">
@@ -37,10 +37,10 @@
                     <van-button round size="small" bind:click="openMemberBtn" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
                 </view>
             </view>
-        </view> -->
+        </view>
     </view>
 
-    <view style="height: 120rpx;"></view>
+    <view style="height: 200rpx;"></view>
     <!-- <view class="activity">
         <view class="activity-note" >全力抗疫，在家充电，这个2月所有用户均可获赠1一个月会员</view>
         <view class="get-member-btn" bindtap="getActivityMember">领取专属会员(仅2月可领)</view>

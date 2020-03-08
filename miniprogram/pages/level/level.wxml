@@ -43,11 +43,10 @@
 	</view>
 	<!-- 推广按钮 -->
 	<view class="buy-info" bindtap="buyBtn">
-		<view class="buy-wrap" wx:if="{{ systemInfo_platform !== 'android' }}">
+		<view class="buy-wrap" wx:if="{{ systemInfo_platform === 'android' }}">
 			<view class="buy-body"><text class="old-price">￥10 </text><text class="price">￥2.9</text> 元解锁全部 <text class="look-btn">查看详情</text></view>
 			<!-- <view class="buy-btn">立即查看</view> -->
 		</view>
-		<view wx:else>IOS版小程序暂不支持开通会员</view>
 	</view>
 
 

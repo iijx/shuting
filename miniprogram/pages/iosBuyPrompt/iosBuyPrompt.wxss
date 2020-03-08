@@ -1,0 +1,14 @@
+/* pages/iosBuyPrompt/iosBuyPrompt.wxss */
+.container {
+    padding: 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    box-sizing: border-box;
+    color: #4a4a4a;
+}
+.title {
+    font-size: 34rpx;
+    color: #000;
+}
