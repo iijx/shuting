@@ -1,0 +1,39 @@
+<!--pages/version/version.wxml-->
+<view class="container">
+    <view style="height: 20rpx; background: #fff;"></view>
+	<van-panel title="下个版本" desc="预计上线: {{ version.onlineTime }}" status="{{ version.status }}">
+		<view class="panel-body">
+            <view wx:for="{{ version.body }}" wx:key="index" wx:for-item="item">{{ item }}</view>
+        </view>
+	</van-panel>
+
+    <view class="user-note-wrap">
+        <cell>
+            <view slot="bd" style="color: #636464; font-size: 32rpx;">功能建议/留言/问题反馈</view>
+            <view slot="ft" bindtap="toAdvice" style="color: #003981; font-size: 32rpx;">写一个</view>
+        </cell>
+
+        <view style="height: 40rpx;"></view>
+
+        <block wx:for="{{ list }}" wx:key="index" wx:for-item="item">
+            <view class="note-item">
+                <image class="avatar" mode="widthFix" src="{{ item.avatar ? item.avatar : '/assets/imgs/user-unlogin.png'}}"></image>
+                <view class="note-body">
+                    <cell>
+                        <view slot="bd">
+                            <text style=" font-size: 32rpx; flex: 1">{{ item.nickName || '匿名'}}</text>
+                        </view>
+                        <view slot="ft">
+                            <view bindtap="likeBtn" data-index="{{ index }}">
+                                <image mode="widthFix" class="like-img" src="{{ item.isLike ? '/assets/imgs/like-1.png' : '/assets/imgs/like-0.png' }}"></image>
+                                <text wx:if="{{ item.likeNum > 0}}">{{ item.likeNum }}</text>
+                            </view>
+                        </view>
+                    </cell>
+                    <view class="content">{{ item.content }}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+</view>

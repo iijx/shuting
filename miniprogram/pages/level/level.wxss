@@ -190,7 +190,8 @@ page {
 } */
 
 .buy-info {
-    margin-top: 32rpx;
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #e2e2e2;
 }
 .buy-wrap {
     background-color: #fff;

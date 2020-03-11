@@ -2,7 +2,7 @@
 
 
 const app = getApp();
-const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, XData, UniApi, Vant, Store, CreateStoreBindings } = app;
 
 Page({
     /**
@@ -13,16 +13,18 @@ Page({
         awardedNum: 0,
 
         CAN_AWARD_MIN_INVITE: 10,
-    },
 
+        ...XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt'])
+    },
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
+        this.setData( XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']))
         // 数据绑定
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['user', 'messages', 'newMessageNum', 'systemInfo', 'systemInfo_platform'],
+            fields: ['user', 'messages', 'newMessageNum', 'systemInfo_platform'],
             actions: ['setUser', 'setMessages'],
         });
         wx.nextTick(() => {
@@ -72,7 +74,23 @@ Page({
 
     },
     onShow: function () {
-        UniApi.login();
+        UniApi.login().then(res => {
+            this.setData({ user: this.data.user })
+        });
+    },
+    memberBtn() {
+        if (this.data.systemInfo_platform === 'android') {
+            wx.navigateTo({
+                url: '../buy/buy',
+            })
+        } else {
+            Vant.Dialog.alert({
+                title: 'Sorry',
+                confirmButtonText: '知道了',
+              }).then(() => {
+                // on close
+              });
+        }
     },
     onGetUserInfo() {
         wx.getUserInfo({
@@ -96,7 +114,7 @@ Page({
     },
 
     openMemberBtn() {
-        if (this.data.systemInfo_platform === 'android') {
+        if (Store.systemInfo_platform === 'android') {
             wx.navigateTo({
                 url: '../buy/buy',
             })

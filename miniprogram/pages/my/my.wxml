@@ -14,55 +14,39 @@
             <block wx:else>
                 <view style="flex: 1">{{ user.nickName }}</view>
             </block>
-            <view wx:if="{{ user.avatar }}" class="member {{ user.isPro ? 'pro' : ''}}">
-                <view wx:if="{{user.isPro}}">会员用户</view>
-                <view wx:else>暂未加入会员</view>
-            </view>
+
+            <block wx:if="{{ user.avatar }}" >
+                <view wx:if="{{user.isPro}}" class="member-pro">会员用户</view>
+                <view wx:else class="member-btn">
+                    <van-button color="#FD4D4F"  bind:click="memberBtn" size="small">{{ systemInfo_platform === 'android' ? '开通会员' : '会员计划' }}</van-button>
+                </view>
+                <!-- <view  class="member-btn">开通会员</view> -->
+            </block>
         </view>
 
-        <view class="progress-wrap" wx:if="{{ !user.isPro }}">
-            <cell custom-class="progress-cell">
-                <van-progress slot="bd" show-pivot="{{false}}" color="#f9ce0d" percentage="{{ remainInviteCount * 100 / CAN_AWARD_MIN_INVITE }}" />
-                <view slot="ft" class="progress-ft">{{ remainInviteCount }}/{{ CAN_AWARD_MIN_INVITE }}</view>
-            </cell>
-            <view class="progress-note">[限时] 邀请10位新用户进入即可获赠7天会员, 可累加噢!</view>
-            <view style="margin-top: 38rpx;"></view>
-
-            <view style="display: flex;">
-                <view style="flex: 1">
-                    <van-button round size="small" color="#f9ce0d" open-type="share" custom-style="color: #4a4a4a; font-weight: bold;" block>立即分享给好友</van-button>            
-                </view>
-                <view style="width: 20rpx;"></view>
-                <view style="flex: 1;">
-                    <van-button round size="small" bind:click="openMemberBtn" custom-style="font-weight: bold; " plain color="#f9ce0d"  block>直接开通会员</van-button>
-                </view>
-            </view>
-        </view>
     </view>
 
-    <view style="height: 200rpx;"></view>
-    <!-- <view class="activity">
-        <view class="activity-note" >全力抗疫，在家充电，这个2月所有用户均可获赠1一个月会员</view>
-        <view class="get-member-btn" bindtap="getActivityMember">领取专属会员(仅2月可领)</view>
-    </view> -->
-
+    <view style="height: 120rpx;"></view>
 
     <view class="operators">
-        <!-- <van-cell title="版本预告" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  /> -->
+        <button wx:if="{{ isShowIosMemberPrompt }}" class="contact-btn" open-type="contact" style="border: none;">
+            <van-cell icon="smile-o" title="关注公众号 · 会员福利" size="default" is-link></van-cell>
+        </button>
+        <van-cell title="版本预告" icon="down" size="default" link-type="navigateTo" url="/pages/version/version" is-link  />
         <van-cell-group>
-            <van-cell size="large" link-type="navigateTo" url="/pages/message/message" is-link>
+            <van-cell size="default" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
                 <cell slot="title" num="{{ newMessageNum }}">
                     <view slot="bd">我的消息</view>
                 </cell>
             </van-cell>
-            <van-cell title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell icon="gem-o" title="会员兑换码/转赠码" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
             
         </van-cell-group>
     </view>
 
     <!-- <view class="operators">
         <van-cell-group>
-            <van-cell title="班长计划" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell icon="friends-o" title="班长计划" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
         </van-cell-group>
     </view> -->
     
@@ -70,10 +54,10 @@
     <view class="operators">
         <van-cell-group>
             <button class="contact-btn" open-type="contact" style="">
-                <van-cell title="人工客服/建议" size="large" is-link></van-cell>
+                <van-cell icon="smile-o" title="人工客服/转赠会员/建议" size="default" is-link></van-cell>
             </button>
 
-            <van-cell title="复制 ID 号" size="large" bind:click="copyOpenid"/>
+            <van-cell icon="idcard" title="复制 ID 号" size="default" bind:click="copyOpenid"/>
         </van-cell-group>
     </view>
 
@@ -81,7 +65,7 @@
         <image class="img" src="/assets/imgs/freeMember.png" ></image>
     </view> -->
 
-    <van-dialog id="van-dialog" use-slot>
+    <!-- <van-dialog id="van-dialog" use-slot>
         <view>
             <image mode="widthFix" src="/assets/imgs/kefu-bg.png" />
             <view style="color: #4a4a4a; padding: 20rpx 32rpx;line-height: 1.8;">
@@ -91,5 +75,16 @@
             </view>
             
         </view>
+    </van-dialog> -->
+
+    <van-dialog id="van-dialog" use-slot>
+        <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
+            <view>{{ iosMemberPromptText }}</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}">公众号 · 支持开通</view>
+        </view>
     </van-dialog>
+    
+    <!-- 在页面内添加对应的节点 -->
+    <van-notify id="van-notify" />
 </view>

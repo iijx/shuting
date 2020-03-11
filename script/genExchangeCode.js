@@ -10,7 +10,7 @@ const randomChar = () => str[randomIntegerInRange(0, 58)];
 
 const randomCode = () => {
     let code = ''
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
         code += randomChar();
     }
     return code;
@@ -33,7 +33,7 @@ for (let i = 0; i < 1000; i++) {
 }
 let result = Array.from(codeArr).map(item => new ExchangeCode({
     code: item,
-    type: 2,
+    type: 3,
 }));
 
 for (const item of result) {

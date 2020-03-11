@@ -21,9 +21,17 @@
 			</cell>
 		</view>
 
-		<van-radio-group value="{{ radio }}" bind:change="onRadioChange">
+		<van-radio-group value="{{ memberType }}" bind:change="onRadioChange">
 			<van-cell-group border="{{ false }}">
-				<van-cell clickable data-name="1" bind:click="onRadioCellClick" use-label-slot>
+				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
+					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
+						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" style="color: #FE3F1D">（推荐）</text></view>
+						<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
+						<view wx:else slot="label" class="price">免费</view>
+						<van-radio slot="right-icon" name="{{ item.memberType }}" />
+					</van-cell>
+				</block>
+				<!-- <van-cell clickable data-name="1" bind:click="onRadioCellClick" use-label-slot>
 					<view slot="title" class="member-name">月度会员 · 30天</view>
 					<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥2.9 <text class="old-price">￥6</text></view>
 					<view wx:else slot="label" class="price">免费</view>
@@ -34,9 +42,21 @@
 					<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥4.8 <text class="old-price">￥9.9</text></view>
 					<view wx:else slot="label" class="price">免费</view>
 					<van-radio slot="right-icon" name="2" />
-				</van-cell>
+				</van-cell> -->
 			</van-cell-group>
 		</van-radio-group>
+
+		<view style="padding: 0 32rpx; line-height: 2;">
+			<van-divider />
+			<view style="color: #5a5a5a; font-weight: bold; font-size: 26rpx">终身会员特别福利:</view>
+			<view style="color: #646566; font-size: 24rpx; line-height: 1.8">
+				<view>1. 终身会员 · 无限转赠计划<text class="give-rule-btn" bindtap="giveRuleBtn"> 查看规则>></text></view>
+				<view>2. 终身会员 · 享受后续新版本功能</view>
+			</view>
+		</view>
+
+		<!-- <view>2. 被转赠人直接获得终身会员</view> -->
+		<!-- <view>3. 被转赠人学完之后依然可以继续转增，即无限转赠</view> -->
 
 	</view>
 
@@ -51,5 +71,19 @@
 
 	<van-dialog id="van-dialog" />
 	<van-toast id="van-toast" />
+
+
+	<van-dialog id="van-dialog-1" use-slot title="" show="{{ isShowGiveDialog }}" confirm-button-text="已了解" confirm-button-color="#282365">
+		<view style="padding: 32rpx;">
+			<text style="color: #282365; font-size: 34rpx; font-weight: bold; ">无限转赠计划</text>
+			<view style="color: #4a4a4a; font-size: 28rpx; line-height: 2; margin: 20rpx 0;">
+				<view>1. 学习完毕后，会员权可转赠给同学朋友；</view>
+				<view>2. 被转赠人将直接获得终身会员；</view>
+				<view>3. 被转赠人学习完毕后，亦可继续转赠送，次数没有限制；</view>
+				<view>4. 每次转赠，向接收者收取一定手续费；</view>
+				<view>5. 转赠一旦完成，不可撤回, 所有权归受赠人所有。</view>
+			</view>
+		</view>
+    </van-dialog>
 
 </view>

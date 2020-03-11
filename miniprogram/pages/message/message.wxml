@@ -14,6 +14,11 @@
         </van-panel>
         <view style="height: 32rpx;"></view>
     </block>
+
+    <block wx:if="{{ messages.length <= 0 }}">
+        <van-divider contentPosition="center">暂无更多消息</van-divider>
+
+    </block>
 </view>
 
 <!--wxml-->

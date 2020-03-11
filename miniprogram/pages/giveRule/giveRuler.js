@@ -1,18 +1,26 @@
-// pages/iosBuyPrompt/iosBuyPrompt.js
+// pages/giveRule/giveRuler.js
+const app = getApp();
+const { Util, XData, UniApi, Vant, Store, CreateStoreBindings } = app;
+
 Page({
 
     /**
      * Page initial data
      */
     data: {
-
+        ...XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt'])
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
+        this.setData( XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']));
 
+        this.storeBindings = CreateStoreBindings(this, {
+            store: Store,
+            fields: ['user', 'systemInfo_platform'],
+        });
     },
 
     /**
@@ -27,6 +35,20 @@ Page({
      */
     onShow: function () {
 
+    },
+    openMemberBtn() {
+        if (Store.systemInfo_platform === 'android') {
+            wx.navigateTo({
+                url: '../buy/buy',
+            })
+        } else {
+            Vant.Dialog.alert({
+                title: 'Sorry',
+                confirmButtonText: '知道了',
+              }).then(() => {
+                // on close
+              });
+        }
     },
 
     /**

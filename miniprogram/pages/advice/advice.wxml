@@ -1,0 +1,15 @@
+<!--pages/advice/advice.wxml-->
+<view class="container">
+    <view class="note" >描述</view>
+    <view>
+        <textarea class="textarea" placeholder="请输入文字描述" bindinput="onInput" value="{{ value}}" auto-focus></textarea>
+    </view>
+
+    <view class="note-1">(为防止内容灌水，提交后内容将由官方审核后出现)</view>
+    <view style="padding: 0 16rpx">
+        <van-button type="primary" loading="{{ isSubmiting }}" block bind:click="onSubmit" loading-type="spinner" loading-text="提交中">提交</van-button>
+    </view>
+
+
+    <van-notify id="van-notify" />
+</view>

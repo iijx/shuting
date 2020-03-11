@@ -40,7 +40,7 @@ component_1.VantComponent({
         },
         confirmButtonColor: {
             type: String,
-            value: color_1.BLUE
+            value: color_1.RED
         },
         cancelButtonColor: {
             type: String,

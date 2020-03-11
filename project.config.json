@@ -11,6 +11,8 @@
 		"coverView": true,
 		"nodeModules": true,
 		"autoAudits": true,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -18,9 +20,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		}
 	},
 	"appid": "wx11a23be8fd1b03f3",
 	"projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
@@ -104,6 +104,19 @@
 					"name": "exchangeCode",
 					"pathName": "pages/exchange/exchange",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "version",
+					"pathName": "pages/version/version",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "advice",
+					"pathName": "pages/advice/advice",
 					"scene": null
 				}
 			]

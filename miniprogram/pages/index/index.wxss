@@ -37,7 +37,9 @@ page {
     border-bottom-left-radius: 40rpx;
     border-bottom-right-radius: 40rpx;
 }
-
+.main {
+    transform: translate(0, -260rpx);
+}
 .mid {
     width: 684rpx;
     /* height: 570rpx; */
@@ -49,7 +51,6 @@ page {
     box-sizing: border-box;
     /* padding: 20rpx 30rpx; */
     
-    transform: translate(0, -260rpx);
     /* transform: translate(0, -100rpx); */
 }
 .mid .title {
@@ -107,4 +108,14 @@ page {
     color: #fff;
     font-size: 28rpx;
     font-weight: normal !important;
+}
+
+.give-banner {
+    /* width: 100%; */
+    margin: 44rpx 32rpx 0;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.give-banner .img {
+    width: 100%;
+    display: block;
 }

@@ -12,6 +12,13 @@
 			<image class="icon-level" src="/assets/imgs/levels.png"></image>级别单元列表
 		</view>
 		<view wx:for="{{ levelList }}" wx:key="index" wx:for-item="item">
+			<!-- 推广按钮 -->
+			<view wx:if="{{ !user.isPro && systemInfo_platform === 'android' && index === 1 }}" class="buy-info" bindtap="buyBtn">
+				<view class="buy-wrap" >
+					<view class="buy-body"><text class="old-price">￥10 </text><text class="price">￥2.9</text> 元解锁全部 <text class="look-btn">查看详情</text></view>
+					<!-- <view class="buy-btn">立即查看</view> -->
+				</view>
+			</view>
 			<view style="padding: 28rpx 32rpx;">
 				<cell>
 					<view slot="hd" class="level-title">{{ item.title }}</view>
@@ -41,13 +48,7 @@
 			</block>
 		</view>
 	</view>
-	<!-- 推广按钮 -->
-	<view class="buy-info" bindtap="buyBtn">
-		<view class="buy-wrap" wx:if="{{ systemInfo_platform === 'android' }}">
-			<view class="buy-body"><text class="old-price">￥10 </text><text class="price">￥2.9</text> 元解锁全部 <text class="look-btn">查看详情</text></view>
-			<!-- <view class="buy-btn">立即查看</view> -->
-		</view>
-	</view>
+	
 
 
 	<van-dialog id="van-dialog" />

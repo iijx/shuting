@@ -1,22 +1,26 @@
 // pages/buy/buy.js
 const app = getApp();
-const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, UniApi, XData, Vant, Store, CreateStoreBindings } = app;
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        radio: "1",
-        price: 290,
+        memberType: "3",
+        price: 990,
         paying: false,
         signUpNumber: 10,
-        systemInfo_platform: ''
+        systemInfo_platform: '',
+        isShowGiveDialog: false,
+        ...XData.create(['goods']),
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData(XData.create(['goods']));
+
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
             fields: ['systemInfo_platform'],
@@ -105,22 +109,25 @@ Page({
             signUpNumber: parseInt(Number(retNum))
         })
     },
+
+    giveRuleBtn() {
+        this.setData({ isShowGiveDialog: true })
+    },
     randomNum(min, max) {
         return Math.random() * (max - min) + min;
     },
     onRadioChange(e) {
         console.log(e);
-        this.setData({
-            radio: e.detail,
-            price: String(e.detail === '1') ? 290 : 480
-        });
+        // this.setData({
+        //     memberType: e.detail,
+        //     price: String(e.detail === '1') ? 290 : 480
+        // });
     },
     onRadioCellClick(e) {
-        const { name } = e.currentTarget.dataset;
-        console.log(name);
+        const { item } = e.currentTarget.dataset;
         this.setData({
-            radio: name,
-            price: String(name) === '1' ? 290 : 480
+            memberType: String(item.memberType),
+            price: item.price * 100
         });
     },
     onSubmit: Util.throttle(function() {

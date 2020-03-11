@@ -1,0 +1,29 @@
+
+
+<view class='coinInviteRule'>
+    <view class="main">
+        <view class="title">无限转赠计划</view>
+        <view class="content">
+            <view>1. 该计划仅限终身会员用户，其他会员暂不可转赠；</view>
+            <view>2. 学习完毕后，终身会员可转赠给同学朋友；</view>
+            <view>3. 受赠人将直接获得终身会员；</view>
+            <view>4. 受赠人学习完毕后，亦可继续转赠送，即转赠次数没有限制；</view>
+            <view>5. 每次转赠，向受赠人收取一定手续费；</view>
+            <view>6. 转赠一旦完成，不可撤回, 所有权归受赠人所有；</view>
+            <view>7. 如需转赠，请联系客服，客服会为您生成转赠码，您可将转赠码转赠给同学与朋友。</view>
+        </view>
+
+        <view wx:if="{{ !user.isPro && systemInfo_platform === 'android'}}" style="margin-top: 32rpx;">
+            <van-button block bind:click="openMemberBtn" type="primary">立即开通</van-button>
+        </view>
+    </view>
+
+    <van-dialog id="van-dialog" use-slot>
+        <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
+            <view>{{ iosMemberPromptText }}</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}">公众号 · 支持开通</view>
+        </view>
+    </van-dialog>
+
+</view>

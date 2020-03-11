@@ -15,7 +15,9 @@ const cloud = (name = '', data = {}) => {
             name,
             data: {...data},
             success: res => {
-                console.log(`[云函数]-[${name}] success res =>`, res)
+                if (config.env === 'dev') {
+                    console.log(`[云函数]-[${name}] success res =>`, res.result)
+                }
                 resolve(res.result)
             },
             fail: err => reject(err)

@@ -8,7 +8,9 @@
         "pages/buy/buy",
         "pages/message/message",
         "pages/exchange/exchange",
-        "pages/iosBuyPrompt/iosBuyPrompt"
+        "pages/version/version",
+        "pages/advice/advice",
+        "pages/giveRule/giveRuler"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -38,6 +40,8 @@
         "van-radio-group": "@vant/weapp/radio-group",
         "van-radio": "@vant/weapp/radio",
         "van-submit-bar": "@vant/weapp/submit-bar",
+        "van-notify": "@vant/weapp/notify",
+        "van-divider": "@vant/weapp/divider",
         "cell": "/components/cell/cell"
     },
     

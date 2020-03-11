@@ -1,8 +1,8 @@
 /* pages/my/my.wxss */
 
 .container {
-    /* background: #fff; */
     min-height: 100vh;
+    padding-bottom: 64rpx;
 }
 .top {
     height: 50%;
@@ -84,6 +84,7 @@
 }
 .userInfo .avatar {
     width: 120rpx;
+    
     height: 120rpx;
     display: block;
     margin-right: 28rpx;
@@ -96,21 +97,26 @@
     flex: 1;
     color: #3D96D3;
 }
+.red-btn-dialog {
 
-.userInfo .member {
-    text-align: center;
+}
+.userInfo .member-btn {
     font-size: 24rpx;
-    border: 1px solid #aaa;
-    background: #eaeaea;
-    color: #aaa;
+    background: #FD4D4F;
+    color: #fff;
     border-radius: 10rpx;
     line-height: 1.6;
     padding: 0 8rpx;
+    box-shadow: 0px 0px 6px rgba(255, 0, 0, 0.4);
 }
-.userInfo .member.pro {
-    border: 1px solid #f9ce0d;
-    background: #f9ce0d;
+.userInfo .member-pro {
+    text-align: center;
+    font-size: 24rpx;
+    background: #FD4D4F;
     color: #fff;
+    border-radius: 10rpx;
+    line-height: 2.3;
+    padding: 0 18rpx;
 }
 .join-member {
     color: #D82C1E;

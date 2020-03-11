@@ -1,0 +1,31 @@
+
+.panel-body {
+    padding: 26rpx;
+}
+
+.user-note-wrap {
+    padding: 0 32rpx;
+    margin-top: 32rpx;
+}
+.note-item {
+    display: flex;
+    margin-bottom: 38rpx;
+}
+.note-item .avatar {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+}
+.note-body {
+    flex: 1;
+    color: #636464;
+}
+.content {
+    color: #000;
+
+}
+.like-img {
+    width: 40rpx;
+    vertical-align: middle;
+    margin-bottom: 8rpx;
+}

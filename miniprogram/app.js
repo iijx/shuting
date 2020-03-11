@@ -2,15 +2,18 @@
 import * as Util from "./lib/util";
 import Config from './config.js'
 import UniApi from './lib/uniApi.js'
+import XData from './lib/xData.js'
 
 import Dialog from '@vant/weapp/dialog/dialog';
 import Toast from '@vant/weapp/toast/toast';
+import Notify from '/@vant/weapp/notify/notify';
 
 import { createStoreBindings } from 'mobx-miniprogram-bindings'
 import store from './lib/store'
 const Vant = {
     Dialog,
-    Toast
+    Toast,
+    Notify
 }
 
 App({
@@ -24,8 +27,14 @@ App({
             // 登录获取用户信息
             UniApi.login(opt.query.fromOpenid || '');
       
-
-            // UniApi.cloud('uploadFile')
+            UniApi.cloud('config').then(res => {
+                if (res.success) {
+                    XData.goods = [...res.goods];
+                    XData.version = {...res.version};
+                    XData.iosMemberPromptText = res.iosMemberPromptText || XData.iosMemberPromptText;
+                    XData.isShowIosMemberPrompt = res.isShowIosMemberPrompt || false;
+                }
+            })
         }
     },
     onShow: function (options) {
@@ -50,4 +59,5 @@ App({
     CreateStoreBindings: createStoreBindings,
 
     Vant,
+    XData
 })

@@ -167,3 +167,9 @@
                 transform: translate3d(0, -100%, 0);
     }
 }
+
+
+.give-rule-btn {
+    color: #3D96D3;
+    text-decoration: underline;
+}

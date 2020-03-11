@@ -1,9 +1,8 @@
 <!--pages/exchange/exchange.wxml-->
-
 <view class="container">
-    <view class="title">兑换码</view>
+    <view class="title">兑换码/转赠码</view>
     <van-cell-group>
-        <van-field value="{{ value }}" placeholder="请输入兑换码" border="{{ false }}" bind:change="onChange"/>
+        <van-field value="{{ value }}" placeholder="请输入兑换码/转赠码" border="{{ false }}" bind:change="onChange"/>
     </van-cell-group>
 
     <view style="height: 34rpx;"></view>

@@ -1,5 +1,6 @@
 import { LevelList, SubLevelList } from './level.js';
 import { observable, action } from 'mobx-miniprogram'
+import Config from '../config'
 
 const store = observable({
 
@@ -15,6 +16,8 @@ const store = observable({
     },
     systemInfo: {},
     get systemInfo_platform() {
+        if(Config.env === 'dev') return 'android';
+
         return this.systemInfo.platform;
     }, 
     // 我的消息
