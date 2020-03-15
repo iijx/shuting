@@ -16,7 +16,9 @@ Page({
         inputValue: '',
         spanClass: '',
 
-        nums: [1, 2, 3, 4,5 ,6 ,7 ,8, 9, '.', 0, 'x']
+        nums: [1, 2, 3, 4, 5 ,6 ,7 ,8, 9, '.', 0, 'x'],
+
+        isShowGoodImg: true,
     },
     // 
     onLoad: function (opt = {}) {
@@ -56,6 +58,15 @@ Page({
             let h = this.data.answer.slice(0, 2);
             let m = this.data.answer.slice(2);
             path = `timeAudio/${h}_${m}.m4a`;
+        } else if (type === 'year') {
+            path = `yearAudio/${this.data.answer}.mp3`;
+        } else if (type === 'pointNum') {
+            path = `pointAudio/${this.data.answer}.mp3`;
+        } else if (type === 'week') {
+            return `/assets/audio/week/week_${this.data.answer}.mp3`;
+        }
+        else if (type === 'month') {
+            return `/assets/audio/month/month_${this.data.answer}.mp3`;
         }
         return `${Config.cdnDomain}/assets/audio/${path}`;
     },
@@ -71,36 +82,77 @@ Page({
         })
     },
     _genOneAnswer() {
+        let answer = '';
         if(this.data.type === 'number') {
-            this.data.answer = Util.randomOneNum(this.data.maxLength);
+            answer = Util.randomOneNum(this.data.maxLength);
         } else if (this.data.type === 'phone'){
-            this.data.answer = Util.randomOnePhone(this.data.maxLength)();
+            answer = Util.randomOnePhone(this.data.maxLength)();
         } else if (this.data.type === 'time') {
-            this.data.answer = Util.randomOneTime();
+            answer = Util.randomOneTime();
+        } else if (this.data.type === 'year') {
+            answer = Util.randomOneYear();
+        } else if (this.data.type === 'pointNum') {
+            answer = Util.randomPointNumber();
+        } else if (this.data.type === 'week') {
+            answer = Util.randomOneWeek();
+        } else if (this.data.type === 'month') {
+            answer = Util.randomOneMonth();
         }
 
-        this.audioPlay();
-        this.setData({
-            answerLength: String(this.data.answer).length
-        })
+        if (answer === this.data.answer) {
+            this._genOneAnswer();
+            return;
+        } else {
+            this.data.answer = answer;
+            this.audioPlay();
+            this.setData({
+                answerLength: String(this.data.answer).length
+            })
+        };
+
     },
     _isCorrect() {
         return String(this.data.inputValue) === String(this.data.answer);
     },
+    playResultAudio(isCorrect) {
+        return new Promise((resolve, reject) => {
+            AudioContext.src = isCorrect ? Config.correctAudioSrc : Config.errorAudioSrc;
+            AudioContext.play();
+            Util.sleep(700).then(() => { 
+                if (isCorrect) {
+                    let src = '';
+                    if (this.data.score >= 100 ) src = '/assets/audio/bonustime.m4a';
+                    // else if (this.data.score === 90 ) src = '/assets/audio/unbelievable.m4a';
+                    else if (this.data.score === 80 ) src = '/assets/audio/amazing.m4a';
+                    // else if (this.data.score === 70 ) src = '/assets/audio/greate.m4a';
+                    else if (this.data.score === 60 ) src = '/assets/audio/good.m4a';
+                    if (src) {
+                        AudioContext.src = src;
+                        AudioContext.play();
+                        Util.sleep(1000).then(() => {
+                            resolve()
+                        });
+                    }
+                    else resolve()      
+                } else resolve();
+            })
+        })
+    },
     showAnswer(autoNextIfCorrect = true) {
-        if (this._isCorrect()) {
-            this.data.score += Config.correctScore;
+        let isCorrect = this._isCorrect();
+        if (isCorrect) {
+            if ((this.data.type === 'number' && this.data.maxLength === 1) || this.data.type === 'week') {
+                this.data.score += Config.correctScorePlus;
+            } else {
+                this.data.score += Config.correctScore;
+            }
             this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
-            AudioContext.src = Config.correctAudioSrc;
+            
             this.setData({
                 score: this.data.score,
                 spanClass: 'correct'
             })
-            if (autoNextIfCorrect) {
-                Util.sleep(1000).then(() => this.nextWord())
-            }
         } else {
-            AudioContext.src = Config.errorAudioSrc;
             this.data.score += Config.errorScore;
             if (this.data.score < 0) this.data.score = 0; 
             this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
@@ -108,9 +160,12 @@ Page({
                 score: this.data.score,
                 spanClass: 'error'
             })
-            Util.sleep(1000).then(() => this.audioPlay())
         }
-        AudioContext.play();
+
+        // 播放声音，及下一个词
+        this.playResultAudio(isCorrect).then(() => {
+            isCorrect ? this.nextWord() : this.audioPlay(); 
+        });
     },
     nextWord() {
         if (this.data.score >= 100) {

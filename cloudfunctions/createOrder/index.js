@@ -2,6 +2,33 @@
 const cloud = require('wx-server-sdk')
 const PayConfig = require('./payConfig');
 var md5 = require('md5');
+const goods =  [
+    {
+        name: '月度会员 · 30天',
+        isRecommend: false,
+        price: 2.9,
+        oldPrice: 10,
+        memberType: 1,
+        rank: 1,
+    },
+    // {
+    //     name: '半年会员 · 180天',
+    //     isRecommend: false,
+    //     price: 7.8,
+    //     oldPrice: 19,
+    //     memberType: 2,
+    //     rank: 2,
+    // },
+    {
+        name: '终身会员 · 100年',
+        isRecommend: true,
+        price: 9.7,
+        oldPrice: 68,
+        memberType: 3,
+        rank: 3,
+    },
+];
+
 
 // 初始化 cloud
 cloud.init({
@@ -32,8 +59,14 @@ const dateFormatter = (date, formatter) => {
 const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 const genOrder = async function(openid, memberType) {
+    let total_fee = 0;
+    try {
+        total_fee = parseInt(goods.find(item => String(item.memberType) === String(memberType)).price * 100);
+    } catch (error) {
+        total_fee = 970;        
+    };
     const order = new Order({
-        total_fee:  memberType === "1" ? price1 : price2,
+        total_fee, 
         openid,
     });
 
@@ -43,9 +76,6 @@ const genOrder = async function(openid, memberType) {
     console.log(res)
     return order;
 } 
-const price1 = 290;
-// const price1 = 1;
-const price2 = 480;
 // const price2 = 2;
 
 exports.main = async (event, context) => {

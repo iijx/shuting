@@ -23,6 +23,7 @@
     "usingComponents": {
         "van-progress": "@vant/weapp/progress",
         "van-circle": "@vant/weapp/circle",
+        "van-icon": "@vant/weapp/icon",
         "van-tab": "@vant/weapp/tab",
         "van-tabs": "@vant/weapp/tabs",
         "van-button": "@vant/weapp/button",
@@ -42,6 +43,7 @@
         "van-submit-bar": "@vant/weapp/submit-bar",
         "van-notify": "@vant/weapp/notify",
         "van-divider": "@vant/weapp/divider",
+        "van-popup": "@vant/weapp/popup",
         "cell": "/components/cell/cell"
     },
     

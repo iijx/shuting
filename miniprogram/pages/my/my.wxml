@@ -29,9 +29,6 @@
     <view style="height: 120rpx;"></view>
 
     <view class="operators">
-        <button wx:if="{{ isShowIosMemberPrompt }}" class="contact-btn" open-type="contact" style="border: none;">
-            <van-cell icon="smile-o" title="关注公众号 · 会员福利" size="default" is-link></van-cell>
-        </button>
         <van-cell title="版本预告" icon="down" size="default" link-type="navigateTo" url="/pages/version/version" is-link  />
         <van-cell-group>
             <van-cell size="default" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
@@ -81,7 +78,7 @@
         <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
             <view>{{ iosMemberPromptText }}</view>
             <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}">公众号 · 支持开通</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}">「数听英语」公众号 · 支持开通</view>
         </view>
     </van-dialog>
     

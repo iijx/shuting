@@ -231,3 +231,44 @@ page {
     text-decoration: underline;
     font-size: 36rpx;
 }
+
+
+
+.note-pop {
+    flex: 1;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 16rpx 32rpx 30rpx;
+    position: relative;
+
+}
+.note-pop .title {
+    font-size: 34rpx;
+    font-weight: bold;
+    color: #272163;
+    padding: 10rpx 0 24rpx;
+    font-weight: bold;
+}
+
+.note-pop .content {
+    color: #4a4a4a;
+    font-size: 30rpx;
+    line-height: 1.8;
+    max-height: 80vh;
+    overflow: scroll;
+}
+
+.note-pop .strong {
+    font-weight: bold;
+}
+
+.note-pop .month-item {
+    border-bottom: 1rpx solid #efefef;
+    height: 76rpx;
+}
+.note-pop .close-wrap {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+}

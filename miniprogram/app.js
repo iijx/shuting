@@ -59,5 +59,6 @@ App({
     CreateStoreBindings: createStoreBindings,
 
     Vant,
-    XData
+    XData,
+    AppAudio: wx.createInnerAudioContext()
 })

@@ -24,7 +24,7 @@ export default {
         {
             name: '月度会员 · 30天',
             isRecommend: false,
-            price: 2.9,
+            price: 4.9,
             oldPrice: 10,
             memberType: 1,
             rank: 1,
@@ -32,7 +32,7 @@ export default {
         {
             name: '半年会员 · 180天',
             isRecommend: false,
-            price: 5.8,
+            price: 7.8,
             oldPrice: 19,
             memberType: 2,
             rank: 2,
@@ -40,7 +40,7 @@ export default {
         {
             name: '终身会员 · 100年',
             isRecommend: true,
-            price: 9.9,
+            price: 9.7,
             oldPrice: 19,
             memberType: 3,
             rank: 3,
@@ -56,7 +56,6 @@ export default {
             ac[cur] = cloneObj(that[cur])
             return ac;
         }, {});
-        console.log('a', a);
         return a;
     }
 }

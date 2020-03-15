@@ -32,9 +32,9 @@
             </view>
         </view>
 
-        <view class="give-banner" bindtap="linkToGiveRuler">
+        <!-- <view class="give-banner" bindtap="linkToGiveRuler">
             <image class="img" mode="widthFix" src="/assets/imgs/give-banner.png"></image>
-        </view>
+        </view> -->
     </view>
 </view>
 

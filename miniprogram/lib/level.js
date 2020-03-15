@@ -58,66 +58,100 @@ export const SubLevelList = [
         maxLength: 4,
         index: 4,
     },
-
+    {
+        pLevelId: 1,
+        levelId: 15,
+        type: 'year',
+        title: '年份',
+        maxLength: 4,
+        isPro: true,
+        index: 5,
+        widthIcon: true
+    },
     // 级别 2
     {
         pLevelId: 2,
         levelId: 21,
-        type: 'number',
-        title: '数字4位',
+        type: 'week',
+        title: '星期',
         maxLength: 4,
         isPro: true,
-
         index: 1,
+        widthIcon: true
     },
     {
         pLevelId: 2,
         levelId: 22,
-        type: 'number',
-        title: '数字5位',
-        maxLength: 5,
+        type: 'pointNum',
+        title: '小数',
+        maxLength: 6,
         isPro: true,
-
         index: 2,
     },
     {
         pLevelId: 2,
         levelId: 23,
+        type: 'number',
+        title: '数字4位',
+        maxLength: 4,
+        isPro: true,
+        index: 3,
+    },
+    {
+        pLevelId: 2,
+        levelId: 24,
+        type: 'number',
+        title: '数字5位',
+        maxLength: 5,
+        isPro: true,
+        index: 4,
+    },
+    {
+        pLevelId: 2,
+        levelId: 25,
         type: 'phone',
         title: '电话6位',
         maxLength: 6,
         isPro: true,
-
-        index: 3,
+        index: 5,
     },
-
     // 级别 3
     {
         pLevelId: 3,
         levelId: 31,
-        type: 'time',
-        title: '24h时间',
+        type: 'month',
+        title: '月份',
         isPro: true,
         maxLength: 8,
         index: 1,
+        widthIcon: true
     },
     {
         pLevelId: 3,
         levelId: 32,
-        type: 'number',
-        title: '数字6位',
+        type: 'time',
+        title: '24h时间',
         isPro: true,
-
-        maxLength: 6,
+        maxLength: 8,
         index: 2,
     },
     {
         pLevelId: 3,
         levelId: 33,
+        type: 'number',
+        title: '数字6位',
+        isPro: true,
+
+        maxLength: 6,
+        index: 3,
+    },
+    {
+        pLevelId: 3,
+        levelId: 34,
         type: 'phone',
         title: '电话8位',
         isPro: true,
         maxLength: 8,
-        index: 3,
+        index: 4,
     },
 ]

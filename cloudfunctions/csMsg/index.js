@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
         touser: wxContext.OPENID,
         msgtype: 'text',
         text: {
-            content: '数听客服为您服务！'
+            content: '数听客服为您服务！  ios 版本若需开通会员，请到「数听英语」同名公众号下开通，小程序版暂不支持！'
         }
     })
 

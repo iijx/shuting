@@ -7,7 +7,7 @@ Page({
      */
     data: {
         memberType: "3",
-        price: 990,
+        price: 0,
         paying: false,
         signUpNumber: 10,
         systemInfo_platform: '',
@@ -21,11 +21,18 @@ Page({
     onLoad: function (options) {
         this.setData(XData.create(['goods']));
 
+
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
             fields: ['systemInfo_platform'],
         })
         this.updateSignUpNumber();
+
+        wx.nextTick(() => {
+            this.setData({
+                price: this.data.goods.find(item => String(item.memberType) === '3').price * 100
+            })
+        })
     },
 
     /**
@@ -136,7 +143,7 @@ Page({
             message: ''
         });
         UniApi.cloud('createOrder', {
-            memberType: this.data.radio + ''
+            memberType: String(this.data.memberType)
         }).then(res => {
             Vant.Toast.clear();
             app.globalData.out_trade_no = res.out_trade_no;
@@ -151,7 +158,8 @@ Page({
                       paying: true
                   })
                 },
-                fail: () => {
+                fail: (err) => {
+                    console.log('跳转err => ', err);
                   // 小程序跳转失败
                   // 做好错误处理
                 }

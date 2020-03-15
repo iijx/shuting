@@ -7,6 +7,46 @@ page {
     /* padding: 64rpx; */
     box-sizing: border-box;
 }
+.form {
+    position: relative;
+}
+
+.form .goog-img-wrap {
+    position: absolute;
+    right: 10rpx;
+    top: 10rpx;
+    height: 80rpx;
+    z-index: 1000;
+}
+/* good */
+.goog-img-wrap .img1 {
+    height: 100%;
+    display: block;
+    width: 256rpx;
+    height: 98rpx;
+}
+/* excellent */
+.goog-img-wrap .img2 {
+    height: 100%;
+    display: block;
+    width: 328rpx;
+    height: 102rpx;
+}
+/* amazing */
+.goog-img-wrap .img3 {
+    height: 100%;
+    display: block;
+    width: 337rpx;
+    height: 105rpx;
+}
+/* bouns-time */
+.goog-img-wrap .img4 {
+    height: 100%;
+    display: block;
+    width: 420rpx;
+    height: 103rpx;
+}
+
 .audio-wrap {
     text-align: center;
     padding: 100rpx 0;
@@ -121,5 +161,37 @@ page {
     /* height: 20rpx; */
 
 }
+
+
+
+@keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale3d(.3, .3, .3);
+    }
+  
+    30% {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+    90% {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale3d(0, 0, 0);
+    }
+}
+  
+.zoomIn {
+    animation-duration: 1.2s;
+    animation-fill-mode: both;
+    animation-name: zoomIn;
+}
+
+
+
 
 

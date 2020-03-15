@@ -1,7 +1,7 @@
 // pages/level/level.js
 
 const app = getApp();
-const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, XData, Vant, Store, CreateStoreBindings } = app;
 import { LevelList, SubLevelList } from '../../lib/level.js';
 
 Page({
@@ -11,6 +11,14 @@ Page({
      */
     data: {
         levelList: [],
+
+        isShowNote: false,
+        noteType: '',
+
+        monthWords: [...Util.MonthWords],
+        weekWords: [...Util.WeekWords],
+
+        price: 4.9
     },
 
     /**
@@ -39,9 +47,9 @@ Page({
                     unitList,
                 }
             });
-
             this.setData({
-                levelList
+                levelList,
+                price: XData.create(['goods']).goods.find(item => String(item.memberType) === '1').price,
             })
         })
         
@@ -96,6 +104,12 @@ Page({
     onReady: function () {
 
     },
+    wordPlay(e) {
+        let src = e.currentTarget.dataset.audio;
+        console.log(src);
+        app.AppAudio.src = src;
+        app.AppAudio.play();
+    },
     buyBtn() {
         // if (this.data.systemInfo_platform !== 'android') return;
 
@@ -109,6 +123,18 @@ Page({
      */
     onShow: function () {
         
+    },
+    noteBtn(e) {
+        let unit = e.currentTarget.dataset.unit;
+        this.setData({
+            noteType: unit.type,
+            isShowNote: true,
+        })
+    },
+    popOnClose() {
+        this.setData({
+            isShowNote: false,
+        })
     },
 
     /**

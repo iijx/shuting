@@ -46,14 +46,14 @@
 			</van-cell-group>
 		</van-radio-group>
 
-		<view style="padding: 0 32rpx; line-height: 2;">
+		<!-- <view style="padding: 0 32rpx; line-height: 2;">
 			<van-divider />
 			<view style="color: #5a5a5a; font-weight: bold; font-size: 26rpx">终身会员特别福利:</view>
 			<view style="color: #646566; font-size: 24rpx; line-height: 1.8">
 				<view>1. 终身会员 · 无限转赠计划<text class="give-rule-btn" bindtap="giveRuleBtn"> 查看规则>></text></view>
 				<view>2. 终身会员 · 享受后续新版本功能</view>
 			</view>
-		</view>
+		</view> -->
 
 		<!-- <view>2. 被转赠人直接获得终身会员</view> -->
 		<!-- <view>3. 被转赠人学完之后依然可以继续转增，即无限转赠</view> -->

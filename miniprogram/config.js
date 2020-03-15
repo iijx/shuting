@@ -17,5 +17,6 @@ export default {
     errorAudioSrc: '/assets/audio/error.m4a',
 
     correctScore: 5,
+    correctScorePlus: 10,
     errorScore: -20,
 }
