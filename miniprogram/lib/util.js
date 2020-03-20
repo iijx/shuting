@@ -169,9 +169,9 @@ export const randomOneNum = length => {
     let min = gen10ExpNum(length - 1);
     
     if (length === 6) return SixNums[randomIntegerInRange(0, SixNums.length)]
-    else if (length === 7) return SixNums[randomIntegerInRange(0, SevenNums.length)]
-    else if (length === 8) return SixNums[randomIntegerInRange(0, EightNums.length)]
-    else if (length === 9) return SixNums[randomIntegerInRange(0, NightNums.length)]
+    else if (length === 7) return SevenNums[randomIntegerInRange(0, SevenNums.length)]
+    else if (length === 8) return EightNums[randomIntegerInRange(0, EightNums.length)]
+    else if (length === 9) return NightNums[randomIntegerInRange(0, NightNums.length)]
 
     else return randomIntegerInRange(min === 1 ? 0 : min, gen10ExpNum(length));
 }

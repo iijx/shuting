@@ -159,6 +159,7 @@ const store = observable({
     } else {
         wx.clearStorageSync();
         store.setCurSubLevelId(11);
+        wx.setStorageSync('l_version', "2.0")
         wx.setStorageSync('l_curSubLevelId', "11")
     }
 

@@ -35,9 +35,7 @@ page {
     background-color: #fff;
     margin: 32rpx 0 0;
     padding-bottom: 50rpx;
-    /* border-radius: 20rpx; */
-    border-top-left-radius: 20rpx;
-    border-top-right-radius: 20rpx;
+    border-radius: 10rpx;
     overflow: hidden;
 }
 /* 
@@ -262,3 +260,82 @@ page {
     top: 20rpx;
     right: 20rpx;
 }
+
+
+
+
+.custom-mode-wrap {
+    margin-top: 32rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-mode-wrap .title {
+    font-size: 26rpx;
+    display: flex;
+    padding-left: 30rpx;
+    line-height: 70rpx;
+    align-items: center;
+    justify-content: center;
+    background: #FFD726;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #3e3f41;
+}
+.custom-body {
+    background: url('http://cdnword.iijx.site/assets/imgs/shuting/hard-mode-bg.png');
+    /* background-color: #F1F4F7; */
+    /* background-color: #363635; */
+    height: 360rpx;
+    width: 100%;
+    position: relative;
+}
+.custom-body .case {
+    position: absolute;
+    left: 700rpx;
+    padding: 5rpx;
+    animation: case-ani linear infinite;
+    color: #6D6E6F;
+    font-weight: bold;
+}
+
+.lock {
+    width: 26rpx;
+    height: 36rpx;
+    display: block;
+    opacity: .9;
+}
+.case.case-1 { top: 5rpx; animation-duration: 7.7s;}
+.case.case-2 { top: 50rpx; animation-duration: 12s;}
+.case.case-3 { top: 95rpx; animation-duration: 8.8s;}
+.case.case-4 { top: 140rpx; animation-duration: 9.7s;}
+.case.case-5 { top: 176rpx; animation-duration: 8s;}
+.case.case-6 { top: 220rpx; animation-duration: 8.5s;}
+.case.case-7 { top: 262rpx; animation-duration: 9.6s;}
+.case.case-8 { top: 305rpx; animation-duration: 10s;}
+/* .case-9 { top: 330rpx} */
+
+@keyframes case-ani{
+    /* 0% {
+        left: 720rpx
+    } */
+    33% {
+        left: 40%
+    }
+    40% {
+        left: 40%
+    }
+    100% {
+        left: -100%;
+    }
+
+}
+
+.custom-mode-wrap .btn {
+    position: absolute;
+    right: 20rpx;
+    bottom: 20rpx;
+    text-align: center;
+}
+

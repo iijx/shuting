@@ -13,7 +13,7 @@
             <view class="title">{{ curLevel.title }}</view>
             <view class="body">
                 <cell>
-                    <view slot="bd" class="sublevel-title">{{ curLevel.title }}{{ curSubLevel.title }}</view>
+                    <view slot="bd" class="sublevel-title">{{ curLevel.title }}·{{ curSubLevel.title }}</view>
                     <view slot="ft" >{{ curSubLevelScore }}%</view>
                 </cell>
 

@@ -53,6 +53,28 @@
 		</view>
 	</view>
 
+	<!-- 地狱王者模式 -->
+	<view class="custom-mode-wrap">
+		<view class="title">
+			<text>地狱王者模式　</text>
+			<image wx:if="{{ !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
+		</view>
+		<view class="custom-body">
+			<view class="case case-1">23:50</view>
+			<view class="case case-2">123</view>
+			<view class="case case-3">2020</view>
+			<view class="case case-4">3.1415926</view>
+			<view class="case case-5">Monday</view>
+			<view class="case case-6">24569876</view>
+			<view class="case case-7">2784329237</view>
+			<view class="case case-8">3:15</view>
+			<!-- <view class="case case-9">2008</view> -->
+		</view>
+		<view class="btn" bindtap="startHardMode">
+			<van-button size="small" round color="#3D96D3">开始练习</van-button>
+		</view>
+	</view>
+
 	<van-dialog id="van-dialog" />
 
 	<van-popup show="{{ isShowNote }}" position="bottom" bind:close="popOnClose">

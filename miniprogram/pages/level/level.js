@@ -128,6 +128,19 @@ Page({
     onShow: function () {
         
     },
+    startHardMode() {
+        if (!this.data.user.isPro) {
+            Vant.Dialog.alert({
+                message: '会员专享内容，请先开通会员',
+                confirmButtonText: '知道了'
+            })
+            return;
+        } else {
+            wx.navigateTo({
+              url: '../learn/learn?mode=hard',
+            })
+        }
+    },
     noteBtn(e) {
         let unit = e.currentTarget.dataset.unit;
         this.setData({
