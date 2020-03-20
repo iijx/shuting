@@ -2,30 +2,40 @@
 const cloud = require('wx-server-sdk')
 const PayConfig = require('./payConfig');
 var md5 = require('md5');
-const goods =  [
+const PROD_ENV_NAME = 'prod-mxd6w';
+const GOODS =  [
     {
-        name: '月度会员 · 30天',
-        isRecommend: false,
-        price: 2.9,
-        oldPrice: 10,
-        memberType: 1,
-        rank: 1,
+        title: '数听自定义天数会员',
+        memberType: '10',
+        isCustom: true,
     },
-    // {
-    //     name: '半年会员 · 180天',
-    //     isRecommend: false,
-    //     price: 7.8,
-    //     oldPrice: 19,
-    //     memberType: 2,
-    //     rank: 2,
-    // },
     {
-        name: '终身会员 · 100年',
-        isRecommend: true,
-        price: 9.7,
-        oldPrice: 68,
+        title: '数听月度会员',
+        price: 2.9,
+        totalFee: 290,
+        memberType: 1,
+        memberDay: 30,
+    },
+    {
+        title: '数听半年会员',
+        price: 5.9,
+        totalFee: 590,
+        memberType: 2,
+        memberDay: 180,
+    },
+    {
+        title: '数听年度会员',
+        price: 5.9,
+        totalFee: 590,
+        memberType: 4,
+        memberDay: 180,
+    },
+    {
+        title: '数听终身会员',
+        price: 9.8,
+        totalFee: 980,
         memberType: 3,
-        rank: 3,
+        memberDay: 36500,
     },
 ];
 
@@ -58,32 +68,37 @@ const dateFormatter = (date, formatter) => {
 
 const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-const genOrder = async function(openid, memberType) {
-    let total_fee = 0;
-    try {
-        total_fee = parseInt(goods.find(item => String(item.memberType) === String(memberType)).price * 100);
-    } catch (error) {
-        total_fee = 970;        
-    };
+// 生成订单
+const genOrder = async function(openid, memberType, memberDay) {
+    let good = GOODS.find(item => String(item.memberType) === String(memberType));
+    if (!good) good = GOODS[3]; // 若没找到商品，默认终身会员（做兼容处理，一般不会出现
+    // 如果是自定义会员，单独处理一下
+    if (good.isCustom) {
+        good.totalFee = memberDay * 10;
+        good.body = `数听自定义${memberDay}天会员`;
+        good.memberDay = memberDay;
+    }
+
     const order = new Order({
-        total_fee, 
+        total_fee: good.totalFee,
         openid,
+        body: good.body,
+        attach: JSON.stringify(good)
     });
 
     const res = await db.collection('order').add({
         data: order
     })
-    console.log(res)
     return order;
 } 
-// const price2 = 2;
 
 exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
-    const { memberType } = event;
+    const { memberType, memberDay } = event;
+    console.log(event);
     if (!memberType) return {}
 
-    const order = await genOrder(wxContext.OPENID, memberType)
+    const order = await genOrder(wxContext.OPENID, memberType, memberDay);
 
     return order.getOrder2payjsDto();
 };
@@ -92,30 +107,35 @@ class Order {
     constructor(opt) {
         this.mchid = PayConfig.MCHID;
         this.openid = opt.openid;
+        this.body = opt.body || '数听会员';
         this.total_fee = opt.total_fee;
         this.status = 1; // 1 未支付，2 已支付， 3，已退款
         this.out_trade_no = this.genOrderNum();
         this.transaction_id = ''; // 微信订单号
         this.payjs_order_id = ''; // payjs 订单号
         this.time_end =  ''; // 支付时间
+        this.attach = opt.attach || ''; // 订单附带信息
 
-        this.created = new Date();
-        this.updated = new Date();
+        this.createAt = new Date();
+        this.updateAt = new Date();
     }
+    // 生成订单号
     genOrderNum() {
         return dateFormatter(new Date(), "YYYYMMDDHHmmss") + String(Date.now()).slice(-3) + randomIntegerInRange(100, 999);
     }
+    // 转成payjs需要的订单对象
     getOrder2payjsDto() {
         let payOrder = {
             mchid: this.mchid, // 商户号
             total_fee: this.total_fee,
             out_trade_no: this.out_trade_no,
-            notify_url: PayConfig.NOTIFY_URL,
-            nonce: "1234"
+            body: this.body,
+            notify_url: cloud.DYNAMIC_CURRENT_ENV === PROD_ENV_NAME ? PayConfig.NOTIFY_URL : PayConfig.NOTIFY_URL_DEV,
+            nonce: String(Date.now()), // 随机字符串
         };
         return {
             ...payOrder,
-            sign: md5(`mchid=${payOrder.MCHID}&out_trade_no=${payOrder.out_trade_no}&total_fee=${payOrder.total_fee}&key=${PayConfig.KEY}`).toUpperCase(),
+            sign: md5(`body=${payOrder.body}&mchid=${payOrder.MCHID}&notify_url=${payOrder.notify_url}&out_trade_no=${payOrder.out_trade_no}&total_fee=${payOrder.total_fee}&key=${PayConfig.KEY}`).toUpperCase(),
         }
     }
 }

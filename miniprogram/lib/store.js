@@ -11,7 +11,6 @@ const store = observable({
         openid: '',
         avatar: '',
         nickName: '',
-        proBeginDate: new Date('1970-01-01'),
         proEndDate: new Date('1970-01-01'),
     },
     systemInfo: {},
@@ -61,14 +60,6 @@ const store = observable({
 
 
     get defaultShareInfo() {
-        // if (!title) {
-        //     title = '数听英语·专项提升数字听力'
-        // }
-        // if (params) {
-        //     params += `&fromOpenid=${this.user.openid}`
-        // } else {
-        //     params = `fromOpenid=${this.user.openid}`
-        // }
         return {
             path: `/pages/index/index?fromOpenid=${this.user.openid}`,
             title: '数听英语·专项提升数字听力'
@@ -84,7 +75,6 @@ const store = observable({
         if (_user.avatar) this.user.avatar = _user.avatar;
         if (_user.nickName) this.user.nickName = _user.nickName;
         if (_user.isPro) this.user.isPro = _user.isPro;
-        if (_user.proBeginDate) this.user.proBeginDate = _user.proBeginDate;
         if (_user.proEndDate) this.user.proEndDate = _user.proEndDate;
     }),
 
@@ -129,22 +119,18 @@ const store = observable({
 
 
     autoNextSubLevel: action(function() {
-        console.log('autoNextSubLevel 1');
         // 1. 直接查找跟当前子级别具有【相同父级别，序号+1】的子级别
         let nextSubLevel = SubLevelList.find(item => item.pLevelId === this.curLevel.levelId && item.index === this.curSubLevel.index + 1);
         // 2. 如果没有找到，说明当前子级别是该父级别下最后一个了
         if (!nextSubLevel) {
-            console.log('ll')
             // 2.1 找到下一个父级别
             let nextLevel = LevelList.find(item => item.index === this.curLevel.index + 1);
-            console.log('ll2', nextLevel);
             // 2.1.1 如果没有父级别，说明不用改了
             if (!nextLevel) return;
             // 2.1.2 找到了返回，父级别第一个
             else nextSubLevel = SubLevelList.filter(item => item.pLevelId === nextLevel.levelId).sort((a, b) => a.index - b.index)[0];
         }
 
-        console.log('autoNextSubLevel 2', nextSubLevel);
         let errMsg = '';
         if (nextSubLevel) {
             if (!this.user.isPro && nextSubLevel.isPro) {
@@ -158,23 +144,23 @@ const store = observable({
             success: errMsg ? false : true,
             msg: errMsg
         }
-        
     }),
 
 
 })
 
 ;(() => {
-    // 用户信息
-    // let l_user = wx.getStorageSync('l_user');
-    // if (l_user) store.setUser(JSON.parse(l_user)); 
-
     // 上次学习级别记录
-    let l_curSubLevelId = wx.getStorageSync('l_curSubLevelId') || '11';
-    if (l_curSubLevelId) store.setCurSubLevelId(JSON.parse(l_curSubLevelId));
-
-    let l_subLevelLearnedMap = wx.getStorageSync('l_subLevelLearnedMap');
-    if (l_subLevelLearnedMap) store.setSubLevelLearned(JSON.parse(wx.getStorageSync('l_subLevelLearnedMap')));
+    if (wx.getStorageSync('l_version') === '2.0') {
+        let l_curSubLevelId = wx.getStorageSync('l_curSubLevelId') || '11';
+        if (l_curSubLevelId) store.setCurSubLevelId(JSON.parse(l_curSubLevelId));
+        let l_subLevelLearnedMap = wx.getStorageSync('l_subLevelLearnedMap');
+        if (l_subLevelLearnedMap) store.setSubLevelLearned(JSON.parse(wx.getStorageSync('l_subLevelLearnedMap')));
+    } else {
+        wx.clearStorageSync();
+        store.setCurSubLevelId(11);
+        wx.setStorageSync('l_curSubLevelId', "11")
+    }
 
     wx.getSystemInfo({
         success (res) {

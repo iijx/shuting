@@ -2,31 +2,27 @@
 export const LevelList = [
     {
         levelId: 1,
-        note: "短数字，短电话",
-        title: '级别 I',
+        title: '数字',
         index: 1,
     },
     {
         levelId: 2,
-        note: "数字更长，电话更长，",
-        title: '级别 II',
+        title: '电话',
         index: 2,
     },
     { 
         levelId: 3,
-        note: "24h时间，百万数字，8位电话",
-        title: '级别 III',
+        title: '其它',
         index: 3,
     }
 ]
-
-export const SubLevelList = [
-    // 级别1
+// 系列
+const subP1 = [
     {
         pLevelId: 1,
         levelId: 11,
         type: 'number',
-        title: '数字1位',
+        title: '1位',
         maxLength: 1,
         isPro: false,
         index: 1,
@@ -35,7 +31,7 @@ export const SubLevelList = [
         pLevelId: 1,
         levelId: 12,
         type: 'number',
-        title: '数字2位',
+        title: '2位',
         maxLength: 2,
         isPro: false,
         index: 2,
@@ -44,7 +40,7 @@ export const SubLevelList = [
         pLevelId: 1,
         levelId: 13,
         type: 'number',
-        title: '数字3位',
+        title: '3位',
         isPro: true,
         maxLength: 3,
         index: 3,
@@ -52,38 +48,79 @@ export const SubLevelList = [
     {
         pLevelId: 1,
         levelId: 14,
-        type: 'phone',
-        title: '电话4位',
-        isPro: true,
+        type: 'number',
+        title: '4位',
         maxLength: 4,
+        isPro: true,
         index: 4,
     },
     {
         pLevelId: 1,
         levelId: 15,
-        type: 'year',
-        title: '年份',
-        maxLength: 4,
+        type: 'number',
+        title: '5位',
+        maxLength: 5,
         isPro: true,
         index: 5,
-        widthIcon: true
     },
-    // 级别 2
     {
+        pLevelId: 1,
+        levelId: 16,
+        type: 'number',
+        title: '6位',
+        isPro: true,
+
+        maxLength: 6,
+        index: 6,
+    },
+    {
+        pLevelId: 1,
+        levelId: 17,
+        type: 'number',
+        title: '7位',
+        isPro: true,
+
+        maxLength: 7,
+        index: 7,
+    },
+    {
+        pLevelId: 1,
+        levelId: 18,
+        type: 'number',
+        title: '8位',
+        isPro: true,
+
+        maxLength: 8,
+        index: 8,
+    },
+    {
+        pLevelId: 1,
+        levelId: 19,
+        type: 'number',
+        title: '9位',
+        isPro: true,
+
+        maxLength: 9,
+        index: 9,
+    },
+];
+
+const subP2 = [
+     // 电话系列
+     {
         pLevelId: 2,
         levelId: 21,
-        type: 'week',
-        title: '星期',
-        maxLength: 4,
+        type: 'phone',
+        title: '4位',
         isPro: true,
+        maxLength: 4,
         index: 1,
-        widthIcon: true
     },
     {
         pLevelId: 2,
         levelId: 22,
-        type: 'pointNum',
-        title: '小数',
+        type: 'phone',
+        title: '6位',
         maxLength: 6,
         isPro: true,
         index: 2,
@@ -91,67 +128,67 @@ export const SubLevelList = [
     {
         pLevelId: 2,
         levelId: 23,
-        type: 'number',
-        title: '数字4位',
-        maxLength: 4,
+        type: 'phone',
+        title: '8位',
         isPro: true,
+        maxLength: 8,
         index: 3,
     },
-    {
-        pLevelId: 2,
-        levelId: 24,
-        type: 'number',
-        title: '数字5位',
-        maxLength: 5,
-        isPro: true,
-        index: 4,
-    },
-    {
-        pLevelId: 2,
-        levelId: 25,
-        type: 'phone',
-        title: '电话6位',
-        maxLength: 6,
-        isPro: true,
-        index: 5,
-    },
-    // 级别 3
+];
+
+const subP3 = [
+    // 其他系列
     {
         pLevelId: 3,
         levelId: 31,
-        type: 'month',
-        title: '月份',
+        type: 'pointNum',
+        title: '小数',
+        maxLength: 6,
         isPro: true,
-        maxLength: 8,
         index: 1,
-        widthIcon: true
     },
     {
         pLevelId: 3,
         levelId: 32,
-        type: 'time',
-        title: '24h时间',
+        type: 'year',
+        title: '年份',
+        maxLength: 4,
         isPro: true,
-        maxLength: 8,
         index: 2,
+        widthIcon: true
     },
     {
         pLevelId: 3,
         levelId: 33,
-        type: 'number',
-        title: '数字6位',
+        type: 'month',
+        title: '月份',
         isPro: true,
-
-        maxLength: 6,
+        maxLength: 8,
         index: 3,
+        widthIcon: true
     },
     {
         pLevelId: 3,
         levelId: 34,
-        type: 'phone',
-        title: '电话8位',
+        type: 'week',
+        title: '星期',
+        maxLength: 4,
+        isPro: true,
+        index: 4,
+        widthIcon: true
+    },
+    {
+        pLevelId: 3,
+        levelId: 35,
+        type: 'time',
+        title: '24h时间',
         isPro: true,
         maxLength: 8,
-        index: 4,
+        index: 5,
     },
+]
+export const SubLevelList = [
+    ...subP1,
+    ...subP2,
+    ...subP3
 ]

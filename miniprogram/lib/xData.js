@@ -50,6 +50,13 @@ export default {
     iosMemberPromptText: 'IOS小程序版，暂不支持开通会员功能', // IOS小程序 · 暂不支持开通会员功能
     isShowIosMemberPrompt: false,
 
+    memberBanner: {
+        oldPrice: 2,
+        price: 0.1,
+        text: '/天 解锁全部',
+        btn: '查看详情'
+    },
+
     create(fileds = []) {
         let that = this;
         const a = fileds.reduce((ac, cur) => {

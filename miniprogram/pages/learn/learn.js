@@ -123,9 +123,9 @@ Page({
                     let src = '';
                     if (this.data.score >= 100 ) src = '/assets/audio/bonustime.m4a';
                     // else if (this.data.score === 90 ) src = '/assets/audio/unbelievable.m4a';
-                    else if (this.data.score === 80 ) src = '/assets/audio/amazing.m4a';
+                    // else if (this.data.score === 80 ) src = '/assets/audio/amazing.m4a';
                     // else if (this.data.score === 70 ) src = '/assets/audio/greate.m4a';
-                    else if (this.data.score === 60 ) src = '/assets/audio/good.m4a';
+                    // else if (this.data.score === 60 ) src = '/assets/audio/good.m4a';
                     if (src) {
                         AudioContext.src = src;
                         AudioContext.play();

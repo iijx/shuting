@@ -19,9 +19,6 @@
         </view>
 
         <view class="goog-img-wrap">
-            <image class="img1 zoomIn" mode="heightFix" wx:if="{{ isShowGoodImg && score === 60}}" src="/assets/imgs/good.png"></image>
-            <!-- <image class="img2 zoomIn" mode="heightFix" wx:if="{{ isShowGoodImg && score === 80}}" src="/assets/imgs/excellent.png"></image> -->
-            <image class="img3 zoomIn"  mode="heightFix" wx:if="{{ isShowGoodImg && score === 80}}" src="/assets/imgs/amazing.png"></image>
             <image class="img4 zoomIn" mode="heightFix" wx:if="{{ isShowGoodImg && score >= 100}}" src="/assets/imgs/bounstime.png"></image>
         </view>
     </view>

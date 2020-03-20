@@ -61,10 +61,9 @@ class User {
         this.avatar = opt.avatar || '';
         this.nickName = opt.nickName || '';
         this.isPro = false;
-        this.proBeginDate = new Date('1970-01-01');
-        this.proEndDate = new Date('1970-01-01');
-
-        this.createAt = new Date();
-        this.updateAt = new Date();
+        this.proEndDate = 0;
+        
+        this.createAt = Date.now();
+        this.updateAt = Date.now();
     }
 }

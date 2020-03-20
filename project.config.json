@@ -96,7 +96,7 @@
 					"id": 6,
 					"name": "index_from_user",
 					"pathName": "pages/index/index",
-					"query": "fromOpenid=123",
+					"query": "fromOpenid=123&fflCardShareOpenid=123",
 					"scene": null
 				},
 				{
@@ -117,6 +117,21 @@
 					"id": -1,
 					"name": "advice",
 					"pathName": "pages/advice/advice",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/activity",
+					"pathName": "pages/activity/activity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/fanfanle",
+					"pathName": "pages/fanfanle/fanfanle",
+					"query": "",
 					"scene": null
 				}
 			]

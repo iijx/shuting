@@ -13,7 +13,7 @@
             <view class="title">{{ curLevel.title }}</view>
             <view class="body">
                 <cell>
-                    <view slot="bd" class="sublevel-title">{{ curSubLevel.title }}</view>
+                    <view slot="bd" class="sublevel-title">{{ curLevel.title }}{{ curSubLevel.title }}</view>
                     <view slot="ft" >{{ curSubLevelScore }}%</view>
                 </cell>
 
@@ -31,10 +31,13 @@
                 </cell>
             </view>
         </view>
-
         <!-- <view class="give-banner" bindtap="linkToGiveRuler">
             <image class="img" mode="widthFix" src="/assets/imgs/give-banner.png"></image>
         </view> -->
+    </view>
+
+    <view class="icon-gift" bindtap="linkToActivity">
+        <image class="img" mode="widthFix" src="/assets/imgs/icon-gift.png"></image>
     </view>
 </view>
 

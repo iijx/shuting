@@ -14,7 +14,9 @@ Page({
 
         CAN_AWARD_MIN_INVITE: 10,
 
-        ...XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt'])
+        ...XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']),
+
+        proEndDateStr: ''
     },
     /**
      * Lifecycle function--Called when page load
@@ -40,6 +42,10 @@ Page({
                     }
                 });
             };
+
+            this.setData({
+                proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
+            })
         })
         // wx.showLoading({
         //     title: '加载中...',

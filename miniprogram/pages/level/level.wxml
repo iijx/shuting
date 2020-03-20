@@ -14,8 +14,10 @@
 			<!-- 推广按钮 -->
 			<view wx:if="{{ !user.isPro && systemInfo_platform === 'android' && index === 1 }}" class="buy-info" bindtap="buyBtn">
 				<view class="buy-wrap" >
-					<view class="buy-body"><text class="old-price">￥10 </text><text class="price">￥{{ price }}</text> 元解锁全部 <text class="look-btn">查看详情</text></view>
-					<!-- <view class="buy-btn">立即查看</view> -->
+					<view class="buy-body">
+						<text>{{ memberBanner.text}} </text>
+						<text class="look-btn">{{memberBanner.btn}}</text>
+					</view>
 				</view>
 			</view>
 			<view style="padding: 28rpx 32rpx;">
@@ -33,8 +35,8 @@
 					<view class="unit" >
 						<view style="width: 40rpx;">
 							<view wx:if="{{ !unit.widthIcon }}" class="dot"></view>
-							<view wx:else style="margin-left: -20rpx;" data-unit="{{ unit }}" bindtap="noteBtn">
-								<van-icon name="records" color="#87BE5D" size="28" />
+							<view wx:else style="margin-left: -10rpx;" data-unit="{{ unit }}" bindtap="noteBtn">
+								<van-icon name="records" color="#87BE5D" size="20" />
 							</view>
 						</view>
 						<view style="flex: 1;">
@@ -57,17 +59,16 @@
 		<view class="note-pop">
 			<!-- 年份 -->
 			<block wx:if="{{ noteType === 'year'}}">
-				<view class="title">年份的有两种读法(以2019为例):</view>
+				<view class="title">年份一般有两种读法(以2019为例):</view>
 				<view class="content">
-					<view>1. <text class="strong">两位一读</text>: 读成 twenty eighteen</view>
-					<view>2. <text class="strong">按数字读</text>: 读成 two thousand and nighteen (and 可省略，即two thousand nighteen)</view>
- 					<view style="margin-top: 10rpx;">注: 按数字读与「数字4位」小节重复，故此节按第一种读法发音</view>
+					<view><text class="strong">① 两位一读:</text> 读成 twenty eighteen</view>
+					<view><text class="strong">② 按数字读:</text> 读成 two thousand and nighteen (and 可省略，即two thousand nighteen)</view>
+ 					<view style="margin-top: 20rpx;">注: 按数字读与「数字4位」小节重复，故此节按第一种读法发音</view>
 				</view>
 			</block>
 			<!-- 月份 -->
 			<block wx:if="{{ noteType === 'month' }}">
 				<view class="title">月份单词列表:</view>
-				
 				<view class="content" >
 					<view  wx:for="{{monthWords}}" wx:key="index" wx:for-item="item">
 						<cell custom-class="month-item" data-audio="{{ item.audio }}" bindtap="wordPlay">

@@ -13,7 +13,6 @@ const db = cloud.database();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-    console.log(event);
     const { 
         out_trade_no,
         status,
@@ -51,10 +50,25 @@ exports.main = async (event, context) => {
 
     let user = await db.collection('users').where({ openid: order.openid }).limit(1).get().then(res => res.data[0]);
 
-    await db.collection('users').doc(user._id).update({
-        data: {
-            isPro: true,
-            updateAt: new Date(),
-        }
-    })
+    let attach = JSON.parse(order.attach || '{}');
+    if (!attach.memberDay) {
+        console.log('错误该订单没有attach', event, order, user);
+        // todo 兼容旧版本
+        await db.collection('users').doc(user._id).update({
+            data: {
+                isPro: true,
+            }
+        });
+        return;
+    } else {
+        let proEndDate = Date.now() + attach.memberDay * 24 * 60 * 60 * 1000;
+        await db.collection('users').doc(user._id).update({
+            data: {
+                isPro: true,
+                memberType: attach.memberType || -1,
+                proEndDate,
+                updateAt: new Date(),
+            }
+        })
+    }
 }

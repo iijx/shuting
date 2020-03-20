@@ -6,7 +6,8 @@ page {
 
 .container {
     width: 100%;
-    
+    position: relative;
+    min-height: 100vh;
 }
 
 .top {
@@ -119,3 +120,24 @@ page {
     width: 100%;
     display: block;
 }
+
+.icon-gift {
+    position: fixed;
+    right: 20rpx;
+    bottom: 68rpx;
+    width: 100rpx;
+    height: 100rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(253, 73, 79, .1);
+    border-radius: 50%;
+}
+
+.icon-gift .img{ 
+    width: 60rpx;
+    height: 60rpx;
+    display: block;
+}
+

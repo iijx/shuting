@@ -18,13 +18,17 @@ Page({
         monthWords: [...Util.MonthWords],
         weekWords: [...Util.WeekWords],
 
-        price: 4.9
+        price: 4.9,
+        
+        ...XData.create(['memberBanner']),
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
+        this.setData(XData.create(['memberBanner']));
+        
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
             fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap', 'systemInfo_platform'],

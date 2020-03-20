@@ -97,19 +97,17 @@
     flex: 1;
     color: #3D96D3;
 }
-.red-btn-dialog {
 
-}
-.userInfo .member-btn {
+.member-btn {
     font-size: 24rpx;
     background: #FD4D4F;
     color: #fff;
     border-radius: 10rpx;
-    line-height: 1.6;
-    padding: 0 8rpx;
+    line-height: 76rpx;
     box-shadow: 0px 0px 6px rgba(255, 0, 0, 0.4);
+    text-align: center;
 }
-.userInfo .member-pro {
+.member-pro {
     text-align: center;
     font-size: 24rpx;
     background: #FD4D4F;

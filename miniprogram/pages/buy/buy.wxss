@@ -5,7 +5,7 @@
     opacity: 1;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 80rpx 40rpx;
+    padding: 60rpx 32rpx 40rpx;
     display: flex;
     align-items: center;
     position: relative;
@@ -172,4 +172,17 @@
 .give-rule-btn {
     color: #3D96D3;
     text-decoration: underline;
+}
+
+
+.member-day {
+    width: 70rpx;
+    height: 30rpx;
+    border-radius: 15rpx;
+    color: #fff;
+    background: #FE3F1D;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

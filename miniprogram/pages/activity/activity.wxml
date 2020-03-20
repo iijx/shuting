@@ -1,0 +1,21 @@
+<!--pages/activity/activity.wxml-->
+<view class="container">
+    <block wx:for="{{ activity }}" wx:key="index" wx:item="item">
+        <view class="activity-item" data-type="{{ item.type }}" bindtap="itemClick">
+            <image class="banner" mode="widthFix" src="/assets/imgs/fanfanle_banner.png"></image>
+            <view style="padding: 16rpx 32rpx;">
+                <cell>
+                    <view slot="bd">
+                        <view class="title">{{ item.title }}</view>
+                        <view class="period">第 {{ item.periodNum }} 期　{{ item.periodStart }} - {{ item.periodEnd }}</view>
+                    </view>
+                    <view slot="ft">
+                        <van-button size="small" round color="#FD4D4F">{{ item.btnText }}</van-button>
+                    </view>
+                </cell>
+            </view>
+        </view>
+    </block>
+
+
+</view>

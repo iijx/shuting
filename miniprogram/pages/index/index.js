@@ -27,6 +27,11 @@ Page({
           url: '../giveRule/giveRuler',
         });
     },
+    linkToActivity() {
+        wx.navigateTo({
+          url: '../activity/activity',
+        })
+    },
     // 用户点击右上角分享
     onShareAppMessage: function (res) {
         return Store.defaultShareInfo;

@@ -14,19 +14,14 @@
             <block wx:else>
                 <view style="flex: 1">{{ user.nickName }}</view>
             </block>
-
-            <block wx:if="{{ user.avatar }}" >
-                <view wx:if="{{user.isPro}}" class="member-pro">会员用户</view>
-                <view wx:else class="member-btn">
-                    <van-button color="#FD4D4F"  bind:click="memberBtn" size="small">{{ systemInfo_platform === 'android' ? '开通会员' : '会员计划' }}</van-button>
-                </view>
-                <!-- <view  class="member-btn">开通会员</view> -->
-            </block>
         </view>
-
     </view>
 
-    <view style="height: 120rpx;"></view>
+    <view style="height: 100rpx;"></view>
+    <view class="operators" wx:if="{{ user.avatar }}">
+        <view wx:if="{{user.isPro}}" class="member-pro">数听会员用户 {{ proEndDateStr }}到期</view>
+        <view wx:else class="member-btn" bindtap="memberBtn">{{ systemInfo_platform === 'android' ? '会员仅 ¥0.1/天' : '会员计划' }}</view>
+    </view>
 
     <view class="operators">
         <van-cell title="版本预告" icon="down" size="default" link-type="navigateTo" url="/pages/version/version" is-link  />
@@ -36,7 +31,7 @@
                     <view slot="bd">我的消息</view>
                 </cell>
             </van-cell>
-            <van-cell icon="gem-o" title="会员兑换码/转赠码" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell icon="gem-o" title="会员兑换码" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
             
         </van-cell-group>
     </view>
@@ -51,7 +46,7 @@
     <view class="operators">
         <van-cell-group>
             <button class="contact-btn" open-type="contact" style="">
-                <van-cell icon="smile-o" title="人工客服/转赠会员/建议" size="default" is-link></van-cell>
+                <van-cell icon="smile-o" title="人工客服/建议" size="default" is-link></van-cell>
             </button>
 
             <van-cell icon="idcard" title="复制 ID 号" size="default" bind:click="copyOpenid"/>
@@ -78,7 +73,7 @@
         <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
             <view>{{ iosMemberPromptText }}</view>
             <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}">「数听英语」公众号 · 支持开通</view>
+            <view wx:if="{{ isShowIosMemberPrompt }}"><text style="font-weight: bold;">「数听英语」</text>公众号 · 支持开通</view>
         </view>
     </van-dialog>
     
