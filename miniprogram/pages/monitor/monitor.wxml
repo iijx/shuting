@@ -6,8 +6,14 @@
 
 
 	<view class="body">
-		<block wx:for="{{noteList}}" wx:key="index">
-			<view class="note">{{ item }}</view>
+		<block wx:if="{{ userIsMonitor }}">
+			<view class="note" wx:for="{{noteList}}" wx:key="index">{{ item }}</view>
+		</block>
+		<block wx:else>
+			<view>1. 若想成为班长，可联系客服人员为你开通,</view>
+        	<view>2. 作为班长，邀请同学加入学习，班级所有学员均可获得奖励,</view>
+        	<view>3. 班级满10人，班长获得年度会员，所有班级成员获得月度会员奖励,</view>
+        	<view>4. 班级满50人，班长以及所有班级成员均获得终身会员奖励</view>
 		</block>
 	</view>
 

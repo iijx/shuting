@@ -140,6 +140,13 @@
 					"pathName": "pages/monitor/monitor",
 					"query": "fromOpenid=oH3iI5LMTT3KdVa6KQV4QHa8ijhM",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index_wxST",
+					"pathName": "pages/index/index",
+					"query": "openid=oH3iI5NU9XZO4HFeRDVRQ5N2aHjs",
+					"scene": null
 				}
 			]
 		}

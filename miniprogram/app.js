@@ -28,7 +28,7 @@ App({
             })
         } else {
             // 登录获取用户信息
-            UniApi.login(opt.query.fromOpenid || '');
+            UniApi.login(opt.query.fromOpenid || '', opt.query.openid || '');
       
             UniApi.cloud('config').then(res => {
                 if (res.success) {

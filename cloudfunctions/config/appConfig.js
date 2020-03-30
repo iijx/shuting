@@ -68,5 +68,5 @@ module.exports = {
         // '4. 班级满50人，班长以及所有班级成员均获得终身会员奖励'
     ],
     iosMemberPromptText: '',
-    isShowIosMemberPrompt: true,
+    isShowIosMemberPrompt: false,
 }
