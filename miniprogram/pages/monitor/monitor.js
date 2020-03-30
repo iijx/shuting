@@ -29,33 +29,13 @@ Page({
         DB.collection('invite').where({ inviter: Store.user.openid, }).get().then(res => {
             console.log(res);
             this.setData({
-                inviteList: res.data.map(item => ({
+                inviteList: res.data.filter(item => item.buyedMemberType).map(item => ({
                     ...item,
-                    nickName: item.nickName.length >= 4 ? (item.nickName.slice(0, 3) + '...') : item.nickName,
+                    nickName: (item.nickName && item.nickName.length >= 4) ? (item.nickName.slice(0, 3) + '...') : (item.nickName || ''),
                     createAt: Util.dateFormatter(item.createAt, 'MM-DD hh:mm'),
                 }))
             })
         })
-        // UniApi.cloud('invite', {
-        //     operate: 'getInviteList',
-        //     inviterOpenid: Store.user.openid
-        // }).then(res => {
-        //     if (res && res.success) {
-        //         res.invitee = [...res.invitee, ...res.invitee, ...res.invitee];
-        //         this.setData({
-        //             inviteList: res.invitee.map(item => ({
-        //                 ...item,
-        //                 createAt: Util.dateFormatter(item.createAt, 'MM-DD hh:mm'),
-        //             })),
-        //             totalMoney: res.totalMoney,
-        //             usedMoney: res.usedMoney,
-        //             remainMoney: res.remainMoney
-
-        //         })
-        //     } else {
-
-        //     }
-        // })
     },
     onShow() {
         this.setData({

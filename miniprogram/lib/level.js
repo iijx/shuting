@@ -167,16 +167,16 @@ const subP3 = [
         index: 3,
         widthIcon: true
     },
-    {
-        pLevelId: 3,
-        levelId: 34,
-        type: 'week',
-        title: '星期',
-        maxLength: 4,
-        isPro: true,
-        index: 4,
-        widthIcon: true
-    },
+    // {
+    //     pLevelId: 3,
+    //     levelId: 34,
+    //     type: 'week',
+    //     title: '星期',
+    //     maxLength: 4,
+    //     isPro: true,
+    //     index: 4,
+    //     widthIcon: true
+    // },
     {
         pLevelId: 3,
         levelId: 35,
@@ -184,7 +184,7 @@ const subP3 = [
         title: '24h时间',
         isPro: true,
         maxLength: 8,
-        index: 5,
+        index: 4,
     },
 ]
 export const SubLevelList = [

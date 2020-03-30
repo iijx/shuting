@@ -83,7 +83,10 @@ Page({
         wx.nextTick(() => {
             if (!this.data.user.isPro) {
                 UniApi.login().then(res => {
-                    this.setData({ user: this.data.user })
+                    this.setData({ 
+                        user: this.data.user,
+                        proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
+                    })
                 });
             }
         })

@@ -69,13 +69,10 @@ App({
         if (options.query.fromOpenid) {
             DB.collection('invite').add({data: {
                 inviter: options.query.fromOpenid,
+                nickName: '',
                 createAt: Date.now(),
                 updateAt: Date.now()
             }})
-            // UniApi.cloud('invite', {
-            //     operate: 'invite',
-            //     inviterOpenid: options.query.fromOpenid
-            // })
         }
     },
     globalData: {
