@@ -16,6 +16,8 @@ const Vant = {
     Notify
 }
 
+const DB = wx.cloud.database();
+
 App({
     onLaunch: function(opt) {
         console.log(opt);
@@ -36,6 +38,7 @@ App({
                     XData.isShowIosMemberPrompt = res.isShowIosMemberPrompt || false;
 
                     XData.activity = res.activity || [];
+                    XData.monitorRule = res.monitorRule || [];
 
                     XData.memberBanner = {...res.memberBanner};
                 }
@@ -46,6 +49,7 @@ App({
     },
     onShow: function (options) {
         console.log('app onshow', options);
+        // 关于支付
         if (options.referrerInfo && options.referrerInfo.appId === 'wx959c8c1fb2d877b5') { 
           // 还应判断请求路径
           let extraData = options.referrerInfo.extraData
@@ -53,11 +57,25 @@ App({
           this.globalData.payjsOrderId = extraData.payjsOrderId
         }
 
+        // 关于翻翻卡
         if (options.query.fflCardShareOpenid) {
             UniApi.cloud('fanfanle', {
                 operate: 'addShare',
                 sharedUserOpenid: options.query.fflCardShareOpenid
             })
+        }
+
+        // 关于班长邀请
+        if (options.query.fromOpenid) {
+            DB.collection('invite').add({data: {
+                inviter: options.query.fromOpenid,
+                createAt: Date.now(),
+                updateAt: Date.now()
+            }})
+            // UniApi.cloud('invite', {
+            //     operate: 'invite',
+            //     inviterOpenid: options.query.fromOpenid
+            // })
         }
     },
     globalData: {
@@ -74,5 +92,6 @@ App({
 
     Vant,
     XData,
+    DB,
     AppAudio: wx.createInnerAudioContext()
 })

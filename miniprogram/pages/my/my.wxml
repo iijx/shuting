@@ -7,19 +7,19 @@
 
     <view class="user-wrap">
         <view class="userInfo">
-            <image class="avatar" mode="widthFix" src="{{ user.avatar ? user.avatar : '/assets/imgs/user-unlogin.png' }}"></image>
-            <block wx:if="{{!user.avatar}}">
-                <button class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">点击微信登录</button>
-            </block>
-            <block wx:else>
-                <view style="flex: 1">{{ user.nickName }}</view>
-            </block>
+            <image wx:if="{{ user.avatar }}" class="avatar" mode="widthFix" src="{{ user.avatar }}"></image>
+            <image wx:elif="{{ user.isPro }}" class="avatar" mode="widthFix" src="/assets/imgs/user-unlogin.png"></image>
+            <open-data wx:else class="avatar" type="userAvatarUrl"></open-data>
+            
+            <view wx:if="{{ user.nickName }}" style="flex: 1">{{ user.nickName }}</view>
+            <button wx:elif="{{ user.isPro }}" class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">点击微信登录</button>
+            <open-data wx:else class="nickName" type="userNickName"></open-data>
         </view>
     </view>
 
     <view style="height: 100rpx;"></view>
     <view class="operators" wx:if="{{ user.avatar }}">
-        <view wx:if="{{user.isPro}}" class="member-pro">数听会员用户 {{ proEndDateStr }}到期</view>
+        <view wx:if="{{user.isPro}}" class="member-pro"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
         <view wx:else class="member-btn" bindtap="memberBtn">{{ systemInfo_platform === 'android' ? '会员仅 ¥0.1/天' : '会员计划' }}</view>
     </view>
 
@@ -36,11 +36,11 @@
         </van-cell-group>
     </view>
 
-    <!-- <view class="operators">
+    <view class="operators" wx:if="{{ user.isMonitor }}">
         <van-cell-group>
-            <van-cell icon="friends-o" title="班长计划" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell icon="friends-o" title="班长计划" size="default" link-type="navigateTo" url="/pages/monitor/monitor" is-link  />
         </van-cell-group>
-    </view> -->
+    </view>
     
 
     <view class="operators">

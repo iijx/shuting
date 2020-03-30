@@ -3,6 +3,7 @@ const app = getApp()
 const { Util, UniApi, Vant, Store, CreateStoreBindings } = app;
 Page({
     data: {
+        isPro: false,
     },
     onLoad: function() {
         // 数据绑定
@@ -10,6 +11,11 @@ Page({
             store: Store,
             fields: ['curLevel', 'curSubLevel', 'curSubLevelScore'],
         });
+    },
+    onShow() {
+        this.setData({
+            isPro: Store.user.isPro
+        })
     },
     toLearn() {
         if(Store.curSubLevelList.length <= 0) {

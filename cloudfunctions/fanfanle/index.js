@@ -114,8 +114,9 @@ const addMemberDay = async (openid, memberDay) => {
     console.log('memberDay', memberDay);
     let curUser = await db.collection('users').where({ openid }).limit(1).get().then(res => res.data[0]);
     
-    curUser.proEndDate = curUser.proEndDate || new Date(); // 兼容一下，以防止旧数据没有这个字段
-    let proEndDate = new Date(Math.max(Date.now(), new Date(curUser.proEndDate).getTime()) + memberDay * 24 * 60 * 60 * 1000);
+    curUser.proEndDate = curUser.proEndDate || Date.now(); // 兼容一下，以防止旧数据没有这个字段
+
+    let proEndDate = Math.max(Date.now(), curUser.proEndDate) + memberDay * 24 * 60 * 60 * 1000;
     console.log('proEndDate', proEndDate);
     let res = await db.collection('users').doc(curUser._id).update({
         data: {

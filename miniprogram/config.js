@@ -18,5 +18,6 @@ export default {
 
     correctScore: 5,
     correctScorePlus: 10,
+    
     errorScore: -20,
 }

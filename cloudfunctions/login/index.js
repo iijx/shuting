@@ -20,12 +20,13 @@ const db = cloud.database();
  */
 exports.main = async (event, context) => {
     const fromOpenid = event.fromOpenid;
-    console.log(event.fromOpenid);
-
-    // 获取 WX Context (微信调用上下文)，包括 OPENID、APPID、及 UNIONID（需满足 UNIONID 获取条件）等信息
     const wxContext = cloud.getWXContext()
 
-    let curUser = await db.collection('users').where({ openid: wxContext.OPENID }).limit(1).get().then(res => res.data[0]);
+    let openid = event.openid || wxContext.OPENID;
+
+    // 获取 WX Context (微信调用上下文)，包括 OPENID、APPID、及 UNIONID（需满足 UNIONID 获取条件）等信息
+
+    let curUser = await db.collection('users').where({ openid }).limit(1).get().then(res => res.data[0]);
 
     if(!curUser) {
         curUser = new User({
@@ -41,7 +42,7 @@ exports.main = async (event, context) => {
             const res = await cloud.callFunction({
                 name: 'weappShare',
                 data: {
-                    openid: wxContext.OPENID,
+                    openid,
                     fromOpenid,
                 }
             });
@@ -50,7 +51,7 @@ exports.main = async (event, context) => {
     }
 
     return {
-        openid: wxContext.OPENID,
+        openid,
         ...curUser
     }
 }
@@ -62,6 +63,7 @@ class User {
         this.nickName = opt.nickName || '';
         this.isPro = false;
         this.proEndDate = 0;
+        this.memberType = -1;
         
         this.createAt = Date.now();
         this.updateAt = Date.now();

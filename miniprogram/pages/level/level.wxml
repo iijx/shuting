@@ -12,7 +12,7 @@
 		</view>
 		<view wx:for="{{ levelList }}" wx:key="index" wx:for-item="item">
 			<!-- 推广按钮 -->
-			<view wx:if="{{ !user.isPro && systemInfo_platform === 'android' && index === 1 }}" class="buy-info" bindtap="buyBtn">
+			<view wx:if="{{ user.memberType !== 3 && systemInfo_platform === 'android' && index === 1 }}" class="buy-info" bindtap="buyBtn">
 				<view class="buy-wrap" >
 					<view class="buy-body">
 						<text>{{ memberBanner.text}} </text>

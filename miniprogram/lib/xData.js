@@ -49,7 +49,7 @@ export default {
 
     iosMemberPromptText: 'IOS小程序版，暂不支持开通会员功能', // IOS小程序 · 暂不支持开通会员功能
     isShowIosMemberPrompt: false,
-
+    monitorRule: [],
     memberBanner: {
         oldPrice: 2,
         price: 0.1,

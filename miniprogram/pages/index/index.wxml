@@ -36,7 +36,7 @@
         </view> -->
     </view>
 
-    <view class="icon-gift" bindtap="linkToActivity">
+    <view wx:if="{{ isPro }}" class="icon-gift" bindtap="linkToActivity">
         <image class="img" mode="widthFix" src="/assets/imgs/icon-gift.png"></image>
     </view>
 </view>

@@ -12,6 +12,10 @@ const store = observable({
         avatar: '',
         nickName: '',
         proEndDate: new Date('1970-01-01'),
+        isMonitor: false,
+        totalMoney: 0,
+        usedMoney: 0,
+        memberType: -1,
     },
     systemInfo: {},
     get systemInfo_platform() {
@@ -66,7 +70,6 @@ const store = observable({
         }
     },
 
-
     // actions
     setUser: action(function (_user) {
         console.log('setUser', _user);
@@ -76,6 +79,10 @@ const store = observable({
         if (_user.nickName) this.user.nickName = _user.nickName;
         if (_user.isPro) this.user.isPro = _user.isPro;
         if (_user.proEndDate) this.user.proEndDate = _user.proEndDate;
+        if (_user.isMonitor) this.user.isMonitor = _user.isMonitor || false;
+        if (_user.totalMoney) this.user.totalMoney = _user.totalMoney || 0;
+        if (_user.usedMoney) this.user.usedMoney = _user.usedMoney || 0;
+        if (_user.memberType) this.user.memberType = Number(_user.memberType) || 0;
     }),
 
     setMessages:action(function (_msgList = []) {

@@ -80,9 +80,13 @@ Page({
 
     },
     onShow: function () {
-        UniApi.login().then(res => {
-            this.setData({ user: this.data.user })
-        });
+        wx.nextTick(() => {
+            if (!this.data.user.isPro) {
+                UniApi.login().then(res => {
+                    this.setData({ user: this.data.user })
+                });
+            }
+        })
     },
     memberBtn() {
         if (this.data.systemInfo_platform === 'android') {

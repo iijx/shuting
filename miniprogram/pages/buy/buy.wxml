@@ -5,7 +5,7 @@
 		<open-data class="nickName" type="userNickName"></open-data>
 	</view>
     <view class="signUpNum">
-        <view class="signUpNumAnimation"><text class="num">{{signUpNumber}}</text> 位同学已加入</view>
+        <view class="signUpNumAnimation">已有 <text class="num">{{signUpNumber}}</text> 位同学加入会员·提升数听力</view>
     </view>
 
 	<view class="member-card">
@@ -22,7 +22,7 @@
 					<view slot="title" class="member-name">自定义天数 · ¥0.1/天</view>
 					<view slot="label" >
 						<view style="padding: 32rpx 20rpx;">
-							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="1" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
+							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="5" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
 								<view class="member-day" slot="button">
 									{{ memberDay }}天
 								</view>
@@ -30,14 +30,14 @@
 						</view>
 						<view class="price">￥{{ memberDayPrice / 100 }}</view>
 					</view>
-					<van-radio slot="right-icon" name="10" />
+					<van-radio slot="right-icon" name="10" checked-color="#FE3F1D" />
 				</van-cell>
 				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
 					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
 						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" style="color: #FE3F1D">（推荐）</text></view>
 						<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
 						<view wx:else slot="label" class="price">免费</view>
-						<van-radio slot="right-icon" name="{{ item.memberType }}" />
+						<van-radio slot="right-icon" name="{{ item.memberType }}" checked-color="#FE3F1D" />
 					</van-cell>
 				</block>
 			</van-cell-group>
@@ -56,9 +56,9 @@
 
 	<view class="ios-submit-bar" wx:if="{{ systemInfo_platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
 	<van-submit-bar wx:else loading="{{ paying }}" price="{{ price }}" tip="{{ true }}" button-text="立即开通" button-type="warning" bind:submit="onSubmit">
-        <!-- <view slot="tip">
-           该卡一旦售出，概不退换 
-        </view> -->
+        <view slot="tip"  wx:if="{{ systemInfo_platform === 'android' }}" style="text-indent: 10rpx; color: #07c160 ">
+           注：支付提示跳转payjs，属系统正常流程，请安心支付
+        </view>
     </van-submit-bar>
 
 

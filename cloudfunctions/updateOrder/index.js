@@ -10,6 +10,7 @@ cloud.init({
 })
 
 const db = cloud.database();
+const _ = db.command;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -22,9 +23,7 @@ exports.main = async (event, context) => {
         openid
     } = event.POSTBODY || {};
     const wxContext = cloud.getWXContext()
-    const order  = await db.collection('order').where({
-        out_trade_no,
-    }).limit(1).get().then(res => res.data[0]);
+    const order  = await db.collection('order').where({ out_trade_no }).limit(1).get().then(res => res.data[0]);
 
     if (!order) return {
         success: false,
@@ -53,22 +52,68 @@ exports.main = async (event, context) => {
     let attach = JSON.parse(order.attach || '{}');
     if (!attach.memberDay) {
         console.log('错误该订单没有attach', event, order, user);
-        // todo 兼容旧版本
-        await db.collection('users').doc(user._id).update({
+        return;
+    }
+
+    // 更改用户会员信息
+    let proEndDate = Date.now() + attach.memberDay * 24 * 60 * 60 * 1000;
+    await db.collection('users').doc(user._id).update({
+        data: {
+            isPro: true,
+            memberType: attach.memberType || -1,
+            proEndDate,
+            updateAt: new Date(),
+        }
+    })
+
+    // 如果有班长奖励
+    let inviteRecord = await db.collection('invite').where({ _openid: order.openid }).limit(1).get().then(res => res.data[0]);
+    if (inviteRecord) {
+        let attach = typeof order.attach === 'string' ? JSON.parse(order.attach || '{}') : order.attach;
+        let awardInfo = INVITE_AWARD.find(item => String(item.memberType) === String(attach.memberType)) || {};
+        
+        await db.collection('invite').doc(inviteRecord._id).update({data: {
+            buyedMemberType: Number(attach.memberType),
+            buyedMemberTitle: awardInfo.memberTitle,
+            cashAward: awardInfo.cash,
+            avatar: user.avatar,
+            nickName: user.nickName,
+            updateAt: Date.now()
+        }})
+
+        await db.collection('users').where( { openid: inviteRecord.inviter}).update({
             data: {
-                isPro: true,
+                totalMoney: _.inc(awardInfo.cash)
             }
         });
-        return;
-    } else {
-        let proEndDate = Date.now() + attach.memberDay * 24 * 60 * 60 * 1000;
-        await db.collection('users').doc(user._id).update({
-            data: {
-                isPro: true,
-                memberType: attach.memberType || -1,
-                proEndDate,
-                updateAt: new Date(),
-            }
-        })
     }
 }
+
+// 会员类型对应奖励
+const INVITE_AWARD = [
+    {
+        memberType: 10,
+        memberTitle: '自定义会员',
+        cash: 0,
+    },
+    {
+        memberType: 1,
+        memberTitle: '月度会员',
+        cash: 1,
+    },
+    {
+        memberType: 2,
+        memberTitle: '半年会员',
+        cash: 3,
+    },
+    {
+        memberType: 4,
+        memberTitle: '年度会员',
+        cash: 3,
+    },
+    {
+        memberType: 3,
+        memberTitle: '终身会员',
+        cash: 5,
+    },
+]

@@ -118,7 +118,6 @@ Page({
         let day = parseInt(time / (24 * 60 * 60));
         let hour = parseInt((time - day * (24 * 60 * 60)) / 3600);
         let retNum = baseBumber + day * everyDayAdd;
-        console.log(day, hour);
         retNum += hour <= 6 ? 8 * hour : 22 + 6 * (hour - 6);
         retNum += this.randomNum(0, 3);
         this.setData({
@@ -154,7 +153,7 @@ Page({
         const { item } = e.currentTarget.dataset;
         this.setData({
             memberType: String(item.memberType),
-            price: item.price * 100
+            price: Math.round(item.price * 100)
         });
     },
     onSubmit: Util.throttle(function() {

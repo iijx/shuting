@@ -1,11 +1,18 @@
 /* pages/buy/buy.wxss */
+.container {
+    --submit-bar-tip-background-color: #07c160;
+    --submit-bar-tip-background-color: transparent;
+    --submit-bar-tip-padding: 8rpx;
+    --button-warning-background-color: #FE3F1D;
+    --button-warning-border-color: #FE3F1D;
+}
 .userInfo {
     background: #f9ce0d;
     color: #3e3f41;
     opacity: 1;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 60rpx 32rpx 40rpx;
+    padding: 60rpx 32rpx 60rpx;
     display: flex;
     align-items: center;
     position: relative;

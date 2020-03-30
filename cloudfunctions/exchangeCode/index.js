@@ -49,17 +49,32 @@ exports.main = async (event, context) => {
         }
     })
 
-    let addMemberRes = await cloud.callFunction({
-        name: 'addMember',
+    let curUser = await db.collection('users').where({ openid }).limit(1).get().then(res => res.data[0]);
+    
+    if (!curUser) return {
+        success: false,
+        msg: '用户不存在'
+    }
+    
+    let res = await db.collection('users').doc(curUser._id).update({
         data: {
-            openid,
-            addDay: getAddDayByExchangeCodeType(codeInfo.type)
+            isPro: true,
+            proEndDate: Date.now() + getAddDayByExchangeCodeType(codeInfo.type) * 24 * 60 * 60 * 1000,
+            memberType: codeInfo.memberType
         }
     })
 
-    console.log('addMemberRes', addMemberRes);
+    // let addMemberRes = await cloud.callFunction({
+    //     name: 'addMember',
+    //     data: {
+    //         openid,
+    //         addDay: getAddDayByExchangeCodeType(codeInfo.type)
+    //     }
+    // })
 
-    if (addMemberRes.result.success) {
+    // console.log('addMemberRes', addMemberRes);
+
+    if (res.result.success) {
         
         return {
             success: true,
