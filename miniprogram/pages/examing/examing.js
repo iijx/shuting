@@ -1,15 +1,15 @@
 //index.js
 const app = getApp();
-const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, Config, DB, UniApi, Vant, Store } = app;
 let AudioContext = null;
 
 Page({
     data: {
         mode: 'normal',
+        examId: '',
 
         maxLength: 3, // 最多位数，例如2，表最多2位数，即最大值99
         type: 'number', // number || year || time || phone
-        curSubLevel: -1,
         isComplete: false,
         score: 0,
 
@@ -20,34 +20,27 @@ Page({
 
         nums: [1, 2, 3, 4, 5 ,6 ,7 ,8, 9, '.', 0, 'x'],
 
-        isShowGoodImg: true,
+        count: 0,
+        cNum: 0,
     },
     // 
     onLoad: function (opt = {}) {
-        // 数据绑定
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevelId', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
-            actions: ['setSingleSubLevelLearned']
+        const { mode = 'normal', examId = '' } = opt;
+        this.setData({
+            mode,
+            examId
         });
 
-        Util.sleep(100).then(() => {
-            const { maxLength = 4, type = 'number', level } = this.data.curSubLevel;
-            const { mode = 'normal' } = opt;
+        
+        this.init()
 
-            let score = 0;
-            let subLevelLearned = this.data.subLevelLearnedMap.find(item => item.subLevelId === this.data.curSubLevel.levelId);
-            score = subLevelLearned ? subLevelLearned.score : 0;
-            this.setData({
-                mode,
-                maxLength,
-                type,
-                score: score >= 100 ? 0 : score,
-                isComplete: Boolean(subLevelLearned && subLevelLearned.isComplete)
-            });
-            this.init();
-        })
-
+        if (mode === 'exam') {
+            UniApi.cloud('exam', {
+                operate: 'start',
+                examId
+            })
+            
+        }
     },
     init() {
         // 准备数据
@@ -94,7 +87,7 @@ Page({
         let type = types[Util.randomIntegerInRange(0, types.length)];
         if (type === 'number') {
             this.setData({
-                maxLength: Util.randomIntegerInRange(1, 9)
+                maxLength: Util.randomIntegerInRange(2, 6)
             })
         } else if (type === 'phone') {
             this.setData({
@@ -106,7 +99,7 @@ Page({
         
     },
     _genOneAnswer() {
-        let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
+        let type = ['hard', 'exam', 'mockExam'].includes(this.data.mode) ? this._randomOneType() : this.data.type;
         let answer = '';
         if(type === 'number') {
             answer = Util.randomOneNum(this.data.maxLength);
@@ -123,12 +116,12 @@ Page({
         } else if (type === 'month') {
             answer = Util.randomOneMonth();
         }
-        console.log('随机answer: ', answer);
         if (answer === this.data.answer) {
             return this._genOneAnswer();
         } else {
             this.data.answer = answer;
             this.setData({
+                count: this.data.count + 1,
                 type,
                 answerLength: String(this.data.answer).length
             });
@@ -146,39 +139,25 @@ Page({
             Util.sleep(700).then(() => resolve());
         })
     },
-    showAnswer(autoNextIfCorrect = true) {
+    showAnswer() {
         let isCorrect = this._isCorrect();
-        if (this.data.mode === 'normal') {
-            // 分数统计，与本地存储
-            if (isCorrect) {
-                if ((this.data.type === 'number' && this.data.maxLength === 1) || this.data.type === 'week') {
-                    this.data.score += Config.correctScorePlus;
-                } else {
-                    this.data.score += Config.correctScore;
-                }
-                this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
-            } else {
-                this.data.score += Config.errorScore;
-                if (this.data.score < 0) this.data.score = 0; 
-                this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
-            }
-            this.setData({
-                score: this.data.score,
-            })
+        // 分数统计，与本地存储
+        if (isCorrect) {
+            this.data.score += 5;
+            this.data.cNum += 1;
         }
         this.setData({
+            score: this.data.score,
             spanClass: isCorrect ? 'correct' : 'error'
         })
 
         // 播放声音，及下一个词
-        this.playResultAudio(isCorrect).then(() => {
-            isCorrect ? this.nextWord() : this.audioPlay(); 
-        });
+        this.playResultAudio(isCorrect).then(() => this.nextWord());
     },
     nextWord() {
-        if (this.data.score >= 100 && this.data.mode !== 'hard') {
+        if (this.data.count >= 20) {
             wx.redirectTo({
-                url: '../summary/summary',
+                url: `../examRes/examRes?mode=${this.data.mode}&cNum=${this.data.cNum}`,
             })
         } else {
             this._preStartInit();
@@ -221,7 +200,6 @@ Page({
     },
 
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
     },
     onShareAppMessage: function (res) {
         return this.data.defaultShareInfo;

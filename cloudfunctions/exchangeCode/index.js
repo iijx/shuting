@@ -65,7 +65,8 @@ exports.main = async (event, context) => {
         data: {
             isPro: true,
             proEndDate: Date.now() + getAddDayByExchangeCodeType(codeInfo) * 24 * 60 * 60 * 1000,
-            memberType: codeInfo.memberType
+            memberType: codeInfo.memberType,
+            isMonitor: Number(codeInfo.memberType) === 3 || Number(codeInfo.memberType) === 2 ? true : false,
         }
     })
 
@@ -112,16 +113,16 @@ const INVITE_AWARD = [
     {
         memberType: 2,
         memberTitle: '半年会员',
-        cash: 3,
+        cash: 2,
     },
     {
         memberType: 4,
         memberTitle: '年度会员',
-        cash: 3,
+        cash: 2,
     },
     {
         memberType: 3,
         memberTitle: '终身会员',
-        cash: 5,
+        cash: 3,
     },
 ]

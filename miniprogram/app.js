@@ -41,6 +41,8 @@ App({
                     XData.monitorRule = res.monitorRule || [];
 
                     XData.memberBanner = {...res.memberBanner};
+
+                    XData.challange = res.challange;
                 }
             });
 

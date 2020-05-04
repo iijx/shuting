@@ -57,11 +57,13 @@ exports.main = async (event, context) => {
 
     // 更改用户会员信息
     let proEndDate = Date.now() + attach.memberDay * 24 * 60 * 60 * 1000;
+    let memberType = attach.memberType || -1;
     await db.collection('users').doc(user._id).update({
         data: {
             isPro: true,
-            memberType: attach.memberType || -1,
+            memberType: memberType,
             proEndDate,
+            isMonitor: Number(memberType) === 3 || Number(memberType) === 2 ? true : false,
             updateAt: new Date(),
         }
     })
@@ -87,6 +89,19 @@ exports.main = async (event, context) => {
             }
         });
     }
+
+    // 如果是挑战，生成一个挑战测试
+    if ( String(memberType) === '21') {
+        await db.collection('exam').add({
+            openid: openid,
+            status: 1,
+            createAt: Date.now(),
+            updateAt: Date.now(),
+            answer: [],
+            cNum: 0,
+            isBackCash: false,
+        })
+    }
 }
 
 // 会员类型对应奖励
@@ -104,16 +119,16 @@ const INVITE_AWARD = [
     {
         memberType: 2,
         memberTitle: '半年会员',
-        cash: 3,
+        cash: 2,
     },
     {
         memberType: 4,
         memberTitle: '年度会员',
-        cash: 3,
+        cash: 2,
     },
     {
         memberType: 3,
         memberTitle: '终身会员',
-        cash: 5,
+        cash: 3,
     },
 ]

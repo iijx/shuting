@@ -1,52 +1,50 @@
-// pages/buy/buy.js
+// pages/challange/challange.js
 const app = getApp();
 const { Util, UniApi, XData, Vant, Store, CreateStoreBindings } = app;
 Page({
+
     /**
-     * 页面的初始数据
+     * Page initial data
      */
     data: {
-        memberType: "3",
-        price: 0,
         paying: false,
-        signUpNumber: 10,
-        systemInfo_platform: '',
-        isShowGiveDialog: false,
-        memberDay: 60,
-        memberDayPrice: 600,
-        ...XData.create(['goods']),
+        qaList: [],
+        rule: [],
+        smallTitle: ''
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.setData(XData.create(['goods']));
-
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
             fields: ['systemInfo_platform'],
         })
-        this.updateSignUpNumber();
 
-        wx.nextTick(() => {
-            let defaultGood = this.data.goods.find(item => item.isRecommend);
-            this.setData({
-                price: defaultGood.price * 100,
-                memberType: String(defaultGood.memberType)
-            })
-        })
+        this.refreshData();
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
+     * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
 
     },
+    refreshData() {
+        if (XData.challange.rule.length <= 0) {
+            Util.sleep(1000).then(res => this.refreshData());
+        } else {
+            this.setData({
+                qaList: XData.challange.qaList,
+                rule: XData.challange.rule,
+                smallTitle: XData.challange.smallTitle
+            })
+        }
+    },
 
     /**
-     * 生命周期函数--监听页面显示
+     * Lifecycle function--Called when page show
      */
     onShow: function () {
         // 标记：已经点击过支付
@@ -55,7 +53,6 @@ Page({
             Util.sleep(100).then(res => {
                 console.log('buy on show 100', app.globalData.paySuccess)
                 if (app.globalData.paySuccess) {
-                    
                     Vant.Toast.loading({
                         mask: true,
                         message: '查询支付中...'
@@ -79,7 +76,7 @@ Page({
                                 UniApi.login().then(res => {
                                     Vant.Dialog.alert({
                                         title: '恭喜',
-                                        message: '开通成功'
+                                        message: '报名成功'
                                     }).then(res => {
                                         wx.switchTab({
                                           url: '../my/my',
@@ -107,62 +104,14 @@ Page({
             })
         }
     },
-    updateSignUpNumber() {
-        let baseBumber = 10;
-        let everyDayAdd = 2;
-        let baseDate = new Date("2020-03-01T16:00:00.000Z").getTime();
-        let now = Date.now();
-        let time = (now - baseDate) / 1000; // 间隔秒数
-
-        let day = parseInt(time / (24 * 60 * 60));
-        let hour = parseInt((time - day * (24 * 60 * 60)) / 3600);
-        let retNum = baseBumber + day * everyDayAdd;
-        retNum += hour <= 6 ? 8 * hour : 22 + 6 * (hour - 6);
-        retNum += this.randomNum(0, 3);
-        this.setData({
-            signUpNumber: parseInt(Number(retNum))
-        })
-    },
-    onMemberDayChange(e) {
-        let day = e.detail.value || e.detail;
-        let dayPrice = day * 10;
-        this.setData({
-            memberDay: day,
-            memberDayPrice: dayPrice
-        });
-        if (this.data.memberType === '10') {
-            this.setData({
-                price: dayPrice
-            })
-        }
-    },
-    giveRuleBtn() {
-        this.setData({ isShowGiveDialog: true })
-    },
-    randomNum(min, max) {
-        return Math.random() * (max - min) + min;
-    },
-    memberDayCellClick() {
-        this.setData({
-            memberType: "10",
-            price: this.data.memberDayPrice
-        })
-    },
-    onRadioCellClick(e) {
-        const { item } = e.currentTarget.dataset;
-        this.setData({
-            memberType: String(item.memberType),
-            price: Math.round(item.price * 100)
-        });
-    },
     onSubmit: Util.throttle(function() {
         Vant.Toast.loading({
             mask: true,
-            message: ''
+            message: '请求中...'
         });
         UniApi.cloud('createOrder', {
-            memberType: String(this.data.memberType),
-            memberDay: this.data.memberDay,
+            memberType: '21',
+            memberDay: 30,
         }).then(res => {
             Vant.Toast.clear();
             app.globalData.out_trade_no = res.out_trade_no;
@@ -187,37 +136,37 @@ Page({
     }, 1000),
 
     /**
-     * 生命周期函数--监听页面隐藏
+     * Lifecycle function--Called when page hide
      */
     onHide: function () {
 
     },
 
     /**
-     * 生命周期函数--监听页面卸载
+     * Lifecycle function--Called when page unload
      */
     onUnload: function () {
 
     },
 
     /**
-     * 页面相关事件处理函数--监听用户下拉动作
+     * Page event handler function--Called when user drop down
      */
     onPullDownRefresh: function () {
 
     },
 
     /**
-     * 页面上拉触底事件的处理函数
+     * Called when page reach bottom
      */
     onReachBottom: function () {
 
     },
 
     /**
-     * 用户点击右上角分享
+     * Called when user click on the top right corner to share
      */
     onShareAppMessage: function () {
-        return Store.defaultShareInfo;
+
     }
 })

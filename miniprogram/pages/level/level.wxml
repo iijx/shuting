@@ -11,15 +11,7 @@
 			<image class="icon-level" src="/assets/imgs/levels.png"></image>级别单元列表
 		</view>
 		<view wx:for="{{ levelList }}" wx:key="index" wx:for-item="item">
-			<!-- 推广按钮 -->
-			<view wx:if="{{ user.memberType !== 3 && systemInfo_platform === 'android' && index === 1 }}" class="buy-info" bindtap="buyBtn">
-				<view class="buy-wrap" >
-					<view class="buy-body">
-						<text>{{ memberBanner.text}} </text>
-						<text class="look-btn">{{memberBanner.btn}}</text>
-					</view>
-				</view>
-			</view>
+			
 			<view style="padding: 28rpx 32rpx;">
 				<cell>
 					<view slot="hd" class="level-title">{{ item.title }}</view>
@@ -31,6 +23,15 @@
 			</view>
 			<view class="unit-border"></view>
 			<block wx:for="{{ item.unitList}}" wx:key="index" wx:for-item="unit">
+				<!-- 推广按钮 -->
+			<view wx:if="{{ user.memberType !== 3 && systemInfo_platform === 'android' && unit.levelId === 15 }}" class="buy-info" bindtap="buyBtn">
+				<view class="buy-wrap" >
+					<view class="buy-body">
+						<text>{{ memberBanner.text}} </text>
+						<text class="look-btn">{{memberBanner.btn}}</text>
+					</view>
+				</view>
+			</view>
 				<view class="unit-wrap" style="background: {{ curSubLevel.levelId === unit.levelId ? 'rgb(223, 241, 213)' : 'transparent'}}">
 					<view class="unit" >
 						<view style="width: 40rpx;">
@@ -56,8 +57,7 @@
 	<!-- 地狱王者模式 -->
 	<view class="custom-mode-wrap">
 		<view class="title">
-			<text>地狱王者模式　</text>
-			<image wx:if="{{ !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
+			<text>随机模式　</text>
 		</view>
 		<view class="custom-body">
 			<view class="case case-1">23:50</view>

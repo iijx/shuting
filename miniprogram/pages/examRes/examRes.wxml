@@ -1,0 +1,31 @@
+<!--pages/summary/summary.wxml-->
+<view class="container">
+    <image class="bg" mode="center" src="/assets/imgs/firework.png"></image>
+
+    <view class="main">
+        <image class="award" mode="widthFix" src="/assets/imgs/medal.png"></image>
+        <open-data class="avatar" type="userAvatarUrl"></open-data>
+        <open-data class="nickName" type="userNickName"></open-data>
+        <view class="note">{{ mode === 'exam' ? '正式' : '模拟'}}测试挑战</view>
+
+        <view class="content">
+            <view class="title">正确{{ cNum }}题， 错误{{ 20 - cNum }}题</view>
+            <view class="title-1">{{ scoreAwardText }}</view>
+        </view>
+        <view class="btn-wrap">
+            <view class="btn">
+                <!-- <van-button round plain size="default" bind:click="toIndex" color="#3D96D3" block>返回</van-button> -->
+            </view>
+            <view style="width: 20rpx;"></view>
+            <!-- <view class="btn">
+                <van-button round size="default" bind:click="toLearnNextSubLevel" color="#3D96D3" block>继续学习</van-button>
+            </view> -->
+        </view>
+
+        <view bindtap="lookAllBtn" class="look-all">返回</view>
+    </view>
+
+
+
+    <van-dialog id="van-dialog" />
+</view>

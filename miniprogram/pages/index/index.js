@@ -9,8 +9,9 @@ Page({
         // 数据绑定
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
-            fields: ['curLevel', 'curSubLevel', 'curSubLevelScore'],
+            fields: ['curLevel', 'curSubLevel', 'curSubLevelScore', 'systemInfo_platform'],
         });
+
     },
     onShow() {
         this.setData({
@@ -31,6 +32,11 @@ Page({
     linkToGiveRuler() {
         wx.navigateTo({
           url: '../giveRule/giveRuler',
+        });
+    },
+    linkToChallange() {
+        wx.navigateTo({
+          url: '../challange/challange',
         });
     },
     linkToActivity() {

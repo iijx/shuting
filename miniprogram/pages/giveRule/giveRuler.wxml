@@ -1,4 +1,4 @@
-<!-- 
+
 
 <view class='coinInviteRule'>
     <view class="main">
@@ -18,12 +18,4 @@
         </view>
     </view>
 
-    <van-dialog id="van-dialog" use-slot>
-        <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
-            <view>{{ iosMemberPromptText }}</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}">公众号 · 支持开通</view>
-        </view>
-    </van-dialog>
-
-</view> -->
+</view>

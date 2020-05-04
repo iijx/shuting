@@ -24,6 +24,7 @@
     </view>
 
     <view class="operators">
+        <van-cell title="数听挑战 · 返现测试" icon="gift-o" size="default" link-type="navigateTo" url="/pages/exam/exam" is-link  />
         <van-cell title="版本预告" icon="down" size="default" link-type="navigateTo" url="/pages/version/version" is-link  />
         <van-cell-group>
             <van-cell size="default" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
@@ -72,7 +73,6 @@
     <van-dialog id="van-dialog" use-slot>
         <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
             <view>{{ iosMemberPromptText }}</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}">安卓小程序 · 支持开通</view>
             <view wx:if="{{ isShowIosMemberPrompt }}"><text style="font-weight: bold;">「数听英语」</text>公众号 · 支持开通</view>
         </view>
     </van-dialog>

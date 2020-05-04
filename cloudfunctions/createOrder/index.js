@@ -37,6 +37,13 @@ const GOODS =  [
         memberType: 3,
         memberDay: 36500,
     },
+    {
+        title: '数听挑战',
+        price: 35,
+        totalFee: 3500,
+        memberType: 21,
+        memberDay: 30
+    }
 ];
 
 
@@ -75,14 +82,14 @@ const genOrder = async function(openid, memberType, memberDay) {
     // 如果是自定义会员，单独处理一下
     if (good.isCustom) {
         good.totalFee = memberDay * 10;
-        good.body = `数听自定义${memberDay}天会员`;
+        good.title = `数听自定义${memberDay}天会员`;
         good.memberDay = memberDay;
     }
 
     const order = new Order({
         total_fee: good.totalFee,
         openid,
-        body: good.body,
+        body: good.title,
         attach: JSON.stringify(good)
     });
 

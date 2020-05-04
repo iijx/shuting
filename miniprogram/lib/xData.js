@@ -57,6 +57,12 @@ export default {
         btn: '查看详情'
     },
 
+    challange: {
+        qaList: [],
+        rule: [],
+        smallTitle: ''
+    },
+
     create(fileds = []) {
         let that = this;
         const a = fileds.reduce((ac, cur) => {

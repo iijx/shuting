@@ -65,6 +65,7 @@ const store = observable({
 
     get defaultShareInfo() {
         return {
+            imageUrl: 'http://cdnword.iijx.site/assets/imgs/shuting/share.png',
             path: `/pages/index/index?fromOpenid=${this.user.openid}`,
             title: '数听英语·专项提升数字听力'
         }
@@ -172,6 +173,7 @@ const store = observable({
 
     wx.getSystemInfo({
         success (res) {
+            // if (res.platform === 'devtools') res.platform = 'android';
             store.setSystemInfo({
                 platform: res.platform
             })

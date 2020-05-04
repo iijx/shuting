@@ -147,6 +147,19 @@
 					"pathName": "pages/index/index",
 					"query": "openid=oH3iI5NU9XZO4HFeRDVRQ5N2aHjs",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/challange/challange",
+					"pathName": "pages/challange/challange",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "examRes",
+					"pathName": "pages/examRes/examRes",
+					"scene": null
 				}
 			]
 		}
