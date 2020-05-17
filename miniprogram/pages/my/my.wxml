@@ -33,7 +33,7 @@
                 </cell>
             </van-cell>
             <van-cell icon="gem-o" title="会员兑换码" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
-            <van-cell icon="fire-o" title="观看广告 · 赠一天会员" size="default" bind:click="lookAd"  is-link/>
+            <van-cell wx:if="{{ user.isPro }}" icon="fire-o" title="观看广告 · 赠一天会员" size="default" bind:click="lookAd"  is-link/>
         </van-cell-group>
     </view>
 
