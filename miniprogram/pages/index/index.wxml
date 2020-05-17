@@ -31,17 +31,13 @@
                 </cell>
             </view>
         </view>
-        <view class="give-banner" bindtap="linkToChallange" wx:if="{{ systemInfo_platform === 'android' }}">
+        <!-- <view class="give-banner" bindtap="linkToChallange" wx:if="{{ systemInfo_platform === 'android' }}">
             <image class="img" mode="widthFix" src="/assets/imgs/challenge.png"></image>
-        </view>
+        </view> -->
     </view>
 
     <view wx:if="{{ isPro }}" class="icon-gift" bindtap="linkToActivity">
         <image class="img" mode="widthFix" src="/assets/imgs/icon-gift.png"></image>
-    </view>
-
-    <view>
-
     </view>
 
 </view>

@@ -3,11 +3,10 @@
 
 const app = getApp();
 const { Util, XData, UniApi, Vant, Store, CreateStoreBindings } = app;
+// 在页面中定义激励视频广告
+let videoAd = null
 
 Page({
-    /**
-     * Page initial data
-     */
     data: {
         remainInviteCount: 0,
         awardedNum: 0,
@@ -18,9 +17,6 @@ Page({
 
         proEndDateStr: ''
     },
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
         this.setData( XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']))
         // 数据绑定
@@ -47,49 +43,48 @@ Page({
                 proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
             })
         })
-        // wx.showLoading({
-        //     title: '加载中...',
-        // })
-        // UniApi.cloud('updateShareAward').then(res => {
-        //     this.setData({
-        //         awardedNum: res.awardedNum,
-        //         remainInviteCount: res.inviteeCount - res.usedInviteCount
-        //     })
-        //     UniApi.cloud('getMessage').then(res => {
-        //         wx.hideLoading();
-        //         this.setMessages(res.msgList.map(item => ({
-        //             ...item,
-        //             createdAt: new Date(item.createdAt),
-        //             createdAtFormat: Util.dateFormatter(new Date(item.createdAt), "YYYY-MM-DD hh:mm:ss")
-        //         })))
-        //     }).catch(err => {
-        //         wx.hideLoading();
-        //     });
-            
-        // }).catch(err => {
-        //     wx.hideLoading();
-        // })
+        // 在页面onLoad回调事件中创建激励视频广告实例
+        if (wx.createRewardedVideoAd) {
+            videoAd = wx.createRewardedVideoAd({
+                adUnitId: 'adunit-0e2f6b778907b37e'
+            })
+            videoAd.onLoad(() => {console.log('load')})
+            videoAd.onError((err) => {console.log('err', err)})
+            videoAd.onClose((res) => {
+                if(res && res.isEnded) {
+                    UniApi.cloud('addMember', {
+                        addDay: 1
+                    }).then(res => {
+                        this.relogin(true);
+                        wx.showToast({
+                            title: '已获赠1天会员',
+                            icon: 'success',
+                            duration: 1500
+                        })
+                    })
+                }
+            })
+        }
 
         
     },
-
-    /**
-     * Lifecycle function--Called when page is initially rendered
-     */
     onReady: function () {
 
     },
     onShow: function () {
         wx.nextTick(() => {
-            if (!this.data.user.isPro) {
-                UniApi.login().then(res => {
-                    this.setData({ 
-                        user: this.data.user,
-                        proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
-                    })
-                });
-            }
+            this.relogin();
         })
+    },
+    relogin(mustRequest = false) {
+        if (mustRequest || !this.data.user.isPro) {
+            UniApi.login().then(res => {
+                this.setData({ 
+                    user: this.data.user,
+                    proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
+                })
+            });
+        }
     },
     memberBtn() {
         if (this.data.systemInfo_platform === 'android') {
@@ -103,6 +98,19 @@ Page({
               }).then(() => {
                 // on close
               });
+        }
+    },
+    lookAd() {
+        // 用户触发广告后，显示激励视频广告
+        if (videoAd) {
+            videoAd.show().catch(() => {
+                // 失败重试
+                videoAd.load()
+                    .then(() => videoAd.show())
+                    .catch(err => {
+                        console.log('激励视频 广告显示失败')
+                    })
+            })
         }
     },
     onGetUserInfo() {

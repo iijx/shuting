@@ -15,12 +15,14 @@ Page({
         memberDay: 60,
         memberDayPrice: 600,
         ...XData.create(['goods']),
+        ...XData.create(['memberBanner']),
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData(XData.create(['memberBanner']));
         this.setData(XData.create(['goods']));
 
         this.storeBindings = CreateStoreBindings(this, {
@@ -125,7 +127,7 @@ Page({
     },
     onMemberDayChange(e) {
         let day = e.detail.value || e.detail;
-        let dayPrice = day * 10;
+        let dayPrice = day * (this.data.memberBanner.price * 100);
         this.setData({
             memberDay: day,
             memberDayPrice: dayPrice

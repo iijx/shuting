@@ -88,7 +88,7 @@ Page({
         })
     },
     _randomOneType() {
-        const types = ['number', 'phone', 'number', 'time', 'year', 'number', 'pointNum', 'number', 'week', 'number', 'month'];
+        const types = ['number', 'phone', 'number', 'time', 'year', 'number', 'pointNum', 'number', 'number', 'month'];
         const phones = [4, 6, 8];
         
         let type = types[Util.randomIntegerInRange(0, types.length)];
@@ -123,7 +123,6 @@ Page({
         } else if (type === 'month') {
             answer = Util.randomOneMonth();
         }
-        console.log('随机answer: ', answer);
         if (answer === this.data.answer) {
             return this._genOneAnswer();
         } else {
@@ -172,7 +171,7 @@ Page({
 
         // 播放声音，及下一个词
         this.playResultAudio(isCorrect).then(() => {
-            isCorrect ? this.nextWord() : this.audioPlay(); 
+            isCorrect ? '' : this.audioPlay(); 
         });
     },
     nextWord() {

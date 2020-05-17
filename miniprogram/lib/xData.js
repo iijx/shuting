@@ -14,7 +14,6 @@ export default {
         openid: '',
         avatar: '',
         nickName: '',
-        proBeginDate: new Date('1970-01-01'),
         proEndDate: new Date('1970-01-01'),
     },
     version: {},
@@ -52,7 +51,7 @@ export default {
     monitorRule: [],
     memberBanner: {
         oldPrice: 2,
-        price: 0.1,
+        price: 0.2,
         text: '/天 解锁全部',
         btn: '查看详情'
     },

@@ -1,11 +1,79 @@
+
+const START_TIME = new Date(2020, 2, 16); //202年3月16日 第一期开始
+const WEEK_DAY = 7;
+
+// 日期格式化
+const dateFormatter = (date, formatter) => {
+    date = date ? new Date(date) : new Date();
+    const Y = date.getFullYear() + '',
+          M = date.getMonth() + 1,
+          D = date.getDate(),
+          H = date.getHours(),
+          m = date.getMinutes(),
+          s = date.getSeconds();
+    return formatter.replace(/YYYY|yyyy/g, Y)
+                    .replace(/YY|yy/g, Y.substr(2, 2))
+                    .replace(/MM/g, (M < 10 ? '0' : '') + M)
+                    .replace(/DD/g, (D < 10 ? '0' : '') + D)
+                    .replace(/HH|hh/g, (H < 10 ? '0' : '') + H)
+                    .replace(/mm/g, (m < 10 ? '0' : '') + m)
+                    .replace(/ss/g, (s < 10 ? '0' : '') + s)
+}
+/**
+ * 判断两个date之间的天数差
+ * @param {*} dateInitial 
+ * @param {*} dateFinal 
+ */
+const getDaysDiffBetweenDates = (dateInitial, dateFinal) => (dateFinal - dateInitial) / (1000 * 3600 * 24);
+
+/**
+ * 根据某一天，得到相对某一天的日期
+ * @param {*} day 
+ * @param {*} addDayNum 
+ */
+const getDateByAddDay = (day, addDayNum) => {
+    let t = new Date(day)
+    t.setDate(t.getDate() + addDayNum)
+    return t
+}
+
+const getBasePeriodInfo = () => {
+    let dayDiff = getDaysDiffBetweenDates(START_TIME, getToday());
+    let periodNum =  Math.floor(dayDiff / WEEK_DAY) + 1;
+    let curDayIndex =  (dayDiff + 1) % WEEK_DAY; // 从1开始
+    let periodStart = getDateByAddDay(getToday(), -(curDayIndex - 1));
+    let periodEnd = getDateByAddDay(getToday(), WEEK_DAY - curDayIndex);
+
+    return {
+        dayDiff,
+        curDayIndex,
+        periodNum,
+        periodStart,
+        periodEnd,
+    }
+}
+
+
+const getToday = () => {
+    let _day = new Date();
+    _day.setHours(0, 0, 0, 0);
+    return _day;
+};
+
 module.exports = {
+    init: function() {
+        const info = getBasePeriodInfo();
+        this.activity[0].periodNum = info.periodNum;
+        this.activity[0].periodStart = dateFormatter(new Date(info.periodStart), 'MM.DD');
+        this.activity[0].periodEnd = dateFormatter(new Date(info.periodEnd), 'MM.DD');
+    },
     goods: [
         {
             name: '月度会员 · 1月',
             isRecommend: false,
             price: 2.9,
             oldPrice: 3,
-            memberType: 1,
+            memberType: '1',
             rank: 1,
         },
         {
@@ -13,7 +81,7 @@ module.exports = {
             isRecommend: false,
             price: 5.8,
             oldPrice: 18,
-            memberType: 2,
+            memberType: '2',
             rank: 2,
         },
         {
@@ -21,7 +89,7 @@ module.exports = {
             isRecommend: true,
             price: 9.6,
             oldPrice: 68,
-            memberType: 3,
+            memberType: '3',
             rank: 3,
         },
     ],
@@ -39,14 +107,14 @@ module.exports = {
     },
     memberBanner: {
         oldPrice: 1,
-        price: 0.1,
-        text: '会员仅 ¥0.1/天',
+        price: 0.2,
+        text: '会员仅 ¥0.2/天',
         btn: '立即查看'
     },
 
     activity: [
         {
-            title: '一周翻翻乐',
+            title: '一周翻翻乐·赠会员',
             banner: '/assets/imgs/fanfanle_banner.png',
             btnText: '翻一翻',
             periodNum: 2,

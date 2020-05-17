@@ -19,10 +19,10 @@
 		<van-radio-group value="{{ memberType }}" bind:change="onRadioChange">
 			<van-cell-group border="{{ false }}">
 				<van-cell wx:if="{{ systemInfo_platform === 'android' }}" clickable  use-label-slot border bind:click="memberDayCellClick">
-					<view slot="title" class="member-name">自定义天数 · ¥0.1/天</view>
+					<view slot="title" class="member-name">自定义天数 · ¥{{ memberBanner.price }}/天</view>
 					<view slot="label" >
 						<view style="padding: 32rpx 20rpx;">
-							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="5" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
+							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="10" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
 								<view class="member-day" slot="button">
 									{{ memberDay }}天
 								</view>

@@ -21,9 +21,7 @@ exports.main = async (event, context) => {
     
     let res = await db.collection('users').doc(curUser._id).update({
         data: {
-            isPro: true,
-            proBeginDate: Date.now(),
-            proEndDate: Date.now() + addDay * 24 * 60 * 60 * 1000
+            proEndDate: Math.max(Date.now(), curUser.proEndDate) + addDay * 24 * 60 * 60 * 1000
         }
     })
 
