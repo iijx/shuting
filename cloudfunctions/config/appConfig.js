@@ -72,7 +72,7 @@ module.exports = {
             name: '月度会员 · 1月',
             isRecommend: false,
             price: 2.9,
-            oldPrice: 3,
+            oldPrice: 15,
             memberType: '1',
             rank: 1,
         },
@@ -80,15 +80,15 @@ module.exports = {
             name: '半年会员 · 6月',
             isRecommend: false,
             price: 5.8,
-            oldPrice: 18,
+            oldPrice: 45,
             memberType: '2',
             rank: 2,
         },
         {
-            name: '终身永久会员',
+            name: '永久会员',
             isRecommend: true,
             price: 9.6,
-            oldPrice: 68,
+            oldPrice: 98,
             memberType: '3',
             rank: 3,
         },
@@ -107,8 +107,8 @@ module.exports = {
     },
     memberBanner: {
         oldPrice: 1,
-        price: 0.2,
-        text: '会员仅 ¥0.2/天',
+        price: 0.1,
+        text: '会员仅 ¥0.1/天',
         btn: '立即查看'
     },
 

@@ -5,8 +5,8 @@ const ENV_PROD = 'prod-mxd6w';
 const ENV_DEV = 'dev-c7oqs';
 
 
-// const env = 'dev'; // prod || dev
-const env = 'prod'; // prod || dev
+const env = 'dev'; // prod || dev
+// const env = 'prod'; // prod || dev
 
 export default {
     env,
