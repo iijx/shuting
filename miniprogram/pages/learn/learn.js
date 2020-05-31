@@ -145,7 +145,7 @@ Page({
             Util.sleep(700).then(() => resolve());
         })
     },
-    showAnswer(autoNextIfCorrect = true) {
+    showAnswer() {
         let isCorrect = this._isCorrect();
         if (this.data.mode === 'normal') {
             // 分数统计，与本地存储
@@ -171,7 +171,7 @@ Page({
 
         // 播放声音，及下一个词
         this.playResultAudio(isCorrect).then(() => {
-            isCorrect ? '' : this.audioPlay(); 
+            isCorrect ? this.nextWord() : this.audioPlay(); 
         });
     },
     nextWord() {

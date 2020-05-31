@@ -19,7 +19,6 @@
             </block>
             <view wx:if="{{  type === 'month'  }}" class="span {{ spanClass }}">月</view>
         </view>
-
     </view>
 
 
@@ -47,11 +46,11 @@
                     <view class="num-item" data-value="9" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">9</view>
                 </view>
                 <view class="num-item-line">
-                    <view class="num-item no-bg" data-value="." bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">.</view>
-                    <view class="num-item" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
-                    <view class="num-item no-bg" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
+                    <view class="num-item no-bg flex1" data-value="." bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">.</view>
+                    <view class="num-item flex2" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
+                    <!-- <view class="num-item no-bg" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
                         <image class="play-img" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
-                    </view>
+                    </view> -->
                 </view>
             </view>
 
@@ -59,7 +58,10 @@
                 <view class="btn-del" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
                     <image class="icon-del" data-value="x" mode="widthFix" src="/assets/imgs/icon-del.png"></image>
                 </view>
-                <view class="btn-confirm" bindtap="nextWord" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">下一个</view>
+                <view class="num-item no-bg" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
+                    <image class="play-img" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
+                </view>
+                <!-- <view class="btn-confirm" bindtap="nextWord" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">下一个</view> -->
             </view>
 
         </view>

@@ -53,7 +53,8 @@ export default {
         oldPrice: 2,
         price: 0.2,
         text: '/天 解锁全部',
-        btn: '查看详情'
+        btn: '查看详情',
+        dialogPrompt: '会员专享，请先开通会员'
     },
 
     challange: {

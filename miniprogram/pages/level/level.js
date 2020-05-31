@@ -27,7 +27,7 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.setData(XData.create(['memberBanner']));
+        
         
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
@@ -59,14 +59,29 @@ Page({
         
        
     },
-    
+    onShow: function () {
+        this.setData(XData.create(['memberBanner']));
+    },
     selectBtn: function(e) {
         let subLevel = e.currentTarget.dataset.level;
         if (subLevel.isPro && !this.data.user.isPro) {
-            Vant.Dialog.alert({
-                message: '会员专享内容，请先开通会员',
-                confirmButtonText: '知道了'
-            })
+            console.log(this.data.systemInfo_platform)
+            if (this.data.systemInfo_platform === 'android') {
+                Vant.Dialog.confirm({
+                    message: '会员专享内容，请先开通会员',
+                    cancelButtonText: '知道了',
+                    confirmButtonText: '去看看'
+                }).then(res => {
+                    wx.navigateTo({ url: '../buy/buy' })
+                }).catch(err => {
+                    
+                })
+            } else {
+                Vant.Dialog.alert({
+                    message: this.data.memberBanner.dialogPrompt,
+                    confirmButtonText: '知道了'
+                })
+            }
             return;
         }
         this.setCurSubLevelId(subLevel.levelId);
@@ -75,32 +90,7 @@ Page({
                 url: '../learn/learn',
             })
         })
-        // let level = e.currentTarget.dataset.level;
-        // if (level.levelId === this.data.curLevel.levelId) return;
-
-        // // 会员判定
-        // let list = SubLevelList.filter(item => item.pLevelId === level.levelId).sort((a, b) => a.index - b.index);
-        // console.log(list);
-
-        // if (!this.data.user.isPro && list[0].isPro) {
-        //     Vant.Dialog.alert({
-        //         message: '会员专享内容，请先开通会员'
-        //     })
-        // } else {
-        //     this.setCurSubLevelId(list[0].levelId);
-        //     Vant.Dialog.confirm({
-        //         title: '恭喜',
-        //         message: '选择成功，快去学习吧！',
-        //         confirmButtonText: '去学习',
-        //         cancelButtonText: '知道了'
-        //     }).then(() => {
-        //         wx.redirectTo({
-        //             url: '../learn/learn',
-        //         })
-        //     }).catch(() => {
-                
-        //     })
-        // }
+        
     },
     /**
      * Lifecycle function--Called when page is initially rendered
@@ -115,18 +105,7 @@ Page({
         app.AppAudio.play();
     },
     buyBtn() {
-        // if (this.data.systemInfo_platform !== 'android') return;
-
-        wx.navigateTo({
-            url: '../buy/buy',
-        })
-    },
-
-    /**
-     * Lifecycle function--Called when page show
-     */
-    onShow: function () {
-        
+        wx.navigateTo({ url: '../buy/buy' })
     },
     startHardMode() {
         if (!this.data.user.isPro) {

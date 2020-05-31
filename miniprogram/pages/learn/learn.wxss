@@ -192,6 +192,12 @@ page {
     background: none;
     box-shadow: none;
 }
+.flex1 {
+    flex: 1;
+}
+.flex2 {
+    flex: 2;
+}
 
 .num-item-hover {
     background: #b5c3d1;
