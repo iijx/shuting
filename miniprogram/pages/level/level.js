@@ -100,7 +100,6 @@ Page({
     },
     wordPlay(e) {
         let src = e.currentTarget.dataset.audio;
-        console.log(src);
         app.AppAudio.src = src;
         app.AppAudio.play();
     },

@@ -127,7 +127,6 @@ Page({
             ...info,
             path: info.path + `&fflCardShareOpenid=${Store.user.openid}`,
         }
-        console.log('share res', res);
         return res;
     }
 })

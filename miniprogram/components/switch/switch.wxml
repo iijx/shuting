@@ -1,7 +1,0 @@
-
-<view class="switch {{ value ? 'active' : '' }}" bindtap="toggle">
-    <view class="line"></view>
-    <view class="ball-wrap">
-        <view class=".ball" />
-    </view>
-</view>

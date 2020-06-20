@@ -101,7 +101,6 @@ Page({
                 maxLength: phones[Util.randomIntegerInRange(0, 3)]
             })
         }
-        console.log('随机type: ', type);
         return type;
         
     },

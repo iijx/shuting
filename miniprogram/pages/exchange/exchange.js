@@ -15,7 +15,6 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (opt) {
-        console.log('opt', opt)
         if(opt && opt.code) {
             this.setData({
                 value: opt.code.trim()

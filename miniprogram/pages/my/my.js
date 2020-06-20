@@ -34,7 +34,7 @@ Page({
                         }
                     },
                     fail: err => {
-                        console.log('暂未授权');
+                        // console.log('暂未授权');
                     }
                 });
             };
@@ -95,9 +95,9 @@ Page({
             Vant.Dialog.alert({
                 title: 'Sorry',
                 confirmButtonText: '知道了',
-              }).then(() => {
+            }).then(() => {
                 // on close
-              });
+            });
         }
     },
     lookAd() {
@@ -108,7 +108,7 @@ Page({
                 videoAd.load()
                     .then(() => videoAd.show())
                     .catch(err => {
-                        console.log('激励视频 广告显示失败')
+                        // console.log('激励视频 广告显示失败')
                     })
             })
         }

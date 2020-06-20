@@ -19,32 +19,7 @@ export default {
     version: {},
 
 
-    goods: [
-        {
-            name: '月度会员 · 30天',
-            isRecommend: false,
-            price: 4.9,
-            oldPrice: 10,
-            memberType: 1,
-            rank: 1,
-        },
-        {
-            name: '半年会员 · 180天',
-            isRecommend: false,
-            price: 7.8,
-            oldPrice: 19,
-            memberType: 2,
-            rank: 2,
-        },
-        {
-            name: '终身会员 · 100年',
-            isRecommend: true,
-            price: 9.7,
-            oldPrice: 19,
-            memberType: 3,
-            rank: 3,
-        },
-    ],
+    goods: [],
 
     iosMemberPromptText: 'IOS小程序版，暂不支持开通会员功能', // IOS小程序 · 暂不支持开通会员功能
     isShowIosMemberPrompt: false,
