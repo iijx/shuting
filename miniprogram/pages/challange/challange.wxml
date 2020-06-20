@@ -24,21 +24,6 @@
 		IOS小程序平台暂不支持参与
 	</view>
 
-	
-	
-
-	
-
-
-	<!-- <van-dialog id="van-dialog" use-slot>
-		<view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
-			<view>请联系工作人员申请提现</view>
-			<image class="kefu-img" mode="widthFix" src="http://cdnword.iijx.site/assets/imgs/shuting/shuting_kefu.png"></image>
-		</view>
-	</van-dialog>
-	
-	<van-notify id="van-notify" /> -->
-
 	<van-submit-bar wx:if="{{ systemInfo_platform === 'android' }}" loading="{{ paying }}" price="{{ 3500 }}" tip="{{ true }}" button-text="报名挑战" button-type="warning" bind:submit="onSubmit">
     </van-submit-bar>
 

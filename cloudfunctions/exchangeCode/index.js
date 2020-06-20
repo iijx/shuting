@@ -13,7 +13,8 @@ const getAddDayByExchangeCodeType = (codeInfo = {}) => {
     if (codeInfo.type === 1) return 7;
     if (codeInfo.type === 3) {
         if (codeInfo.memberType === 1) return 30;
-        if (codeInfo.memberType === 2 || codeInfo.memberType === 4) return 180;
+        if (codeInfo.memberType === 2) return 180;
+        if (codeInfo.memberType === 4) return 360;
         if (codeInfo.memberType === 6) return 3 * 365;
         if (codeInfo.memberType === 3) return 100 * 365;
     }

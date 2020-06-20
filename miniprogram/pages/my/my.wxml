@@ -20,7 +20,7 @@
     <view style="height: 100rpx;"></view>
     <view class="operators" wx:if="{{ user.avatar }}">
         <view wx:if="{{user.isPro}}" class="member-pro"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
-        <view wx:else class="member-btn" bindtap="memberBtn">{{ systemInfo_platform === 'android' ? '会员仅 ¥0.1/天' : '会员计划' }}</view>
+        <view wx:else class="member-btn" bindtap="memberBtn">查看会员计划</view>
     </view>
 
     <view class="operators">
@@ -37,12 +37,6 @@
         </van-cell-group>
     </view>
 
-    <view class="operators" wx:if="{{ user.isMonitor }}">
-        <van-cell-group>
-            <van-cell icon="friends-o" title="班长计划" size="default" link-type="navigateTo" url="/pages/monitor/monitor" is-link  />
-        </van-cell-group>
-    </view>
-
     <view class="operators">
         <van-cell-group>
             <button class="contact-btn" open-type="contact" style="">
@@ -52,22 +46,6 @@
             <van-cell icon="idcard" title="复制 ID 号" size="default" bind:click="copyOpenid"/>
         </van-cell-group>
     </view>
-
-    <!-- <view class="freeMember" open-type="contact" bindtap="freeMemberBtn">
-        <image class="img" src="/assets/imgs/freeMember.png" ></image>
-    </view> -->
-
-    <!-- <van-dialog id="van-dialog" use-slot>
-        <view>
-            <image mode="widthFix" src="/assets/imgs/kefu-bg.png" />
-            <view style="color: #4a4a4a; padding: 20rpx 32rpx;line-height: 1.8;">
-                <view style="font-weight: bold; line-height: 2.3;">免费获取方式：</view>
-                <view>1.关注「数听英语」公众号，获得会员</view>
-                <view>2.点击“查看客服”，添加数听英语客服微信</view>
-            </view>
-            
-        </view>
-    </van-dialog> -->
 
     <van-dialog id="van-dialog" use-slot>
         <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
