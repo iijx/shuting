@@ -11,35 +11,36 @@ const GOODS =  [
     },
     {
         title: '数听月度会员',
-        price: 2.9,
-        totalFee: 290,
+        totalFee: 590,
         memberType: 1,
         memberDay: 30,
     },
     {
         title: '数听半年会员',
-        price: 5.8,
         totalFee: 580,
         memberType: 2,
         memberDay: 180,
     },
     {
         title: '数听年度会员',
-        price: 5.8,
         totalFee: 580,
         memberType: 4,
         memberDay: 180,
     },
     {
+        title: '3年会员',
+        totalFee: 960,
+        memberType: 6,
+        memberDay: 365 * 3,
+    },
+    {
         title: '数听终身会员',
-        price: 9.6,
         totalFee: 960,
         memberType: 3,
         memberDay: 36500,
     },
     {
         title: '数听挑战',
-        price: 35,
         totalFee: 3500,
         memberType: 21,
         memberDay: 30

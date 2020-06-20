@@ -14,6 +14,7 @@ const getAddDayByExchangeCodeType = (codeInfo = {}) => {
     if (codeInfo.type === 3) {
         if (codeInfo.memberType === 1) return 30;
         if (codeInfo.memberType === 2 || codeInfo.memberType === 4) return 180;
+        if (codeInfo.memberType === 6) return 3 * 365;
         if (codeInfo.memberType === 3) return 100 * 365;
     }
     
@@ -66,63 +67,32 @@ exports.main = async (event, context) => {
             isPro: true,
             proEndDate: Date.now() + getAddDayByExchangeCodeType(codeInfo) * 24 * 60 * 60 * 1000,
             memberType: codeInfo.memberType,
-            isMonitor: Number(codeInfo.memberType) === 3 || Number(codeInfo.memberType) === 2 ? true : false,
         }
     })
 
     // 如果有班长奖励
-    let inviteRecord = await db.collection('invite').where({ _openid: openid }).limit(1).get().then(res => res.data[0]);
-    if (inviteRecord) {
-        let awardInfo = INVITE_AWARD.find(item => String(item.memberType) === String(codeInfo.memberType)) || {};
+    // let inviteRecord = await db.collection('invite').where({ _openid: openid }).limit(1).get().then(res => res.data[0]);
+    // if (inviteRecord) {
+    //     let awardInfo = INVITE_AWARD.find(item => String(item.memberType) === String(codeInfo.memberType)) || {};
         
-        await db.collection('invite').doc(inviteRecord._id).update({data: {
-            buyedMemberType: Number(codeInfo.memberType),
-            buyedMemberTitle: awardInfo.memberTitle,
-            cashAward: awardInfo.cash,
-            avatar: curUser.avatar,
-            nickName: curUser.nickName,
-            updateAt: Date.now()
-        }})
+    //     await db.collection('invite').doc(inviteRecord._id).update({data: {
+    //         buyedMemberType: Number(codeInfo.memberType),
+    //         buyedMemberTitle: awardInfo.memberTitle,
+    //         cashAward: awardInfo.cash,
+    //         avatar: curUser.avatar,
+    //         nickName: curUser.nickName,
+    //         updateAt: Date.now()
+    //     }})
 
-        await db.collection('users').where( { openid: inviteRecord.inviter}).update({
-            data: {
-                totalMoney: _.inc(awardInfo.cash)
-            }
-        });
-    }
+    //     await db.collection('users').where( { openid: inviteRecord.inviter}).update({
+    //         data: {
+    //             totalMoney: _.inc(awardInfo.cash)
+    //         }
+    //     });
+    // }
 
     return {
         success: true,
         msg: '兑换成功'
     }
 }
-
-
-// 会员类型对应奖励
-const INVITE_AWARD = [
-    {
-        memberType: 10,
-        memberTitle: '自定义会员',
-        cash: 0,
-    },
-    {
-        memberType: 1,
-        memberTitle: '月度会员',
-        cash: 1,
-    },
-    {
-        memberType: 2,
-        memberTitle: '半年会员',
-        cash: 2,
-    },
-    {
-        memberType: 4,
-        memberTitle: '年度会员',
-        cash: 2,
-    },
-    {
-        memberType: 3,
-        memberTitle: '终身会员',
-        cash: 3,
-    },
-]

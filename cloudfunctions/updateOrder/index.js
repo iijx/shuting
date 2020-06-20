@@ -1,8 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-
-
 // 初始化 cloud
 cloud.init({
     // API 调用都保持和云函数当前所在环境一致
@@ -69,66 +67,76 @@ exports.main = async (event, context) => {
     })
 
     // 如果有班长奖励
-    let inviteRecord = await db.collection('invite').where({ _openid: order.openid }).limit(1).get().then(res => res.data[0]);
-    if (inviteRecord) {
-        let attach = typeof order.attach === 'string' ? JSON.parse(order.attach || '{}') : order.attach;
-        let awardInfo = INVITE_AWARD.find(item => String(item.memberType) === String(attach.memberType)) || {};
+    // let inviteRecord = await db.collection('invite').where({ _openid: order.openid }).limit(1).get().then(res => res.data[0]);
+    // if (inviteRecord) {
+    //     let attach = typeof order.attach === 'string' ? JSON.parse(order.attach || '{}') : order.attach;
+    //     let awardInfo = INVITE_AWARD.find(item => String(item.memberType) === String(attach.memberType)) || {};
         
-        await db.collection('invite').doc(inviteRecord._id).update({data: {
-            buyedMemberType: Number(attach.memberType),
-            buyedMemberTitle: awardInfo.memberTitle,
-            cashAward: awardInfo.cash,
-            avatar: user.avatar,
-            nickName: user.nickName,
-            updateAt: Date.now()
-        }})
+    //     await db.collection('invite').doc(inviteRecord._id).update({data: {
+    //         buyedMemberType: Number(attach.memberType),
+    //         buyedMemberTitle: awardInfo.memberTitle,
+    //         cashAward: awardInfo.cash,
+    //         avatar: user.avatar,
+    //         nickName: user.nickName,
+    //         updateAt: Date.now()
+    //     }})
 
-        await db.collection('users').where( { openid: inviteRecord.inviter}).update({
-            data: {
-                totalMoney: _.inc(awardInfo.cash)
-            }
-        });
-    }
+    //     await db.collection('users').where( { openid: inviteRecord.inviter}).update({
+    //         data: {
+    //             totalMoney: _.inc(awardInfo.cash)
+    //         }
+    //     });
+    // }
 
     // 如果是挑战，生成一个挑战测试
-    if ( String(memberType) === '21') {
-        await db.collection('exam').add({
-            openid: openid,
-            status: 1,
-            createAt: Date.now(),
-            updateAt: Date.now(),
-            answer: [],
-            cNum: 0,
-            isBackCash: false,
-        })
-    }
+    // if ( String(memberType) === '21') {
+    //     await db.collection('exam').add({
+    //         openid: openid,
+    //         status: 1,
+    //         createAt: Date.now(),
+    //         updateAt: Date.now(),
+    //         answer: [],
+    //         cNum: 0,
+    //         isBackCash: false,
+    //     })
+    // }
 }
 
 // 会员类型对应奖励
-const INVITE_AWARD = [
-    {
-        memberType: 10,
-        memberTitle: '自定义会员',
-        cash: 0,
-    },
-    {
-        memberType: 1,
-        memberTitle: '月度会员',
-        cash: 1,
-    },
-    {
-        memberType: 2,
-        memberTitle: '半年会员',
-        cash: 2,
-    },
-    {
-        memberType: 4,
-        memberTitle: '年度会员',
-        cash: 2,
-    },
-    {
-        memberType: 3,
-        memberTitle: '终身会员',
-        cash: 3,
-    },
-]
+// const INVITE_AWARD = [
+//     {
+//         memberType: 10,
+//         memberTitle: '自定义会员',
+//         cash: 0,
+//     },
+//     {
+//         memberType: 1,
+//         memberTitle: '月度会员',
+//         cash: 1,
+//     },
+//     {
+//         memberType: 2,
+//         memberTitle: '半年会员',
+//         cash: 2,
+//     },
+//     {
+//         memberType: 4,
+//         memberTitle: '年度会员',
+//         cash: 2,
+//     },
+//     {
+//         memberType: 3,
+//         memberTitle: '终身会员',
+//         cash: 3,
+//     },
+//     {
+//         memberType: 5,
+//         memberTitle: '1年会员',
+//         cash: 3,
+//     },
+//     {
+//         memberType: 6,
+//         memberTitle: '3年会员',
+//         cash: 3,
+//     },
+// ]

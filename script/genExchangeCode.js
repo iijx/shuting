@@ -33,7 +33,7 @@ for (let i = 0; i < 1000; i++) {
 }
 let result = Array.from(codeArr).map(item => new ExchangeCode({
     code: item,
-    type: 3,
+    type: 6,
 }));
 
 for (const item of result) {
