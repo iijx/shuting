@@ -14,12 +14,8 @@ Page({
 
         isShowNote: false,
         noteType: '',
-
         monthWords: [...Util.MonthWords],
         weekWords: [...Util.WeekWords],
-
-        price: 4.9,
-        
         ...XData.create(['memberBanner']),
     },
 
@@ -27,8 +23,6 @@ Page({
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        
-        
         this.storeBindings = CreateStoreBindings(this, {
             store: Store,
             fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap', 'systemInfo_platform'],
@@ -53,11 +47,8 @@ Page({
             });
             this.setData({
                 levelList,
-                price: XData.create(['goods']).goods.find(item => String(item.memberType) === '1').price,
             })
         })
-        
-       
     },
     onShow: function () {
         this.setData(XData.create(['memberBanner']));
@@ -92,12 +83,6 @@ Page({
         })
         
     },
-    /**
-     * Lifecycle function--Called when page is initially rendered
-     */
-    onReady: function () {
-
-    },
     wordPlay(e) {
         let src = e.currentTarget.dataset.audio;
         app.AppAudio.src = src;
@@ -115,7 +100,7 @@ Page({
             return;
         } else {
             wx.navigateTo({
-              url: '../learn/learn?mode=hard',
+                url: '../learn/learn?mode=hard',
             })
         }
     },

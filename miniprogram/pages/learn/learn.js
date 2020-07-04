@@ -80,7 +80,6 @@ Page({
         AudioContext.src = this._genAudioSrcByNumAndType(this.data.type);
         AudioContext.play();
     },
-   
     _preStartInit() {
         this.setData({
             inputValue: '',
@@ -144,16 +143,21 @@ Page({
             Util.sleep(700).then(() => resolve());
         })
     },
+    getCorrectScore() {
+        if (this.data.type === 'number') {
+            if ( this.data.maxLength === 1 || this.data.score >= 65) {
+                return Config.correctScorePlus;
+            } else return Config.correctScore;
+        }
+        if (this.data.type === 'week') return Config.correctScorePlus;
+        return Config.correctScore;
+    },
     showAnswer() {
         let isCorrect = this._isCorrect();
         if (this.data.mode === 'normal') {
             // 分数统计，与本地存储
             if (isCorrect) {
-                if ((this.data.type === 'number' && this.data.maxLength === 1) || this.data.type === 'week') {
-                    this.data.score += Config.correctScorePlus;
-                } else {
-                    this.data.score += Config.correctScore;
-                }
+                this.data.score += this.getCorrectScore();
                 this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
             } else {
                 this.data.score += Config.errorScore;
@@ -167,7 +171,6 @@ Page({
         this.setData({
             spanClass: isCorrect ? 'correct' : 'error'
         })
-
         // 播放声音，及下一个词
         this.playResultAudio(isCorrect).then(() => {
             isCorrect ? this.nextWord() : this.audioPlay(); 

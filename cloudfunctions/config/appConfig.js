@@ -92,14 +92,14 @@ module.exports = {
             memberType: '6',
             rank: 3,
         },
-        {
-            name: '终身会员 ',
-            isRecommend: false,
-            price: 36,
-            oldPrice: 360,
-            memberType: '3',
-            rank: 4,
-        },
+        // {
+        //     name: '终身会员 ',
+        //     isRecommend: false,
+        //     price: 36,
+        //     oldPrice: 360,
+        //     memberType: '3',
+        //     rank: 4,
+        // },
     ],
     version: {
         onlineTime: '两周内',

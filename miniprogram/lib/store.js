@@ -59,7 +59,7 @@ const store = observable({
     get curSubLevelScore() {
         let info = this.subLevelLearnedMap.find(item => item.subLevelId === this.curSubLevelId);
         if (!info) return 0;
-        else return info.score;
+        else return Math.min(info.score, 100);
     },
 
 

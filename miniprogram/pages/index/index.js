@@ -31,17 +31,17 @@ Page({
     },
     linkToGiveRuler() {
         wx.navigateTo({
-          url: '../giveRule/giveRuler',
+            url: '../giveRule/giveRuler',
         });
     },
     linkToChallange() {
         wx.navigateTo({
-          url: '../challange/challange',
+            url: '../challange/challange',
         });
     },
     linkToActivity() {
         wx.navigateTo({
-          url: '../activity/activity',
+            url: '../activity/activity',
         })
     },
     // 用户点击右上角分享

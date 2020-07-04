@@ -1,13 +1,9 @@
 /**index.wxss**/
-
-page {
-    background: #f6f6f6;
-}
-
 .container {
     width: 100%;
     position: relative;
     min-height: 100vh;
+    /* background-image: linear-gradient(180deg, #f9ce0d, #fff); */
 }
 
 .top {

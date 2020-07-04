@@ -10,8 +10,7 @@
         "pages/exchange/exchange",
         "pages/version/version",
         "pages/advice/advice",
-        "pages/activity/activity",
-        "pages/fanfanle/fanfanle"
+        "pages/activity/activity"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -53,6 +52,7 @@
     "tabBar": {
         "color": "#929292",
         "selectedColor": "#3D96D3",
+        "borderStyle": "white",
         "list": [
             {
                 "pagePath": "pages/index/index",
@@ -75,5 +75,4 @@
             }
         ]
     }
-   
 }

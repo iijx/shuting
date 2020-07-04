@@ -10,10 +10,6 @@ Page({
     data: {
         isSubmiting: false,
         value: '',
-
-        
-
-
     },
 
     /**
@@ -46,6 +42,7 @@ Page({
 
         if (!this.data.value.trim()) {
             Vant.Notify({type: 'warning', message: '请输入内容'});
+            return;
         }
 
         this.setData({

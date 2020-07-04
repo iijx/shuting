@@ -2,7 +2,7 @@
 <view class="container">
     <view class="top">
         <view class="box1">
-            <view class="text1">专项练习·提升数字英语听力</view>
+            <view class="text1">专项提升·数字英语听力</view>
             <view class="text2">Let’s get started</view>
         </view>
         <view class="box2"></view>
@@ -31,21 +31,15 @@
                 </cell>
             </view>
         </view>
-        <!-- <view class="give-banner" bindtap="linkToChallange" wx:if="{{ systemInfo_platform === 'android' }}">
-            <image class="img" mode="widthFix" src="/assets/imgs/challenge.png"></image>
-        </view> -->
     </view>
-
-    <view wx:if="{{ isPro }}" class="icon-gift" bindtap="linkToActivity">
+    <!-- <view wx:if="{{ isPro }}" class="icon-gift" bindtap="linkToActivity">
         <image class="img" mode="widthFix" src="/assets/imgs/icon-gift.png"></image>
-    </view>
-
+    </view> -->
 </view>
-
-
 
 <wxs module="computed">
 module.exports.getMins = function(score) {
-    return parseInt((0.3 * (100 - parseInt(score))));
+    console.log(score);
+    return parseInt((0.3 * (100 - parseInt(score || 0))));
 }
 </wxs>

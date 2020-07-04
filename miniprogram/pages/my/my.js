@@ -3,9 +3,6 @@
 
 const app = getApp();
 const { Util, XData, UniApi, Vant, Store, CreateStoreBindings } = app;
-// 在页面中定义激励视频广告
-let videoAd = null
-
 Page({
     data: {
         remainInviteCount: 0,
@@ -43,30 +40,6 @@ Page({
                 proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
             })
         })
-        // 在页面onLoad回调事件中创建激励视频广告实例
-        if (wx.createRewardedVideoAd) {
-            videoAd = wx.createRewardedVideoAd({
-                adUnitId: 'adunit-0e2f6b778907b37e'
-            })
-            videoAd.onLoad(() => {console.log('load')})
-            videoAd.onError((err) => {console.log('err', err)})
-            videoAd.onClose((res) => {
-                if(res && res.isEnded) {
-                    UniApi.cloud('addMember', {
-                        addDay: 1
-                    }).then(res => {
-                        this.relogin(true);
-                        wx.showToast({
-                            title: '已获赠1天会员',
-                            icon: 'success',
-                            duration: 1500
-                        })
-                    })
-                }
-            })
-        }
-
-        
     },
     onReady: function () {
 
@@ -98,19 +71,6 @@ Page({
             }).then(() => {
                 // on close
             });
-        }
-    },
-    lookAd() {
-        // 用户触发广告后，显示激励视频广告
-        if (videoAd) {
-            videoAd.show().catch(() => {
-                // 失败重试
-                videoAd.load()
-                    .then(() => videoAd.show())
-                    .catch(err => {
-                        // console.log('激励视频 广告显示失败')
-                    })
-            })
         }
     },
     onGetUserInfo() {
