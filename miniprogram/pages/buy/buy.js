@@ -45,10 +45,10 @@ app.createPage({
         // 标记：已经点击过支付
         if (this.data.paying) {
             console.log('buy on show', app.globalData.paySuccess)
+            let that = this;
             Util.sleep(100).then(res => {
                 console.log('buy on show 100', app.globalData.paySuccess)
                 if (app.globalData.paySuccess) {
-                    
                     Vant.Toast.loading({
                         mask: true,
                         message: '查询支付中...'
@@ -69,7 +69,9 @@ app.createPage({
                         }).then(res => {
                             if (String(res.status) === '2') {
                                 Vant.Toast.clear();
-                                UniApi.login().then(res => {
+                                UniApi.cloud('login').then(res => {
+                                    app.Store.data.user = res;
+                                    that.update();
                                     Vant.Dialog.alert({
                                         title: '恭喜',
                                         message: '开通成功',

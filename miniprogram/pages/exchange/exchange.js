@@ -59,7 +59,10 @@ Page({
                     Vant.Dialog.alert({
                         message: '您已兑换成功'
                     })
-                    UniApi.login();
+                    UniApi.cloud('login').then(res => {
+                        app.Store.data.user = res;
+                        this.update();
+                    });
                 } else {
                     Vant.Dialog.alert({
                         message: res.msg || '兑换失败 ｜ 未知错误'

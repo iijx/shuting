@@ -35,7 +35,7 @@ app.createPage({
         })
     },
     showNoAuthDialog() {
-        if (this.data.env.platForm === 'android') {
+        if (this.data.env.platform === 'android') {
             Vant.Dialog.confirm({
                 title: '开通会员',
                 message: '会员专享内容，请先开通会员',

@@ -53,8 +53,8 @@
 
 	<view class="ios-submit-bar" wx:if="{{ env.platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
 	<view wx:else class="pay-submit-bar">
-		<van-button round block color="#5862F6" loading="{{ paying }}">立即支付 ￥{{ price / 100 }}</van-button>
-		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：支付提示跳转payjs，属系统正常流程，请安心支付</view>
+		<van-button round block bind:click="onSubmit" color="#5862F6" loading="{{ paying }}">立即支付 ￥{{ price / 100 }}</van-button>
+		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：支付提示跳转payjs小程序，属系统正常流程，请安心支付</view>
 	</view>
 
 	<van-dialog id="van-dialog" />

@@ -55,6 +55,14 @@ App({
                 store.setCurLearn(res[1].curLearnUnitId)
                 store.update();
             })
+
+            wx.getSystemInfo({
+                success (res) {
+                    store.setEnv({
+                        platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
+                    })
+                }
+            })
         }
     },
     onShow: function (options) {

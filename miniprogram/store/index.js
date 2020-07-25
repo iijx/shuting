@@ -112,13 +112,4 @@ const store = {
     }
 }
 
-wx.getSystemInfo({
-    success (res) {
-        store.setEnv({
-            platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
-        })
-    }
-})
-
-
 export default store;

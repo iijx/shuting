@@ -3,6 +3,7 @@ const { Util, Vant, Store } = app;
 
 app.createPage({
     data: {
+        user: new app.Models.User({}),
         lesson: [],
         curLearnLevel: {},
         curLearnUnit: {},
@@ -29,7 +30,7 @@ app.createPage({
         let unit = e.currentTarget.dataset.level;
         // 1. 会员拦截
         if (unit.isPro && !this.data.user.isPro) {
-            if (this.data.env.platForm === 'android') {
+            if (this.data.env.platform === 'android') {
                 Vant.Dialog.confirm({
                     title: '开通会员',
                     message: '会员专享内容，请先开通会员',
@@ -66,7 +67,8 @@ app.createPage({
         app.AppAudio.play();
     },
     buyBtn() {
-        if (this.data.env.platForm === 'android') {
+        console.log(this.data.env);
+        if (this.data.env.platform === 'android') {
             wx.navigateTo({ url: '../buy/buy' })
         } else {
             Vant.Dialog.alert({
