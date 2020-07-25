@@ -232,8 +232,4 @@ app.createPage({
 
     onUnload: function () {
     },
-    onShareAppMessage: function (res) {
-        return this.data.defaultShareInfo;
-    },
-
 })

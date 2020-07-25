@@ -100,10 +100,4 @@ app.createPage({
     onReachBottom: function () {
 
     },
-    /**
-     * Called when user click on the top right corner to share
-     */
-    onShareAppMessage: function (res) {
-        // return Store.defaultShareInfo;
-    },
 })

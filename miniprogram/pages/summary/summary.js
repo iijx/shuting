@@ -114,8 +114,4 @@ app.createPage({
     onReachBottom: function () {
 
     },
-
-    onShareAppMessage: function (res) {
-        // return this.data.defaultShareInfo;
-    },
 })

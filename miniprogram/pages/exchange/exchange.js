@@ -2,7 +2,6 @@
 const app = getApp();
 const { Util, UniApi, Vant } = app;
 Page({
-
     /**
      * Page initial data
      */
@@ -99,11 +98,4 @@ Page({
     onReachBottom: function () {
 
     },
-
-    /**
-     * Called when user click on the top right corner to share
-     */
-    onShareAppMessage: function () {
-
-    }
 })
