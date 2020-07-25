@@ -1,18 +1,16 @@
 //index.js
 const app = getApp();
-const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, Config, UniApi, Vant, Store } = app;
 let AudioContext = null;
 
-Page({
+app.createPage({
     data: {
         mode: 'normal',
-
         maxLength: 3, // 最多位数，例如2，表最多2位数，即最大值99
         type: 'number', // number || year || time || phone
-        curSubLevel: -1,
-        isComplete: false,
-        score: 0,
-
+        curLearnUnit: {},
+        allAnswerRecord: [], // 这一次的全部答案记录
+        answerRecord: ['', '', '', '', ''], // 当前一组词的答案记录
         answer: 0,
         answerLength: 0,
         inputValue: '',
@@ -20,39 +18,24 @@ Page({
 
         nums: [1, 2, 3, 4, 5 ,6 ,7 ,8, 9, '.', 0, 'x'],
 
-        isShowGoodImg: true,
+        isFirstAnswer: true,
+        isShowCorrectAnswer: false,
     },
-    // 
     onLoad: function (opt = {}) {
-        // 数据绑定
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevelId', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
-            actions: ['setSingleSubLevelLearned']
-        });
-
-        Util.sleep(100).then(() => {
-            const { maxLength = 4, type = 'number', level } = this.data.curSubLevel;
+        Util.sleep(30).then(() => {
+            const { length = 2, type = 'number' } = this.data.curLearnUnit;
             const { mode = 'normal' } = opt;
-
-            let score = 0;
-            let subLevelLearned = this.data.subLevelLearnedMap.find(item => item.subLevelId === this.data.curSubLevel.levelId);
-            score = subLevelLearned ? subLevelLearned.score : 0;
             this.setData({
                 mode,
-                maxLength,
+                maxLength: length || 2,
                 type,
-                score: score >= 100 ? 0 : score,
-                isComplete: Boolean(subLevelLearned && subLevelLearned.isComplete)
             });
             this.init();
         })
-
     },
     init() {
-        // 准备数据
-        AudioContext = wx.createInnerAudioContext()
-        this.nextWord()
+        AudioContext = wx.createInnerAudioContext();
+        this.nextWord();
     },
     _genAudioSrcByNumAndType(type) {
         let path = '';
@@ -72,8 +55,6 @@ Page({
         else if (type === 'month') {
             return `/assets/audio/month/month_${this.data.answer}.mp3`;
         }
-
-        console.log(`${Config.cdnDomain}/assets/audio/${path}`);
         return `${Config.cdnDomain}/assets/audio/${path}`;
     },
     audioPlay() {
@@ -83,7 +64,10 @@ Page({
     _preStartInit() {
         this.setData({
             inputValue: '',
-            spanClass: ''
+            spanClass: '',
+            isShowCorrectAnswer: false,
+            isFirstAnswer: true,
+            answerRecord: this.data.answerRecord
         })
     },
     _randomOneType() {
@@ -127,7 +111,8 @@ Page({
             this.data.answer = answer;
             this.setData({
                 type,
-                answerLength: String(this.data.answer).length
+                answerLength: String(this.data.answer).length,
+                answer,
             });
             this.audioPlay();
         };
@@ -143,66 +128,85 @@ Page({
             Util.sleep(700).then(() => resolve());
         })
     },
-    getCorrectScore() {
-        if (this.data.type === 'number') {
-            if ( this.data.maxLength === 1 || this.data.score >= 65) {
-                return Config.correctScorePlus;
-            } else return Config.correctScore;
-        }
-        if (this.data.type === 'week') return Config.correctScorePlus;
-        return Config.correctScore;
-    },
     showAnswer() {
         let isCorrect = this._isCorrect();
-        if (this.data.mode === 'normal') {
-            // 分数统计，与本地存储
-            if (isCorrect) {
-                this.data.score += this.getCorrectScore();
-                this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
-            } else {
-                this.data.score += Config.errorScore;
-                if (this.data.score < 0) this.data.score = 0; 
-                this.setSingleSubLevelLearned(this.data.curSubLevelId, this.data.score);
-            }
+        wx.vibrateShort();
+        Util.sleep(100).then(() => wx.vibrateShort());
+        Util.sleep(200).then(() => wx.vibrateShort());
+
+        // 1. 处理答题记录
+        if (this.data.mode === 'normal' && this.data.isFirstAnswer) {
+            let index = this.data.answerRecord.findIndex(i => i === '');
+            let answer = isCorrect ? 'right' : 'error';
+            index >= 0 ? this.data.answerRecord.splice(index, 1, answer) : this.data.answerRecord = [answer, '', '', '', '']
+            this.data.allAnswerRecord.push(answer);
             this.setData({
-                score: this.data.score,
+                answerRecord: this.data.answerRecord,
+                isFirstAnswer: false
+            })
+            Store.setUnitLearnData(this.data.curLearnUnit.unitId, {
+                cNum: this.data.allAnswerRecord.filter(i => i === 'right').length,
+                eNum: this.data.allAnswerRecord.filter(i => i === 'error').length,
             })
         }
+        // 2. 设置正确与错误的样式
         this.setData({
-            spanClass: isCorrect ? 'correct' : 'error'
+            spanClass: isCorrect ? 'correct' : 'error',
         })
-        // 播放声音，及下一个词
+        // 3. 播放「正确与错误」音效，
         this.playResultAudio(isCorrect).then(() => {
+            // 3.1 正确 则下一个词
             isCorrect ? this.nextWord() : this.audioPlay(); 
         });
     },
     nextWord() {
-        if (this.data.score >= 100 && this.data.mode !== 'hard') {
-            wx.redirectTo({
-                url: '../summary/summary',
-            })
-        } else {
+        // 1. 如果当前一组的答案记录全部记录满了，则清空该组，准备开启下一组
+        if (this.data.answerRecord.findIndex(i => i === '') === -1) {
+            // this.data.allAnswerRecord = this.data.allAnswerRecord.concat([...this.data.answerRecord]);
+            this.data.answerRecord = ['', '', '', '', ''];
+        }
+        // 2. 判断全部记录，是否已经有15个，有则完成学习
+        if ((this.data.allAnswerRecord.length) >= 15 && this.data.mode !== 'hard') {
+            this.toSummary()
+        } else { // 3. 否则，继续学习
             this._preStartInit();
             this._genOneAnswer()
         }
     },
-    promptBtn() {
-        if(this.data.inputValue.length >= this.data.answerLength) return;
-
-        let errorIndex = -1;
-        let answerStr = this.data.answer + '';
-        for(let i = 0; i < this.data.answerLength; i++) {
-            if(this.data.inputValue[i] !== answerStr[i]) {
-                errorIndex = i;
-                break;
-            }
-        }
-        let newInputValue = answerStr.slice(0, errorIndex + 1);
-        this.setData({
-            inputValue: newInputValue
+    toSummary() {
+        wx.redirectTo({
+            url: '../summary/summary',
         })
-
-        if(newInputValue.length >= this.data.answerLength) this.showAnswer();
+    },
+    nextWordBtn() {
+        if (this.data.spanClass === 'error') {
+            this.nextWord();
+        }
+    },
+    promptBtn() {
+        // 1. 如果答完了
+        if(this.data.inputValue.length >= this.data.answerLength) {
+            if ( this.data.spanClass === 'error' && !this.data.isShowCorrectAnswer) {
+                this.audioPlay()
+                this.setData({ isShowCorrectAnswer: true })
+            } 
+            return;
+        } else { // 2. 没有答完，则逐步显示答案
+            let errorIndex = -1;
+            let answerStr = this.data.answer + '';
+            for(let i = 0; i < this.data.answerLength; i++) {
+                if(this.data.inputValue[i] !== answerStr[i]) {
+                    errorIndex = i;
+                    break;
+                }
+            }
+            let newInputValue = answerStr.slice(0, errorIndex + 1);
+            this.setData({
+                inputValue: newInputValue
+            })
+    
+            if(newInputValue.length >= this.data.answerLength) this.showAnswer();
+        }
     },
     keyTap(e) {
         const key = e.target.dataset.value;
@@ -220,9 +224,13 @@ Page({
             }
         }
     },
+    handerBack() {
+        wx.navigateBack({
+            delta: 1
+        })
+    },
 
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
     },
     onShareAppMessage: function (res) {
         return this.data.defaultShareInfo;

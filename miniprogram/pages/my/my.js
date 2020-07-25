@@ -2,26 +2,18 @@
 
 
 const app = getApp();
-const { Util, XData, UniApi, Vant, Store, CreateStoreBindings } = app;
-Page({
+const { Util, UniApi, Vant, Store } = app;
+app.createPage({
     data: {
+        env: {},
+        user: new app.Models.User({}),
         remainInviteCount: 0,
         awardedNum: 0,
-
-        CAN_AWARD_MIN_INVITE: 10,
-
-        ...XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']),
-
+        newMessageNum: 0,
+        config: {},
         proEndDateStr: ''
     },
     onLoad: function (options) {
-        this.setData( XData.create(['iosMemberPromptText', 'isShowIosMemberPrompt']))
-        // 数据绑定
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['user', 'messages', 'newMessageNum', 'systemInfo_platform'],
-            actions: ['setUser', 'setMessages'],
-        });
         wx.nextTick(() => {
             if (!this.data.user.avatar) {
                 wx.getSetting({
@@ -31,43 +23,36 @@ Page({
                         }
                     },
                     fail: err => {
-                        // console.log('暂未授权');
                     }
                 });
-            };
-
-            this.setData({
-                proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
-            })
+            } else {
+                this.updateComputed()
+            }
         })
     },
     onReady: function () {
 
     },
     onShow: function () {
-        wx.nextTick(() => {
-            this.relogin();
+        this.update();
+    },
+    updateComputed() {
+        this.setData({
+            proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
         })
     },
-    relogin(mustRequest = false) {
-        if (mustRequest || !this.data.user.isPro) {
-            UniApi.login().then(res => {
-                this.setData({ 
-                    user: this.data.user,
-                    proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
-                })
-            });
-        }
-    },
     memberBtn() {
-        if (this.data.systemInfo_platform === 'android') {
+        if (this.data.env.platform === 'android') {
             wx.navigateTo({
                 url: '../buy/buy',
             })
         } else {
+            console.log(this.data.config)
             Vant.Dialog.alert({
-                title: 'Sorry',
+                title: '开通会员',
+                message: this.data.config.iosBuyPrompt,
                 confirmButtonText: '知道了',
+                confirmButtonColor: '#4b51f2',
             }).then(() => {
                 // on close
             });
@@ -76,11 +61,9 @@ Page({
     onGetUserInfo() {
         wx.getUserInfo({
             success: res => {
-                this.setUser({
-                    avatar: res.userInfo.avatarUrl,
-                    nickName: res.userInfo.nickName,
-                });
-                this.setData({user: this.data.user});
+                app.Store.data.user.avatar = res.userInfo.avatarUrl;
+                app.Store.data.user.nickName = res.userInfo.nickName;
+                this.update().then(diff => this.updateComputed());
                 UniApi.cloud('updateUserInfo', {
                     avatar: res.userInfo.avatarUrl,
                     nickName: res.userInfo.nickName,
@@ -93,76 +76,34 @@ Page({
             data: this.data.user.openid,
         })
     },
-
-    openMemberBtn() {
-        if (Store.systemInfo_platform === 'android') {
-            wx.navigateTo({
-                url: '../buy/buy',
-            })
-        } else {
-            wx.navigateTo({
-                url: '../iosBuyPrompt/iosBuyPrompt',
-            })
-        }
-       
-    },
-    freeMemberBtn() {
-        Vant.Dialog.confirm({
-            confirmButtonText: '查看客服',
-            cancelButtonText: '关闭',
-            confirmButtonOpenType: 'contact'
-        }).then(() => {
-
-        }).catch(err => {
-
-        })
-    },
     pageToMsg() {
         wx.navigateTo({
             url: '../message/message',
         })
     },
     link: function(e) {
-        console.log(e);
         wx.navigateTo({
             url: e.currentTarget.dataset.path,
         })
-        
     },
-
-    /**
-     * Lifecycle function--Called when page hide
-     */
     onHide: function () {
     },
-
-    /**
-     * Lifecycle function--Called when page unload
-     */
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
     },
-
-    /**
-     * Page event handler function--Called when user drop down
-     */
     onPullDownRefresh: function () {
-        UniApi.login()
+        UniApi.cloud('login').then(res => {
+            Store.data.user = res;
+            this.update();
+        })
         Util.sleep(1000).then(() => wx.stopPullDownRefresh());
     },
-
-    /**
-     * Called when page reach bottom
-     */
     onReachBottom: function () {
 
     },
-
     /**
      * Called when user click on the top right corner to share
      */
-   
     onShareAppMessage: function (res) {
-        return Store.defaultShareInfo;
+        // return Store.defaultShareInfo;
     },
 })

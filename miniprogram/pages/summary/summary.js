@@ -1,41 +1,21 @@
 // pages/summary/summary.js
 const app = getApp();
-const { Util, Config, UniApi, Vant, Store, CreateStoreBindings } = app;
+const { Util, UniApi, Vant } = app;
 
 let AudioContext = null;
 
-Page({
-
-    /**
-     * 页面的初始数据
-     */
+app.createPage({
     data: {
-        levelTitle: '',
-        // canNextSubLevel: {
-        //     success: false,
-        //     msg: ''
-        // },
+        user: new app.Models.User({}),
+        rawLesson: [],
+        curLearnLevel: {},
+        curLearnUnit: {},
+        env: {},
+        config: {}
     },
     onLoad: function (opt) {
         AudioContext = wx.createInnerAudioContext();
-        // 数据绑定
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['defaultShareInfo', 'user', 'curLevel', 'curSubLevelId', 'curSubLevel', 'curSubLevelList', 'subLevelLearnedMap'],
-            actions: ['autoNextSubLevel']
-        });
-
-        Util.sleep(200).then(() => {
-            this.setData({
-                levelTitle: this.data.curLevel.title + ' · 小节' + this.data.curSubLevel.index 
-            })
-
-            // 自动学习下一个小节
-            this.autoNextSubLevel();
-            // this.setData({
-            //     canNextSubLevel
-            // })
-        })
+        app.Store.update();
     },
 
     /**
@@ -54,21 +34,56 @@ Page({
             AudioContext.play();
         })
     },
-    toLearnNextSubLevel() {
-        wx.redirectTo({
-            url: '../learn/learn',
-        })
-        // if (this.data.canNextSubLevel.success) {
-        // } else {
-        //     Vant.Dialog.alert({
-        //         message: this.data.canNextSubLevel.msg,
-        //     })
-        // }
+    showNoAuthDialog() {
+        if (this.data.env.platForm === 'android') {
+            Vant.Dialog.confirm({
+                title: '开通会员',
+                message: '会员专享内容，请先开通会员',
+                cancelButtonText: '知道了',
+                confirmButtonText: '去看看',
+                confirmButtonColor: '#4b51f2',
+            }).then(res => {
+                wx.navigateTo({ url: '../buy/buy' })
+            }).catch(err => {
+                
+            })
+        } else {
+            Vant.Dialog.alert({
+                title: '开通会员',
+                message: this.data.config.iosBuyPrompt,
+                confirmButtonText: '知道了',
+                confirmButtonColor: '#4b51f2',
+            })
+        }
     },
-    toIndex() {
-        wx.switchTab({
-          url: '../index/index',
-        });
+    toLearnNextSubLevel() {
+        let unitList = this.data.rawLesson.find(i => i.levelId === this.data.curLearnLevel.levelId).unitList;
+        let targetUnit = unitList.find(i => i.rank === this.data.curLearnUnit.rank + 1);
+        if (!targetUnit) {
+            let nextLevel = this.data.rawLesson.find(i => i.rank === this.data.curLearnLevel.rank + 1);
+            if (nextLevel) {
+                targetUnit = nextLevel.unitList[0];
+            } else {
+                // 连下一个level级别都找不到，说明全部学习完了
+                Vant.Dialog.alert({
+                    title: '提示',
+                    message: '您已经全部学习完成啦',
+                    confirmButtonText: '知道了',
+                    confirmButtonColor: '#4b51f2',
+                })
+                return;
+            }
+        }
+        // 判断权限
+        if (!this.data.user.isPro && targetUnit.isPro) {
+            // 说明无权限学习
+            this.showNoAuthDialog();
+        } else {
+            app.Store.setCurLearn(targetUnit.unitId);
+            wx.redirectTo({
+                url: '../learn/learn',
+            })
+        }
     },
     lookAllBtn() {
         wx.switchTab({
@@ -84,7 +99,6 @@ Page({
     },
 
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
     },
 
     /**
@@ -102,6 +116,6 @@ Page({
     },
 
     onShareAppMessage: function (res) {
-        return this.data.defaultShareInfo;
+        // return this.data.defaultShareInfo;
     },
 })

@@ -1,12 +1,86 @@
 /**app.wxss**/
 
 page {
-    background: #ededed;
+    background: #ECF2F5;
     min-height: 100%;
-
-    /* --button-primary-color: @white; */
-    --button-primary-background-color: #3D96D3;
-    --button-primary-border-color: #3D96D3;
-
-    /* --cell-value-color: #ee0a24; */
 }
+
+.cl_fff { color: #fff; }
+.cl_000 { color: #000; }
+
+.ft_bold { font-weight: bold; }
+
+.ft_12 { font-size: 24rpx; }
+.ft_13 { font-size: 26rpx; }
+.ft_14 { font-size: 28rpx; }
+.ft_15 { font-size: 30rpx; }
+.ft_16 { font-size: 32rpx; }
+.ft_17 { font-size: 34rpx; }
+.ft_18 { font-size: 36rpx; }
+.ft_19 { font-size: 38rpx; }
+.ft_20 { font-size: 40rpx; }
+.ft_21 { font-size: 42rpx; }
+.ft_22 { font-size: 44rpx; }
+.ft_23 { font-size: 46rpx; }
+.ft_24 { font-size: 48rpx; }
+.ft_25 { font-size: 50rpx; }
+.ft_26 { font-size: 52rpx; }
+
+.mt_4 { margin-top: 8rpx; }
+.mt_5 { margin-top: 10rpx; }
+.mt_6 { margin-top: 12rpx; }
+.mt_7 { margin-top: 14rpx; }
+.m_8 { margin-top: 16rpx; }
+.mt_9 { margin-top: 18rpx; }
+.mt_10 { margin-top: 20rpx; }
+.mt_11 { margin-top: 22rpx; }
+.mt_12 { margin-top: 24rpx; }
+.mt_14 { margin-top: 28rpx; }
+.mt_16 { margin-top: 32rpx; }
+.mt_18 { margin-top: 36rpx; }
+.mt_20 { margin-top: 40rpx; }
+.mt_30 { margin-top: 60rpx; }
+.mt_40 { margin-top: 80rpx; }
+.mt_50 { margin-top: 100rpx; }
+.mt_60 { margin-top: 120rpx; }
+.mb_4 { margin-bottom: 8rpx; }
+.mb_5 { margin-bottom: 10rpx; }
+.mb_6 { margin-bottom: 12rpx; }
+.mb_7 { margin-bottom: 14rpx; }
+.mb_8 { margin-bottom: 16rpx; }
+.mb_9 { margin-bottom: 18rpx; }
+.mb_10 { margin-bottom: 20rpx; }
+.mb_11 { margin-bottom: 22rpx; }
+.mb_12 { margin-bottom: 24rpx; }
+.mb_30 { margin-bottom: 60rpx; }
+.mb_40 { margin-bottom: 80rpx; }
+
+.h_6 { height: 12rpx; }
+.h_8 { height: 16rpx; }
+.h_10 { height: 20rpx; }
+.h_12 { height: 24rpx; }
+.h_15 { height: 30rpx; }
+
+.text-center {
+    text-align: center;
+}
+
+
+
+.flex1 { flex: 1; }
+.flex2 { flex: 2; }
+.flex3 { flex: 3; }
+.flex4 { flex: 4; }
+.flex5 { flex: 5; }
+.flex { display: flex; }
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.w90 { width: 90%; }
+.w80 { width: 80%; }
+.w60 { width: 60%; }
+.w50 { width: 50%; }
+.w40 { width: 40%; }
+.blockC { margin-left: auto; margin-right: auto; }

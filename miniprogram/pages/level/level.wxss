@@ -1,14 +1,36 @@
 /* pages/level/level.wxss */
 .container {
-    padding: 36rpx;
+    /* padding: 6rpx 14rpx 18rpx; */
+    padding-top: 120rpx;
     padding-bottom: 140rpx;
-    background-image: linear-gradient(180deg, #f9ce0d, #f8ecba);
+    /* background-image: linear-gradient(180deg, #F9CE0D, #FFEFCA); */
+    background-color: #ECF2F5;
 }
 .curBook-wrap {
-    border-radius: 20rpx;
-    background: #fff;
+    margin: 28rpx 36rpx 40rpx;
+    background-color: #4A50F2;
+    padding: 40rpx 36rpx 12rpx;
+    color: #fff;
+    border-radius: 16rpx;
     overflow: hidden;
-    padding-bottom: 8rpx;
+    box-shadow: 0 12rpx 32rpx -16rpx rgba(0, 0, 0, .08),
+    0 18rpx 54rpx 0rpx rgba(0, 0, 0, .05),
+    0 24rpx 96rpx 32rpx rgba(0, 0, 0, .03);
+}
+.tap-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32rpx;
+    font-size: 24rpx;
+}
+.icon-down {
+    width: 40rpx;
+    height: 40rpx;
+    transition: all .2s;
+}
+.icon-down.rotate180 {
+    transform: rotate(180deg);
 }
 .curBook-wrap > .title,
 .levels > .title {
@@ -17,7 +39,8 @@
     padding-left: 30rpx;
     line-height: 70rpx;
     align-items: center;
-    background: #fddcdc;
+    /* background: #fddcdc; */
+    background: #ffe2d6;
 }
 .curBook-wrap > .title {
     padding-left: 24rpx;
@@ -31,7 +54,7 @@
 }
 .levels {
     background-color: #fff;
-    margin: 32rpx 0 0;
+    margin: 12rpx 0 0;
     padding-bottom: 50rpx;
     border-radius: 10rpx;
     overflow: hidden;
@@ -63,12 +86,21 @@
 }
 .unit {
     padding: 20rpx 0;
-    border-bottom: 1rpx solid #e2e2e2;
     display: flex;
     align-items: center;
     flex-shrink: 0;
     position: relative;
-    
+}
+
+.unit .border {
+    position: absolute;
+    left: 36rpx;
+    bottom: 0;
+    right: 0;
+    height: 1rpx;
+    border-bottom: 1rpx solid #ECF2F5;
+    background: #ECF2F5;
+    transform: scale(1, .5);
 }
 .unit .dot{
     width: 10px;
@@ -78,6 +110,10 @@
     margin-right: 8px;
     flex-shrink: 0;
     background: rgb(117, 210, 55);
+    background: #40a9ff;
+    background: #4A50F2;
+    background: #ADB5F9;
+    background: #a1aaff;
 }
 .unit .lock {
     width: 26rpx;
@@ -88,15 +124,16 @@
 .unit-title {
     font-weight: bolder;
     color: #333;
-    font-size: 34rpx;
+    font-size: 32rpx;
     line-height: 1.6;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 .unit-status {
-    font-size: 30rpx;
-    color: #4a4a4a;
+    font-size: 28rpx;
+    /* color: #4a4a4a; */
+    color: #56646A;
     line-height: 1;
 }
 .unit-border {
@@ -106,8 +143,9 @@
 }
 .unit-select-btn {
     flex-shrink: 0;
-    color: #4facfe;
-    font-size: 30rpx;
+    /* color: #4facfe; */
+    color: #7881ff;
+    font-size: 28rpx;
     font-weight: bolder;
 }
 .buy-info {
@@ -262,3 +300,9 @@
     text-align: center;
 }
 
+.buy-btn {
+    position: fixed;
+    bottom: 40rpx;
+    right: 32rpx;
+    font-family: sans-serif;
+}

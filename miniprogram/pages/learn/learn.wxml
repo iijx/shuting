@@ -1,69 +1,72 @@
 <!--index.wxml-->
-<view class="container">
-    <!-- <view>距离完成还剩{{ 100 - score }}分</view> -->
-    <block wx:if="{{ mode === 'normal' }}">
-        <van-progress show-pivot="{{false}}" percentage="{{ score }}" stroke-width="10" pivot-color="#F1F4F7" color="linear-gradient(to right, #be99ff, #3D96D3)" />
-    </block>
-    <view class="form" bindsubmit="submitCode">
+<view class="container flex-col">
+    <view class="header">
+        <image class="icon-back-img" bindtap="handerBack" src="../../assets/imgs/icon-left-arrow.png" mode="widthFix"></image>
+        <view class="flex1 text-center ft_14">数听英语</view>
+        <view class="icon-back-img"></view>
+    </view>
+
+    <view class="flex step-wrap">
+        <view wx:for="{{ answerRecord }}" wx:key="index" class="step-item {{ index === 0 ? 'left-radius' : (index === 4 ? 'right-radius' : '') }}">
+            <view class="content {{ answerRecord[index] }}"></view>
+        </view>
+    </view>
+
+    <view class="form flex-col flex1" bindsubmit="submitCode">
         <view class="audio-wrap" bindtap="audioPlay">
             <image class="audio" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
         </view>
-        
-         <!-- 数字型：数字/年份/电话/24时间 -->
+        <!-- 数字型：数字/年份/电话/24时间 -->
         <view class='input-spans'>
             <view wx:if="{{ type === 'week' }}" class="span {{ spanClass }}">星</view>
             <view wx:if="{{ type === 'week' }}" class="span {{ spanClass }}">期</view>
             <block wx:for="{{answerLength}}" wx:key="index">
                 <view wx:if="{{ type === 'time' && index === 2}}" class="span {{ spanClass }} ">:</view>
-                <view catchtap='focusBox'class="span {{ spanClass }} ">{{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
+                <view catchtap='focusBox' class="span {{ spanClass }} ">{{ inputValue.length >= 1 ? inputValue[index] : "" }} </view>
             </block>
             <view wx:if="{{  type === 'month'  }}" class="span {{ spanClass }}">月</view>
         </view>
+
+        <!-- 正确答案 -->
+        <view class="answer {{ isShowCorrectAnswer ? 'show' : '' }}">正确答案：<text class="ft_bold">{{ answer }}</text></view>
     </view>
 
+    <view class="btm-spance"></view>
 
     <!-- 键盘 -->
     <view class="keyboard-wrap">
-        <view class="prompt">
-            <image class="item show-answer" bindtap="promptBtn" src="../../assets/imgs/prompt.png"></image>
-        </view>
         <view class="keyboard">
-            <view class="num-list">
-                <view class="num-item-line">
+            <view class="flex3 flex-col">
+                <view class="flex1 flex">
                     <view class="num-item" data-value="1" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">1</view>
                     <view class="num-item" data-value="2" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">2</view>
                     <view class="num-item" data-value="3" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">3</view>
                 </view>
-                <view class="num-item-line">
+                <view class="flex1 flex">
                     <view class="num-item" data-value="4" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">4</view>
                     <view class="num-item" data-value="5" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">5</view>
                     <view class="num-item" data-value="6" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">6</view>
-                    
                 </view>
-                <view class="num-item-line">
+                <view class="flex1 flex">
                     <view class="num-item" data-value="7" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">7</view>
                     <view class="num-item" data-value="8" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">8</view>
                     <view class="num-item" data-value="9" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">9</view>
                 </view>
-                <view class="num-item-line">
+                <view class="flex1 flex">
                     <view class="num-item no-bg flex1" data-value="." bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">.</view>
-                    <view class="num-item flex2" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
-                    <!-- <view class="num-item no-bg" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
-                        <image class="play-img" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
-                    </view> -->
+                    <view class="num-item flex1" data-value="0" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">0</view>
+                    <view class="num-item flex1" data-value="%" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">%</view>
                 </view>
             </view>
 
-            <view class="btns">
-                <view class="btn-del" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
-                    <image class="icon-del" data-value="x" mode="widthFix" src="/assets/imgs/icon-del.png"></image>
+            <view class="flex-col flex1">
+                <view class="num-item flex1 ft13" bindtap="promptBtn" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">提示</view>
+                <view class="num-item flex1 ft13" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">删除</view>
+                <view class="num-item no-bg flex1" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
+                    <image class="play-img2" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
                 </view>
-                <view class="num-item no-bg" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
-                    <image class="play-img" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
-                </view>
-                <!-- <view class="btn-confirm" bindtap="nextWord" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">下一个</view> -->
+                <view class="num-item flex1 ft13 {{ spanClass !== 'error' ? 'disabled' : '' }}" bindtap="nextWordBtn" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">下一个</view>
             </view>
-
         </view>
     </view>
 </view>

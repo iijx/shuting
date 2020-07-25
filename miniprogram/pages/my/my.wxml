@@ -1,10 +1,5 @@
 <!--pages/my/my.wxml-->
 <view class="container">
-    <view class="top">
-        <view class="box1"></view>
-        <view class="box2"></view>
-    </view>
-
     <view class="user-wrap">
         <view class="userInfo">
             <image wx:if="{{ user.avatar }}" class="avatar" mode="widthFix" src="{{ user.avatar }}"></image>
@@ -16,42 +11,36 @@
             <open-data wx:else class="nickName" type="userNickName"></open-data>
         </view>
     </view>
-
-    <view style="height: 100rpx;"></view>
-    <view class="operators" wx:if="{{ user.avatar }}">
-        <view wx:if="{{user.isPro}}" class="member-pro"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
+    
+    <view class="cl_fff ft_12 mt_16 mb_30 w90 blockC text-center" wx:if="{{ user.avatar }}">
+        <view wx:if="{{user.isPro}}" class="member-btn"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
         <view wx:else class="member-btn" bindtap="memberBtn">查看会员计划</view>
     </view>
 
     <view class="operators">
         <!-- <van-cell title="数听挑战 · 返现测试" icon="gift-o" size="default" link-type="navigateTo" url="/pages/exam/exam" is-link  /> -->
-        <van-cell title="版本预告" icon="down" size="default" link-type="navigateTo" url="/pages/version/version" is-link  />
+        <van-cell title="版本预告" icon="down" size="large" link-type="navigateTo" url="/pages/version/version" is-link  />
         <van-cell-group>
-            <van-cell size="default" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
+            <van-cell size="large" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
                 <cell slot="title" num="{{ newMessageNum }}">
                     <view slot="bd">我的消息</view>
                 </cell>
             </van-cell>
-            <van-cell icon="gem-o" title="会员兑换码" size="default" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
+            <van-cell icon="gem-o" title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
         </van-cell-group>
     </view>
 
     <view class="operators">
         <van-cell-group>
             <button class="contact-btn" open-type="contact" style="">
-                <van-cell icon="smile-o" title="人工客服/建议" size="default" is-link></van-cell>
+                <van-cell icon="smile-o" title="人工客服/建议" size="large" is-link></van-cell>
             </button>
 
-            <van-cell icon="idcard" title="复制 ID 号" size="default" bind:click="copyOpenid"/>
+            <van-cell icon="idcard" title="复制 ID 号" size="large" bind:click="copyOpenid"/>
         </van-cell-group>
     </view>
 
-    <van-dialog id="van-dialog" use-slot>
-        <view style="text-align: center; color: #646566; font-size: 28rpx; padding: 20rpx 0 34rpx; line-height: 1.7;">
-            <view>{{ iosMemberPromptText }}</view>
-            <view wx:if="{{ isShowIosMemberPrompt }}"><text style="font-weight: bold;">「数听英语」</text>公众号 · 支持开通</view>
-        </view>
-    </van-dialog>
+    <van-dialog id="van-dialog"></van-dialog>
     
     <!-- 在页面内添加对应的节点 -->
     <van-notify id="van-notify" />

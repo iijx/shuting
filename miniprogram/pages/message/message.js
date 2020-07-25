@@ -1,37 +1,17 @@
 // pages/message/message.js
 const app = getApp();
-const { UniApi, Store, CreateStoreBindings } = app;
+const { UniApi, Store } = app;
 
 Page({
-
-    /**
-     * Page initial data
-     */
     data: {
-        
+        messages: []
     },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['defaultShareInfo', 'messages'],
-            actions: ['setMessages'],
-        })
+      
     },
-
-    /**
-     * Lifecycle function--Called when page is initially rendered
-     */
     onReady: function () {
 
     },
-
-    /**
-     * Lifecycle function--Called when page show
-     */
     onShow: function () {
 
     },
@@ -41,18 +21,10 @@ Page({
             url: '../exchange/exchange?code=' + e.currentTarget.dataset.code,
         })
     },
-    /**
-     * Lifecycle function--Called when page hide
-     */
     onHide: function () {
 
     },
-
-    /**
-     * Lifecycle function--Called when page unload
-     */
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
     },
 
     /**
@@ -73,6 +45,6 @@ Page({
      * Called when user click on the top right corner to share
      */
     onShareAppMessage: function () {
-        return this.data.defaultShareInfo;
+        // return this.data.defaultShareInfo;
     }
 })

@@ -1,18 +1,62 @@
-/* pages/buy/buy.wxss */
-.container {
-    --submit-bar-tip-background-color: #07c160;
-    --submit-bar-tip-background-color: transparent;
-    --submit-bar-tip-padding: 8rpx;
-    --button-warning-background-color: #FE3F1D;
-    --button-warning-border-color: #FE3F1D;
+.top-box {
+    position: relative;
+    background: #3930D7;
+    height: 360rpx;
+    overflow: hidden;
+}
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.circle1 {
+    width: 80rpx;
+    height: 80rpx;
+    background: #4D49F9;
+    top: 50rpx;
+    left: 10%;
+}
+.circle2 {
+    width: 200rpx;
+    height: 200rpx;
+    background: #48D9FA;
+    right: 80rpx;
+    top: -14rpx;
+}
+.circle3 {
+    width: 180rpx;
+    height: 180rpx;
+    background: #4D49F9;
+    bottom: -50rpx;
+    left: 120rpx;
+}
+.circle4 {
+    width: 180rpx;
+    height: 180rpx;
+    background: #4D49F9;
+    right: -140rpx;
+    top: 100rpx;
+}
+.header {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 60rpx 12rpx 40rpx;
+    align-items: center;
+    display: flex;
+}
+
+.icon-back-img {
+    width: 40rpx;
+    height: 40rpx;
 }
 .userInfo {
-    background: #f9ce0d;
-    color: #3e3f41;
+    color: #fff;
     opacity: 1;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 60rpx 32rpx 60rpx;
+    /* padding: 60rpx 32rpx 120rpx; */
     display: flex;
     align-items: center;
     position: relative;
@@ -31,17 +75,11 @@
 
 .userInfo .nickName {
     flex: 1;
+    color: #fff;
 }
 
 .userInfo .member {
     text-align: center;
-}
-
-.join-member {
-    color: #D82C1E;
-    font-size: 28rpx;
-    text-decoration: underline;
-
 }
 
 .sign-avatar {
@@ -51,17 +89,14 @@
 
 .member-card {
     width: 696rpx;
-    /* height: 570rpx; */
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     opacity: 1;
     border-radius: 5px;
     margin: 0 auto;
     box-sizing: border-box;
-    transform: translate(0, -30rpx);
+    transform: translate(0, -100rpx);
     padding-bottom: 20rpx;
-    /* padding: 30rpx; */
-
 }
 
 .member-name {
@@ -83,8 +118,6 @@
 }
 
 
-
-
 .ios-submit-bar {
     position: fixed;
     bottom: 0;
@@ -95,14 +128,20 @@
     background: #D82C1E;
     color: #fff;
 }
+.pay-submit-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 20rpx 32rpx;
+    box-sizing: border-box;
+}
 
 .signUpNum {
     position: absolute;
-    /* bottom: 160px; */
-    /* left: 40px; */
     right: 40rpx;
-    top: 60rpx;
-    /* width: 340rpx; */
+    top: 160rpx;
     color: #fff;
     font-size: 24rpx;
     overflow: hidden;
@@ -192,4 +231,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.van-submit-bar__tip {
+    background: #f0f3ff !important;
+    color: #3930D7 !important;
 }

@@ -1,58 +1,78 @@
 <view class="container">
 	<view class="curBook-wrap">
-		<view class="title"><image class="icon-cur-level" src="/assets/imgs/level.png"></image>当前选择</view>
-		<view class="curBookLocation">{{ curLevel.title }} · {{ curSubLevel.title }}</view>
+		<cell>
+			<view slot="bd" class="cl_fff ft_bold">{{ curLearnLevel.title }} · {{ curLearnUnit.title }}</view>
+			<!-- <view slot="ft" class="ft_14">{{ curLearnUnit.score }}%</view> -->
+		</cell>
+		<view class="h_15"></view>
+		<cell>
+			<view slot="bd" class="cl_fff ft_12">刻意练习 · 提升数听力</view>
+			<view slot="ft" class="ft_12">{{ curLearnUnit.score }}%</view>
+		</cell>
+		<view class="h_8"></view>
+		<progress percent="{{ curLearnUnit.score }}" active-mode="forwards" duration="300" activeColor="#81F8F5" backgroundColor="#10098E" stroke-width="10" border-radius="10"/>
+		<view bindtap="switchShowRecordDetail" class="tap-switch">Tap to expand <image class="icon-down {{ isShowRecordDetail ? 'rotate180' : '' }}" src="/assets/imgs/icon-down.png"/></view>
+		<view wx:if="{{ isShowRecordDetail }}" class="ft_12 mt_8 mb_10">答对：{{ curLearnUnit.cNum }}　答错：{{ curLearnUnit.eNum }}</view>
 	</view>
 
 	<view class="levels">
-		<view class="title">
-			<image class="icon-level" src="/assets/imgs/levels.png"></image>课程列表
-		</view>
-		<view wx:for="{{ levelList }}" wx:key="index" wx:for-item="item">
+		<!-- <view class="title"> -->
+			<!-- <image class="icon-level" src="/assets/imgs/levels.png"></image>课程清单 -->
+		<!-- </view> -->
+		<view wx:for="{{ lesson }}" wx:key="index" wx:for-item="item">
 			<view style="padding: 28rpx 32rpx;">
 				<cell>
 					<view slot="hd" class="level-title">{{ item.title }}</view>
 					<view slot="bd" style="width: 300rpx; margin-left: 42rpx;">
 						<view style="color: #848A8E; font-size: 24rpx; line-height: 2.3;">进度</view>
-						<van-progress color="#02AF42" show-pivot="{{false}}" percentage="{{ item.score / item.unitList.length }}" />
+						<van-progress color="#02AF42" show-pivot="{{false}}" percentage="{{ 20 * item.cNum / item.unitList.length / 3 }}" />
+					</view>
+					<view slot="ft">
+						<view wx:if="{{ index === 0 || index === 1 }}" data-index="{{ index }}" bindtap="audioNote" style="color: #999; font-size: 10px; text-decoration: underline;">读音说明?</view>
 					</view>
 				</cell>
 			</view>
 			<view class="unit-border"></view>
 			<block wx:for="{{ item.unitList}}" wx:key="index" wx:for-item="unit">
 				<!-- 推广按钮 -->
-				<view wx:if="{{ !user.isPro && user.memberType !== 3 && systemInfo_platform === 'android' && unit.levelId === 15 }}" class="buy-info" bindtap="buyBtn">
+				<!-- <view wx:if="{{ !user.isPro && user.memberType !== 3 && systemInfo_platform === 'android' && unit.unitId === 15 }}" class="buy-info" bindtap="buyBtn">
 					<view class="buy-wrap">
 						<view class="buy-body">
 							<text>{{ memberBanner.text}} </text>
 							<text class="look-btn">{{memberBanner.btn}}</text>
 						</view>
 					</view>
-				</view>
-				<view class="unit-wrap" style="background: {{ curSubLevel.levelId === unit.levelId ? 'rgb(223, 241, 213)' : 'transparent'}}">
+				</view> -->
+				<view class="unit-wrap" style="background: {{ curLearnUnit.unitId === unit.unitId ? '#D6DEFC' : 'transparent'}}">
 					<view class="unit" >
 						<view style="width: 40rpx;">
-							<view wx:if="{{ !unit.widthIcon }}" class="dot"></view>
+							<view wx:if="{{ !(unit.type === 'year' || unit.type === 'week' || unit.type === 'month') }}" class="dot"></view>
 							<view wx:else style="margin-left: -10rpx;" data-unit="{{ unit }}" bindtap="noteBtn">
 								<van-icon name="records" color="#87BE5D" size="20" />
 							</view>
 						</view>
 						<view style="flex: 1;">
 							<view class="unit-title">{{ unit.title }} </view>
-							<view class="unit-status">{{ unit.isComplete ? '已完成' : (unit.score > 0 ? '未学完...' : '未学习')}}</view>
+							<view class="unit-status">{{ unit.cNum >= 15 ? '已完成' : ( curLearnUnit.unitId === unit.unitId ? '学习中...' : '未完成')}}</view>
 						</view>
 						<view style="flex: 1">
 							<image wx:if="{{ unit.isPro && !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
 						</view>
-						<view class="unit-select-btn" data-level="{{ unit }}" size="small" color="#3D96D3" bindtap="selectBtn">{{ unit.isComplete ? '复习' : '学习' }}</view>
+						<view class="unit-select-btn" data-level="{{ unit }}" bindtap="selectBtn">{{ unit.cNum >= 15 ? '复习' : '学习' }}</view>
+						<view wx:if="{{ curLearnUnit.unitId !== unit.unitId }}" class="border"></view>
 					</view>
 				</view>
 			</block>
 		</view>
 	</view>
 
+	<view class="buy-btn">
+		<van-button icon="point-gift" type="primary" color="#4A50F2" bind:click="buyBtn">Upgrade</van-button>
+	</view>
+
+
 	<!-- 地狱王者模式 -->
-	<view class="custom-mode-wrap">
+	<!-- <view class="custom-mode-wrap">
 		<view class="title">
 			<text>随机模式　</text>
 		</view>
@@ -65,12 +85,11 @@
 			<view class="case case-6">24569876</view>
 			<view class="case case-7">2784329237</view>
 			<view class="case case-8">3:15</view>
-			<!-- <view class="case case-9">2008</view> -->
 		</view>
 		<view class="btn" bindtap="startHardMode">
 			<van-button size="small" round color="#3D96D3">开始练习</van-button>
 		</view>
-	</view>
+	</view> -->
 
 	<van-dialog id="van-dialog" />
 
@@ -82,7 +101,7 @@
 				<view class="content">
 					<view><text class="strong">① 两位一读:</text> 读成 twenty eighteen</view>
 					<view><text class="strong">② 按数字读:</text> 读成 two thousand and nighteen (and 可省略，即two thousand nighteen)</view>
- 					<view style="margin-top: 20rpx;">注: 按数字读与「数字4位」小节重复，故此节按第一种读法发音</view>
+					<view style="margin-top: 20rpx;">注: 按数字读与「数字4位」小节重复，故此节按第一种读法发音</view>
 				</view>
 			</block>
 			<!-- 月份 -->

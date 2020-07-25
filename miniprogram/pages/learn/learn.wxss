@@ -1,83 +1,99 @@
 /**index.wxss**/
-
-page {
-    background: #FEFFFE;
-}
 .container {
-    /* padding: 64rpx; */
     box-sizing: border-box;
+    height: 100vh;
+    /* background-image: linear-gradient(-20deg, #e6f7ff 25%, #FEFFFE); */
+    /* background-color: #fff; */
+    background-color: #f4fafd;
+    box-sizing: border-box;
+    padding-top: 60rpx;
+    position: relative;
+}
+.header {
+    padding: 0 12rpx 40rpx;
+    align-items: center;
+    display: flex;
+}
+.icon-back-img {
+    width: 40rpx;
+    height: 40rpx;
+}
+.step-wrap {
+    padding: 10rpx 40rpx;
+    justify-content: center;
+}
+.step-item {
+    flex: 1;
+    margin: 0 4rpx;
+    background-color: rgba(0, 0, 0, .1);
+    height: 10rpx;
+    position: relative;
+    overflow: hidden;
+}
+.step-item .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    transition: all .3s;
+}
+.content.right {
+    background-color: #02AF42;
+    right: 0;
+}
+.content.error {
+    background-color: #E86452;
+    right: 0;
+}
+.step-item.left-radius {
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+}
+.step-item.right-radius {
+    border-top-right-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+.btm-spance {
+    height: 580rpx;
 }
 .form {
     position: relative;
-}
-
-.form .goog-img-wrap {
-    position: absolute;
-    right: 10rpx;
-    top: 10rpx;
-    height: 80rpx;
-    z-index: 1000;
-}
-/* good */
-.goog-img-wrap .img1 {
-    height: 100%;
-    display: block;
-    width: 256rpx;
-    height: 98rpx;
-}
-/* excellent */
-.goog-img-wrap .img2 {
-    height: 100%;
-    display: block;
-    width: 328rpx;
-    height: 102rpx;
-}
-/* amazing */
-.goog-img-wrap .img3 {
-    height: 100%;
-    display: block;
-    width: 337rpx;
-    height: 105rpx;
-}
-/* bouns-time */
-.goog-img-wrap .img4 {
-    height: 100%;
-    display: block;
-    width: 420rpx;
-    height: 103rpx;
+    justify-content: center;
 }
 
 .audio-wrap {
     text-align: center;
-    padding: 100rpx 0;
+    padding: 20rpx 0;
 }
 .audio-wrap .audio {
-    width: 80rpx;
+    width: 104rpx;
+    height: 91rpx;
 }
-.play-img {
-    width: 60rpx;
+.play-img2 {
+    width: 42rpx;
+    height: 37rpx;
 }
 .input-spans {
     display: flex;
-    /* padding: 0 150rpx; */
     position: relative;
     justify-content: center;
-    background-color: #F1F4F7;
-    width: 86%;
+    /* background-color: #F1F4F7; */
+    /* background-color: #e6f7ff; */
+    width: 100%;
     margin: 0 auto;
     padding: 30rpx 0;
     border-radius: 16rpx;
-
 }
-
 .input-spans .span {
-    width: 60rpx;
-    height: 66rpx;
-    /* border: 1px solid #999; */
-    /* border: 1px solid #D2D8DA; */
-    background: #D2D8DA;
+    width: 70rpx;
+    height: 70rpx;
+    /* background: rgba(210, 216, 218, 1); */
+    border: 1rpx solid #CCCBCB;
+    /* border-bottom: 1px solid #D2D8DA; */
+    /* background: #f0fdff; */
     border-radius: 6rpx;
-    margin: 0 12rpx;
+    margin: 0 8rpx;
     text-align: center;
     font-size: 38rpx;
     display: flex;
@@ -85,9 +101,11 @@ page {
     align-items: center;
     font-weight: bolder;
     color: #4a4a4a;
+    box-shadow: 0 6rpx 16rpx 0rpx rgba(0, 0, 0, .01),
+                0 9rpx 28rpx 8rpx rgba(0, 0, 0, .005);
 }
-.input-spans .span.error { color: #FF406B; }
-.input-spans .span.correct { color: #02AF42; }
+.input-spans .span.error { color: #FF406B; color: #E86452; color: #f5222d; }
+.input-spans .span.correct { color: #02AF42; color: #5AD8A6; color: #52c41a}
 
 .input {
     position: absolute;
@@ -97,6 +115,16 @@ page {
     left: 0;
     right: 0;
     height: 100%;
+}
+.answer {
+    text-align: center;
+    opacity: 0;
+    color: #6DC8EC;
+    color: #003a8c;
+    font-size: 28rpx;
+}
+.answer.show {
+    opacity: 1;
 }
 
 .prompt {
@@ -117,96 +145,60 @@ page {
     right: 0;
 }
 .keyboard {
-    /* border-top:1rpx solid #e9eaec; */
-    /* border-left:1rpx solid #e9eaec; */
     overflow:hidden;
-    padding-left: 10rpx;
-    padding-top: 10rpx;
-    padding-right: 10rpx;
-    /* background: #d0d3da; */
+    padding: 4rpx;
     background: #FEFFFE;
-    box-shadow: rgb(211, 230, 250) 0 1px -1px;
+    background: #D3EEF9;
+    background: #eef5f0;
+    background: #e6fffb;
+    background: #e6f7ff;
+    background: #D6DEFC;
+    /* box-shadow:  0 -1px 1px #e6f7ff; */
     display: flex;
-}
-.keyboard .num-list {
-    flex: 3
-}
-.keyboard .btns {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-.btn-del {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F1F4F7;
-    margin-bottom: 16rpx;
-    border-radius: 10rpx;
-    /* margin-right: 16rpx; */
-    
-}
-.btn-confirm {
-    flex: 1;
-    /* margin-top: 8rpx; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #F1F4F7;
-    margin-bottom: 16rpx;
-    border-radius: 10rpx;
-    /* margin-right: 16rpx; */
-    /* background-color: #3D96D3; */
-    background-color: #0098F1;
-    color: #fff;
-    font-weight: bold;
-}
-.btn-confirm.disabled {
-    opacity: .5;
-}
-.num-item-line {
-    display: flex;
+    height: 44vh;
+    box-sizing: border-box;
 }
 .num-item {
     flex: 1;
     position:relative;
-    /* background: #fff; */
-    background: #F1F4F7;
-    /* background: rgb(211, 230, 250); */
-    height: 90rpx;
-    margin-right: 16rpx;
-    margin-bottom: 16rpx;
     box-sizing: border-box;
     border-radius: 10rpx;
-
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48rpx;
-    /* box-shadow: #868a8D 0 1px 1px; */
-    /* box-shadow: rgb(211, 230, 250) 0 1px 1px; */
+    font-size: 36rpx;
     color: #000;
+    color: #614200;
+    color: #00474f;
+    color: #003a8c;
+    color: #150d59;
+    color: #1c1480;
+    transition: all .1s;
+}
+.num-item.disabled {
+    opacity: .5;
+}
+.ft13 {
+    font-size: 26rpx;
 }
 .no-bg {
     background: none;
     box-shadow: none;
 }
-.flex1 {
-    flex: 1;
-}
-.flex2 {
-    flex: 2;
-}
 
 .num-item-hover {
     background: #b5c3d1;
+    background: #bae7ff;
+    background: #a1aaff;
+    /* background: #7881ff; */
+    transform: scale(1.1);
+    font-weight: bold;
+    font-size: 40rpx;
 }
 
 .icon-del {
     width: 70rpx;
-    /* height: 20rpx; */
-
+    height: 70rpx;
 }
 
 

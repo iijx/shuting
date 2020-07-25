@@ -23,7 +23,7 @@ const GOODS =  [
     },
     {
         title: '数听年度会员',
-        totalFee: 1500,
+        totalFee: 1800,
         memberType: 4,
         memberDay: 360,
     },

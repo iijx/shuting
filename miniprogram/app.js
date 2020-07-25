@@ -2,25 +2,18 @@
 import * as Util from "./lib/util";
 import Config from './config.js'
 import UniApi from './lib/uniApi.js'
-import XData from './lib/xData.js'
-
 import Dialog from '@vant/weapp/dialog/dialog';
 import Toast from '@vant/weapp/toast/toast';
 import Notify from '/@vant/weapp/notify/notify';
+import create from './lib/westore/create';
+import Models from './models/index';
+import store from './store/index';
 
-import { createStoreBindings } from 'mobx-miniprogram-bindings'
-import store from './lib/store'
-const Vant = {
-    Dialog,
-    Toast,
-    Notify
-}
-
+const Vant = { Dialog, Toast, Notify }
 const DB = wx.cloud.database();
 
 App({
     onLaunch: function(opt) {
-        console.log(opt);
         if (!wx.cloud) {
             console.error('请使用 2.2.3 或以上的基础库以使用云能力');
             wx.showLoading({
@@ -28,35 +21,49 @@ App({
             })
         } else {
             // 登录获取用户信息
-            UniApi.login(opt.query.fromOpenid || '', opt.query.openid || '');
-      
+            UniApi.cloud('login', { from: opt.query.fromOpenid || '', openid: opt.query.openid || ''})
+                .then(res => {
+                    store.data.user = res;
+                    store.update();
+                })
+            
             UniApi.cloud('config').then(res => {
                 if (res.success) {
-                    XData.goods = [...res.goods];
-                    XData.version = {...res.version};
-                    XData.iosMemberPromptText = res.iosMemberPromptText || XData.iosMemberPromptText;
-                    XData.isShowIosMemberPrompt = res.isShowIosMemberPrompt || false;
-
-                    XData.activity = res.activity || [];
-                    XData.monitorRule = res.monitorRule || [];
-
-                    XData.memberBanner = {...res.memberBanner};
-
-                    XData.challange = res.challange;
+                    store.data.goods = [...res.goods];
+                    store.data.config.version = {...res.version};
+                    store.data.config.iosBuyPrompt = res.iosMemberPromptText || store.data.config.iosBuyPrompt;
+                    store.data.config.isAppInCheck = res.isAppInCheck || false;
+                    store.data.oneDayPrice = res.oneDayPrice || 0.2;
+                    store.update();
                 }
             });
 
-            // UniApi.cloud('a_script')
+            Promise.all([
+                UniApi.cloud('local', { model: 'lesson' }),
+                UniApi.cloud('local', { model: 'learnInfo' })
+            ]).then(res => {
+                store.data.rawLesson = [...res[0]];
+                store.data.unitMap = res[0].reduce((ac, cur) => {
+                    return cur.unitList.reduce((a, c) => {
+                        a[c.unitId] = { ...c };
+                        return a;
+                    }, ac);
+                }, {});
+                
+                store.data.learnRecords = [ ...res[1].learnRecords ];
+                store.updateLesson();
+                store.setCurLearn(res[1].curLearnUnitId)
+                store.update();
+            })
         }
     },
     onShow: function (options) {
-        console.log('app onshow', options);
         // 关于支付
         if (options.referrerInfo && options.referrerInfo.appId === 'wx959c8c1fb2d877b5') { 
           // 还应判断请求路径
-          let extraData = options.referrerInfo.extraData
-          this.globalData.paySuccess = extraData.success
-          this.globalData.payjsOrderId = extraData.payjsOrderId
+            let extraData = options.referrerInfo.extraData
+            this.globalData.paySuccess = extraData.success
+            this.globalData.payjsOrderId = extraData.payjsOrderId
         }
 
         // 关于翻翻卡
@@ -81,16 +88,20 @@ App({
         payjsOrderId: '',
         out_trade_no: '',
         paySuccess: false,
-
     },
     Util,
     Config,
     UniApi,
     Store: store,
-    CreateStoreBindings: createStoreBindings,
-
     Vant,
-    XData,
     DB,
-    AppAudio: wx.createInnerAudioContext()
+    Models,
+    AppAudio: wx.createInnerAudioContext(),
+    createPage: opt => create(store, {
+        // 用户点击右上角分享
+        onShareAppMessage() {
+            return store.getDefaultShareInfo();
+        },
+        ...opt,
+    })
 })

@@ -1,25 +1,32 @@
 <!--pages/buy/buy.wxml-->
 <view class="container">
-	<view class="userInfo">
-		<open-data class="avatar" type="userAvatarUrl"></open-data>
-		<open-data class="nickName" type="userNickName"></open-data>
+	<view class="top-box">
+		<view class="circle circle1"></view>
+		<view class="circle circle2"></view>
+		<view class="circle circle3"></view>
+		<view class="circle circle4"></view>
+	
+		<view class="header">
+			<image class="icon-back-img" bindtap="handerBack" src="../../assets/imgs/icon-left-arrow-white.png" mode="widthFix"></image>
+			<view class="flex1 text-center cl_fff ft_14">开通会员</view>
+			<view class="icon-back-img"></view>
+		</view>
+		<view class="signUpNum">
+			<view class="signUpNumAnimation">已有 <text class="num">{{signUpNumber}}</text> 位同学加入会员·提升数听力</view>
+		</view>
 	</view>
-    <view class="signUpNum">
-        <view class="signUpNumAnimation">已有 <text class="num">{{signUpNumber}}</text> 位同学加入会员·提升数听力</view>
-    </view>
 
 	<view class="member-card">
 		<view style="padding: 30rpx;">
 			<cell>
 				<view slot="bd" style="color: #000; font-weight: bold;">选择会员类型</view>
-				<view slot="ft" style="color: #989897; font-size: 24rpx;">该卡一旦售出，概不退换</view>
 			</cell>
 		</view>
 
 		<van-radio-group value="{{ memberType }}" bind:change="onRadioChange">
 			<van-cell-group border="{{ false }}">
-				<van-cell wx:if="{{ systemInfo_platform === 'android' }}" clickable  use-label-slot border bind:click="memberDayCellClick">
-					<view slot="title" class="member-name">自定义天数 · ¥{{ memberBanner.price }}/天</view>
+				<van-cell wx:if="{{ env.platform === 'android' }}" clickable  use-label-slot border bind:click="memberDayCellClick">
+					<view slot="title" class="member-name">自定义天数 · ¥{{ oneDayPrice }}/天</view>
 					<view slot="label" >
 						<view style="padding: 32rpx 20rpx;">
 							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="10" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
@@ -30,53 +37,27 @@
 						</view>
 						<view class="price">￥{{ memberDayPrice / 100 }}</view>
 					</view>
-					<van-radio slot="right-icon" name="10" checked-color="#FE3F1D" />
+					<van-radio slot="right-icon" name="10" checked-color="#5862F6" />
 				</van-cell>
 				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
 					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
 						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" style="color: #FE3F1D">（推荐）</text></view>
-						<view wx:if="{{ systemInfo_platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
+						<view wx:if="{{ env.platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
 						<view wx:else slot="label" class="price">免费</view>
-						<van-radio slot="right-icon" name="{{ item.memberType }}" checked-color="#FE3F1D" />
+						<van-radio slot="right-icon" name="{{ item.memberType }}" checked-color="#5862F6" />
 					</van-cell>
 				</block>
 			</van-cell-group>
 		</van-radio-group>
-
-		<!-- <view style="padding: 0 28rpx; line-height: 2;">
-			<van-divider />
-			<view style="color: #5a5a5a; font-weight: bold; font-size: 26rpx">终身会员特别福利:</view>
-			<view style="color: #646566; font-size: 24rpx; line-height: 1.8">
-				<view>一次转赠计划<text class="give-rule-btn" bindtap="giveRuleBtn"> 查看规则>></text></view>
-			</view>
-		</view> -->
-
 	</view>
 
-
-	<view class="ios-submit-bar" wx:if="{{ systemInfo_platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
-	<van-submit-bar wx:else loading="{{ paying }}" price="{{ price }}" tip="{{ true }}" button-text="立即开通" button-type="warning" bind:submit="onSubmit">
-        <view slot="tip"  wx:if="{{ systemInfo_platform === 'android' }}" style="text-indent: 10rpx; color: #07c160 ">
-           注：支付提示跳转payjs，属系统正常流程，请安心支付
-        </view>
-    </van-submit-bar>
-
+	<view class="ios-submit-bar" wx:if="{{ env.platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
+	<view wx:else class="pay-submit-bar">
+		<van-button round block color="#5862F6" loading="{{ paying }}">立即支付 ￥{{ price / 100 }}</van-button>
+		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：支付提示跳转payjs，属系统正常流程，请安心支付</view>
+	</view>
 
 	<van-dialog id="van-dialog" />
 	<van-toast id="van-toast" />
-
-
-	<van-dialog id="van-dialog-1" use-slot title="" show="{{ isShowGiveDialog }}" confirm-button-text="已了解" confirm-button-color="#282365">
-		<view style="padding: 32rpx;">
-			<text style="color: #282365; font-size: 34rpx; font-weight: bold; ">无限转赠计划</text>
-			<view style="color: #4a4a4a; font-size: 28rpx; line-height: 2; margin: 20rpx 0;">
-				<view>1. 学习完毕后，会员权可转赠给同学朋友；</view>
-				<view>2. 被转赠人将直接获得终身会员；</view>
-				<view>3. 被转赠人学习完毕后，亦可继续转赠送，次数没有限制；</view>
-				<view>4. 每次转赠，向接收者收取一定手续费；</view>
-				<view>5. 转赠一旦完成，不可撤回, 所有权归受赠人所有。</view>
-			</view>
-		</view>
-    </van-dialog>
 
 </view>

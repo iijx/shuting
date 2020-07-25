@@ -1,5 +1,4 @@
 const app = getApp()
-const { Util, UniApi, XData, Vant, Store, CreateStoreBindings } = app;
 
 // pages/activity/activity.js
 Page({
@@ -8,14 +7,12 @@ Page({
      * Page initial data
      */
     data: {
-        ...XData.create(['activity']),
     },
 
     /**
      * Lifecycle function--Called when page load
      */
     onLoad: function (options) {
-        this.setData(XData.create(['activity']));
     },
 
     /**

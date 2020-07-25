@@ -1,36 +1,22 @@
 // pages/buy/buy.js
 const app = getApp();
-const { Util, UniApi, XData, Vant, Store, CreateStoreBindings } = app;
-Page({
-    /**
-     * 页面的初始数据
-     */
+const { Util, UniApi, Vant } = app;
+app.createPage({
     data: {
         memberType: "3",
         price: 0,
         paying: false,
         signUpNumber: 10,
-        systemInfo_platform: '',
-        isShowGiveDialog: false,
+        // isShowGiveDialog: false,
         memberDay: 60,
         memberDayPrice: 600,
-        ...XData.create(['goods']),
-        ...XData.create(['memberBanner']),
+        env: {},
+        config: {},
+        goods: [],
+        oneDayPrice: 0.2,
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
-        this.setData(XData.create(['memberBanner']));
-        this.setData(XData.create(['goods']));
-
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['systemInfo_platform'],
-        })
         this.updateSignUpNumber();
-
         wx.nextTick(() => {
             let defaultGood = this.data.goods.find(item => item.isRecommend);
             this.setData({
@@ -45,6 +31,11 @@ Page({
      */
     onReady: function () {
 
+    },
+    handerBack() {
+        wx.navigateBack({
+            delta: 1
+        })
     },
 
     /**
@@ -81,7 +72,8 @@ Page({
                                 UniApi.login().then(res => {
                                     Vant.Dialog.alert({
                                         title: '恭喜',
-                                        message: '开通成功'
+                                        message: '开通成功',
+                                        confirmButtonColor: '#4b51f2',
                                     }).then(res => {
                                         wx.switchTab({
                                           url: '../my/my',
@@ -100,6 +92,7 @@ Page({
                         message: '支付失败',
                         confirmButtonText: '重新支付',
                         cancelButtonText: '取消支付',
+                        confirmButtonColor: '#4b51f2',
                     }).then(res => {
                         this.onSubmit();
                     }).catch(err => {
@@ -127,7 +120,7 @@ Page({
     },
     onMemberDayChange(e) {
         let day = e.detail.value || e.detail;
-        let dayPrice = day * (this.data.memberBanner.price * 100);
+        let dayPrice = Math.round(day * (this.data.oneDayPrice * 100));
         this.setData({
             memberDay: day,
             memberDayPrice: dayPrice
@@ -138,9 +131,9 @@ Page({
             })
         }
     },
-    giveRuleBtn() {
-        this.setData({ isShowGiveDialog: true })
-    },
+    // giveRuleBtn() {
+    //     this.setData({ isShowGiveDialog: true })
+    // },
     randomNum(min, max) {
         return Math.random() * (max - min) + min;
     },
@@ -220,6 +213,6 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        return Store.defaultShareInfo;
+        // return Store.defaultShareInfo;
     }
 })

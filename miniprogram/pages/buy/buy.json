@@ -1,4 +1,9 @@
 {
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#F9CE0D"
+  "navigationBarBackgroundColor": "#4A50F2",
+  "enablePullDownRefresh": true,
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#4A50F2",
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "开通会员"
 }

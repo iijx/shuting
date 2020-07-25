@@ -1,67 +1,41 @@
-// pages/level/level.js
-
 const app = getApp();
-const { Util, XData, Vant, Store, CreateStoreBindings } = app;
-import { LevelList, SubLevelList } from '../../lib/level.js';
+const { Util, Vant, Store } = app;
 
-Page({
-
-    /**
-     * Page initial data
-     */
+app.createPage({
     data: {
-        levelList: [],
-
+        lesson: [],
+        curLearnLevel: {},
+        curLearnUnit: {},
         isShowNote: false,
         noteType: '',
         monthWords: [...Util.MonthWords],
         weekWords: [...Util.WeekWords],
-        ...XData.create(['memberBanner']),
+        config: {},
+        env: {},
+        isShowRecordDetail: false
     },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
-        this.storeBindings = CreateStoreBindings(this, {
-            store: Store,
-            fields: ['user', 'curLevel', 'curSubLevel', 'subLevelLearnedMap', 'systemInfo_platform'],
-            actions: ['setCurSubLevelId']
-        })
-        wx.nextTick(() => {
-            let levelList = LevelList.map(item => {
-                let unitList = SubLevelList.filter(unit => unit.pLevelId === item.levelId).sort((a, b) => a.index - b.index).map(item => {
-                    let subLevel = this.data.subLevelLearnedMap.find(subLevel => subLevel.subLevelId === item.levelId);
-                    let score = subLevel ? subLevel.score : 0; 
-                    return {
-                        ...item,
-                        score,
-                        isComplete: score >= 100
-                    }
-                });
-                return {
-                    ...item,
-                    score: unitList.reduce((ac, cur) => ac + cur.score, 0),
-                    unitList,
-                }
-            });
-            this.setData({
-                levelList,
-            })
-        })
+        
     },
     onShow: function () {
-        this.setData(XData.create(['memberBanner']));
+        this.update();
+    },
+    switchShowRecordDetail() {
+        this.setData({
+            isShowRecordDetail: !this.data.isShowRecordDetail
+        })
     },
     selectBtn: function(e) {
-        let subLevel = e.currentTarget.dataset.level;
-        if (subLevel.isPro && !this.data.user.isPro) {
-            console.log(this.data.systemInfo_platform)
-            if (this.data.systemInfo_platform === 'android') {
+        let unit = e.currentTarget.dataset.level;
+        // 1. 会员拦截
+        if (unit.isPro && !this.data.user.isPro) {
+            if (this.data.env.platForm === 'android') {
                 Vant.Dialog.confirm({
+                    title: '开通会员',
                     message: '会员专享内容，请先开通会员',
                     cancelButtonText: '知道了',
-                    confirmButtonText: '去看看'
+                    confirmButtonText: '去看看',
+                    confirmButtonColor: '#4b51f2',
                 }).then(res => {
                     wx.navigateTo({ url: '../buy/buy' })
                 }).catch(err => {
@@ -69,15 +43,18 @@ Page({
                 })
             } else {
                 Vant.Dialog.alert({
-                    message: this.data.memberBanner.dialogPrompt,
-                    confirmButtonText: '知道了'
+                    title: '开通会员',
+                    message: this.data.config.iosBuyPrompt,
+                    confirmButtonText: '知道了',
+                    confirmButtonColor: '#4b51f2',
                 })
             }
             return;
         }
-        this.setCurSubLevelId(subLevel.levelId);
+        Store.setCurLearn(unit.unitId);
+        // 2. 进入学习
         wx.nextTick(() => {
-            wx.redirectTo({
+            wx.navigateTo({
                 url: '../learn/learn',
             })
         })
@@ -89,13 +66,23 @@ Page({
         app.AppAudio.play();
     },
     buyBtn() {
-        wx.navigateTo({ url: '../buy/buy' })
+        if (this.data.env.platForm === 'android') {
+            wx.navigateTo({ url: '../buy/buy' })
+        } else {
+            Vant.Dialog.alert({
+                title: '开通会员',
+                message: this.data.config.iosBuyPrompt,
+                confirmButtonText: '知道了',
+                confirmButtonColor: '#4b51f2',
+            })
+        }
     },
     startHardMode() {
         if (!this.data.user.isPro) {
             Vant.Dialog.alert({
                 message: '会员专享内容，请先开通会员',
-                confirmButtonText: '知道了'
+                confirmButtonText: '知道了',
+                confirmButtonColor: '#4b51f2',
             })
             return;
         } else {
@@ -109,6 +96,17 @@ Page({
         this.setData({
             noteType: unit.type,
             isShowNote: true,
+        })
+    },
+    audioNote(e) {
+        let index = Number(e.currentTarget.dataset.index);
+        if (index !== 0 && index !== 1) return;
+
+        Vant.Dialog.alert({
+            title: index === 0 ? '数字系列读音示例' : '电话系列读音示例',    
+            message: index === 0 ? '110 => one hundred and ten' : '10086 => one zero zero eight six',
+            confirmButtonText: '知道了',
+            confirmButtonColor: '#4b51f2',
         })
     },
     popOnClose() {
@@ -128,28 +126,5 @@ Page({
      * Lifecycle function--Called when page unload
      */
     onUnload: function () {
-        this.storeBindings.destroyStoreBindings()
-    },
-
-    /**
-     * Page event handler function--Called when user drop down
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * Called when page reach bottom
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * Called when user click on the top right corner to share
-     */
-    // 用户点击右上角分享
-    onShareAppMessage: function (res) {
-        return Store.defaultShareInfo;
     },
 })

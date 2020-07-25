@@ -1,22 +1,17 @@
 // pages/version/version.js
 
 const app = getApp();
-const { Util, UniApi, Vant, XData, Store, CreateStoreBindings } = app;
-Page({
-
-    /**
-     * Page initial data
-     */
+const { UniApi, Store } = app;
+app.createPage({
     data: {
         list: [],
-        ...XData.create(['version']),
+        config: {
+            body: [],
+            onlineTime: '',
+            status: ''
+        }
     },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
-        this.setData(XData.create(['version']))
         UniApi.cloud('advice', {
             operate: 'getAll',
         }).then(res => {
@@ -24,23 +19,15 @@ Page({
                 list: res.data.map(item => {
                     return {
                         ...item,
-                        isLike: item.likeUserOpenid && item.likeUserOpenid.includes(Store.user.openid)
+                        isLike: item.likeUserOpenid && item.likeUserOpenid.includes(Store.data.user.openid)
                     }
                 }),
             })
         })
     },
-
-    /**
-     * Lifecycle function--Called when page is initially rendered
-     */
     onReady: function () {
 
     },
-
-    /**
-     * Lifecycle function--Called when page show
-     */
     onShow: function () {
 
     },

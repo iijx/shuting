@@ -1,9 +1,9 @@
 <!--pages/version/version.wxml-->
 <view class="container">
     <view style="height: 20rpx; background: #fff;"></view>
-	<van-panel title="下个版本" desc="预计上线: {{ version.onlineTime }}" status="{{ version.status }}">
+	<van-panel title="下个版本" desc="预计上线: {{ config.version.onlineTime }}" status="{{ config.version.status }}">
 		<view class="panel-body">
-            <view wx:for="{{ version.body }}" wx:key="index" wx:for-item="item">{{ item }}</view>
+            <view wx:for="{{ config.version.body }}" wx:key="index" wx:for-item="item">{{ item }}</view>
         </view>
 	</van-panel>
 

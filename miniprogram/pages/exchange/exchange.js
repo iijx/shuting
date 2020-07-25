@@ -1,6 +1,6 @@
 // pages/exchange/exchange.js
 const app = getApp();
-const { Util, UniApi, Store, Vant } = app;
+const { Util, UniApi, Vant } = app;
 Page({
 
     /**

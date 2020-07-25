@@ -1,8 +1,7 @@
 {
     "pages": [
-        "pages/index/index",
-        "pages/learn/learn",
         "pages/level/level",
+        "pages/learn/learn",
         "pages/summary/summary",
         "pages/my/my",
         "pages/buy/buy",
@@ -24,47 +23,40 @@
         "van-progress": "@vant/weapp/progress",
         "van-circle": "@vant/weapp/circle",
         "van-icon": "@vant/weapp/icon",
-        "van-tab": "@vant/weapp/tab",
-        "van-tabs": "@vant/weapp/tabs",
         "van-button": "@vant/weapp/button",
         "van-field": "@vant/weapp/field",
         "van-panel": "@vant/weapp/panel",
-        "van-cell": "@vant/weapp/cell",
-        "van-cell-group": "@vant/weapp/cell-group",
         "van-dialog": "@vant/weapp/dialog",
         "van-action-sheet": "@vant/weapp/action-sheet",
-        "van-tag": "@vant/weapp/tag",
         "van-loading": "@vant/weapp/loading",
         "van-toast": "@vant/weapp/toast",
         "van-col": "@vant/weapp/col",
         "van-row": "@vant/weapp/row",
+        "van-tabs": "@vant/weapp/tabs",
+        "van-tag": "@vant/weapp/tag",
+        "van-cell-group": "@vant/weapp/cell-group",
+        "van-cell": "@vant/weapp/cell",
         "van-radio-group": "@vant/weapp/radio-group",
         "van-radio": "@vant/weapp/radio",
         "van-submit-bar": "@vant/weapp/submit-bar",
         "van-notify": "@vant/weapp/notify",
         "van-divider": "@vant/weapp/divider",
-        "van-popup": "@vant/weapp/popup",
         "van-slider": "@vant/weapp/slider",
+        "van-popup": "@vant/weapp/popup",
         "cell": "/components/cell/cell"
     },
     
     "sitemapLocation": "sitemap.json",
     "tabBar": {
         "color": "#929292",
-        "selectedColor": "#3D96D3",
+        "selectedColor": "#4A50F2",
         "borderStyle": "white",
         "list": [
-            {
-                "pagePath": "pages/index/index",
-                "iconPath": "./assets/imgs/tabs/index@2x.png",
-                "selectedIconPath": "/assets/imgs/tabs/index-1@2x.png",
-                "text": "首页"
-            },
             {
                 "pagePath": "pages/level/level",
                 "iconPath": "./assets/imgs/tabs/level.png",
                 "selectedIconPath": "/assets/imgs/tabs/level-1.png",
-                "text": "级别"
+                "text": "课程"
             },
             
             {
