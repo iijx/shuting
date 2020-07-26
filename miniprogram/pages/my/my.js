@@ -25,8 +25,6 @@ app.createPage({
                     fail: err => {
                     }
                 });
-            } else {
-                this.updateComputed()
             }
         })
     },
@@ -34,12 +32,16 @@ app.createPage({
 
     },
     onShow: function () {
-        this.update();
+        this.update().then(() => {
+            this.updateComputed()
+        });
     },
     updateComputed() {
-        this.setData({
-            proEndDateStr: Util.dateFormatter(this.data.user.proEndDate, 'YYYY/MM/DD')
-        })
+        if (this.data.user.proEndDate) {
+            this.setData({
+                proEndDateStr: Util.dateFormatter(new Date(this.data.user.proEndDate), 'YYYY-MM-DD')
+            })
+        }
     },
     memberBtn() {
         if (this.data.env.platform === 'android') {
@@ -64,7 +66,7 @@ app.createPage({
                 app.Store.data.user.avatar = res.userInfo.avatarUrl;
                 app.Store.data.user.nickName = res.userInfo.nickName;
                 this.update().then(diff => this.updateComputed());
-                UniApi.cloud('updateUserInfo', {
+                UniApi.appCloud('user', 'update', {
                     avatar: res.userInfo.avatarUrl,
                     nickName: res.userInfo.nickName,
                 })
@@ -91,7 +93,7 @@ app.createPage({
     onUnload: function () {
     },
     onPullDownRefresh: function () {
-        UniApi.cloud('login').then(res => {
+        UniApi.appCloud('user', 'get').then(res => {
             Store.data.user = res;
             this.update();
         })

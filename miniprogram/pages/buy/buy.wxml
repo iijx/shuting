@@ -44,7 +44,7 @@
 						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" style="color: #FE3F1D">（推荐）</text></view>
 						<view wx:if="{{ env.platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
 						<view wx:else slot="label" class="price">免费</view>
-						<van-radio slot="right-icon" name="{{ item.memberType }}" checked-color="#5862F6" />
+						<van-radio slot="right-icon" name="{{ item.memberType + '' }}" checked-color="#5862F6" />
 					</van-cell>
 				</block>
 			</van-cell-group>

@@ -23,7 +23,7 @@ export default [
         "unitList": [
             { "levelId": 2, "unitId": 21, "type": "phone", "title": "4位", length: 4, "isPro": true, "rank": 1},
             { "levelId": 2, "unitId": 22, "type": "phone", "title": "6位", length: 6, "isPro": true, "rank": 2},
-            { "levelId": 2, "unitId": 23, "type": "phone", "title": "8位", length: 7, "isPro": true, "rank": 3}
+            { "levelId": 2, "unitId": 23, "type": "phone", "title": "8位", length: 8, "isPro": true, "rank": 3}
         ]
     },
     { 

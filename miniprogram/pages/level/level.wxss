@@ -299,10 +299,3 @@
     bottom: 20rpx;
     text-align: center;
 }
-
-.buy-btn {
-    position: fixed;
-    bottom: 40rpx;
-    right: 32rpx;
-    font-family: sans-serif;
-}

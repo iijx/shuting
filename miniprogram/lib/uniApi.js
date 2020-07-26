@@ -78,8 +78,8 @@ const reqMapClearer = function clear(){
 };
 setTimeout(() => reqMapClearer(), 2000);
 
-const cloud = (name = 'appCloud', data = { model: '', operate: 'get'}) => {
-    const key = `${name}_${data.model}_${data.operate || ''}`;
+const cloud = (name = 'appCloud', data = { model: '', method: 'get', params: {} }) => {
+    const key = `${name}_${data.model}_${data.method || ''}`;
     if (reqMap[key]) return reqMap[key];
     else {
         if (name === 'local') {
@@ -102,10 +102,17 @@ const cloud = (name = 'appCloud', data = { model: '', operate: 'get'}) => {
 
         return reqMap[key];
     }
-    
+}
+
+const appCloud = (model, method, params = {}) => {
+    return cloud('appCloud', {
+        model,
+        method,
+        params
+    })
 }
 
 export default {
     cloud,
-    // login
+    appCloud,
 }

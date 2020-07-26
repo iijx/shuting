@@ -64,12 +64,11 @@ app.createPage({
                             that.setData({ paying: false, })
                             return;
                         };
-                        UniApi.cloud('getOrderStatus', {
-                            out_trade_no,
-                        }).then(res => {
+                        // UniApi.cloud('getOrderStatus', { out_trade_no })
+                        UniApi.appCloud('order', 'getStatus', { out_trade_no }).then(res => {
                             if (String(res.status) === '2') {
                                 Vant.Toast.clear();
-                                UniApi.cloud('login').then(res => {
+                                UniApi.appCloud('user', 'get').then(res => {
                                     app.Store.data.user = res;
                                     that.update();
                                     Vant.Dialog.alert({
@@ -157,7 +156,11 @@ app.createPage({
             mask: true,
             message: ''
         });
-        UniApi.cloud('createOrder', {
+        // UniApi.cloud('createOrder', {
+        //     memberType: String(this.data.memberType),
+        //     memberDay: this.data.memberDay,
+        // })
+        UniApi.appCloud('order', 'post', {
             memberType: String(this.data.memberType),
             memberDay: this.data.memberDay,
         }).then(res => {

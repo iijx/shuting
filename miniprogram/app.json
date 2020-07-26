@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/level/level",
+        "pages/index/index",
         "pages/learn/learn",
         "pages/summary/summary",
         "pages/my/my",

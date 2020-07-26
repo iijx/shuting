@@ -1,19 +1,21 @@
-// 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+const userController = require('./controller/user.js')
+const configController = require('./controller/config.js')
+const orderController = require('./controller/order.js')
+const excCodeController = require('./controller/excCode.js')
+
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { model, operate } = event;
-  const openid = cloud.getWXContext().OPENID;
+  const { model } = event;
 
+  if (model === 'user') return await userController(event, context);
+  else if (model === 'config') return await configController(event, context);
+  else if (model === 'order') return await orderController(event, context);
+  else if (model === 'excCode') return await excCodeController(event, context);
 
-
-  return {
-    event,
-    openid: wxContext.OPENID,
-    appid: wxContext.APPID,
-    unionid: wxContext.UNIONID,
-  }
 }

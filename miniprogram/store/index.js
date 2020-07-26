@@ -1,5 +1,5 @@
 import Models from '../models/index';
-import Config from '../config';
+
 const getScoreByCNum = cNum => {
     if (cNum >= 15) return 100;
     return Math.min(10, cNum) * 5 + Math.max(0, cNum - 10) * 10
@@ -106,7 +106,7 @@ const store = {
     getDefaultShareInfo() {
         return {
             imageUrl: 'http://cdnword.iijx.site/assets/imgs/shuting/share1.png',
-            path: `/pages/index/index?fromOpenid=${this.data.user.openid}`,
+            path: `/pages/level/level?fromOpenid=${this.data.user.openid}`,
             title: '刻意练习 · 提升数听力'
         }
     }

@@ -12,7 +12,7 @@
         </view>
     </view>
     
-    <view class="cl_fff ft_12 mt_16 mb_30 w90 blockC text-center" wx:if="{{ user.avatar }}">
+    <view class="cl_fff ft_12 mt_16 mb_30 w90 blockC text-center">
         <view wx:if="{{user.isPro}}" class="member-btn"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
         <view wx:else class="member-btn" bindtap="memberBtn">查看会员计划</view>
     </view>
@@ -44,4 +44,8 @@
     
     <!-- 在页面内添加对应的节点 -->
     <van-notify id="van-notify" />
+
+    <view class="buy-btn" wx:if="{{ !user.isPro }}">
+		<van-button icon="point-gift" type="primary" color="#4A50F2" bind:click="memberBtn">Vip</van-button>
+	</view>
 </view>

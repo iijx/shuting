@@ -21,13 +21,11 @@ App({
             })
         } else {
             // 登录获取用户信息
-            UniApi.cloud('login', { from: opt.query.fromOpenid || '', openid: opt.query.openid || ''})
-                .then(res => {
-                    store.data.user = res;
-                    store.update();
-                })
-            
-            UniApi.cloud('config').then(res => {
+            UniApi.appCloud('user', 'get', { from: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
+                store.data.user = res;
+                store.update();
+            })
+            UniApi.appCloud('config', 'get').then(res => {
                 if (res.success) {
                     store.data.goods = [...res.goods];
                     store.data.config.version = {...res.version};
@@ -73,24 +71,23 @@ App({
             this.globalData.paySuccess = extraData.success
             this.globalData.payjsOrderId = extraData.payjsOrderId
         }
-
         // 关于翻翻卡
-        if (options.query.fflCardShareOpenid) {
-            UniApi.cloud('fanfanle', {
-                operate: 'addShare',
-                sharedUserOpenid: options.query.fflCardShareOpenid
-            })
-        }
+        // if (options.query.fflCardShareOpenid) {
+        //     UniApi.cloud('fanfanle', {
+        //         operate: 'addShare',
+        //         sharedUserOpenid: options.query.fflCardShareOpenid
+        //     })
+        // }
 
-        // 关于班长邀请
-        if (options.query.fromOpenid) {
-            DB.collection('invite').add({data: {
-                inviter: options.query.fromOpenid,
-                nickName: '',
-                createAt: Date.now(),
-                updateAt: Date.now()
-            }})
-        }
+        // // 关于班长邀请
+        // if (options.query.fromOpenid) {
+        //     DB.collection('invite').add({data: {
+        //         inviter: options.query.fromOpenid,
+        //         nickName: '',
+        //         createAt: Date.now(),
+        //         updateAt: Date.now()
+        //     }})
+        // }
     },
     globalData: {
         payjsOrderId: '',

@@ -51,16 +51,17 @@ Page({
 
         this.setData({ isExchanging: true })
         
-        UniApi.cloud('exchangeCode', { code: this.data.value })
+        UniApi.appCloud('excCode', 'use', { code: this.data.value })
+        // UniApi.cloud('exchangeCode', { code: this.data.value })
             .then(res => {
                 this.setData({ isExchanging: false })
                 if (res.success) {
                     Vant.Dialog.alert({
                         message: '您已兑换成功'
                     })
-                    UniApi.cloud('login').then(res => {
+                    UniApi.appCloud('user', 'get').then(res => {
                         app.Store.data.user = res;
-                        this.update();
+                        app.Store.update();
                     });
                 } else {
                     Vant.Dialog.alert({

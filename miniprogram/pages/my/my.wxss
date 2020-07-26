@@ -66,3 +66,11 @@
 .contact-btn:after {
     display: none !important;
 }
+
+
+.buy-btn {
+    position: fixed;
+    bottom: 50rpx;
+    right: 32rpx;
+    font-family: sans-serif;
+}

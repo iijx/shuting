@@ -45,7 +45,6 @@ app.createPage({
             operate: item.isLike ? 'like' : 'unlike',
             adviceId: item._id,
         })
-
         
         this.data.list.splice(index, 1, item);
 

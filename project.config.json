@@ -160,6 +160,13 @@
 					"id": -1,
 					"name": "examRes",
 					"pathName": "pages/examRes/examRes",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index",
+					"pathName": "pages/index/index",
 					"scene": null
 				}
 			]

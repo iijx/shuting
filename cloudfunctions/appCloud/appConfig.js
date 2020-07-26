@@ -1,6 +1,7 @@
 
 const START_TIME = new Date(2020, 2, 16); //202年3月16日 第一期开始
 const WEEK_DAY = 7;
+const Good = require('./models/good');
 
 // 日期格式化
 const dateFormatter = (date, formatter) => {
@@ -59,6 +60,14 @@ const getToday = () => {
     _day.setHours(0, 0, 0, 0);
     return _day;
 };
+const GOODS = [
+    new Good('1', 30, 5.9, 6).setRank(1), // 月会员
+    new Good('2', 180, 9.6, 18), // 半年会员
+    new Good('3', 36500, 23, 68).setName('数听永久会员').setRank(3), // 永久会员
+    new Good('4', 365, 18, 36).setRecommend().setRank(2), // 1年会员
+    new Good('6', 365 * 3, 18, 54), // 3年会员
+    new Good('10', 0, 0, 0).setCustom(), // 自定义
+]
 
 module.exports = {
     init: function() {
@@ -68,48 +77,8 @@ module.exports = {
         this.activity[0].periodEnd = dateFormatter(new Date(info.periodEnd), 'MM.DD');
     },
     oneDayPrice: 0.2,
-    goods: [
-        {
-            name: '月度会员 · 30天',
-            isRecommend: false,
-            price: 5.9,
-            oldPrice: 6,
-            memberType: '1',
-            rank: 1,
-        },
-        // {
-        //     name: '半年会员 · 180天',
-        //     isRecommend: false,
-        //     price: 9.8,
-        //     oldPrice: 36,
-        //     memberType: '2',
-        //     rank: 2,
-        // },
-        {
-            name: '一年会员 · 365天',
-            isRecommend: true,
-            price: 18,
-            oldPrice: 216,
-            memberType: '4',
-            rank: 2,
-        },
-        // {
-        //     name: '三年会员 · 3 * 365天',
-        //     isRecommend: true,
-        //     price: 18,
-        //     oldPrice: 216,
-        //     memberType: '6',
-        //     rank: 3,
-        // },
-        {
-            name: '终身永久会员 ',
-            isRecommend: false,
-            price: 23,
-            oldPrice: 360,
-            memberType: '3',
-            rank: 4,
-        },
-    ],
+    GOODS: [...GOODS],
+    goods: GOODS.filter(i => ['1', '3', '4'].includes(i.memberType)).sort((a, b) => a.rank - b.rank),
     version: {
         onlineTime: '两周内',
         status: '开发中...',
@@ -208,25 +177,9 @@ module.exports = {
         // smallTitle: '班长邀请挑战',
     },
 
-    iosMemberPromptText: 'IOS小程序版，目前仅「数听英语」公众号下支持开通',
-    iosBuyPrompt: 'IOS小程序版，目前仅「数听英语」公众号下支持开通',
+    iosMemberPromptText: 'IOS小程序版，暂不支持开通会员功能',
+    iosBuyPrompt: 'IOS小程序版，暂不支持开通会员功能',
 
     isShowIosMemberPrompt: true,
     isAppInCheck: false
-
-
 }
-
-
-{/* <view>同学，你好，我是数听开发者。</view>
-            <view>今天我想给大家发起一个挑战，内容是： 35元报名挑战，2周时间练习，通过数听测试即可返还现金35 + 5元奖学金，共返40元。</view>
-
-            <view>1. 说明挑战之前先说说为什么要发起</view>
-
-			<view>数字在英语听力中一直是考试中的常考点，可很多同学从初中，高中，甚至到了大学考四六级依然对简单到3位数的数字反应都会慢半拍，经常等反应过来读音已经读到后面去了。 </view>
-
-            <view>为此，数听英语由此应运而生，通过刻意练习，为你一次性解决数字听力中反应慢的问题。</view>
-
-            <view>但是呢，经过这一两个月的运营，发现有不少同学下定决心开始好好练习，也购买了会员，可是呢，却还是坚持不了，三天打鱼，两天晒网。</view>
-
-            <view>为此，数听英语官方补贴，35元报名挑战，学成归来即可返还现金35 + 5元奖学金，共40元</view>  */}

@@ -219,7 +219,7 @@ export const throttle = (fn, wait = 300) => {
 export const gen10ExpNum = expNum => genExpNum(10, expNum);
 
 export const dateFormatter = (date, formatter) => {
-    date = (date ? new Date(date) : new Date)
+    date = (date ? new Date(date) : new Date())
     const Y = date.getFullYear() + '',
         M = date.getMonth() + 1,
         D = date.getDate(),

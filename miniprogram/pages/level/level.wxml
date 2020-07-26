@@ -66,10 +66,6 @@
 		</view>
 	</view>
 
-	<view class="buy-btn" wx:if="{{ !user.isPro }}">
-		<van-button icon="point-gift" type="primary" color="#4A50F2" bind:click="buyBtn">Upgrade</van-button>
-	</view>
-
 
 	<!-- 地狱王者模式 -->
 	<!-- <view class="custom-mode-wrap">
