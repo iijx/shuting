@@ -61,6 +61,7 @@ exports.main = async (event, context) => {
             isPro: true,
             memberType: memberType,
             proEndDate,
+            isPaid: true,
             isMonitor: Number(memberType) === 3 || Number(memberType) === 2 ? true : false,
             updateAt: new Date(),
         }

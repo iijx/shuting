@@ -35,6 +35,8 @@ module.exports = class Order {
             notify_url: cloud_env === PROD_ENV_NAME ? PayConfig.NOTIFY_URL : PayConfig.NOTIFY_URL_DEV,
             nonce: String(Date.now()), // 随机字符串
         };
+        console.log('cloud_env', cloud_env);
+        console.log('payOrder', payOrder);
         return {
             ...payOrder,
             sign: md5(`body=${payOrder.body}&mchid=${payOrder.MCHID}&notify_url=${payOrder.notify_url}&out_trade_no=${payOrder.out_trade_no}&total_fee=${payOrder.total_fee}&key=${PayConfig.KEY}`).toUpperCase(),

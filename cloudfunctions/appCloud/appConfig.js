@@ -42,8 +42,8 @@ module.exports = {
         // '3. 班级满10人，班长获得年度会员，所有班级成员获得月度会员奖励',
         // '4. 班级满50人，班长以及所有班级成员均获得终身会员奖励'
     ],
-    freeMemberNeedCount: 7,
-    iosMemberPromptText: 'IOS小程序版，目前仅「数听英语」公众号下支持开通',
-    iosBuyPrompt: 'IOS小程序版，目前仅「数听英语」公众号下支持开通',
+    freeMemberNeedCount: 10,
+    // iosMemberPromptText: 'IOS小程序版，目前仅「数听英语」公众号下支持开通',
+    iosBuyPrompt: '"IOS小程序版，目前仅「数听英语」公众号下支持开通"',
     isAppInCheck: false
 }

@@ -47,7 +47,7 @@ module.exports = async (event, context) => {
         if (!memberType) return {}
         const order = await genOrder(wxContext.OPENID, memberType, memberDay);
 
-        return order.getOrder2payjsDto(cloud.DYNAMIC_CURRENT_ENV);
+        return order.getOrder2payjsDto(wxContext.ENV);
     }
     //  获取订单状态
     else if (method === 'getStatus') {
