@@ -9,8 +9,6 @@ cloud.init({
 
 // 云函数入口函数
 module.exports = async (event, context) => {
-    appConfig.init();
-    
     return {
         success: true,
         ...appConfig,

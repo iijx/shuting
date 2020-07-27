@@ -28,7 +28,7 @@
         </view>
 
         <!-- 正确答案 -->
-        <view class="answer {{ isShowCorrectAnswer ? 'show' : '' }}">正确答案：<text class="ft_bold">{{ answer }}</text></view>
+        <view class="answer {{ isShowCorrectAnswer ? 'show' : '' }}">答案：<text class="ft_bold">{{ answer }}</text></view>
     </view>
 
     <view class="btm-spance"></view>
@@ -63,7 +63,7 @@
                 <view class="num-item flex1 ft13" bindtap="promptBtn" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">提示</view>
                 <view class="num-item flex1 ft13" data-value="x" bindtap="keyTap" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">删除</view>
                 <view class="num-item no-bg flex1" bindtap="audioPlay" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">
-                    <image class="play-img2" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
+                    <image class="play-img2" src="../../assets/imgs/audio_blue.png" mode="widthFix"></image>
                 </view>
                 <view class="num-item flex1 ft13 {{ spanClass !== 'error' ? 'disabled' : '' }}" bindtap="nextWordBtn" hover-class="num-item-hover" hover-start-time="20" hover-stay-time="120">下一个</view>
             </view>

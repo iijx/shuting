@@ -61,6 +61,23 @@ app.createPage({
         })
         
     },
+    memberBtn() {
+        if (this.data.env.platform === 'android') {
+            wx.navigateTo({
+                url: '../buy/buy',
+            })
+        } else {
+            console.log(this.data.config)
+            Vant.Dialog.alert({
+                title: '开通会员',
+                message: this.data.config.iosBuyPrompt,
+                confirmButtonText: '知道了',
+                confirmButtonColor: '#4b51f2',
+            }).then(() => {
+                // on close
+            });
+        }
+    },
     wordPlay(e) {
         let src = e.currentTarget.dataset.audio;
         app.AppAudio.src = src;

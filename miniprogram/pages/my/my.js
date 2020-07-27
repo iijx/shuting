@@ -39,7 +39,7 @@ app.createPage({
     updateComputed() {
         if (this.data.user.proEndDate) {
             this.setData({
-                proEndDateStr: Util.dateFormatter(new Date(this.data.user.proEndDate), 'YYYY-MM-DD')
+                proEndDateStr: Util.dateFormatter(new Date(this.data.user.proEndDate), 'YYYY/MM/DD')
             })
         }
     },

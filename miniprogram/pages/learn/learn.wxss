@@ -167,11 +167,6 @@
     align-items: center;
     justify-content: center;
     font-size: 36rpx;
-    color: #000;
-    color: #614200;
-    color: #00474f;
-    color: #003a8c;
-    color: #150d59;
     color: #1c1480;
     transition: all .1s;
 }

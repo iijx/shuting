@@ -110,11 +110,21 @@
     font-weight: bold;
     color: #FE3F1D;
 }
-
+.cl_primary {
+    color: #3930D7;
+} 
+.cl_red {
+    color: #FE3F1D;
+}
 .old-price {
     text-decoration: line-through;
     color: #959695;
     font-size: 26rpx;
+}
+.activity-note {
+    font-size: 24rpx;
+    color: #FE3F1D;
+    text-decoration: underline;
 }
 
 

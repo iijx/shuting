@@ -29,7 +29,7 @@
 					<view slot="title" class="member-name">自定义天数 · ¥{{ oneDayPrice }}/天</view>
 					<view slot="label" >
 						<view style="padding: 32rpx 20rpx;">
-							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="10" max="100" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
+							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="7" max="30" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
 								<view class="member-day" slot="button">
 									{{ memberDay }}天
 								</view>
@@ -41,8 +41,13 @@
 				</van-cell>
 				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
 					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
-						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" style="color: #FE3F1D">（推荐）</text></view>
-						<view wx:if="{{ env.platform === 'android' }}" slot="label" class="price">￥{{ item.price }} <text class="old-price">￥{{ item.oldPrice }}</text></view>
+						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" class="cl_red">（推荐）</text></view>
+						<view wx:if="{{ env.platform === 'android' }}" slot="label" class="price">
+							<text>￥{{ item.price }}</text>
+							<text class="old-price">￥{{ item.oldPrice }}</text>
+							<text>　</text>
+							<text wx:if="{{ item.activityNote }}" class="activity-note">{{ item.activityNote }}</text>
+						</view>
 						<view wx:else slot="label" class="price">免费</view>
 						<van-radio slot="right-icon" name="{{ item.memberType + '' }}" checked-color="#5862F6" />
 					</van-cell>
@@ -54,7 +59,7 @@
 	<view class="ios-submit-bar" wx:if="{{ env.platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
 	<view wx:else class="pay-submit-bar">
 		<van-button round block bind:click="onSubmit" color="#5862F6" loading="{{ paying }}">立即支付 ￥{{ price / 100 }}</van-button>
-		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：支付提示跳转payjs小程序，属系统正常流程，请安心支付</view>
+		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属系统正常流程，可放心支付</view>
 	</view>
 
 	<van-dialog id="van-dialog" />

@@ -10,9 +10,11 @@
 			<view slot="ft" class="ft_12">{{ curLearnUnit.score }}%</view>
 		</cell>
 		<view class="h_8"></view>
-		<progress percent="{{ curLearnUnit.score }}" active-mode="forwards" duration="300" activeColor="#81F8F5" backgroundColor="#10098E" stroke-width="10" border-radius="10"/>
-		<view bindtap="switchShowRecordDetail" class="tap-switch">Tap to expand <image class="icon-down {{ isShowRecordDetail ? 'rotate180' : '' }}" src="/assets/imgs/icon-down.png"/></view>
-		<view wx:if="{{ isShowRecordDetail }}" class="ft_12 mt_8 mb_10">答对：{{ curLearnUnit.cNum }}　答错：{{ curLearnUnit.eNum }}</view>
+		<progress percent="{{ curLearnUnit.score }}" active-mode="forwards" duration="300" activeColor="#81F8F5" backgroundColor="#10098E" stroke-width="12" border-radius="10"/>
+		<view class="mt_16 pb_6" bindtap="switchShowRecordDetail" >
+			<view wx:if="{{ !isShowRecordDetail }}" class="tap-switch">Tap to expand <image class="icon-down {{ isShowRecordDetail ? 'rotate180' : '' }}" src="/assets/imgs/icon-down.png"/></view>
+			<view wx:if="{{ isShowRecordDetail }}" class="ft_12 pt_10 mb_10">答对：{{ curLearnUnit.cNum }}　答错：{{ curLearnUnit.eNum }}</view>
+		</view>
 	</view>
 
 	<view class="levels">
@@ -64,6 +66,10 @@
 				</view>
 			</block>
 		</view>
+	</view>
+
+	<view class="buy-btn" wx:if="{{ !user.isPro && curLearnUnit.score > 0 }}">
+		<van-button icon="point-gift" type="primary" color="#4A50F2" bind:click="memberBtn">Pro</van-button>
 	</view>
 
 

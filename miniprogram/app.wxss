@@ -26,6 +26,7 @@ page {
 .ft_25 { font-size: 50rpx; }
 .ft_26 { font-size: 52rpx; }
 
+.mt_0 { margin-top: 0rpx !important; }
 .mt_4 { margin-top: 8rpx; }
 .mt_5 { margin-top: 10rpx; }
 .mt_6 { margin-top: 12rpx; }
@@ -55,6 +56,13 @@ page {
 .mb_30 { margin-bottom: 60rpx; }
 .mb_40 { margin-bottom: 80rpx; }
 
+.pt_10 { padding-top: 20rpx }
+.pb_6 { padding-bottom: 12rpx }
+.pb_10 { padding-bottom: 20rpx }
+.pb_20 { padding-bottom: 40rpx }
+.bg_fff {
+    background-color: #fff;
+}
 .h_6 { height: 12rpx; }
 .h_8 { height: 16rpx; }
 .h_10 { height: 20rpx; }

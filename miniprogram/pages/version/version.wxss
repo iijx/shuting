@@ -1,4 +1,7 @@
 
+.container {
+    background: #ECF2F5;
+}
 .panel-body {
     padding: 26rpx;
 }

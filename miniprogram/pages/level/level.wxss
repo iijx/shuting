@@ -7,21 +7,22 @@
     background-color: #ECF2F5;
 }
 .curBook-wrap {
-    margin: 28rpx 36rpx 40rpx;
+    margin: 28rpx 32rpx 40rpx;
     background-color: #4A50F2;
-    padding: 40rpx 36rpx 12rpx;
+    padding: 40rpx 36rpx 0rpx;
     color: #fff;
     border-radius: 16rpx;
     overflow: hidden;
     box-shadow: 0 12rpx 32rpx -16rpx rgba(0, 0, 0, .08),
     0 18rpx 54rpx 0rpx rgba(0, 0, 0, .05),
     0 24rpx 96rpx 32rpx rgba(0, 0, 0, .03);
+    transition: all .3s;
 }
 .tap-switch {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 32rpx;
+    /* margin-top: 32rpx; */
     font-size: 24rpx;
 }
 .icon-down {
@@ -147,6 +148,9 @@
     color: #7881ff;
     font-size: 28rpx;
     font-weight: bolder;
+    width: 4em;
+    line-height: 76rpx;
+    text-align: center;
 }
 .buy-info {
     padding: 20rpx 0;
@@ -298,4 +302,12 @@
     right: 20rpx;
     bottom: 20rpx;
     text-align: center;
+}
+
+
+.buy-btn {
+    position: fixed;
+    bottom: 50rpx;
+    right: 32rpx;
+    font-family: sans-serif;
 }

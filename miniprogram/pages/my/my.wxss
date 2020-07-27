@@ -3,16 +3,18 @@
 .container {
     min-height: 100vh;
     padding-bottom: 64rpx;
+    background-color: #f7f8fa;
 }
-.user-wrap {
+.top-wrap {
     border-radius: 5px;
     padding: 32rpx 40rpx 24rpx;
     box-sizing: border-box;
+    background-color: #ECF2F5;
 }
-.userInfo {
+/* .userInfo {
     display: flex;
     align-items: center;
-}
+} */
 .getUserInfoBtn {
     background: none !important;
     border: none !important;
@@ -26,7 +28,7 @@
 .getUserInfoBtn:after {
     display: none;
 }
-.userInfo .avatar {
+.avatar {
     width: 120rpx;
     height: 120rpx;
     display: block;
@@ -39,13 +41,18 @@
     0 18rpx 54rpx 0rpx rgba(0, 0, 0, .05),
     0 24rpx 96rpx 32rpx rgba(0, 0, 0, .03);
 }
-.userInfo .nickName {
+.nickName {
     flex: 1;
     color: #3D96D3;
     color: #4a4a4a;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
-
+.pro-note {
+    color: #4A50F2;
+    color: #4a4a4a;
+    /* font-weight: bold; */
+    /* border: 1px solid #4A50F2; */
+}
 .member-btn {
     background: #4A50F2;
     border-radius: 10rpx;
@@ -65,12 +72,4 @@
 }
 .contact-btn:after {
     display: none !important;
-}
-
-
-.buy-btn {
-    position: fixed;
-    bottom: 50rpx;
-    right: 32rpx;
-    font-family: sans-serif;
 }

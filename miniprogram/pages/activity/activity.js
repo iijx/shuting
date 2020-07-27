@@ -1,32 +1,60 @@
 const app = getApp()
-
-// pages/activity/activity.js
-Page({
-
-    /**
-     * Page initial data
-     */
+const { Vant, UniApi, DB } = app;
+app.createPage({
     data: {
+        user: {},
+        inviteNum: 0,
+        remainNum: 10,
+        isUsedFreeMember: false,
+        config: {
+            freeMemberNeedCount: 10
+        },
+        progressNote: '您已邀请 0 位好友，还差 10 位好友',
+        
+        isExchanging: false
     },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
+        
     },
-
     /**
      * Lifecycle function--Called when page is initially rendered
      */
     onReady: function () {
-
+        DB.collection('weapp_share').where({ openid: this.data.user.openid }).get()
+            .then(res => {
+                let record = res.data[0];
+                let num = record.invitedUser.length;
+                this.setData({
+                    inviteNum: num,
+                    isUsedFreeMember: record.isUsedFreeMember,
+                    progressNote: `您已邀请 ${num} 位好友，` + `还差 ${Math.max(0, this.data.config.freeMemberNeedCount - num)} 位好友`
+                })
+            });
     },
-
     /**
      * Lifecycle function--Called when page show
      */
     onShow: function () {
 
+    },
+    getFreeMember() {
+        if (this.data.isExchanging) return;
+
+        this.setData({ isExchanging: true })
+        UniApi.appCloud('share', 'useFreeMember').then(res => {
+            if (res.success) {
+                UniApi.appCloud('user', 'get').then(res => {
+                    app.Store.data.user = res;
+                    this.update();
+                });
+            }
+            Vant.Dialog.alert({
+                message: res.message,
+                confirmButtonColor: '#4b51f2'
+            }).then(res => {
+                wx.navigateBack({ delta: 1 })
+            });
+        })
     },
 
     itemClick(e) {

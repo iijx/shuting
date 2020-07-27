@@ -11,6 +11,7 @@ module.exports = class {
         this.rank = 1;
         this.isCustom = false;
         this.isRecommend = false;
+        this.activityNote = '';
     }
     setCustom() {
         this.isCustom = true;
@@ -26,6 +27,10 @@ module.exports = class {
     }
     setName(name) {
         this.name = name;
+        return this;
+    }
+    setActiviteNote(note) {
+        this.activityNote = note;
         return this;
     }
 

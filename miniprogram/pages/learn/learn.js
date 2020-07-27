@@ -209,19 +209,17 @@ app.createPage({
         }
     },
     keyTap(e) {
+        if (this.data.spanClass === 'right') return;
         const key = e.target.dataset.value;
-        const newValue = key === 'x' ? this.data.inputValue.slice(0, -1) : this.data.inputValue + key;
+        const newValue = key === 'x' ? this.data.inputValue.slice(0, -1) : this.data.spanClass === 'error' ? key : this.data.inputValue + key;
 
-        if (newValue.length > this.data.answerLength) return;
-        else {
-            this.setData({
-                spanClass: '',
-                inputValue: newValue
-            })
+        this.setData({
+            spanClass: '',
+            inputValue: newValue
+        })
 
-            if (newValue.length >= this.data.answerLength) {
-                this.showAnswer();
-            }
+        if (newValue.length >= this.data.answerLength) {
+            this.showAnswer();
         }
     },
     handerBack() {

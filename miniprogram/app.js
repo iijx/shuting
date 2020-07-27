@@ -21,16 +21,17 @@ App({
             })
         } else {
             // 登录获取用户信息
-            UniApi.appCloud('user', 'get', { from: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
-                store.data.user = res;
-                store.update();
-            })
+            // UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
+            //     store.data.user = res;
+            //     store.update();
+            // })
             UniApi.appCloud('config', 'get').then(res => {
                 if (res.success) {
                     store.data.goods = [...res.goods];
                     store.data.config.version = {...res.version};
-                    store.data.config.iosBuyPrompt = res.iosMemberPromptText || store.data.config.iosBuyPrompt;
+                    store.data.config.iosBuyPrompt = res.iosBuyPrompt || store.data.config.iosBuyPrompt;
                     store.data.config.isAppInCheck = res.isAppInCheck || false;
+                    store.data.config.freeMemberNeedCount = res.freeMemberNeedCount || 10;
                     store.data.oneDayPrice = res.oneDayPrice || 0.2;
                     store.update();
                 }

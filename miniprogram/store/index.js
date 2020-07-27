@@ -14,6 +14,7 @@ const store = {
         config: {
             iosBuyPrompt: 'IOS小程序版，暂不支持开通会员功能',
             isAppInCheck: false,
+            freeMemberNeedCount: 10,
             version: {},
         },
 

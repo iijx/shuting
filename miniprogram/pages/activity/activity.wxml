@@ -1,21 +1,20 @@
 <!--pages/activity/activity.wxml-->
 <view class="container">
-    <block wx:for="{{ activity }}" wx:key="index" wx:item="item">
-        <view class="activity-item" data-type="{{ item.type }}" bindtap="itemClick">
-            <image class="banner" mode="widthFix" src="/assets/imgs/fanfanle_banner.png"></image>
-            <view style="padding: 16rpx 32rpx;">
-                <cell>
-                    <view slot="bd">
-                        <view class="title">{{ item.title }}</view>
-                        <view class="period">第 {{ item.periodNum }} 期　{{ item.periodStart }} - {{ item.periodEnd }}</view>
-                    </view>
-                    <view slot="ft">
-                        <van-button size="small" round color="#FD4D4F">{{ item.btnText }}</van-button>
-                    </view>
-                </cell>
+    <view class="activity-item bg_fff mb_10 pb_20">
+        <image class="img" src="http://cdn.iijx.site/img/ebe8n.png" mode="widthFix"/>
+        <view class="mt_20 w90 blockC">
+            <view class="title text-center">邀请{{ config.freeMemberNeedCount }}位新用户进入即可获赠7天会员!</view>
+            <view class="flex dot-wrap">
+                <view wx:for="{{ config.freeMemberNeedCount }}" wx:key="index" class="dot {{ index < inviteNum ? 'active' : '' }}"></view>
+            </view>
+            <view class="progress-note">{{ progressNote }}</view>
+
+            <view class="mt_20 w90 blockC">
+                <van-button wx:if="{{ isUsedFreeMember }}" round size="normal" disabled color="#00C171" block>已领取</van-button>
+                <van-button wx:elif="{{ inviteNum < config.freeMemberNeedCount }}" round size="normal" open-type="share" color="#00C171" block>邀请好友</van-button>
+                <van-button wx:else bind:click="getFreeMember" round size="normal" color="#00C171" block>立即领奖</van-button>
             </view>
         </view>
-    </block>
-
-
+    </view>
+    <van-dialog id="van-dialog" />
 </view>

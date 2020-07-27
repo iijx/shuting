@@ -6,5 +6,7 @@ export default class User {
         this.avatar = opt.avatar || '';
         this.nickName = opt.nickName || '';
         this.proEndDate = opt.proEndDate || new Date('1970-01-01');
+
+        this.isPaid = opt.isPaid || false;
     }
 }

@@ -1,11 +1,13 @@
 
 const cloud = require('wx-server-sdk');
 const User = require('../models/user.js');
+const ShareInfo = require('../models/shareInfo.js');
 
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV // API 调用都保持和云函数当前所在环境一致
 });
 const db = cloud.database();
+const _ = db.command;
 
 const getUser = async (openid) => db.collection('users').where({ openid }).limit(1).get().then(res => res.data[0]);
 const createUser = async (openid) => {
@@ -27,23 +29,21 @@ module.exports = async function(event, context) {
     console.log('user event', event);
     const { method, params = {} } = event;
     const wxContext = cloud.getWXContext()
-    console.log('wxContext', wxContext)
     let openid = params.openid || wxContext.OPENID;
     let curUser = await getUser(openid);
-    console.log('method', method);
     if (method === 'get') {
         if (!curUser) {
             curUser = await createUser(openid);
-            //     if (params.fromOpenid !== wxContext.OPENID) {
-            //         const res = await cloud.callFunction({
-            //             name: 'weappShare',
-            //             data: {
-            //                 openid,
-            //                 fromOpenid,
-            //             }
-            //         });
-            //         console.log(res);
-            //     }
+            if (params.fromOpenid && params.fromOpenid !== openid) {
+                await db.collection('weapp_share').where({ openid: params.fromOpenid })
+                    .update({ data: { invitedUser: _.addToSet(openid)}})
+                    .then(async res => {
+                        if(res.stats.updated <= 0) {
+                            return await db.collection('weapp_share').add({ data: new ShareInfo(params.fromOpenid).addInvitedUser(openid) })
+                        }
+                        return res;
+                    })
+            }
         }
         return { openid, ...curUser }
     }

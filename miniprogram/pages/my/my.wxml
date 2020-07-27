@@ -1,31 +1,36 @@
 <!--pages/my/my.wxml-->
 <view class="container">
-    <view class="user-wrap">
-        <view class="userInfo">
-            <image wx:if="{{ user.avatar }}" class="avatar" mode="widthFix" src="{{ user.avatar }}"></image>
-            <image wx:elif="{{ user.isPro }}" class="avatar" mode="widthFix" src="/assets/imgs/user-unlogin.png"></image>
-            <open-data wx:else class="avatar" type="userAvatarUrl"></open-data>
-            
-            <view wx:if="{{ user.nickName }}" style="flex: 1">{{ user.nickName }}</view>
-            <button wx:elif="{{ user.isPro }}" class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">点击微信登录</button>
-            <open-data wx:else class="nickName" type="userNickName"></open-data>
+    <view class="top-wrap">
+        <cell class="user-info">
+            <view slot="hd">
+                <image wx:if="{{ user.avatar }}" class="avatar" mode="widthFix" src="{{ user.avatar }}"></image>
+                <image wx:elif="{{ user.isPro }}" class="avatar" mode="widthFix" src="/assets/imgs/user-unlogin.png"></image>
+                <open-data wx:else class="avatar" type="userAvatarUrl"></open-data>
+            </view>
+            <view slot="bd">
+                <view wx:if="{{ user.nickName }}" class="nickName">{{ user.nickName }}</view>
+                <button wx:elif="{{ user.isPro }}" class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">点击微信登录</button>
+                <open-data wx:else class="nickName" type="userNickName"></open-data>
+                <view wx:if="{{ user.isPro }}" class="ft_14 pro-note">Pro会员 {{ user.memberType === 3 ? '永久版' : '' + proEndDateStr + '到期' }}</view>
+            </view>
+        </cell>
+
+        <view wx:if="{{ !user.isPaid }}" class="cl_fff ft_12 mt_16 mb_10 text-center">
+            <view class="member-btn" bindtap="memberBtn">查看会员计划</view>
         </view>
-    </view>
-    
-    <view class="cl_fff ft_12 mt_16 mb_30 w90 blockC text-center">
-        <view wx:if="{{user.isPro}}" class="member-btn"> {{ user.memberType === 3 ? '终身永久会员' : '数听会员用户 ' + proEndDateStr + '到期' }}</view>
-        <view wx:else class="member-btn" bindtap="memberBtn">查看会员计划</view>
+
+        <view wx:else class="h_15"></view>
     </view>
 
-    <view class="operators">
-        <!-- <van-cell title="数听挑战 · 返现测试" icon="gift-o" size="default" link-type="navigateTo" url="/pages/exam/exam" is-link  /> -->
-        <van-cell title="版本预告" icon="down" size="large" link-type="navigateTo" url="/pages/version/version" is-link  />
+    <view class="operators mt_0">
         <van-cell-group>
-            <van-cell size="large" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
+            <van-cell title="版本预告" icon="down" size="large" link-type="navigateTo" url="/pages/version/version" is-link  />
+            <van-cell icon="gem-o" title="免费Vip" value="可领7天" size="large" link-type="navigateTo" url="/pages/activity/activity" is-link  />
+            <!-- <van-cell size="large" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
                 <cell slot="title" num="{{ newMessageNum }}">
                     <view slot="bd">我的消息</view>
                 </cell>
-            </van-cell>
+            </van-cell> -->
             <van-cell icon="gem-o" title="会员兑换码" size="large" link-type="navigateTo" url="/pages/exchange/exchange" is-link  />
         </van-cell-group>
     </view>
@@ -45,7 +50,4 @@
     <!-- 在页面内添加对应的节点 -->
     <van-notify id="van-notify" />
 
-    <view class="buy-btn" wx:if="{{ !user.isPro }}">
-		<van-button icon="point-gift" type="primary" color="#4A50F2" bind:click="memberBtn">Vip</van-button>
-	</view>
 </view>
