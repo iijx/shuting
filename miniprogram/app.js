@@ -21,10 +21,10 @@ App({
             })
         } else {
             // 登录获取用户信息
-            // UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
-            //     store.data.user = res;
-            //     store.update();
-            // })
+            UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
+                store.data.user = res;
+                store.update();
+            })
             UniApi.appCloud('config', 'get').then(res => {
                 if (res.success) {
                     store.data.goods = [...res.goods];
