@@ -10,8 +10,7 @@
         "pages/exchange/exchange",
         "pages/version/version",
         "pages/advice/advice",
-        "pages/activity/activity",
-        "pages/temp/temp"
+        "pages/activity/activity"
     ],
     "window": {
         "backgroundColor": "#ECF2F5",
