@@ -20,6 +20,13 @@ app.createPage({
 
         isFirstAnswer: true,
         isShowCorrectAnswer: false,
+
+        isShowFeedBack: false, // 反馈
+        feedBackOptions: [
+            { name: '发音不全/不清晰' },
+            { name: '没有声音' },
+            { name: '其他' }
+        ]
     },
     onLoad: function (opt = {}) {
         Util.sleep(30).then(() => {
@@ -135,7 +142,7 @@ app.createPage({
         Util.sleep(200).then(() => wx.vibrateShort());
 
         // 1. 处理答题记录
-        if (this.data.mode === 'normal' && this.data.isFirstAnswer) {
+        if (this.data.isFirstAnswer) {
             let index = this.data.answerRecord.findIndex(i => i === '');
             let answer = isCorrect ? 'right' : 'error';
             index >= 0 ? this.data.answerRecord.splice(index, 1, answer) : this.data.answerRecord = [answer, '', '', '', '']
@@ -144,10 +151,12 @@ app.createPage({
                 answerRecord: this.data.answerRecord,
                 isFirstAnswer: false
             })
-            Store.setUnitLearnData(this.data.curLearnUnit.unitId, {
-                cNum: this.data.allAnswerRecord.filter(i => i === 'right').length,
-                eNum: this.data.allAnswerRecord.filter(i => i === 'error').length,
-            })
+            if (this.data.mode === 'normal') {
+                Store.setUnitLearnData(this.data.curLearnUnit.unitId, {
+                    cNum: this.data.allAnswerRecord.filter(i => i === 'right').length,
+                    eNum: this.data.allAnswerRecord.filter(i => i === 'error').length,
+                })
+            }
         }
         // 2. 设置正确与错误的样式
         this.setData({
@@ -166,7 +175,7 @@ app.createPage({
             this.data.answerRecord = ['', '', '', '', ''];
         }
         // 2. 判断全部记录，是否已经有15个，有则完成学习
-        if ((this.data.allAnswerRecord.length) >= 15 && this.data.mode !== 'hard') {
+        if ((this.data.allAnswerRecord.length) >= 15 && this.data.mode === 'normal') {
             this.toSummary()
         } else { // 3. 否则，继续学习
             this._preStartInit();
@@ -226,6 +235,20 @@ app.createPage({
         wx.navigateBack({
             delta: 1
         })
+    },
+    switchfeedback() {
+        this.setData({
+            isShowFeedBack: !this.data.isShowFeedBack
+        })
+    },
+    onSelectFeedback(e) {
+        app.DB.collection('word_error').add({
+            data: {
+                word: this.data.answer,
+                name: e.detail.name
+            }
+        })
+        Vant.Toast.success('感谢您的反馈');
     },
 
     onUnload: function () {

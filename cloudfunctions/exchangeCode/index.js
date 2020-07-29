@@ -66,7 +66,9 @@ exports.main = async (event, context) => {
     let res = await db.collection('users').doc(curUser._id).update({
         data: {
             isPro: true,
+            isPaid: true,
             proEndDate: Date.now() + getAddDayByExchangeCodeType(codeInfo) * 24 * 60 * 60 * 1000,
+            lastBuyTime: Date.now(),
             memberType: codeInfo.memberType,
         }
     })

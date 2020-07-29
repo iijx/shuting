@@ -5,13 +5,11 @@ app.createPage({
         user: {},
         inviteNum: 0,
         remainNum: 10,
-        isUsedFreeMember: false,
-        config: {
-            freeMemberNeedCount: 10
-        },
-        progressNote: '您已邀请 0 位好友，还差 10 位好友',
+        isUsedMemberDouble: false,
+        progressNote: '您已邀请 0 位好友，还差 * 位好友',
         
-        isExchanging: false
+        isExchanging: false,
+        time: 30 * 60 * 60 * 1000
     },
     onLoad: function (options) {
         
@@ -27,14 +25,14 @@ app.createPage({
                     let num = record.invitedUser.length;
                     this.setData({
                         inviteNum: num,
-                        isUsedFreeMember: record.isUsedFreeMember,
-                        progressNote: `您已邀请 ${num} 位好友，` + `还差 ${Math.max(0, this.data.config.freeMemberNeedCount - num)} 位好友`
+                        isUsedMemberDouble: record.isUsedMemberDouble || false,
+                        progressNote: `您已邀请 ${num} 位好友，` + `还差 ${Math.max(0, 3 - num)} 位好友`
                     })
                 } else {
                     this.setData({
                         inviteNum: 0,
-                        isUsedFreeMember: false,
-                        progressNote: `您已邀请 0 位好友，` + `还差 ${this.data.config.freeMemberNeedCount} 位好友`
+                        isUsedMemberDouble: false,
+                        progressNote: `您已邀请 0 位好友，` + `还差 3 位好友`
                     })
                 }
             });
@@ -49,7 +47,7 @@ app.createPage({
         if (this.data.isExchanging) return;
 
         this.setData({ isExchanging: true })
-        UniApi.appCloud('share', 'useFreeMember').then(res => {
+        UniApi.appCloud('share', 'useMemberDouble').then(res => {
             if (res.success) {
                 UniApi.appCloud('user', 'get').then(res => {
                     app.Store.data.user = res;

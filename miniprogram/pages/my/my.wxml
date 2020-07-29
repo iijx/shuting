@@ -14,18 +14,24 @@
                 <view wx:if="{{ user.isPro }}" class="ft_14 pro-note">Pro会员 {{ user.memberType === 3 ? '永久版' : '' + proEndDateStr + '到期' }}</view>
             </view>
         </cell>
-
+        <!-- 没有付过费 -->
         <view wx:if="{{ !user.isPaid }}" class="cl_fff ft_12 mt_16 mb_10 text-center">
             <view class="member-btn" bindtap="memberBtn">查看会员计划</view>
         </view>
+        <!-- 付过费 -->
+        <block wx:else>
+            <view wx:if="{{ !user.isBuyOver24Hour && user.memberType !== 3 }}" class="cl_fff ft_12 mt_16 mb_10 text-center">
+                <view class="activity-btn" bindtap="memberDouble">获得会员翻倍机会</view>
+            </view>
+            <view wx:else class="h_15"></view>
+        </block>
 
-        <view wx:else class="h_15"></view>
     </view>
 
     <view class="operators mt_0">
         <van-cell-group>
             <van-cell title="版本预告" icon="down" size="large" link-type="navigateTo" url="/pages/version/version" is-link  />
-            <van-cell icon="gem-o" title="免费Vip" value="可领7天" size="large" link-type="navigateTo" url="/pages/activity/activity" is-link  />
+            <van-cell wx:if="{{ user.memberType !== 3 }}" icon="point-gift-o" title="免费Vip" value="可领7天" size="large" link-type="navigateTo" url="/pages/activity/activity" is-link  />
             <!-- <van-cell size="large" icon="chat-o" link-type="navigateTo" url="/pages/message/message" is-link>
                 <cell slot="title" num="{{ newMessageNum }}">
                     <view slot="bd">我的消息</view>

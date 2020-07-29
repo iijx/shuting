@@ -4,6 +4,7 @@
         <image class="icon-back-img" bindtap="handerBack" src="../../assets/imgs/icon-left-arrow.png" mode="widthFix"></image>
         <view class="flex1 text-center ft_14">数听英语</view>
         <view class="icon-back-img"></view>
+        <text class="feedback" bindtap="switchfeedback">反馈</text>
     </view>
 
     <view class="flex step-wrap">
@@ -69,4 +70,9 @@
             </view>
         </view>
     </view>
+
+    <!-- 反馈弹框 -->
+    <van-action-sheet show="{{ isShowFeedBack }}" actions="{{ feedBackOptions }}" bind:close="switchfeedback" bind:select="onSelectFeedback"/>
+    <van-toast id="van-toast" />
+
 </view>

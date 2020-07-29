@@ -45,7 +45,11 @@ module.exports = async function(event, context) {
                     })
             }
         }
-        return { openid, ...curUser }
+        return { 
+            openid,
+            ...curUser,
+            isBuyOver24Hour: curUser.lastBuyTime || 0 > (Date.now() - 24 * 60 * 60 * 1000)
+        }
     }
     else if (method === 'update') {
         if (!curUser) {

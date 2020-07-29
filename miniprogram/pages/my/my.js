@@ -11,7 +11,9 @@ app.createPage({
         awardedNum: 0,
         newMessageNum: 0,
         config: {},
-        proEndDateStr: ''
+        proEndDateStr: '',
+
+        isShowMemberActivity: true
     },
     onLoad: function (options) {
         wx.nextTick(() => {
@@ -42,6 +44,11 @@ app.createPage({
                 proEndDateStr: Util.dateFormatter(new Date(this.data.user.proEndDate), 'YYYY/MM/DD')
             })
         }
+    },
+    memberDouble() {
+        wx.navigateTo({
+            url: '../memberDouble/memberDouble',
+        })
     },
     memberBtn() {
         if (this.data.env.platform === 'android') {

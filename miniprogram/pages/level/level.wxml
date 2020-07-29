@@ -2,7 +2,6 @@
 	<view class="curBook-wrap">
 		<cell>
 			<view slot="bd" class="cl_fff ft_bold">{{ curLearnLevel.title }} · {{ curLearnUnit.title }}</view>
-			<!-- <view slot="ft" class="ft_14">{{ curLearnUnit.score }}%</view> -->
 		</cell>
 		<view class="h_15"></view>
 		<cell>
@@ -17,10 +16,9 @@
 		</view>
 	</view>
 
+	<view class="random-btn" bindtap="startHardMode">随机练习</view>
+
 	<view class="levels">
-		<!-- <view class="title"> -->
-			<!-- <image class="icon-level" src="/assets/imgs/levels.png"></image>课程清单 -->
-		<!-- </view> -->
 		<view wx:for="{{ lesson }}" wx:key="index" wx:for-item="item">
 			<view style="padding: 28rpx 32rpx;">
 				<cell>

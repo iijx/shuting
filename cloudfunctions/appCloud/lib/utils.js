@@ -18,6 +18,16 @@ const dateFormatter = (date, formatter) => {
                     .replace(/ss/g, (s < 10 ? '0' : '') + s)
 }
 
+const getMemberDayByType = type => {
+    if (type === 1) return 30;
+    if (type === 2) return 180;
+    if (type === 4) return 360;
+    if (type === 6) return 3 * 365;
+    if (type === 3) return 100 * 365;
+    return 0;
+}
+
 module.exports = {
     dateFormatter,
+    getMemberDayByType
 }

@@ -135,6 +135,12 @@
 					"pathName": "pages/activity/activity",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/memberDouble",
+					"pathName": "pages/memberDouble/memberDouble",
+					"scene": null
 				}
 			]
 		}
