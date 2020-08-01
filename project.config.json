@@ -140,6 +140,14 @@
 					"id": -1,
 					"name": "pages/memberDouble",
 					"pathName": "pages/memberDouble/memberDouble",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "pages/article/article",
+					"pathName": "pages/article/article",
+					"query": "",
 					"scene": null
 				}
 			]

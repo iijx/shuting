@@ -1,0 +1,5 @@
+<!--components/cell/cell.wxml-->
+<view class="custom-class list">
+    <view wx:if="{{ title }}" class="title">{{ title }}</view>
+    <view class="list-item" wx:for="{{ data }}" wx:key="index">{{ item }}</view>
+</view>

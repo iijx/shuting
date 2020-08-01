@@ -1,0 +1,22 @@
+.list {
+}
+.list .title {
+    color: #5E4846;
+    font-size: 36rpx;
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F3F0;
+}
+.list-item {
+    background-color: #F8F3F0;
+    color: #5E4846;
+    line-height: 78rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 24rpx;
+}
+.list .list-item:nth-child(2n){
+    background: #E2DAD3;
+}

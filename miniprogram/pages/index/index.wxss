@@ -1,1 +1,121 @@
-/* pages/index/index.wxss */
+.container {
+    width: 100%;
+    position: relative;
+    height: 100vh;
+}
+
+.top {
+    color: #3e3f41;
+    font-weight: bold;
+    height: 32%;
+    background: #f9ce0d;
+    padding: 100rpx 32rpx 0;
+    box-sizing: border-box;
+}
+.top .text1 {
+    font-size: 38rpx;
+}
+.top .text2 {
+    font-size: 32rpx;
+    margin-top: 68rpx;
+}
+.main {
+    /* transform: translate(0, -260rpx); */
+    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
+    box-sizing: border-box;
+    padding: 60rpx 40rpx 32rpx;
+    background: #ECF2F5;
+
+}
+.learn-item {
+    width: 686rpx;
+    margin: 0 auto;
+    border-radius: 10rpx;
+    margin-bottom: 60rpx;
+    padding: 32rpx;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 28rpx;
+    box-shadow: 0 12rpx 32rpx -16rpx rgba(0, 0, 0, .08),
+    0 18rpx 54rpx 0rpx rgba(0, 0, 0, .05),
+    0 24rpx 96rpx 32rpx rgba(0, 0, 0, .03);
+}
+.learn-item .title {
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.learn-item.item-1 { background-color: #D94828; }
+.learn-item.item-2 { background-color: #31C16F; }
+.learn-item .note {
+    font-size: 24rpx;
+    color: #efefef;
+}
+
+.levellist-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 60rpx 0 120rpx;
+}
+.sublevel-title {
+    /* text-align: center; */
+    font-size: 40rpx;
+    color: #3D3E40;
+    padding-bottom: 10rpx;
+    font-weight: bold;
+}
+.item {
+    display: flex;
+    
+}
+.item .item-bd {
+    flex: 1;
+}
+
+.icon-clock {
+    width: 46rpx;
+    height: 46rpx;
+    display: block;
+}
+.learn-btn {
+    background: #3D96D3;
+    width: 300rpx;
+    height: 74rpx;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 28rpx;
+    font-weight: normal !important;
+}
+
+.give-banner {
+    /* width: 100%; */
+    margin: 44rpx 32rpx 0;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+}
+.give-banner .img {
+    width: 100%;
+    display: block;
+}
+
+.icon-gift {
+    position: fixed;
+    right: 20rpx;
+    bottom: 68rpx;
+    width: 100rpx;
+    height: 100rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(253, 73, 79, .1);
+    border-radius: 50%;
+}
+
+.icon-gift .img{ 
+    width: 60rpx;
+    height: 60rpx;
+    display: block;
+}

@@ -1,0 +1,139 @@
+<view class="article-container article">
+    <van-tabs active="{{ activeKey }}" bind:change="onChange" sticky>
+        <van-tab title="基数词">
+            <view class="content">
+                <view class="h2">含义</view>
+                <view class="p">用来描述数量的多少。可以理解为数学上的数字。</view>
+                <view class="h2">写法</view>
+                <view class="h2">0 ~ 12</view>
+                <view class="p">这些是固定词，你一定很熟悉了。</view>
+                <van-row>
+                    <van-col span="8">
+                        <list data="{{ ['0: zero', '1: one', '2: two', '3: three', '4: four'] }}"></list>
+                    </van-col>
+                    <van-col span="8">
+                        <list data="{{ ['5: five', '6: six', '7: seven', '8: eight', '9: nine'] }}"></list>
+                    </van-col>
+                    <van-col span="8">
+                        <list data="{{ ['10: ten', '11: eleven', '12: twelve' ] }}"></list>
+                    </van-col>
+                </van-row>
+                <view class="h2">13 ~ 19</view>
+                <view class="p">这些结构上都是以后缀<text class="code">－teen</text>结尾</view>
+                <van-row>
+                    <van-col span="12">
+                        <list data="{{ ['13: thirteen', '14: fourteen', '15: fifteen', '16: sixteen'] }}"></list>
+                    </van-col>
+                    <van-col span="12">
+                        <list data="{{ ['17: seventeen', '18: eighteen', '19: nineteen'] }}"></list>
+                    </van-col>
+                </van-row>
+                <view class="h2">20 ~ 99</view>
+                <view class="p">如果是十的整数结构上都是以后缀<text class="code">－ty</text>结尾</view>
+                <van-row>
+                    <van-col span="12">
+                        <list data="{{ ['20: twenty', '30: thirty', '40: forty', '50: fifty'] }}"></list>
+                    </van-col>
+                    <van-col span="12">
+                        <list data="{{ ['60: sixty', '70: seventy', '80: eighty', '90: ninety'] }}"></list>
+                    </van-col>
+                </van-row>
+                <view class="p">非十的整数则是：先说几十，再说几。如：</view>
+                <list data="{{ ['21: twenty-one', '43: forty-three', '95: ninety-five', '68: sixty-eight'] }}"></list>
+                <view class="h2">100～999</view>
+                <view class="p">其规则是：先说几百，再说几，中间加个<text class="code">and</text>。就像这样：</view>
+                <list data="{{ ['101:  one hundred and one', '156: one hundred and fifty-six', '367: three hundred and sixty-seven'] }}"></list>
+                <view class="h2">1千以后</view>
+                <view class="p">这些更大的数呢，从个位数起，每三位数都表示一个新单位，以逗号分割，一节一节的表示即可。如：</view>
+                <list data="{{ ['2,648', 'two thousand six hundred and forty-eight'] }}"></list>
+                <list data="{{ ['16,250,064', 'sixteen million two hundred and fifty thousand and sixty-four'] }}"></list>
+                <list data="{{ ['5,237,166,234', 'five billion，two hundred and thirty-seven million，one hundred and sixty-six thousand，two hundred and thirty-four'] }}"></list>
+                <view class="p">需要掌握的有这些单位：</view>
+                <list data="{{ ['千: thousand', '百万: million', '十亿: billion', '万亿: trillion'] }}"></list>
+            </view>
+        </van-tab>
+        <van-tab title="序数词">
+            <view class="content">
+                <view class="h2">含义</view>
+                <view class="p">用来表示顺序的词，同汉语中的“第几”。</view>
+                <view class="h2">写法</view>
+                <view class="p">除第1, 2, 3特殊点外，其余均是以<text class="code">th</text>结尾。</view>
+                <van-row>
+                    <van-col span="12">
+                        <list data="{{ ['第一: first', '第二: second', '第三: third', '第四: fourth', '第五: fifth', '第六: sixth'] }}"></list>
+                    </van-col>
+                    <van-col span="12">
+                        <list data="{{ ['第七: seventh', '第八: eighth', '第九: ninth', '第十: tenth', '第十一: eleventh', '第十二: twelfth'] }}"></list>
+                    </van-col>
+                </van-row>
+                <view class="p">如果是第几十几，第几百几等，只需变个位就可以了。</view>
+                <list data="{{ ['第33: thirty-third', '第121: one hundred and twenty-first', '第2034: two thousand and thirty-fourth'] }}"></list>
+                <view class="h2">缩写形式</view>
+                <view class="p">缩写形式也很常见，它的规律是<text class="code">数字 + 最后两个字母</text></view>
+                <list data="{{ ['first: 1st', 'second: 2nd', 'third: 3rd', 'fourth: 4th', 'fifth: 5th', '...', 'thirty-third: 33rd'] }}"></list>
+            </view>
+        </van-tab>
+        <van-tab title="分数小数">
+            <view class="content">
+                <view class="h2">分数表示</view>
+                <view class="p">分数由基数词和序数词构成——分子用基数词，分母用序数词，分子超过<text class="code">1</text>时，分母用复数。</view>
+                <list data="{{ ['2/3: two thirds', '3/5: three fifths', '1/6: a [one] sixth'] }}"></list>
+                <view class="p">当然，有几个特殊的分数，也有特定的单词来表示，如：</view>
+                <list data="{{ ['1: whole', '1/2: half', '1/4: quarter'] }}"></list>
+                <view class="p">另外，对于复杂点的数，也常用<text class="code">over</text>来表示分数，此时分子分母都用基数词即可。</view>
+                <list data="{{ ['327/465', 'three hundred and twenty-seven over four hundred and sixty-five'] }}"></list>
+                <view class="h2">小数表示法</view>
+                <view class="p">小数点前的数字正常读，小数点后的数字是一位一位读，点读作<text class="code">point</text>。如：</view>
+                <list data="{{ ['33.14159', 'thirty-three point one four one five nine'] }}"></list>
+            </view>
+        </van-tab>
+        <van-tab title="电话">
+            <view class="content">
+                <view class="h2">读法规则</view>
+                <view class="li">1. 一位一位的读</view>
+                <view class="li">2. 遇到相同的两位数，可用<text class="code">double</text></view>
+                <view class="li">3. 遇到相同的三位数，可用<text class="code">triple</text></view>
+                <view class="li">4. 0 可以读为<text class="code">zero</text>, 也可以读作字母<text class="code">o</text>或<text class="code">nought</text>.</view>
+                <view class="ps">注意：在<text class="code">TOEFL</text>考试中,<text class="code">0</text>常念作<text class="code">zero</text>,但在<text class="code">IELTS</text>考试中“<text class="code">0</text>常念作“<text class="code">nought</text></view>
+            </view>
+        </van-tab>
+        <van-tab title="年/月/日">
+            <view class="content">
+                <view class="h2">年份</view>
+                <view class="p">年份有两种读法，以<text class="code">2019</text>为例：</view>
+                <view><text class="strong">① 两位一读:</text> 读成 <text class="code">twenty eighteen</text></view>
+                <view><text class="strong">② 当数字读:</text> 读成<text class="code">two thousand and nighteen</text></view>
+                <view class="h2">月份</view>
+                <list data="{{ monthWords }}"></list>
+                <view class="h2">星期</view>
+                <list data="{{ weekWords }}"></list>
+            </view>
+        </van-tab>
+        <van-tab title="时间">
+            <view class="content">
+                <view class="h2">读法一</view>
+                <view class="p">从左向右，两位一读。如:</view>
+                <list data="{{ ['15:23 读作 fifteen twenty-three', ''] }}"></list>
+                <view class="h2">读法二</view>
+                <view class="p">用<text class="code">past/to</text>来表示</view>
+                <list data="{{ ['2:00 读作 2 o’clock', '2:05 读作 five past two', '2:15 读作 fifteen past two', '2:40 读作 twenty to three', '2:55 读作 five to three'] }}"></list>
+                <view class="p">你一定看出来了，<text class="code">past</text>意思是过去，<text class="code">five past two</text> 表示5分钟从2点这个时刻过去了，即2:05; 而<text class="code">to</text>表示将到达，<text class="code">five to three</text> 还有5分钟到3点，即现在是2:55。</view>
+                <view class="p">另外，注意下一些单词的转换, 需注意下</view>
+                <list data="{{ ['2:15 读作 quarter past two', '2:30 读作 half past two', '2:45 读作 quarter to three'] }}"></list>
+            </view>
+        </van-tab>
+        <van-tab title="各种单位">
+            <view class="content">
+                <view class="h2">百分比</view>
+                <view class="p">百分比这个单词是 <text class="code">percent</text> 。使用也很简单，只需在数字后面跟上<text class="code">percent</text> 就行。如：</view>
+                <list data="{{ ['1.5% => one point five percent', '3% => three percent'] }}"></list>
+                <view class="h2">倍数</view>
+                <view class="p">倍数用单词 <text class="code">times</text>。如：</view>
+                <list data="{{ ['十倍 => ten times'] }}"></list>
+                <view class="h2">常见货币</view>
+                <list data="{{ ['Dollar 美元(美国) $', 'Pound 磅(英国) ￡', 'penny 便士(英国辅币 1磅=100便士)', 'euro 欧元 €', 'Rouble 卢布(俄罗斯) ₽', 'Franc 法郎(法国)', 'Mark: 马克(德国)'] }}"></list>
+                <view class="p">另外，还常见以<text class="code">cent</text>为单位，表示<text class="code">分</text>，既可以表示<text class="code">美元的分</text>，也可以是<text class="code">欧元的分</text>，需注意下。</view>
+            </view>
+        </van-tab>
+    </van-tabs>
+</view>

@@ -92,3 +92,7 @@ page {
 .w50 { width: 50%; }
 .w40 { width: 40%; }
 .blockC { margin-left: auto; margin-right: auto; }
+
+.text-right {
+    text-align: right;
+}

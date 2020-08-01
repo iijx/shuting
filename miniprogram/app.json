@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/level/level",
         "pages/index/index",
+        "pages/level/level",
+        "pages/article/article",
         "pages/learn/learn",
         "pages/summary/summary",
         "pages/my/my",
@@ -35,6 +36,7 @@
         "van-col": "@vant/weapp/col",
         "van-row": "@vant/weapp/row",
         "van-tabs": "@vant/weapp/tabs",
+        "van-tab": "@vant/weapp/tab",
         "van-tag": "@vant/weapp/tag",
         "van-cell-group": "@vant/weapp/cell-group",
         "van-cell": "@vant/weapp/cell",
@@ -45,7 +47,10 @@
         "van-divider": "@vant/weapp/divider",
         "van-slider": "@vant/weapp/slider",
         "van-popup": "@vant/weapp/popup",
-        "cell": "/components/cell/cell"
+        "van-sidebar": "@vant/weapp/sidebar",
+        "van-sidebar-item": "@vant/weapp/sidebar-item",
+        "cell": "/components/cell/cell",
+        "list": "/components/list/list"
     },
     
     "sitemapLocation": "sitemap.json",
@@ -55,12 +60,11 @@
         "borderStyle": "black",
         "list": [
             {
-                "pagePath": "pages/level/level",
+                "pagePath": "pages/index/index",
                 "iconPath": "./assets/imgs/tabs/level.png",
                 "selectedIconPath": "/assets/imgs/tabs/level-1.png",
-                "text": "课程"
+                "text": "首页"
             },
-            
             {
                 "pagePath": "pages/my/my",
                 "iconPath": "/assets/imgs/tabs/my.png",

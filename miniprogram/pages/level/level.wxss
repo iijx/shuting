@@ -1,9 +1,7 @@
 /* pages/level/level.wxss */
 .container {
-    /* padding: 6rpx 14rpx 18rpx; */
-    padding-top: 120rpx;
+    /* padding-top: 120rpx; */
     padding-bottom: 140rpx;
-    /* background-image: linear-gradient(180deg, #F9CE0D, #FFEFCA); */
     background-color: #ECF2F5;
 }
 .curBook-wrap {
@@ -33,8 +31,10 @@
 .icon-down.rotate180 {
     transform: rotate(180deg);
 }
-.random-btn {
+.btn-wrap {
     margin: 32rpx 32rpx;
+}
+.random-btn {
     background-color: #fff;
     text-align: center;
     line-height: 2.6;

@@ -1,2 +1,28 @@
-<!--pages/index/index.wxml-->
-<view></view>
+<!--index.wxml-->
+<view class="container">
+    <view class="top">
+        <view class="text1">数听英语 · 专项提升数字英语听力</view>
+        <view class="text2">Let’s get started</view>
+    </view>
+    
+    <view class="main">
+        <view class="learn-item item-1" bindtap="toArticle">
+            <view class="titel">1. 数字表达详解</view>
+            <view class="mt_20">
+                <cell>
+                    <view slot="bd" class="note">基数词、序数词、分数、小数等等</view>
+                    <van-button slot="ft" round plain size="small" color="#D94828">查看详解</van-button>
+                </cell>
+            </view>
+        </view>
+        <view class="learn-item item-2" bindtap="toLevel">
+            <view class="titel">2. 专项练习</view>
+            <view class="mt_20">
+                <cell>
+                    <view slot="bd" class="note">刻意练习 · 各个击破</view>
+                    <van-button slot="ft" round plain size="small" color="#31C16F">进入练习</van-button>
+                </cell>
+            </view>
+        </view>
+    </view>
+</view>

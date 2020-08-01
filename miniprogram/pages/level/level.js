@@ -7,8 +7,6 @@ app.createPage({
         lesson: [],
         curLearnLevel: {},
         curLearnUnit: {},
-        isShowNote: false,
-        noteType: '',
         monthWords: [...Util.MonthWords],
         weekWords: [...Util.WeekWords],
         config: {},
@@ -97,13 +95,6 @@ app.createPage({
                 url: '../learn/learn?mode=hard',
             })
         }
-    },
-    noteBtn(e) {
-        let unit = e.currentTarget.dataset.unit;
-        this.setData({
-            noteType: unit.type,
-            isShowNote: true,
-        })
     },
     audioNote(e) {
         let index = Number(e.currentTarget.dataset.index);

@@ -1,19 +1,27 @@
 const app = getApp();
-const { Util, Vant, Store } = app;
+const { Util, UniApi, Vant } = app;
+
 app.createPage({
   data: {
-      user: new app.Models.User({}),
-      curLearnLevel: {},
-      curLearnUnit: {},
+    arr: [
+      '基数词',
+      '序数词',
+      '分数小数',
+      '电话',
+      '年/月/日',
+      '时间',
+      '各种单位',
+    ],
+    activeKey: 0,
+    monthWords: [...Util.MonthWords].map(i => `${i.word}  /${i.phonetic}/  ${i.mean}`),
+    weekWords: [...Util.WeekWords].map(i => `${i.word}  /${i.phonetic}/  ${i.mean}`),
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    // wx.switchTab({
-    //   url: '../level/level'
-    // })
+
   },
 
   /**
@@ -23,25 +31,21 @@ app.createPage({
 
   },
 
-
   /**
    * Lifecycle function--Called when page show
    */
   onShow: function () {
 
   },
-
-  toArticle() {
-    wx.navigateTo({
-      url: '../article/article',
-    })
-  },
-  toLevel() {
-    wx.navigateTo({
-      url: '../level/level',
-    })
+  onChange(e) {
+    // this.setData({
+    //   activeKey: e.detail
+    // });
   },
 
+  /**
+   * Lifecycle function--Called when page hide
+   */
   onHide: function () {
 
   },
@@ -66,4 +70,11 @@ app.createPage({
   onReachBottom: function () {
 
   },
+
+  /**
+   * Called when user click on the top right corner to share
+   */
+  onShareAppMessage: function () {
+
+  }
 })
