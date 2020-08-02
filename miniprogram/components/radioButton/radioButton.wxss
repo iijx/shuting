@@ -1,0 +1,31 @@
+/* components/radioButton.wxss */
+.item-wrap {
+    display: inline-block;
+}
+.item {
+    display: inline-block;
+    height: 30px;
+    line-height: 28px;
+    margin: 0;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #515a6e;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border: 1px solid #dcdee2;
+    border-left: 0;
+    background: #fff;
+    position: relative;
+}
+.item:first-child {
+    border-radius: 4px 0 0 4px;
+    border-left: 1px solid #dcdee2;
+    box-shadow: none !important;
+}
+.item.checked {
+    background: #fff;
+    border-color: #9254de;
+    box-shadow: -1px 0 0 0 #9254de;
+    color: #9254de;
+    z-index: 1;
+}

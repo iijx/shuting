@@ -41,6 +41,11 @@ app.createPage({
       url: '../level/level',
     })
   },
+  toQst() {
+    wx.navigateTo({
+      url: '../qst/qst',
+    })
+  },
 
   onHide: function () {
 

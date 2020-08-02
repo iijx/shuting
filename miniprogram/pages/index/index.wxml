@@ -16,13 +16,31 @@
             </view>
         </view>
         <view class="learn-item item-2" bindtap="toLevel">
-            <view class="titel">2. 专项练习</view>
+            <view class="titel">2. 专项训练</view>
             <view class="mt_20">
                 <cell>
-                    <view slot="bd" class="note">刻意练习 · 各个击破</view>
+                    <view slot="bd" class="note">单元练习 · 各个击破</view>
                     <van-button slot="ft" round plain size="small" color="#31C16F">进入练习</van-button>
                 </cell>
             </view>
         </view>
+        <view class="learn-item item-3" bindtap="toQst">
+            <view class="titel">3. 快听检验</view>
+            <view class="mt_20">
+                <cell>
+                    <view slot="bd" class="note">混合快速数听</view>
+                    <van-button slot="ft" round plain size="small" color="#9B89DC">进入快听</van-button>
+                </cell>
+            </view>
+        </view>
+        <!-- <view class="learn-item item-2" bindtap="toLevel">
+            <view class="titel">4. 真题测试</view>
+            <view class="mt_20">
+                <cell>
+                    <view slot="bd" class="note">单元练习 · 各个击破</view>
+                    <van-button slot="ft" round plain size="small" color="#31C16F">进入练习</van-button>
+                </cell>
+            </view>
+        </view> -->
     </view>
 </view>

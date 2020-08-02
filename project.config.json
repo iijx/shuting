@@ -149,6 +149,13 @@
 					"pathName": "pages/article/article",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "qst",
+					"pathName": "pages/qst/qst",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

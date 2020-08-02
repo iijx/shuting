@@ -1,0 +1,6 @@
+<!--components/cell/cell.wxml-->
+<view class="custom-class">
+    <view class="item-wrap">
+        <view class="item {{ item.checked ? 'checked' : '' }}" data-index="{{ index }}" wx:for="{{ data }}" wx:key="index" bindtap="btnTap">{{ item.label }}</view>
+    </view>
+</view>

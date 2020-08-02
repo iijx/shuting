@@ -2,6 +2,7 @@
     "pages": [
         "pages/index/index",
         "pages/level/level",
+        "pages/qst/qst",
         "pages/article/article",
         "pages/learn/learn",
         "pages/summary/summary",
@@ -49,8 +50,11 @@
         "van-popup": "@vant/weapp/popup",
         "van-sidebar": "@vant/weapp/sidebar",
         "van-sidebar-item": "@vant/weapp/sidebar-item",
+        "van-checkbox": "@vant/weapp/checkbox",
+        "van-checkbox-group": "@vant/weapp/checkbox-group",
         "cell": "/components/cell/cell",
-        "list": "/components/list/list"
+        "list": "/components/list/list",
+        "radioBtn": "/components/radioButton/radioButton"
     },
     
     "sitemapLocation": "sitemap.json",

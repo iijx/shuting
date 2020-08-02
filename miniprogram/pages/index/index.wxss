@@ -7,7 +7,7 @@
 .top {
     color: #3e3f41;
     font-weight: bold;
-    height: 32%;
+    height: 28%;
     background: #f9ce0d;
     padding: 100rpx 32rpx 0;
     box-sizing: border-box;
@@ -20,10 +20,8 @@
     margin-top: 68rpx;
 }
 .main {
-    /* transform: translate(0, -260rpx); */
-    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); */
     box-sizing: border-box;
-    padding: 60rpx 40rpx 32rpx;
+    padding: 32rpx;
     background: #ECF2F5;
 
 }
@@ -31,7 +29,7 @@
     width: 686rpx;
     margin: 0 auto;
     border-radius: 10rpx;
-    margin-bottom: 60rpx;
+    margin-bottom: 32rpx;
     padding: 32rpx;
     box-sizing: border-box;
     color: #fff;
@@ -46,6 +44,7 @@
 }
 .learn-item.item-1 { background-color: #D94828; }
 .learn-item.item-2 { background-color: #31C16F; }
+.learn-item.item-3 { background-color: #9B89DC; }
 .learn-item .note {
     font-size: 24rpx;
     color: #efefef;
