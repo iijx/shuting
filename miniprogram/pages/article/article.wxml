@@ -90,11 +90,12 @@
         <van-tab title="电话">
             <view class="content">
                 <view class="h2">读法规则</view>
-                <view class="li">1. 一位一位的读</view>
-                <view class="li">2. 遇到相同的两位数，可用<text class="code">double</text></view>
-                <view class="li">3. 遇到相同的三位数，可用<text class="code">triple</text></view>
-                <view class="li">4. 0 可以读为<text class="code">zero</text>, 也可以读作字母<text class="code">o</text>或<text class="code">nought</text>.</view>
+                <view class="li">1. 正常下一位一位的读；</view>
+                <view class="li">2. 遇到相同的两位数，可用<text class="code">double</text>，三位数，用<text class="code">triple</text>表示；</view>
+                <view class="li">3. 0 可以读为<text class="code">zero</text>, 也可以读作字母<text class="code">o</text>或<text class="code">nought</text>。</view>
                 <view class="ps">注意：在<text class="code">TOEFL</text>考试中,<text class="code">0</text>常念作<text class="code">zero</text>,但在<text class="code">IELTS</text>考试中“<text class="code">0</text>常念作“<text class="code">nought</text></view>
+                <view class="p">示例：</view>
+                <list data="{{ ['9712: nine seven one two', '10086: one double o eight six', '110-666: double one zero triple six'] }}"></list>
             </view>
         </van-tab>
         <van-tab title="年/月/日">

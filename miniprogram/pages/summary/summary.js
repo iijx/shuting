@@ -56,6 +56,11 @@ app.createPage({
             })
         }
     },
+    toLearnCurSubLevel() {
+        wx.redirectTo({
+            url: '../learn/learn',
+        })
+    },
     toLearnNextSubLevel() {
         let unitList = this.data.rawLesson.find(i => i.levelId === this.data.curLearnLevel.levelId).unitList;
         let targetUnit = unitList.find(i => i.rank === this.data.curLearnUnit.rank + 1);
@@ -86,7 +91,7 @@ app.createPage({
         }
     },
     lookAllBtn() {
-        wx.switchTab({
+        wx.redirectTo({
           url: '../level/level',
         })
     },

@@ -233,7 +233,12 @@ app.createPage({
     },
     handerBack() {
         wx.navigateBack({
-            delta: 1
+            delta: 1,
+            fail: (err) => {
+                wx.redirectTo({
+                    url: '../level/level'
+                })
+            }
         })
     },
     switchfeedback() {

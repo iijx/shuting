@@ -6,7 +6,7 @@
 		<view class="h_15"></view>
 		<cell>
 			<view slot="bd" class="cl_fff ft_12">刻意练习 · 提升数听力</view>
-			<view slot="ft" class="ft_12">{{ curLearnUnit.score }}%</view>
+			<view slot="ft" class="cl_fff ft_12">{{ curLearnUnit.score }}%</view>
 		</cell>
 		<view class="h_8"></view>
 		<progress percent="{{ curLearnUnit.score }}" active-mode="forwards" duration="300" activeColor="#81F8F5" backgroundColor="#10098E" stroke-width="12" border-radius="10"/>

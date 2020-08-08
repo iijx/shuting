@@ -11,9 +11,6 @@ app.createPage({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    // wx.switchTab({
-    //   url: '../level/level'
-    // })
   },
 
   /**
@@ -57,12 +54,10 @@ app.createPage({
   onUnload: function () {
 
   },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
+  toMy() {
+    wx.navigateTo({
+      url: '../my/my'
+    })
   },
 
   /**

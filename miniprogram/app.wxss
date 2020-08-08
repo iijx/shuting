@@ -121,3 +121,12 @@ page {
 .opa_85 { opacity: .85; }
 .opa_9 { opacity: .9; }
 .opa_95 { opacity: .95; }
+
+
+
+.header {
+    position: relative;
+    padding: 60rpx 12rpx 40rpx;
+    align-items: center;
+    display: flex;
+}

@@ -192,6 +192,12 @@ app.createPage({
       return;
     };
 
+    this.data.isPlaying = false;
+    this.setData({
+      isPlaying: this.data.isPlaying
+    })
+
+
     let allTypes = [...this.data.checkboxArr];
     if (allTypes.includes('number')) {
       let count = this.data.numCountArr.filter(i => i.checked).length;

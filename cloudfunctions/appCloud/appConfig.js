@@ -3,10 +3,10 @@ const Good = require('./models/good');
 
 
 const GOODS = [
-    new Good('1', 30, 3.9, 6).setRank(1), // 月会员
+    new Good('1', 30, 4.9, 6).setRank(1), // 月会员
     new Good('2', 180, 9.6, 18), // 半年会员
-    new Good('3', 36500, 15, 68).setName('数听永久会员').setRank(3), // 永久会员
-    new Good('4', 365, 9.6, 36).setActiviteNote('7月特惠 · 赠送90天').setRecommend().setRank(2), // 1年会员
+    new Good('3', 36500, 17, 68).setName('数听永久会员').setRank(3), // 永久会员
+    new Good('4', 365, 9.6, 36).setActiviteNote('8月特惠 · 再赠90天').setRecommend().setRank(2), // 1年会员
     new Good('6', 365 * 3, 18, 54), // 3年会员
     new Good('10', 0, 0, 0).setCustom(), // 自定义
 ]

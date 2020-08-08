@@ -68,4 +68,6 @@
             </van-checkbox-group>
         </view>
     </van-dialog>
+
+    <van-toast id="van-toast" />
 </view>
