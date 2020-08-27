@@ -1,7 +1,10 @@
 <!--index.wxml-->
 <view class="container">
     <view class="top">
-        <cell>
+        <view class="text1">数听英语 · 专项提升数字英语听力</view>
+        <view class="text2">Let’s get started</view>
+
+        <!-- <cell>
             <view slot="hd">
                 <view class="text1">刻意练习</view>
                 <view class="text2">提升数字英语听力</view>
@@ -10,7 +13,7 @@
                 <open-data class="avatar" type="userAvatarUrl"></open-data>
                 <view class="ft_12 text-center my-text">个人主页</view>
             </view>
-        </cell>
+        </cell> -->
     </view>
     
     <view class="main flex1">
@@ -28,7 +31,7 @@
             <view class="mt_20">
                 <cell>
                     <view slot="bd" class="note">单元练习 · 各个击破</view>
-                    <van-button slot="ft" round plain size="small" color="#4A50F2">进入练习</van-button>
+                    <van-button slot="ft" round plain size="small" color="#31c16f">进入练习</van-button>
                 </cell>
             </view>
         </view>
@@ -37,7 +40,7 @@
             <view class="mt_20">
                 <cell>
                     <view slot="bd" class="note">混合快速数听</view>
-                    <van-button slot="ft" round plain size="small" color="#9254de">进入快听</van-button>
+                    <van-button slot="ft" round plain size="small" color="#9B89DC">进入快听</van-button>
                 </cell>
             </view>
         </view>

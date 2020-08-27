@@ -55,7 +55,7 @@ app.createPage({
 
   },
   toMy() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '../my/my'
     })
   },

@@ -76,7 +76,7 @@ app.createPage({
                                         message: '开通成功',
                                         confirmButtonColor: '#4b51f2',
                                     }).then(res => {
-                                        wx.redirectTo({
+                                        wx.switchTab({
                                           url: '' // 指定页面的url
                                         });({
                                           url: '../my/my',

@@ -26,7 +26,8 @@ app.createPage({
             { name: '发音不全/不清晰' },
             { name: '没有声音' },
             { name: '其他' }
-        ]
+        ],
+        env: {}
     },
     onLoad: function (opt = {}) {
         Util.sleep(30).then(() => {
@@ -44,28 +45,28 @@ app.createPage({
         AudioContext = wx.createInnerAudioContext();
         this.nextWord();
     },
-    _genAudioSrcByNumAndType(type) {
+    _genAudioSrcByNumAndType(answer, type) {
         let path = '';
-        if (type === 'number') path = `numberAudio/${this.data.answer}.mp3`;
-        else if (type === 'phone') path = `phoneAudio/${this.data.answer}.m4a`;
+        if (type === 'number') path = `numberAudio/${answer}.mp3`;
+        else if (type === 'phone') path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/phone${this.data.maxLength}/${answer}.mp3`;
         else if(type === 'time') {
-            let h = this.data.answer.slice(0, 2);
-            let m = this.data.answer.slice(2);
-            path = `timeAudio/${h}_${m}.m4a`;
+            // let h = answer.split('.')[0];
+            // let m = answer.split('.')[1];
+            path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
         } else if (type === 'year') {
             path = `yearAudio/${this.data.answer}.mp3`;
         } else if (type === 'pointNum') {
-            path = `pointAudio/${this.data.answer}.mp3`;
+            path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/point/${answer}.mp3`;
         } else if (type === 'week') {
-            return `/assets/audio/week/week_${this.data.answer}.mp3`;
+            return `/assets/audio/week/week_${answer}.mp3`;
         }
         else if (type === 'month') {
-            return `/assets/audio/month/month_${this.data.answer}.mp3`;
+            return `/assets/audio/month/month_${answer}.mp3`;
         }
+        console.log(`${Config.cdnDomain}/assets/audio/${path}`);
         return `${Config.cdnDomain}/assets/audio/${path}`;
     },
     audioPlay() {
-        AudioContext.src = this._genAudioSrcByNumAndType(this.data.type);
         AudioContext.play();
     },
     _preStartInit() {
@@ -112,14 +113,17 @@ app.createPage({
         } else if (type === 'month') {
             answer = Util.randomOneMonth();
         }
+
         if (answer === this.data.answer) {
             return this._genOneAnswer();
         } else {
-            this.data.answer = answer;
+            console.log('answer', answer);
+            AudioContext.src = this._genAudioSrcByNumAndType(answer, this.data.type);
+            this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
             this.setData({
                 type,
                 answerLength: String(this.data.answer).length,
-                answer,
+                answer: this.data.answer,
             });
             this.audioPlay();
         };
@@ -253,7 +257,11 @@ app.createPage({
                 name: e.detail.name
             }
         })
-        Vant.Toast.success('感谢您的反馈');
+        if (e.detail.name === '没有声音' && this.data.env.platform === 'ios') {
+            Vant.Toast.success('是否打开静音模式');
+        } else {
+            Vant.Toast.success('感谢您的反馈');
+        }
     },
 
     onUnload: function () {

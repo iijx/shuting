@@ -1,4 +1,7 @@
-import {pointNum, pointNumLen } from './pointNum';
+import * as Digit from '../local/digit';
+
+const PointNumLen = Digit.point.length;
+const TimeNumLen = Digit.time.length;
 /**
  * 生成 [min, max) 范围随机数
  */
@@ -147,17 +150,17 @@ export const eightPhones = ["11799765", "13981342", "15100990", "16967709", "187
 const ALL_TIMES = ["1230", "1235", "1245", "0100", "0115", "0225", "0230", "0305", "0335", "0405", "0445", "0450", "0505", "0540", "0545", "0610", "0615", "0710", "0715", "0725", "0730", "0810", "0825", "0855", "0905", "0925", "1005", "1015", "1030", "1200", "1205", "1330", "1340", "1410", "1430", "1435", "1545", "1550", "1555", "1600", "1605", "1620", "1630", "1645", "1710", "1730", "1800", "1910", "2000", "2010", "2020", "2025", "2040", "2045", "2050", "2135", "2210", "2215", "2220", "2235", "2255", "2300", "2320"];
 
 
-export const randomOneTime = (() => {
-    let len = ALL_TIMES.length;
-    return () => ALL_TIMES[randomIntegerInRange(0, len)]; 
-})();
+export const randomOneTime = () => Digit.time[randomIntegerInRange(0, TimeNumLen)];
 
 export const randomOnePhone = length => {
 
     let arr = [];
-    if (length === 4) arr = fourPhones;
-    else if (length === 6) arr = sixPhones;
-    else if (length === 8) arr = eightPhones;
+    if (length === 4) arr = Digit.phone4;
+    else if (length === 6) arr = Digit.phone6;
+    else if (length === 8) arr = Digit.phone8;
+    else if (length === 10) arr = Digit.phone10;
+    else if (length === 12) arr = Digit.phone12;
+    else if (length === 16) arr = Digit.phone16;
     
     let len = arr.length;
 
@@ -181,7 +184,8 @@ export const randomOneYear = () => {
 }
 
 export const randomPointNumber = () => {
-    return pointNum[randomIntegerInRange(0, pointNumLen)];
+    // return pointNum[randomIntegerInRange(0, pointNumLen)];
+    return Digit.point[randomIntegerInRange(0, PointNumLen)]
 }
 
 export const randomOneWeek = () => {

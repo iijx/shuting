@@ -93,9 +93,10 @@
                 <view class="li">1. 正常下一位一位的读；</view>
                 <view class="li">2. 遇到相同的两位数，可用<text class="code">double</text>，三位数，用<text class="code">triple</text>表示；</view>
                 <view class="li">3. 0 可以读为<text class="code">zero</text>, 也可以读作字母<text class="code">o</text>或<text class="code">nought</text>。</view>
+                <view class="li">4. 如果末尾出现三个零，可以读作“千”, 如<text class="code">196000</text>读作<text class="code">one nine six thousand</text>。</view>
                 <view class="ps">注意：在<text class="code">TOEFL</text>考试中,<text class="code">0</text>常念作<text class="code">zero</text>,但在<text class="code">IELTS</text>考试中“<text class="code">0</text>常念作“<text class="code">nought</text></view>
                 <view class="p">示例：</view>
-                <list data="{{ ['9712: nine seven one two', '10086: one double o eight six', '110-666: double one zero triple six'] }}"></list>
+                <list data="{{ ['9712: nine seven one two', '10086: one double o eight six', '110-666: double one zero triple six', '3246000: three two four six thousand'] }}"></list>
             </view>
         </van-tab>
         <van-tab title="年/月/日">
@@ -118,7 +119,7 @@
                 <view class="h2">读法二</view>
                 <view class="p">用<text class="code">past/to</text>来表示</view>
                 <list data="{{ ['2:00 读作 2 o’clock', '2:05 读作 five past two', '2:15 读作 fifteen past two', '2:40 读作 twenty to three', '2:55 读作 five to three'] }}"></list>
-                <view class="p">你一定看出来了，<text class="code">past</text>意思是过去，<text class="code">five past two</text> 表示5分钟从2点这个时刻过去了，即2:05; 而<text class="code">to</text>表示将到达，<text class="code">five to three</text> 还有5分钟到3点，即现在是2:55。</view>
+                <view class="p">你一定看出来了，<text class="code">past</text>意思是过去，<text class="code">five past two</text> 表示5分钟从2点这个时刻过去了，即<text class="code">2:05</text>; 而<text class="code">to</text>表示将到达，<text class="code">five to three</text> 还有5分钟到3点，即现在是<text class="code">2:55</text>。</view>
                 <view class="p">另外，注意下一些单词的转换, 需注意下</view>
                 <list data="{{ ['2:15 读作 quarter past two', '2:30 读作 half past two', '2:45 读作 quarter to three'] }}"></list>
             </view>

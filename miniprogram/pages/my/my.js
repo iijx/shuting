@@ -1,6 +1,3 @@
-// pages/my/my.js
-
-
 const app = getApp();
 const { Util, UniApi, Vant, Store } = app;
 app.createPage({

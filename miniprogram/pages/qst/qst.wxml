@@ -34,7 +34,7 @@
         </view>
     </view>
 
-    <van-dialog use-slot title="选择内容" show="{{ isShowDialog }}" bind:close="onClose" bind:confirm="dialogConfirm" confirm-button-color="#9254de">
+    <van-dialog use-slot title="选择内容" show="{{ isShowDialog }}" bind:confirm="dialogConfirm" confirm-button-color="#9254de">
         <view class="mt_10 mb_10">
             <van-checkbox-group value="{{ checkboxArr }}" bind:change="onChange">
                 <cell custom-class="cell-item border">
