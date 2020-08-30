@@ -79,8 +79,8 @@
     padding: 20rpx 0;
 }
 .audio-wrap .audio {
-    width: 104rpx;
-    height: 91rpx;
+    width: 83.2rpx;
+    height: 94.9rpx;
 }
 .play-img2 {
     width: 42rpx;
@@ -129,8 +129,9 @@
 .answer {
     text-align: center;
     opacity: 0;
-    color: #6DC8EC;
-    color: #003a8c;
+    /* color: #6DC8EC;
+    color: #003a8c; */
+    color: #02AF42;
     font-size: 28rpx;
 }
 .answer.show {
@@ -157,12 +158,13 @@
 .keyboard {
     overflow:hidden;
     padding: 4rpx;
-    background: #FEFFFE;
+    /* background: #FEFFFE;
     background: #D3EEF9;
     background: #eef5f0;
     background: #e6fffb;
     background: #e6f7ff;
-    background: #D6DEFC;
+    background: #D6DEFC; */
+    background: rgba(237, 244, 242, 1);
     /* box-shadow:  0 -1px 1px #e6f7ff; */
     display: flex;
     height: 44vh;
@@ -178,6 +180,7 @@
     justify-content: center;
     font-size: 36rpx;
     color: #1c1480;
+    color: rgb(28, 100, 61);
     transition: all .1s;
 }
 .num-item.disabled {
@@ -195,10 +198,11 @@
     background: #b5c3d1;
     background: #bae7ff;
     background: #a1aaff;
+    background: rgb(147, 173, 160);
     /* background: #7881ff; */
-    transform: scale(1.1);
-    font-weight: bold;
-    font-size: 40rpx;
+    transform: scale(1.01);
+    /* font-weight: bold; */
+    font-size: 36rpx;
 }
 
 .icon-del {

@@ -57,14 +57,14 @@
         "radioBtn": "/components/radioButton/radioButton"
     },
     "tabBar": {
-        "color": "#929292",
-        "selectedColor": "#4A50F2",
+        "color": "#333333",
+        "selectedColor": "#d93044",
         "borderStyle": "black",
         "list": [
             {
                 "pagePath": "pages/index/index",
-                "iconPath": "./assets/imgs/tabs/level.png",
-                "selectedIconPath": "/assets/imgs/tabs/level-1.png",
+                "iconPath": "./assets/imgs/tabs/index.png",
+                "selectedIconPath": "/assets/imgs/tabs/index-1.png",
                 "text": "首页"
             },
             {

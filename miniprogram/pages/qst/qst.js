@@ -56,16 +56,14 @@ app.createPage({
     let answer = item.word;
     let path = '';
     if (type === 'number') path = `numberAudio/${answer}.mp3`;
-    else if (type === 'phone') path = `phoneAudio/${answer}.m4a`;
+    else if (type === 'phone') path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/phone${String(answer).length}/${answer}.mp3`;
     else if(type === 'time') {
-        console.log('item', item)
-        let h = answer.slice(0, 2).trim();
-        let m = answer.slice(-2).trim();
-        path = `timeAudio/${h}_${m}.m4a`;
+      path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
     } else if (type === 'year') {
         path = `yearAudio/${answer}.mp3`;
     } else if (type === 'pointNum') {
-        path = `pointAudio/${answer}.mp3`;
+        // path = `pointAudio/${answer}.mp3`;
+        path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/point/${answer}.mp3`;
     } else if (type === 'week') {
         return `/assets/audio/week/week_${answer}.mp3`;
     }

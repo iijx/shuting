@@ -34,7 +34,7 @@ app.createPage({
                     message: '会员专享内容，请先开通会员',
                     cancelButtonText: '知道了',
                     confirmButtonText: '去看看',
-                    confirmButtonColor: '#4b51f2',
+                    confirmButtonColor: '#d93043',
                 }).then(res => {
                     wx.navigateTo({ url: '../buy/buy' })
                 }).catch(err => {
@@ -45,7 +45,7 @@ app.createPage({
                     title: '开通会员',
                     message: this.data.config.iosBuyPrompt,
                     confirmButtonText: '知道了',
-                    confirmButtonColor: '#4b51f2',
+                    confirmButtonColor: '#d93043',
                 })
             }
             return;
@@ -70,7 +70,7 @@ app.createPage({
                 title: '开通会员',
                 message: this.data.config.iosBuyPrompt,
                 confirmButtonText: '知道了',
-                confirmButtonColor: '#4b51f2',
+                confirmButtonColor: '#d93043',
             }).then(() => {
                 // on close
             });
@@ -87,7 +87,7 @@ app.createPage({
             Vant.Dialog.alert({
                 message: '会员专享内容，请先开通会员',
                 confirmButtonText: '知道了',
-                confirmButtonColor: '#4b51f2',
+                confirmButtonColor: '#d93043',
             })
             return;
         } else {
@@ -104,7 +104,7 @@ app.createPage({
             title: index === 0 ? '数字系列读音示例' : '电话系列读音示例',    
             message: index === 0 ? '110 => one hundred and ten' : '10086 => one zero zero eight six',
             confirmButtonText: '知道了',
-            confirmButtonColor: '#4b51f2',
+            confirmButtonColor: '#d93043',
         })
     },
     popOnClose() {

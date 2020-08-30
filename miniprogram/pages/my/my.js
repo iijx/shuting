@@ -58,7 +58,7 @@ app.createPage({
                 title: '开通会员',
                 message: this.data.config.iosBuyPrompt,
                 confirmButtonText: '知道了',
-                confirmButtonColor: '#4b51f2',
+                confirmButtonColor: '#d93043',
             }).then(() => {
                 // on close
             });
@@ -88,6 +88,7 @@ app.createPage({
         })
     },
     link: function(e) {
+        console.log(e)
         wx.navigateTo({
             url: e.currentTarget.dataset.path,
         })

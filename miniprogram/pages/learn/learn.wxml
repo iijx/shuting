@@ -15,7 +15,7 @@
 
     <view class="form flex-col flex1" bindsubmit="submitCode">
         <view class="audio-wrap" bindtap="audioPlay">
-            <image class="audio" src="../../assets/imgs/audio@2x.png" mode="widthFix"></image>
+            <image class="audio" src="../../assets/imgs/audio.png" mode="widthFix"></image>
         </view>
         <!-- 数字型：数字/年份/电话/24时间 -->
         <view class='input-spans'>

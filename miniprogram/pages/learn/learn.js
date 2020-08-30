@@ -27,7 +27,8 @@ app.createPage({
             { name: '没有声音' },
             { name: '其他' }
         ],
-        env: {}
+        env: {},
+        curNumAudioSrc: '',
     },
     onLoad: function (opt = {}) {
         Util.sleep(30).then(() => {
@@ -50,8 +51,6 @@ app.createPage({
         if (type === 'number') path = `numberAudio/${answer}.mp3`;
         else if (type === 'phone') path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/phone${this.data.maxLength}/${answer}.mp3`;
         else if(type === 'time') {
-            // let h = answer.split('.')[0];
-            // let m = answer.split('.')[1];
             path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
         } else if (type === 'year') {
             path = `yearAudio/${this.data.answer}.mp3`;
@@ -67,6 +66,7 @@ app.createPage({
         return `${Config.cdnDomain}/assets/audio/${path}`;
     },
     audioPlay() {
+        AudioContext.src = this.data.curNumAudioSrc;
         AudioContext.play();
     },
     _preStartInit() {
@@ -118,7 +118,8 @@ app.createPage({
             return this._genOneAnswer();
         } else {
             console.log('answer', answer);
-            AudioContext.src = this._genAudioSrcByNumAndType(answer, this.data.type);
+            this.data.curNumAudioSrc = this._genAudioSrcByNumAndType(answer, this.data.type);
+            AudioContext.src = this.data.curNumAudioSrc;
             this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
             this.setData({
                 type,

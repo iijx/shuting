@@ -287,3 +287,16 @@ export const compareDateByDay = (day1, day2) => {
     if (day1.setHours(0, 0, 0, 0) === day2.setHours(0, 0, 0, 0)) return 0;
     else return day1 > day2 ? 1 : -1;
 }
+
+/**
+ * 根据指定日期，获取其所在一周的日期，
+ * @param {*} date 
+ */
+export const getWeekByDate = date => {
+    const dateOfToday = date.getTime();
+    const dayOfToday = (new Date().getDay() + 7 - 1) % 7
+    return Array.from(new Array(7))
+      .map((_, i) => {
+        return new Date(dateOfToday + (i - dayOfToday) * 1000 * 60 * 60 * 24)
+      })
+}

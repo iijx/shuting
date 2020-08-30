@@ -52,7 +52,7 @@ app.createPage({
                 title: '开通会员',
                 message: this.data.config.iosBuyPrompt,
                 confirmButtonText: '知道了',
-                confirmButtonColor: '#4b51f2',
+                confirmButtonColor: '#d93043',
             })
         }
     },
@@ -74,7 +74,7 @@ app.createPage({
                     title: '提示',
                     message: '您已经全部学习完成啦',
                     confirmButtonText: '知道了',
-                    confirmButtonColor: '#4b51f2',
+                    confirmButtonColor: '#d93043',
                 })
                 return;
             }
@@ -91,8 +91,13 @@ app.createPage({
         }
     },
     lookAllBtn() {
-        wx.redirectTo({
-          url: '../level/level',
+        wx.navigateBack({
+            delta: 1,
+            fail: (err) => {
+                wx.redirectTo({
+                    url: '../level/level'
+                })
+            }
         })
     },
 

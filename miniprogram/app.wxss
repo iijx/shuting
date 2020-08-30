@@ -74,6 +74,8 @@ page {
 .h_10 { height: 20rpx; }
 .h_12 { height: 24rpx; }
 .h_15 { height: 30rpx; }
+.h_16 { height: 32rpx; }
+.h_20 { height: 40rpx; }
 
 .text-center {
     text-align: center;
@@ -129,4 +131,10 @@ page {
     padding: 60rpx 12rpx 40rpx;
     align-items: center;
     display: flex;
+}
+.cl_red {
+    color: #d93044;
+}
+.bg_blue {
+    background-color: #4A50F2;
 }

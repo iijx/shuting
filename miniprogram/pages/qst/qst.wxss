@@ -1,6 +1,8 @@
 .container {
     min-height: 100vh;
     background-color: #F1F1FC;
+    background-color: #fff;
+    background-color: #F5DEDB;
     justify-content: center;
     align-items: center;
 }
@@ -12,14 +14,18 @@
     align-items: center;
     justify-content: center;
     background-color: #efdbff;
+    background-color: #e6fffc;
+    background-color: #F8F3F0;
+    color: #5E4846;
+    opacity: .9;
 }
 
 .list .list-item:nth-child(2n){
     background: #d3adf7;
-    box-shadow: 0 2rpx 6rpx -4rpx rgba(0, 0, 0, .08),
-    0 6rpx 16rpx 0rpx rgba(0, 0, 0, .05),
-    0 9rpx 28rpx 8rpx rgba(0, 0, 0, .03);
-    transition: all .3s;
+    background: #adfffa;
+    background: #fff;
+    background: #E2DAD3;
+    /* color: #fff; */
 }
 
 .play-box {
@@ -33,20 +39,13 @@
     0 9rpx 28rpx 8rpx rgba(0, 0, 0, .03);
     transition: all .3s;
     box-sizing: border-box;
-    background-color: #f6f0ff;
+    /* background-color: #f6f0ff; */
 }
 .play-count-text {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -45%);
-    font-size: 24rpx;
-}
-.speed {
-    border: 1px dashed #554a8f;
-    height: 36rpx;
-    width: 60rpx;
-    opacity: .55;
     font-size: 24rpx;
 }
 
@@ -79,5 +78,6 @@
 .option-note {
     font-size: 24rpx;
     color: #9254de;
+    color: #e0475a;
     padding: 0 32rpx;
 }

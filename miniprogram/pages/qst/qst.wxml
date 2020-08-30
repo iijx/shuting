@@ -2,7 +2,7 @@
     
     <view class="flex1 w100">
         <view class="flex mlr_16 mt_20 mb_20">
-            <van-icon size="23" color="#9254de" name="setting" bindtap="changeTypes"/>
+            <van-icon size="23" color="#e0475a" name="setting" bindtap="changeTypes"/>
         </view>
         <view class="mlr_16">
            <view class="custom-class list">
@@ -11,7 +11,7 @@
             <view class="flex mt_20 mb_20">
                 <view class="flex1"></view>
                 <view class="flex1">
-                    <van-button plain block size="small" color="#9254de" bindtap="gen">重新生成</van-button>
+                    <van-button  block size="small" color="#e0475a" bindtap="gen">重新生成</van-button>
                 </view>
             </view>
         </view>
@@ -34,7 +34,7 @@
         </view>
     </view>
 
-    <van-dialog use-slot title="选择内容" show="{{ isShowDialog }}" bind:confirm="dialogConfirm" confirm-button-color="#9254de">
+    <van-dialog use-slot title="选择内容" show="{{ isShowDialog }}" bind:confirm="dialogConfirm" confirm-button-color="#e0475a">
         <view class="mt_10 mb_10">
             <van-checkbox-group value="{{ checkboxArr }}" bind:change="onChange">
                 <cell custom-class="cell-item border">
@@ -42,26 +42,26 @@
                     <view slot="bd" class="flex flex-center">
                         <radioBtn data="{{ numCountArr }}" bind:click="numRadioBtnClick"></radioBtn>
                     </view>
-                    <van-checkbox slot="ft" checked-color="#9254de" shape="square" name="number" />
+                    <van-checkbox slot="ft" checked-color="#e0475a" shape="square" name="number" />
                 </cell>
                 <cell custom-class="cell-item border">
                     <view slot="hd">小数</view>
-                    <van-checkbox slot="ft" checked-color="#9254de" shape="square" name="pointNum" />
+                    <van-checkbox slot="ft" checked-color="#e0475a" shape="square" name="pointNum" />
                 </cell>
                 <cell custom-class="cell-item border">
                     <view slot="hd">电话</view>
                     <view slot="bd" class="flex flex-center">
                         <radioBtn data="{{ phoneCountArr }}" bind:click="phoneRadioBtnClick"></radioBtn>
                     </view>
-                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#9254de" shape="square" name="phone" />
+                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#e0475a" shape="square" name="phone" />
                 </cell>
                 <cell custom-class="cell-item border">
                     <view slot="hd">年份</view>
-                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#9254de" shape="square" name="year" />
+                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#e0475a" shape="square" name="year" />
                 </cell>
                 <cell custom-class="cell-item">
                     <view slot="hd">时间</view>
-                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#9254de" shape="square" name="time" />
+                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#e0475a" shape="square" name="time" />
                 </cell>
                 <van-divider wx:if="{{ !user.isPro }}"/>
                 <view wx:if="{{ !user.isPro }}" class="option-note">注: 整数的4位、5位、6位及电话、年份、时间。为vip会员内容，如需，请先开通会员。</view>

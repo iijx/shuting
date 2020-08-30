@@ -1,57 +1,70 @@
 <!--index.wxml-->
 <view class="container">
     <view class="top">
-        <view class="text1">数听英语 · 专项提升数字英语听力</view>
-        <view class="text2">Let’s get started</view>
+        <view class="text1">数听英语 · <text class="sub-text1">专项提升数字英语听力</text></view>
 
-        <!-- <cell>
-            <view slot="hd">
-                <view class="text1">刻意练习</view>
-                <view class="text2">提升数字英语听力</view>
+        <view class="week-wrap">
+            <cell>
+                <view slot="hd" class="week-month">{{ curMonth.label }}　{{ curMonth.year}}</view>
+                <view slot="ft" class="week-month"></view>
+            </cell>
+            <view class="days-row">
+                <view wx:for="{{ curWeek }}" wx:key="item" class="day-item {{ item.isToday ? 'item-today' : ''}}">
+                    <view class="item-l">{{ labelWeek[index] }}</view>
+                    <view class="item-v">{{ item.isToday ? '今' : item.num }}</view>
+                </view>
             </view>
-            <view slot="ft" class="text-center" bindtap="toMy">
-                <open-data class="avatar" type="userAvatarUrl"></open-data>
-                <view class="ft_12 text-center my-text">个人主页</view>
-            </view>
-        </cell> -->
+        </view>
     </view>
     
     <view class="main flex1">
-        <view class="learn-item item-1" bindtap="toArticle">
-            <view class="titel">1. 数字表达详解</view>
-            <view class="mt_20">
-                <cell>
-                    <view slot="bd" class="note">基数词、序数词、分数、小数等等</view>
-                    <van-button slot="ft" round plain size="small" color="#D94828">查看详解</van-button>
-                </cell>
+        <view class="h_20"></view>
+        <cell>
+            <view slot="hd" class="nickname-wrap">
+                <text class="hello">Hello, </text>
+                <open-data class="nickName" type="userNickName"></open-data>
             </view>
+            <button slot="ft" class="share-btn" open-type="share">
+                <image src="/assets/imgs/icon-share.png" class="icon-share" mode="widthFix"></image>
+                <text class="share-text">分享知识予朋友</text>
+                <view class="flex1"></view>
+                <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
+            </button>
+        </cell>
+        <view class="h_20"></view>
+
+        <view class="learn-item item-1" bindtap="toArticle">
+            <image src="/assets/imgs/icon-learn-item-1.png" class="learn-item-img" mode="widthFix"></image>
+            <view class="flex1 item-bd">
+                <view class="title">I. 数字表达详解</view>
+                <view class="time">
+                    <van-icon name="underway-o" color="#bfbfbf"/>
+                    <text class="time-text">30min</text>
+                </view>
+            </view>
+            <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
         </view>
         <view class="learn-item item-2" bindtap="toLevel">
-            <view class="titel">2. 专项训练</view>
-            <view class="mt_20">
-                <cell>
-                    <view slot="bd" class="note">单元练习 · 各个击破</view>
-                    <van-button slot="ft" round plain size="small" color="#31c16f">进入练习</van-button>
-                </cell>
+            <image src="/assets/imgs/icon-learn-item-2.png" class="learn-item-img" mode="widthFix"></image>
+            <view class="flex1 item-bd">
+                <view class="title">II. 专项训练</view>
+                <view class="time">
+                    <van-icon name="underway-o" color="#bfbfbf"/>
+                    <text class="time-text">180min</text>
+                </view>
             </view>
+            <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
         </view>
         <view class="learn-item item-3" bindtap="toQst">
-            <view class="titel">3. 快听检验</view>
-            <view class="mt_20">
-                <cell>
-                    <view slot="bd" class="note">混合快速数听</view>
-                    <van-button slot="ft" round plain size="small" color="#9B89DC">进入快听</van-button>
-                </cell>
+            <image src="/assets/imgs/icon-learn-item-3.png" class="learn-item-img" mode="widthFix"></image>
+            <view class="flex1 item-bd">
+                <view class="title">III. 快听默写</view>
+                <view class="time">
+                    <van-icon name="underway-o" color="#bfbfbf"/>
+                    <text class="time-text">100min</text>
+                </view>
             </view>
+            <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
         </view>
-        <!-- <view class="learn-item item-2" bindtap="toLevel">
-            <view class="titel">4. 真题测试</view>
-            <view class="mt_20">
-                <cell>
-                    <view slot="bd" class="note">单元练习 · 各个击破</view>
-                    <van-button slot="ft" round plain size="small" color="#31C16F">进入练习</van-button>
-                </cell>
-            </view>
-        </view> -->
     </view>
 </view>

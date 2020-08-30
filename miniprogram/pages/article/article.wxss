@@ -24,7 +24,7 @@
 .code {
     background-color: #f7f9fa;
     padding: 0 6rpx;
-    color: #a71d5d;
+    color: #d93044;
     line-height: 1.6;
     font-family: monospace;
     font-size: 30rpx;

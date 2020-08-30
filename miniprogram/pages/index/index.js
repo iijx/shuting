@@ -5,12 +5,33 @@ app.createPage({
       user: new app.Models.User({}),
       curLearnLevel: {},
       curLearnUnit: {},
+
+      curWeek: [],
+      curMonth: {
+        label: '',
+        index: 6,
+        year: 2020
+      },
+      labelWeek: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    const monthsLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthIndex = (new Date()).getMonth();
+    this.setData({
+      curWeek: Util.getWeekByDate(new Date()).map(i => ({
+        num: String(i.getDate()).padStart(2, '0'),
+        isToday: Util.isToday(i)
+      })),
+      curMonth: {
+        label: monthsLabel[monthIndex],
+        index: monthIndex,
+        year: new Date().getFullYear()
+      }
+    })
   },
 
   /**
@@ -66,4 +87,11 @@ app.createPage({
   onReachBottom: function () {
 
   },
+  // 用户点击右上角分享
+  onShareAppMessage() {
+    return {
+      path: `/pages/index/index?fromOpenid=${this.data.user.openid}`,
+      title: '刻意练习 · 提升数听力'
+  }
+},
 })

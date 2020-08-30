@@ -25,7 +25,10 @@
 .item.checked {
     background: #fff;
     border-color: #9254de;
+    border-color: #e0475a;
     box-shadow: -1px 0 0 0 #9254de;
+    box-shadow: -1px 0 0 0 #e0475a;
     color: #9254de;
+    color: #e0475a;
     z-index: 1;
 }

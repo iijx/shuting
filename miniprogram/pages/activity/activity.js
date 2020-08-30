@@ -58,7 +58,7 @@ app.createPage({
             }
             Vant.Dialog.alert({
                 message: res.message,
-                confirmButtonColor: '#4b51f2'
+                confirmButtonColor: '#d93043'
             }).then(res => {
                 wx.navigateBack({ delta: 1 })
             });

@@ -74,7 +74,7 @@ app.createPage({
                                     Vant.Dialog.alert({
                                         title: '恭喜',
                                         message: '开通成功',
-                                        confirmButtonColor: '#4b51f2',
+                                        confirmButtonColor: '#d93043',
                                     }).then(res => {
                                         wx.switchTab({
                                           url: '' // 指定页面的url

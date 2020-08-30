@@ -7,6 +7,7 @@
 .curBook-wrap {
     margin: 28rpx 32rpx 40rpx;
     background-color: #4A50F2;
+    background-color: #0d6dd4;
     padding: 40rpx 36rpx 0rpx;
     color: #fff;
     border-radius: 16rpx;
@@ -127,6 +128,7 @@
     background: #4A50F2;
     background: #ADB5F9;
     background: #a1aaff;
+    background: #96d7ff;
 }
 .unit .lock {
     width: 26rpx;
@@ -158,6 +160,7 @@
     flex-shrink: 0;
     /* color: #4facfe; */
     color: #7881ff;
+    color: #1b8efa;
     font-size: 28rpx;
     font-weight: bolder;
     width: 4em;
@@ -256,6 +259,7 @@
     align-items: center;
     justify-content: center;
     background: #FFD726;
+    /* background: #e2f5fd; */
     font-weight: bold;
     letter-spacing: 2px;
     color: #3e3f41;
