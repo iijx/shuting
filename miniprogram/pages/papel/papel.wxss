@@ -1,0 +1,78 @@
+.container {
+    position: relative;
+    min-height: 100vh;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main {
+    position: relative;
+}
+.audio {
+    width: 90rpx;
+    height: 90rpx;
+    display: block;
+    margin: 40rpx 0 100rpx;
+}
+.question {
+    text-align: left;
+    color: #262626;
+    font-size: 38rpx;
+    font-family: "PT Mono";
+}
+
+.option {
+    background: #fff;
+    color: #353535;
+    width: 620rpx;
+    margin: 0 auto;
+    border-radius: 20rpx;
+    height: 120rpx;
+    padding-left: 32rpx;
+    font-size: 34rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 36rpx;
+}
+/* .option-hover {
+    background: rgba(0, 0, 0, .1);
+    opacity: .6;
+} */
+.option.right {
+    background: #02AF42;
+    color: #fff;
+}
+.option.error{
+    background: #E86452;
+    color: #fff;
+}
+
+.originBtn {
+    width: 540rpx;
+    margin: 60rpx auto 0;
+    border: 1rpx solid #d93043;
+    border-radius: 10rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    color: #d93043;
+    height: 60rpx;
+    background: transparent !important;
+    opacity: .7;
+}
+
+
+.origin-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #ECF2F5;
+    opacity: .95;
+    overflow: hidden;
+}

@@ -17,6 +17,7 @@
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
@@ -158,6 +159,12 @@
 					"name": "qst",
 					"pathName": "pages/qst/qst",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "papel",
+					"pathName": "pages/papel/papel",
 					"scene": null
 				}
 			]

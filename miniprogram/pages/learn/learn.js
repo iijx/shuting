@@ -53,7 +53,7 @@ app.createPage({
         else if(type === 'time') {
             path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
         } else if (type === 'year') {
-            path = `yearAudio/${this.data.answer}.mp3`;
+            path = `yearAudio/${answer}.mp3`;
         } else if (type === 'pointNum') {
             path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/point/${answer}.mp3`;
         } else if (type === 'week') {
@@ -83,6 +83,7 @@ app.createPage({
         const phones = [4, 6, 8];
         
         let type = types[Util.randomIntegerInRange(0, types.length)];
+
         if (type === 'number') {
             this.setData({
                 maxLength: Util.randomIntegerInRange(1, 9)
@@ -117,8 +118,8 @@ app.createPage({
         if (answer === this.data.answer) {
             return this._genOneAnswer();
         } else {
-            console.log('answer', answer);
-            this.data.curNumAudioSrc = this._genAudioSrcByNumAndType(answer, this.data.type);
+            console.log('_genOneAnswer answer：', answer, type);
+            this.data.curNumAudioSrc = this._genAudioSrcByNumAndType(answer, type);
             AudioContext.src = this.data.curNumAudioSrc;
             this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
             this.setData({

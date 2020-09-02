@@ -39,7 +39,7 @@
                 <view class="title">I. 数字表达详解</view>
                 <view class="time">
                     <van-icon name="underway-o" color="#bfbfbf"/>
-                    <text class="time-text">30min</text>
+                    <text class="time-text">20min</text>
                 </view>
             </view>
             <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
@@ -50,7 +50,7 @@
                 <view class="title">II. 专项训练</view>
                 <view class="time">
                     <van-icon name="underway-o" color="#bfbfbf"/>
-                    <text class="time-text">180min</text>
+                    <text class="time-text">210min</text>
                 </view>
             </view>
             <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
@@ -61,7 +61,7 @@
                 <view class="title">III. 快听默写</view>
                 <view class="time">
                     <van-icon name="underway-o" color="#bfbfbf"/>
-                    <text class="time-text">100min</text>
+                    <text class="time-text">60min</text>
                 </view>
             </view>
             <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>

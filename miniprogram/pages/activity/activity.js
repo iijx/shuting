@@ -22,6 +22,7 @@ app.createPage({
     onReady: function () {
         DB.collection('weapp_share').where({ openid: this.data.user.openid }).get()
             .then(res => {
+                console.log('res', res)
                 let record = res.data[0];
                 if (record) {
                     let num = record.invitedUser.length;

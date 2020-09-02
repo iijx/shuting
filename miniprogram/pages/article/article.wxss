@@ -2,11 +2,12 @@
 .article-container {
     background-color: #fff;
     min-height: 100vh;
+    line-height: 60rpx;
 }
 .content {
-    padding: 0 24rpx 100rpx 30rpx;
+    padding: 40rpx 24rpx 100rpx 30rpx;
     color: #353535;
-    font-size: 30rpx;
+    font-size: 32rpx;
     line-height: 1.6;
     box-sizing: border-box;
 }
@@ -14,15 +15,19 @@
     font-size: 36rpx;
     color: #000;
     font-weight: bold;
-    margin: 40rpx 0 18rpx;
+    /* margin: 40rpx 0 18rpx; */
+    margin-bottom: 36rpx;
 }
 .p {
-    margin-top: 22rpx;
-    margin-bottom: 10rpx;
+    /* margin-top: 22rpx; */
+    margin-bottom: 54rpx;
 }
-
+.strong {
+    font-weight: bold;
+    color: #000;
+}
 .code {
-    background-color: #f7f9fa;
+    /* background-color: #f7f9fa; */
     padding: 0 6rpx;
     color: #d93044;
     line-height: 1.6;

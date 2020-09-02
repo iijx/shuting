@@ -21,7 +21,7 @@
     display: inline !important;
     padding: 0 !important;
     margin: 0 !important;
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 .getUserInfoBtn:after {
@@ -52,6 +52,8 @@
 .pro-note {
     color: #4A50F2;
     color: #4a4a4a;
+    color: #fff;
+    opacity: .8;
     /* font-weight: bold; */
     /* border: 1px solid #4A50F2; */
 }

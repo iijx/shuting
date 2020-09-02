@@ -11,6 +11,11 @@ import store from './store/index';
 
 const Vant = { Dialog, Toast, Notify }
 const DB = wx.cloud.database();
+wx.loadFontFace({
+    family: 'PT Mono',
+    source: 'url("https://iijx-cdn.oss-cn-beijing.aliyuncs.com/font/PTM55F.ttf")',
+    success: console.log
+})
 
 App({
     onLaunch: function(opt) {

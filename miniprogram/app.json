@@ -13,7 +13,8 @@
         "pages/version/version",
         "pages/advice/advice",
         "pages/activity/activity",
-        "pages/memberDouble/memberDouble"
+        "pages/memberDouble/memberDouble",
+        "pages/papel/papel"
     ],
     "window": {
         "backgroundColor": "#ECF2F5",

@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="main">
+        <view class="question">{{ curQuestion }}</view>
+        <image class="audio" bindtap="handerBack" src="../../assets/imgs/audio.png"  mode="widthFix"></image>
+
+        <view class="options">
+            <view class="option {{ item.showResClass }}" data-index="{{ index }}" bindtap="optionClick" hover-class="option-hover" wx:for="{{ curOptions }}" wx:key="index" wx:for-item="item">{{ item.label }}</view>
+        </view>
+
+        <view class="originBtn" bindtap="toggleOrigin">
+            显示原文
+        </view>
+    </view>
+
+    <view class="origin-dialog" wx:if="{{ isShowOrigin }}">
+        <main>
+            <view wx:for="{{ curOrigin }}"  wx:key="index" wx:for-item="item">{{ item }}</view>
+        </main>
+        
+        <van-button block bindclick="toggleOrigin" size="small" color="#d93043">返回</van-button>
+    </view>
+
+
+</view>

@@ -58,7 +58,7 @@ app.createPage({
     if (type === 'number') path = `numberAudio/${answer}.mp3`;
     else if (type === 'phone') path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/phone${String(answer).length}/${answer}.mp3`;
     else if(type === 'time') {
-      path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
+      path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer.replace(':', '.')}.mp3`;
     } else if (type === 'year') {
         path = `yearAudio/${answer}.mp3`;
     } else if (type === 'pointNum') {
@@ -171,7 +171,8 @@ app.createPage({
         answer = Util.randomOnePhone(len)();
     } else if (type === 'time') {
         answer = Util.randomOneTime();
-        answer = `${answer.slice(0, 2)}:${answer.slice(2)}`;
+        console.log('time answer', answer)
+        answer = answer.replace('.', ':');
     } else if (type === 'year') {
         answer = Util.randomOneYear();
     } else if (type === 'pointNum') {
