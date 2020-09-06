@@ -1,6 +1,6 @@
 // pages/papel/papel.js
 const app = getApp();
-const { Util, Vant, Store } = app;
+const { Util, Vant, Store, Config } = app;
 import papel from '../../local/papel';
 
 app.createPage({
@@ -11,10 +11,16 @@ app.createPage({
     curQuestion: '',
     curOptions: [],
     curOrigin: [],
+    curAudioSrc: '',
 
     curUserAnswer: -1,
 
     isShowOrigin: false,
+    isLoading: false,
+    isPlaying: false,
+
+    percent: 0,
+    speed: 25
     
   },
   onLoad: function (options) {
@@ -23,7 +29,9 @@ app.createPage({
   initItem() {
     let item = this.data.papelArr[this.data.index];
     this.setData({
+      isPlaying: false,
       curUserAnswer: -1,
+      curAudioSrc: item.audio,
       curOrigin: [...item.origin],
       curQuestion: item.q,
       curOptions: item.o.map(i => ({
@@ -31,6 +39,41 @@ app.createPage({
         showResClass: ''
       }))
     })
+    this.prePlay()
+    
+  },
+  loadingAnimation() {
+
+  },
+  prePlay() {
+    this.setData({
+      percent: 100
+    })
+    Promise.all([Util.sleep(4000), app.uniAudio.setSrc(`${Config.cdnDomain}${this.data.curAudioSrc}`)])
+      .then(() => {
+        console.log(1);
+        this.setData({
+          isPlaying: true
+        })
+        app.uniAudio.play(() => {
+          this.setData({ isPlaying: false })
+        });
+      })
+      .catch(err => {
+        console.log(12)
+      })
+  },
+  audioClick() {
+    if (this.isLoading) return;
+    
+    if (this.data.isPlaying) {
+      app.uniAudio.stop();
+      this.setData({ isPlaying: false })
+    }
+    if (this.data.isPlaying) {
+      app.uniAudio.play(() => this.setData({ isPlaying: false }));
+      this.setData({ isPlaying: true })
+    }
   },
 
   optionClick(e) {
@@ -48,24 +91,30 @@ app.createPage({
     })
     console.log(this.data.curOptions[index])
 
-    setTimeout(() => {
-      this.data.index++;
-      this.initItem()
-    }, 1500)
-
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    
   },
 
   toggleOrigin() {
     this.setData({
       isShowOrigin: !this.data.isShowOrigin
     })
+  },
+  nextQ() {
+    console.log(1);
+    this.data.index++;
+    this.initItem()
+  },
+  prevQ() {
+    if (this.data.index > 0) {
+      this.data.index--;
+      this.initItem()
+    }
   },
 
   /**

@@ -1,22 +1,46 @@
 .container {
     min-height: 100vh;
-    background-color: #F1F1FC;
-    background-color: #fff;
-    background-color: #F5DEDB;
+    display: flex;
+    flex-direction: column;
+    background: #00aac4;
     justify-content: center;
     align-items: center;
 }
-
+.top {
+    height: 14rpx;
+}
+.main {
+    flex: 1;
+    background: #fff;
+    width: 686rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.list {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 .list-item {
     text-align: center;
-    height: 78rpx;
+    min-height: 78rpx;
+    flex: 1;
     display: flex;
+
     align-items: center;
     justify-content: center;
     background-color: #efdbff;
     background-color: #e6fffc;
     background-color: #F8F3F0;
+    /* background-color: #e6fffc; */
     color: #5E4846;
+    font-weight: bold;
+    font-size: 32rpx;
+    letter-spacing: 1rpx;
+    /* color: #006073; */
     opacity: .9;
 }
 
@@ -25,12 +49,35 @@
     background: #adfffa;
     background: #fff;
     background: #E2DAD3;
+    /* background: #a8fff9; */
     /* color: #fff; */
+}
+.main-bottom {
+    display: flex;
+    padding: 38rpx 32rpx;
+    justify-content: space-between;
+}
+.refresh-btn {
+    border: 1px solid #008599;
+    border-radius: 10rpx;
+    color: #008599;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240rpx;
+    height: 68rpx;
+    font-size: 28rpx;
 }
 
 .play-box {
-    width: 100%;
-    position: fixed;
+    margin: 32rpx 0;
+    /* width: 100%; */
+    border-radius: 10rpx;
+    width: 686rpx;
+    /* position: fixed; */
+    background: #FFF;
+    background: rgba(255, 255, 255, .8);
+
     left: 0;
     bottom: 0;
     padding: 20rpx 32rpx;
@@ -47,6 +94,12 @@
     top: 50%;
     transform: translate(-50%, -45%);
     font-size: 24rpx;
+}
+.speed {
+    font-size: 34rpx;
+    color: #595A5A;
+    width: 3em;
+    justify-content: flex-end;
 }
 
 
@@ -77,7 +130,9 @@
 
 .option-note {
     font-size: 24rpx;
-    color: #9254de;
-    color: #e0475a;
+    /* color: #9254de; */
+    /* color: #e0475a; */
+    /* color: #00aac4; */
+    color: #595A5A;
     padding: 0 32rpx;
 }

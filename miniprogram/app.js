@@ -8,6 +8,7 @@ import Notify from '/@vant/weapp/notify/notify';
 import create from './lib/westore/create';
 import Models from './models/index';
 import store from './store/index';
+import UniAudio from './lib/uniAudio';
 
 const Vant = { Dialog, Toast, Notify }
 const DB = wx.cloud.database();
@@ -107,7 +108,7 @@ App({
     Vant,
     DB,
     Models,
-    AppAudio: wx.createInnerAudioContext(),
+    uniAudio: new UniAudio(),
     createPage: opt => create(store, {
         // 用户点击右上角分享
         onShareAppMessage() {

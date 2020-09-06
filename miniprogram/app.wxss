@@ -90,7 +90,8 @@ page {
 .flex5 { flex: 5; }
 .flex { display: flex; }
 .flex-col { display: flex; flex-direction: column; }
-.flex-center { justify-content: center; align-items: center; }
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-right { display: flex; justify-content: flex-end; align-items: center; }
 
 .w100 { width: 100%; }
 .w90 { width: 90%; }

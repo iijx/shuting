@@ -92,6 +92,7 @@ app.createPage({
           } else return;
         }
         AudioContext.src = index === -1 ? `${Config.cdnDomain}/assets/audio/commonAudio/ding.mp3` : that._genAudioSrcItem(that.data.arr[index])
+        AudioContext.playbackRate = Number(that.data.speed);
         AudioContext.play();
         index += 1;
         that._playPromise().then(() => {
@@ -100,7 +101,7 @@ app.createPage({
               if (playid === that.data.playingId) {
                 autoPlay();
               }
-            }, 1300)
+            }, this.data.speed === '0.7' ? 1800 : 1300)
         });
       }
     })();
@@ -150,7 +151,15 @@ app.createPage({
     })
   },
   switchSpeed() {
+      if (this.data.speed === '1.0') this.data.speed = '1.3'
+      if (this.data.speed === '1.3') this.data.speed = '1.5'
+      else if (this.data.speed === '1.5') this.data.speed = '1.7'
+      else if (this.data.speed === '1.7') this.data.speed = '2.0'
+      else if (this.data.speed === '2.0') this.data.speed = '0.7'
+      else if (this.data.speed === '0.7') this.data.speed = '1.0'
 
+      this.setData({ speed: this.data.speed })
+      AudioContext.playbackRate = Number(this.data.speed);
   },
   changeTypes() {
     this.setData({

@@ -22,28 +22,52 @@
         </block>
     
         <view class="row-operaters">
-            <view class="row-item row-item1" bindtap="link" data-path="/pages/version/version">
+            <view class="row-item row-item1" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/pages/version/version">
                 <van-icon name="down" color="#e0475a" size="26px"/>
                 <view class="row-item-text">版本预告</view>
             </view>
-            <view class="row-item" bindtap="link" data-path="/pages/activity/activity">
+            <view class="row-item" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/pages/activity/activity">
                 <van-icon name="point-gift-o" color="#e0475a" size="26px"/>
                 <view class="row-item-text">免费vip</view>
             </view>
-            <view class="row-item row-item3" bindtap="link" data-path="/pages/exchange/exchange">
+            <view class="row-item row-item3" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/pages/exchange/exchange">
                 <van-icon name="gem-o" color="#e0475a" size="26px"/>
                 <view class="row-item-text">会员兑换码</view>
             </view>
         </view>
     
         <view class="operators">
-            <van-cell-group>
+            <view hover-class="hover" hover-stay-time="100">
                 <button class="contact-btn" open-type="contact" style="">
-                    <van-cell icon="smile-o" title="人工客服/建议" size="large" is-link></van-cell>
+                    <cell custom-class="operator-cell with-border">
+                        <view slot="hd" class="flex-center">
+                            <van-icon name="smile-o" color="#e0475a" size="26px"/>
+                        </view>
+                        <view slot="bd" class="operator-cell-body">
+                            人工客服/建议/留言
+                        </view>
+                        <view slot="ft">
+                            <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
+                        </view>
+                    </cell>
+                </button>
+            </view>
+            <view hover-class="hover" hover-stay-time="100">
+                <cell custom-class="operator-cell"  bind:tap="copyOpenid">
+                    <view slot="hd" class="flex-center">
+                        <van-icon name="idcard" color="#e0475a" size="26px"/>
+                    </view>
+                    <view slot="bd" class="operator-cell-body">复制 ID 号</view>
+                </cell>
+            </view>
+
+            <!-- <van-cell-group>
+                <button class="contact-btn" open-type="contact" style="">
+                    <van-cell icon="smile-o" title="人工客服/建议/留言" size="large" is-link></van-cell>
                 </button>
     
                 <van-cell icon="idcard" title="复制 ID 号" size="large" bind:click="copyOpenid"/>
-            </van-cell-group>
+            </van-cell-group> -->
         </view>
     </view>
 

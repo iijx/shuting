@@ -115,7 +115,8 @@
     right: 0;
     top: 48rpx;
     bottom: 48rpx;
-    background: #8c8c8c;
+    /* background: #8c8c8c; */
+    background: #c9c9c9;
     opacity: .8;
     transform: scaleX(0.5);
     right: 0;
@@ -140,10 +141,47 @@
     border-radius: 20rpx;
     overflow: hidden;
 }
+.operator-cell {
+    padding-left: 32rpx;
+
+    height: 98rpx;
+    position: relative;
+}
+.operator-cell.with-border:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1rpx;
+    color: #e9e9e9;
+    border-bottom: 1rpx solid #e9e9e9;
+    transform: scaleY(.5);
+
+}
+.operator-cell-body {
+    font-size: 30rpx;
+    color: #262626;
+    margin-left: 28rpx;
+}
 
 .contact-btn {
+    height: 98rpx;
+    background: #fff;
     text-align: left; padding: 0; border: 0 !important;
 }
 .contact-btn:after {
     display: none !important;
+}
+.icon-share-arrow {
+    width: 14rpx;
+    height: 14rpx;
+    display: block;
+    margin-right: 32rpx;
+}
+
+
+.hover {
+    opacity: .8;
+    background: #eee;
 }

@@ -24,11 +24,15 @@
 }
 .item.checked {
     background: #fff;
-    border-color: #9254de;
-    border-color: #e0475a;
-    box-shadow: -1px 0 0 0 #9254de;
-    box-shadow: -1px 0 0 0 #e0475a;
-    color: #9254de;
-    color: #e0475a;
+    /* border-color: #9254de; */
+    /* border-color: #e0475a; */
+    border-color: #00aac4;
+    /* box-shadow: -1px 0 0 0 #9254de;
+    box-shadow: -1px 0 0 0 #e0475a; */
+    box-shadow: -1px 0 0 0 #00aac4;
+    /* color: #9254de;
+    color: #e0475a; */
+    color: #00aac4;
+
     z-index: 1;
 }

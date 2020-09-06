@@ -1,24 +1,37 @@
 <view class="container">
+    <view class="top"></view>
     <view class="main">
+        <!-- 题目info -->
+        <view class="flex main-info">
+            <view class="flex1">正确: 1</view>
+            <view class="flex3 text-center">2019高考全国卷(一)</view>
+            <view class="flex1 text-right">{{ index + 1 }}/{{ papelArr.length }}</view>
+        </view>
         <view class="question">{{ curQuestion }}</view>
-        <image class="audio" bindtap="handerBack" src="../../assets/imgs/audio.png"  mode="widthFix"></image>
-
+        <view class="audio-wrap">
+            <van-circle value="{{ percent }}" speed="{{ speed }}" size="50" stroke-width="2" layer-color="#f0f0f0" color="#D97630">
+                <view class="flex-center audio-box" bindtap="audioClick">
+                    <image wx:if="{{ !isPlaying }}" class="audio-0" bindtap="handerBack" src="../../assets/imgs/audio-yellow-0.png"  mode="widthFix"></image>
+                    <image wx:else class="audio-1" bindtap="handerBack" src="../../assets/imgs/audio-yellow-1.png"  mode="widthFix"></image>
+                </view>
+            </van-circle>
+        </view>
         <view class="options">
+            <view wx:if="{{ isShowOrigin }}" class="origin-box">
+                <view wx:for="{{ curOrigin }}"  wx:key="index" wx:for-item="item">{{ item }}</view>
+            </view>
             <view class="option {{ item.showResClass }}" data-index="{{ index }}" bindtap="optionClick" hover-class="option-hover" wx:for="{{ curOptions }}" wx:key="index" wx:for-item="item">{{ item.label }}</view>
         </view>
 
         <view class="originBtn" bindtap="toggleOrigin">
-            显示原文
+            {{ isShowOrigin ? '返回' : '显示原文' }}
         </view>
-    </view>
 
-    <view class="origin-dialog" wx:if="{{ isShowOrigin }}">
-        <main>
-            <view wx:for="{{ curOrigin }}"  wx:key="index" wx:for-item="item">{{ item }}</view>
-        </main>
         
-        <van-button block bindclick="toggleOrigin" size="small" color="#d93043">返回</van-button>
     </view>
 
-
+    <view class="bottom">
+        <view class="prev-btn" bindtap="prevQ">上一题</view>
+        <view class="next-btn" bindtap="nextQ">下一题</view>
+    </view>
 </view>

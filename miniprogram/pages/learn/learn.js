@@ -248,6 +248,7 @@ app.createPage({
         })
     },
     switchfeedback() {
+        console.log(1)
         this.setData({
             isShowFeedBack: !this.data.isShowFeedBack
         })

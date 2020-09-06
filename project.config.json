@@ -95,7 +95,7 @@
 					"id": 5,
 					"name": "index_from_user",
 					"pathName": "pages/index/index",
-					"query": "fromOpenid=1234",
+					"query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
 					"scene": null
 				},
 				{
@@ -165,6 +165,7 @@
 					"id": -1,
 					"name": "papel",
 					"pathName": "pages/papel/papel",
+					"query": "",
 					"scene": null
 				}
 			]
