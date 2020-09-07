@@ -5,14 +5,15 @@
     background: #00aac4;
     justify-content: center;
     align-items: center;
+    padding: 0 20rpx;
 }
 .top {
     height: 14rpx;
 }
 .main {
     flex: 1;
+    width: 100%;
     background: #fff;
-    width: 686rpx;
     border-radius: 10rpx;
     overflow: hidden;
     display: flex;
@@ -73,7 +74,7 @@
     margin: 32rpx 0;
     /* width: 100%; */
     border-radius: 10rpx;
-    width: 686rpx;
+    width: 100%;
     /* position: fixed; */
     background: #FFF;
     background: rgba(255, 255, 255, .8);

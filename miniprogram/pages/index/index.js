@@ -64,6 +64,11 @@ app.createPage({
       url: '../qst/qst',
     })
   },
+  toPapel() {
+    wx.navigateTo({
+      url: '../papel/papel',
+    })
+  },
 
   onHide: function () {
 

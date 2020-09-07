@@ -66,5 +66,17 @@
             </view>
             <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
         </view>
+
+        <!-- <view class="learn-item item-3" bindtap="toPapel">
+            <image src="/assets/imgs/icon-learn-item-3.png" class="learn-item-img" mode="widthFix"></image>
+            <view class="flex1 item-bd">
+                <view class="title">IV. 真题测验</view>
+                <view class="time">
+                    <van-icon name="underway-o" color="#bfbfbf"/>
+                    <text class="time-text">90min</text>
+                </view>
+            </view>
+            <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
+        </view> -->
     </view>
 </view>

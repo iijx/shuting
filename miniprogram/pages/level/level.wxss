@@ -95,6 +95,12 @@
     height: 24rpx;
     margin-right: 8rpx;
 }
+.audio-note {
+    color: #999;
+    font-size: 10px;
+    height: 40rpx;
+    text-decoration: underline;
+}
 .unit-wrap {
     padding: 0 32rpx;
 }

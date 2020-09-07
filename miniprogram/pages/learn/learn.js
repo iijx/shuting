@@ -138,7 +138,7 @@ app.createPage({
         return new Promise((resolve, reject) => {
             AudioContext.src = isCorrect ? Config.correctAudioSrc : Config.errorAudioSrc;
             AudioContext.play();
-            Util.sleep(700).then(() => resolve());
+            Util.sleep(isCorrect ? 1200 : 700).then(() => resolve());
         })
     },
     showAnswer() {

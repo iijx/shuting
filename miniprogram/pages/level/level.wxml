@@ -29,9 +29,7 @@
 						<view style="color: #848A8E; font-size: 24rpx; line-height: 2.3;">进度</view>
 						<van-progress color="#02AF42" show-pivot="{{false}}" percentage="{{ 20 * item.cNum / item.unitList.length / 3 }}" />
 					</view>
-					<view slot="ft">
-						<view wx:if="{{ index === 0 || index === 1 }}" data-index="{{ index }}" bindtap="audioNote" style="color: #999; font-size: 10px; text-decoration: underline;">读音说明?</view>
-					</view>
+					<view slot="ft" wx:if="{{ index === 0 || index === 1 }}" data-index="{{ index }}" bindtap="audioNote" class="flex-center audio-note">读音说明?</view>
 				</cell>
 			</view>
 			<view class="unit-border"></view>

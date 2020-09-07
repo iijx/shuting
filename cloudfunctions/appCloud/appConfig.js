@@ -31,7 +31,7 @@ module.exports = {
         ]
     },
     freeMemberNeedCount: 10,
-    iosBuyPrompt: 'IOS小程序版，暂不支持开通',
-    // iosBuyPrompt: 'IOS小程序版目前仅「数听英语」公众号下支持开通',
+    // iosBuyPrompt: 'IOS小程序版，暂不支持开通',
+    iosBuyPrompt: 'IOS小程序版目前仅「数听英语」公众号下支持开通',
     isAppInCheck: false
 }

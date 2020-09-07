@@ -101,7 +101,7 @@ app.createPage({
               if (playid === that.data.playingId) {
                 autoPlay();
               }
-            }, this.data.speed === '0.7' ? 1800 : 1300)
+            }, that.data.speed === '0.7' ? 1800 : 1300)
         });
       }
     })();
