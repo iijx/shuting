@@ -36,5 +36,7 @@
         <view class="prev-btn" bindtap="prevQ">上一题</view>
         <view class="next-btn" bindtap="nextQ">下一题</view>
     </view>
+    
+    <van-dialog id="van-dialog" />
     <van-toast id="van-toast" />
 </view>
