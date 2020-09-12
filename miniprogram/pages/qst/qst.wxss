@@ -2,10 +2,10 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #00aac4;
+    background: #09CEDB;
     justify-content: center;
     align-items: center;
-    padding: 0 20rpx;
+    padding: 0 12rpx;
 }
 .top {
     height: 14rpx;
@@ -36,11 +36,12 @@
     background-color: #efdbff;
     background-color: #e6fffc;
     background-color: #F8F3F0;
+    background-color: #fff;
     /* background-color: #e6fffc; */
     color: #5E4846;
     font-weight: bold;
     font-size: 32rpx;
-    letter-spacing: 1rpx;
+    letter-spacing: 2rpx;
     /* color: #006073; */
     opacity: .9;
 }
@@ -50,6 +51,7 @@
     background: #adfffa;
     background: #fff;
     background: #E2DAD3;
+    background: #F8F3F0;
     /* background: #a8fff9; */
     /* color: #fff; */
 }

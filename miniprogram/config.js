@@ -9,7 +9,7 @@ export default {
     env,
     cloudEnv: env === 'prod' ? ENV_PROD : ENV_DEV,
 
-    cdnDomain: 'http://cdnword.iijx.site',
+    cdnDomain: 'https://cdnword.iijx.site',
     correctAudioSrc: '/assets/audio/correct.m4a',
     errorAudioSrc: '/assets/audio/error.m4a',
 }

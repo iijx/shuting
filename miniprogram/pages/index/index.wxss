@@ -5,12 +5,12 @@ page {
 .container {
     width: 100%;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
 }
 .top {
     position: relative;
     color: #3e3f41;
-    height: 30%;
+    height: 412rpx;
     padding: 100rpx 32rpx 0;
     box-sizing: border-box;
     color: #fff;
@@ -111,6 +111,7 @@ page {
     width: 686rpx;
     margin: 0 auto;
     box-sizing: border-box;
+    padding-bottom: 32rpx;
 }
 .learn-item {
     border-radius: 10rpx;

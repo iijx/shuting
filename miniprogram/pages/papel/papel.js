@@ -3,61 +3,71 @@ const app = getApp();
 const { Util, Vant, Store, Config } = app;
 import papel from '../../local/papel';
 
+class QItem {
+  constructor(opt = {}) {
+    this.q = opt.q || '';
+    this.o = (opt.o || []).map(i => ({ label: i, showResClass: '' })),
+    this.audio = opt.audio || '';
+    this.answer = opt.answer || 0;
+    this.origin = (opt.origin || []).map(i => i.trim());
+    this.source = opt.source || '';
+  }
+}
 app.createPage({
   data: {
+    pageIsActive: true,
     papelArr: [...papel],
     index: 0,
-    
-    curQuestion: '',
-    curOptions: [],
-    curOrigin: [],
-    curAudioSrc: '',
-
+  
     curUserAnswer: -1,
+    curItem: new QItem(),
 
     isShowOrigin: false,
     isLoading: false,
     isPlaying: false,
 
     percent: 0,
-    speed: 25
+    speed: 25,
     
   },
   onLoad: function (options) {
-    this.initItem()
+    let index = Number(wx.getStorageSync('l_curPapelQIndex')) || 0;
+    this.setData({ index })
+    this.nextWord()
   },
-  initItem() {
+  onShow: function() {
+    this.data.pageIsActive = true;
+  },
+
+  nextWord() {
     let item = this.data.papelArr[this.data.index];
     this.setData({
+      speed: -1,
+      percent: 0,
       isPlaying: false,
+      isLoading: true,
       curUserAnswer: -1,
-      curAudioSrc: item.audio,
-      curOrigin: [...item.origin],
-      curQuestion: item.q,
-      curOptions: item.o.map(i => ({
-        label: i,
-        showResClass: ''
-      }))
+      curItem: new QItem(item),
     })
     this.prePlay()
-    
-  },
-  loadingAnimation() {
-
   },
   prePlay() {
-    this.setData({
-      percent: 100
-    })
-    Promise.all([Util.sleep(4000), app.uniAudio.setSrc(`${Config.cdnDomain}${this.data.curAudioSrc}`)])
+    this.setData({ speed: 25, percent: 100 })
+    let curIndex = this.data.index;
+    Promise.all([Util.sleep(4000), app.uniAudio.setSrc(`${Config.cdnDomain}/assets/audio/shuting/papel/${this.data.curItem.audio}.m4a`)])
       .then(() => {
-        console.log(1);
-        this.setData({
-          isPlaying: true
+        console.log('promise.all then')
+        // 如果切换题了，就不用处理了
+        if (curIndex !== this.data.index || !this.data.pageIsActive) return;
+        // 否则，正常流程
+        this.setData({ isLoading: false, isPlaying: true })
+        app.assAudio.playDD();
+        Util.sleep(2500).then(() => {
+          if (curIndex !== this.data.index || !this.data.pageIsActive) return;
+          app.uniAudio.play(() => {
+            this.setData({ isPlaying: false })
+          });
         })
-        app.uniAudio.play(() => {
-          this.setData({ isPlaying: false })
-        });
       })
       .catch(err => {
         console.log(12)
@@ -70,7 +80,7 @@ app.createPage({
       app.uniAudio.stop();
       this.setData({ isPlaying: false })
     }
-    if (this.data.isPlaying) {
+    else {
       app.uniAudio.play(() => this.setData({ isPlaying: false }));
       this.setData({ isPlaying: true })
     }
@@ -81,23 +91,34 @@ app.createPage({
 
     let index = e.currentTarget.dataset.index;
     this.data.curUserAnswer = index;
-    console.log(index)
+    console.log('选中的是', index)
     if (this.data.papelArr[this.data.index].answer === index + 1) {
-      this.data.curOptions[index].showResClass = 'right'
-    } else this.data.curOptions[index].showResClass = 'error'
+      this.data.curItem.o[index].showResClass = 'right';
+      app.assAudio.playCorrect();
+    } else {
+      this.data.curItem.o[index].showResClass = 'error'
+      this.data.curItem.o[this.data.curItem.answer - 1].showResClass = 'right';
+      app.assAudio.playError();
+    }
 
     this.setData({
-      curOptions: this.data.curOptions
+      curItem: { ...this.data.curItem }
     })
-    console.log(this.data.curOptions[index])
-
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-    
+    this.data.pageIsActive = false;
+    console.log('onHide');
+    this.setData({ isPlaying: false })
+    app.uniAudio.stop();
+  },
+  onUnload: function() {
+    this.data.pageIsActive = false;
+    console.log('onUnload');
+    app.uniAudio.stop();
   },
 
   toggleOrigin() {
@@ -106,42 +127,25 @@ app.createPage({
     })
   },
   nextQ() {
-    console.log(1);
-    this.data.index++;
-    this.initItem()
+    if (this.data.index <= this.data.papelArr.length) {
+      app.uniAudio.stop();
+      this.setData({
+        index: this.data.index + 1
+      })
+      wx.setStorageSync('l_curPapelQIndex', this.data.index);
+      this.nextWord()
+    } else {
+      Vant.Toast('没有更多题了');
+    }
   },
   prevQ() {
     if (this.data.index > 0) {
-      this.data.index--;
-      this.initItem()
+      this.setData({
+        index: this.data.index - 1
+      })
+      this.nextWord()
+    } else {
+      Vant.Toast('已经是第一题了');
     }
   },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
-  }
 })

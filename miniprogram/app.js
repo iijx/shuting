@@ -64,6 +64,7 @@ App({
             wx.getSystemInfo({
                 success (res) {
                     store.setEnv({
+                        // platform: 'android'
                         platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
                     })
                 }
@@ -109,6 +110,7 @@ App({
     DB,
     Models,
     uniAudio: new UniAudio(),
+    assAudio: new UniAudio(),
     createPage: opt => create(store, {
         // 用户点击右上角分享
         onShareAppMessage() {

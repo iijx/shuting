@@ -3,35 +3,38 @@
     <view class="main">
         <!-- 题目info -->
         <view class="flex main-info">
-            <view class="flex1">正确: 1</view>
-            <view class="flex3 text-center">2019高考全国卷(一)</view>
+            <view class="flex1"></view>
+            <view class="flex3 text-center">{{ curItem.source }}</view>
             <view class="flex1 text-right">{{ index + 1 }}/{{ papelArr.length }}</view>
         </view>
-        <view class="question">{{ curQuestion }}</view>
+        <view class="question" style="{{ curItem.q.length >= 15 ? (curItem.q.length >= 40 ? '13px' : '16px') : '18px'}}">{{ curItem.q }}</view>
         <view class="audio-wrap">
-            <van-circle value="{{ percent }}" speed="{{ speed }}" size="50" stroke-width="2" layer-color="#f0f0f0" color="#D97630">
+            <van-circle value="{{ percent }}" speed="{{ speed }}" size="50" stroke-width="2" layer-color="#f4f4f4" color="#D97630">
                 <view class="flex-center audio-box" bindtap="audioClick">
-                    <image wx:if="{{ !isPlaying }}" class="audio-0" bindtap="handerBack" src="../../assets/imgs/audio-yellow-0.png"  mode="widthFix"></image>
-                    <image wx:else class="audio-1" bindtap="handerBack" src="../../assets/imgs/audio-yellow-1.png"  mode="widthFix"></image>
+                    <image wx:if="{{ !isPlaying }}" class="audio-0" src="../../assets/imgs/audio-yellow-0.png"  mode="widthFix"></image>
+                    <image wx:else class="audio-1" src="../../assets/imgs/audio-yellow-1.png"  mode="widthFix"></image>
                 </view>
             </van-circle>
         </view>
         <view class="options">
             <view wx:if="{{ isShowOrigin }}" class="origin-box">
-                <view wx:for="{{ curOrigin }}"  wx:key="index" wx:for-item="item">{{ item }}</view>
+                <view wx:for="{{ curItem.origin }}"  wx:key="index" wx:for-item="item">{{ item }}</view>
             </view>
-            <view class="option {{ item.showResClass }}" data-index="{{ index }}" bindtap="optionClick" hover-class="option-hover" wx:for="{{ curOptions }}" wx:key="index" wx:for-item="item">{{ item.label }}</view>
+            <view class="option {{ item.showResClass }}" data-index="{{ index }}" bindtap="optionClick" hover-class="option-hover" wx:for="{{ curItem.o }}" wx:key="index" wx:for-item="item">
+                <text>{{ item.label }}</text>
+                <image mode="widthFix" class="icon-right correct" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA2CAYAAABz508/AAAAAXNSR0IArs4c6QAAA9hJREFUaAXtml2ITVEUx+eOmcaMTGkwGlGUj8HMCw+TGhIy8+RleJDElAwvPOEBJZNE80CJPCokociDF5Jvygvx4GNIUb4/8z3Xb8Vpdsfd95y9z5lzjj2z6t/Ze+2111r/dW/tu9e5JSX9RPL5fCM4Az6DR2BlP6HeSxPSbeAr8Et9r5XjI5h3gF/+Cvydz3Sc/h96kN2kKYCnHut0IWCZA3s8tprnBdeLUA7xIxrynvoDgwZnCwG5IeCsx1bz/Im+1eUi1EDwuoa8ql7tchHGwPSeylYz7nK5CPWQfqohrqpPMil1shAQawKvVbaa8U30Va4WoQVynzTEVfUTJqNcLcISyH1X2WrG79FPc7UIayHXoyGuqn8wWeBqETpVpgHjVc4VAcKDwIEA4uryTheLUAHDEyrLgPFx1nNOFQJC1eA8CCs3MKx0rQi1kLoVtgLYPQa1rhVhPKQeGBThHbZTXSuC9BafGxRBjsn5sRYBh6n+Fid+M5BP10TiacISsQxIS+s+kN6eXGC2gPJYqxzgjHgLwRdgIjsC3IZfJupeTeRr6OvCe7K3JE47kIaJiRzDOL5jEmfSttLJMxaa7CkG78T/Bl3wInr5kOI9JnH4skhAWZL3ASuCKZlZ4FMarF3AVLrZMNIsWghrnB4Mmclu7MpCuAw0ET8GcdX03jKZEhjAxgDHclx9U6MVGZ9jrcYmjreH/VVAXr2Zily753p++uRJgHUGWXVj22iTCPuGgcvARtptYhrvIbPTBtlJZ6jNJAj2o8Edgxiq6XaTWJFsiSrt8DBNUDXBbUwCjzBsJgK5C9jIUTYFxohE3r+ZgLOA6Xl+ij3Vfl/enLUZ4AWwkStsGuz5SvRJ4M0WGd9lzwR/oujmgY8W/mTLQzDC7zOxOcFLgZwOpiJHW4uXKOPFIOxp5I8lviZ7vlJ7kkQdsPk6y11lPVgDZGwjckzOSY28PzDJtIIeGyYR9yz355L6HEK7IpIy3d6ZOulCCcBC/msQ5g2zKeFC9vKfhmSPyUKkdTqSGwdMmyWFiBbTXWKxQpdDZvQkuagYi4hr0pscnhmyQYmQ7P6IhAttf4NyUlDsTK2TcCW4XYiNpU5+Y8zOFMmwyZB4PZB/rsYhy8LGzaQdFZD+YlTZmklypklRhcMRKnHINF5m7SnCUCDtf1O5yIbsH5MmlYfQdGByqZLCRWrzmeSXqC3Ewrb45A9f/1zTE022r4NBUBozxUS+Nc19nUfq/iEZ1OJbmnqSSSVAMRqAv98pV/iNSeUQNU5stz1Iy9unDiCvCF+Bfblc7irPARmowH9Ygd9B9xkEedU1rAAAAABJRU5ErkJggg==" alt="" />
+                <image mode="widthFix" class="icon-right wrong" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAmCAMAAACbFsmhAAAAmVBMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VHQRUAAAAMnRSTlMAA/nt4NEeEOTWysG2ZE4vGhQMCQb28drGu6ujnoN8WkhAOiwnlpLor5l2bmxVKSWFhB0Y9ToAAAGASURBVDjLfZTZloIwEETDqgKKrCKgguK+zfT/f9x0aBjRJNaLVOWexFQrrCmWIfuicFk0rASwAjUTWAAl0zyAha1i7AWAp+F+DsB4J2d2YwAnbHdE2tjKmK2BpwTdnsgnlchUCZ5h985PAfTNJ7PRAVL/5Wv0cH1nrhjp9TC5A2o1TFY8ubM33Xi213qr7bm/sQ/98DSPycQ5d79MUMnzZUijAFQpMrx6lBNgcVgvFS0qygA1se0JoLKISTVqV02zZUdyhqonUdGKgRrEGMLAhQqpVqWm0GmqZtbwr7WKOcBABykSF7R6PtNnEUuq9GjtpGknevIiociMVtwIeZees49C5xYAFU3Vk7PmQ+ZpUmp26bz3zxfjH7uiH33y6Ko/+n1Sp5Qk28G/KaEsrcnPdPL6jLwsner9KOQj0jG/CIMQhnRhrnoMeyC5rKKHXBMhLae1ijGnhWPpONtjHH4NXu1I8avng2ivZ1HRoqh6i94eRsOUaowNfT+ffZGPN/oDO8hL9cPkExgAAAAASUVORK5CYII=" alt="" />
+            </view>
         </view>
 
         <view class="originBtn" bindtap="toggleOrigin">
             {{ isShowOrigin ? '返回' : '显示原文' }}
         </view>
-
-        
     </view>
 
     <view class="bottom">
         <view class="prev-btn" bindtap="prevQ">上一题</view>
         <view class="next-btn" bindtap="nextQ">下一题</view>
     </view>
+    <van-toast id="van-toast" />
 </view>

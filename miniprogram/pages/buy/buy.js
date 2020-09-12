@@ -7,9 +7,6 @@ app.createPage({
         price: 0,
         paying: false,
         signUpNumber: 10,
-        // isShowGiveDialog: false,
-        memberDay: 10,
-        memberDayPrice: 200,
         env: {},
         config: {},
         goods: [],
@@ -121,30 +118,8 @@ app.createPage({
             signUpNumber: parseInt(Number(retNum))
         })
     },
-    onMemberDayChange(e) {
-        let day = e.detail.value || e.detail;
-        let dayPrice = Math.round(day * (this.data.oneDayPrice * 100));
-        this.setData({
-            memberDay: day,
-            memberDayPrice: dayPrice
-        });
-        if (this.data.memberType === '10') {
-            this.setData({
-                price: dayPrice
-            })
-        }
-    },
-    // giveRuleBtn() {
-    //     this.setData({ isShowGiveDialog: true })
-    // },
     randomNum(min, max) {
         return Math.random() * (max - min) + min;
-    },
-    memberDayCellClick() {
-        this.setData({
-            memberType: "10",
-            price: this.data.memberDayPrice
-        })
     },
     onRadioCellClick(e) {
         const { item } = e.currentTarget.dataset;
@@ -158,13 +133,8 @@ app.createPage({
             mask: true,
             message: ''
         });
-        // UniApi.cloud('createOrder', {
-        //     memberType: String(this.data.memberType),
-        //     memberDay: this.data.memberDay,
-        // })
         UniApi.appCloud('order', 'post', {
             memberType: String(this.data.memberType),
-            memberDay: this.data.memberDay,
         }).then(res => {
             Vant.Toast.clear();
             app.globalData.out_trade_no = res.out_trade_no;

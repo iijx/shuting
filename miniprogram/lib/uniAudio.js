@@ -1,11 +1,15 @@
 export default class UniAudio {
-    init () {
+    constructor() {
         this.audioInstance = wx.createInnerAudioContext();
         this.audioInstance.onCanplay(() => this.onCanPlay())
         this.audioInstance.onEnded(() => this.onEnded())
+        this.audioInstance.onError(e => this.onError(e))
     }
     onCanPlay() {
-        this.canPlayCB();
+        typeof this.canPlayCB === 'function' && this.canPlayCB();
+    }
+    onError(e) {
+        console.log(e)
     }
     onEnded() {
         if (typeof this.endedCB === 'function') {
@@ -13,10 +17,12 @@ export default class UniAudio {
         }
     }
     setSrc(src) {
-        if (!this.audioInstance) this.init();
         return new Promise((resolve, reject) => {
-            this.audioInstance.src = src;
-            this.canPlayCB = function() { resolve() }
+            if (this.audioInstance.src === src) resolve();
+            else {
+                this.canPlayCB = function() { resolve() }
+                this.audioInstance.src = src;
+            }
         })
     }
     play(end) {
@@ -24,6 +30,18 @@ export default class UniAudio {
         if (end && typeof end === 'function') {
             this.endedCB = end;
         }
+    }
+    playDD() {
+        this.audioInstance.src = "/assets/audio/dingdong.m4a";
+        this.audioInstance.play()
+    }
+    playCorrect() {
+        this.audioInstance.src = "/assets/audio/correct.m4a";
+        this.audioInstance.play()
+    }
+    playError() {
+        this.audioInstance.src = "/assets/audio/error.m4a";
+        this.audioInstance.play()
     }
     stop() {
         this.audioInstance.stop();

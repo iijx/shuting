@@ -22,23 +22,8 @@
 				<view slot="bd" style="color: #000; font-weight: bold;">选择会员类型</view>
 			</cell>
 		</view>
-
 		<van-radio-group value="{{ memberType }}" bind:change="onRadioChange">
 			<van-cell-group border="{{ false }}">
-				<van-cell wx:if="{{ env.platform === 'android' }}" clickable  use-label-slot border bind:click="memberDayCellClick">
-					<view slot="title" class="member-name">自定义天数 · ¥{{ oneDayPrice }}/天</view>
-					<view slot="label" >
-						<view style="padding: 32rpx 20rpx;">
-							<van-slider  value="{{ memberDay }}" active-color="#FE3F1D" min="7" max="30" step="1" use-button-slot bind:drag="onMemberDayChange" bind:change="onMemberDayChange">
-								<view class="member-day" slot="button">
-									{{ memberDay }}天
-								</view>
-							</van-slider>
-						</view>
-						<view class="price">￥{{ memberDayPrice / 100 }}</view>
-					</view>
-					<van-radio slot="right-icon" name="10" checked-color="#5862F6" />
-				</van-cell>
 				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
 					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
 						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" class="cl_red">（推荐）</text></view>

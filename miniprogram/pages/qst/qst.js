@@ -14,7 +14,7 @@ app.createPage({
      curTypes: [],
 
      playingId: '',
-     checkboxArr: ['number', 'pointNum'],
+     checkboxArr: ['number'],
      numCountArr: [
       { label: '2位', len: 2, key: 2, checked: true },
       { label: '3位', len: 3, key: 3, checked: true },
