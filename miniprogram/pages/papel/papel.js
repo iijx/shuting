@@ -2,7 +2,6 @@
 const app = getApp();
 const { Util, Vant, Store, Config } = app;
 import papel from "../../local/papel";
-
 class QItem {
 	constructor(opt = {}) {
 		this.q = opt.q || "";
@@ -44,7 +43,7 @@ app.createPage({
 	nextWord() {
 		let item = this.data.papelArr[this.data.index];
 		this.setData({
-		speed: -1,
+		// speed: -1,
 		percent: 0,
 		isPlaying: false,
 		isLoading: true,
@@ -154,18 +153,18 @@ app.createPage({
 
 	nextQ() {
 		if (this.data.index <= this.data.papelArr.length) {
-		if (!this.data.user.isPro) {
-			this.showMember();
+			if (this.data.index >= 2 && !this.data.user.isPro) {
+				this.showMember();
+			} else {
+				app.uniAudio.stop();
+				this.setData({
+					index: this.data.index + 1,
+				});
+				wx.setStorageSync("l_curPapelQIndex", this.data.index);
+				this.nextWord();
+			}
 		} else {
-			app.uniAudio.stop();
-			this.setData({
-				index: this.data.index + 1,
-			});
-			wx.setStorageSync("l_curPapelQIndex", this.data.index);
-			this.nextWord();
-		}
-		} else {
-		Vant.Toast("没有更多题了");
+			Vant.Toast("没有更多题了");
 		}
 	},
 	prevQ() {

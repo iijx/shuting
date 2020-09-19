@@ -48,7 +48,6 @@ module.exports = async function(event, context) {
         return { 
             openid,
             ...curUser,
-            isBuyOver24Hour: !curUser.lastBuyTime || (curUser.lastBuyTime || 0) > (Date.now() - 24 * 60 * 60 * 1000)
         }
     }
     else if (method === 'update') {
@@ -61,5 +60,20 @@ module.exports = async function(event, context) {
             let res = await updateUser(curUser._id, curUser);
             return { success: true, ...res };
         }
+    }
+    else if (method === 'openMember') {
+        const { memberType, isPaid, memberDay, openid } = params;
+        let user = await getUser(openid);
+        let proEndDate = Date.now() + memberDay * 24 * 60 * 60 * 1000;
+        return await db.collection('users').doc(user._id).update({
+            data: {
+                isPro: true,
+                memberType: memberType,
+                proEndDate,
+                lastBuyTime: Date.now(),
+                isPaid,
+                updateAt: new Date(),
+            }
+        })
     }
 }

@@ -13,13 +13,9 @@
 
     <view class="main-wrap">
         <!-- 没有付过费 -->
-        <view  wx:if="{{ !user.isPaid }}" class="cl_fff ft_12 text-center">
+        <view  wx:if="{{ !user.isPro }}" class="cl_fff ft_12 text-center">
             <view class="member-btn" bindtap="memberBtn">查看会员计划</view>
         </view>
-        <!-- 付过费 -->
-        <block wx:else>
-            <view wx:if="{{ !user.isBuyOver24Hour && user.memberType !== 3 }}"  class="activity-btn" bindtap="memberDouble">已获得会员时长翻倍机会</view>
-        </block>
     
         <view class="row-operaters">
             <view class="row-item row-item1" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/pages/version/version">
@@ -35,8 +31,30 @@
                 <view class="row-item-text">会员兑换码</view>
             </view>
         </view>
+
+        <view wx:if="{{ user.openid === 'oH3iI5LMTT3KdVa6KQV4QHa8ijhM' }}" class="operators">
+            <view hover-class="hover" hover-stay-time="100">
+                <cell custom-class="operator-cell"  bind:tap="toChecking">
+                    <view slot="hd" class="flex-center">
+                        <van-icon name="bulb-o" color="#e0475a" size="26px"/>
+                    </view>
+                    <view slot="bd" class="operator-cell-body">返现审核</view>
+                </cell>
+            </view>
+        </view>
     
         <view class="operators">
+            <view  wx:if="{{ user.memberType + '' === '20' }}" hover-class="hover" hover-stay-time="100">
+                <cell custom-class="operator-cell with-border" bind:tap="toMyDuju">
+                    <view slot="hd" class="flex-center">
+                        <van-icon name="bulb-o" color="#e0475a" size="26px"/>
+                    </view>
+                    <view slot="bd" class="operator-cell-body">我的笃局会员</view>
+                    <view slot="ft">
+                        <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>
+                    </view>
+                </cell>
+            </view>
             <view hover-class="hover" hover-stay-time="100">
                 <button class="contact-btn" open-type="contact" style="">
                     <cell custom-class="operator-cell with-border">
@@ -60,15 +78,9 @@
                     <view slot="bd" class="operator-cell-body">复制 ID 号</view>
                 </cell>
             </view>
-
-            <!-- <van-cell-group>
-                <button class="contact-btn" open-type="contact" style="">
-                    <van-cell icon="smile-o" title="人工客服/建议/留言" size="large" is-link></van-cell>
-                </button>
-    
-                <van-cell icon="idcard" title="复制 ID 号" size="large" bind:click="copyOpenid"/>
-            </van-cell-group> -->
         </view>
+        
+        
     </view>
 
     <van-dialog id="van-dialog"></van-dialog>

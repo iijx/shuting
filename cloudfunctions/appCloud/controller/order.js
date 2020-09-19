@@ -60,4 +60,37 @@ module.exports = async (event, context) => {
         else if (String(order.status) === '1') return { status: 1, msg: '暂未查询到成功支付' }
         else return { status: order.status, msg: '未知订单状态' }
     }
+    // get 获取订单
+    else if (method === 'get') {
+        const { openid, out_trade_no } = params;
+        const order = await db.collection('order').where({
+            out_trade_no,
+            openid
+        }).limit(1).get().then(res => res.data[0]);
+
+        return order;
+    }
+
+    else if (method === 'updateStatus') {
+        const { time_end, status, payjs_order_id, out_trade_no, transaction_id } = params;
+        const order = await db.collection('order').where({ out_trade_no }).limit(1).get().then(res => res.data[0]);
+
+        if (!order) return { success: false, msg: '订单不存在' }
+        if (order.status === status ) { return { success: false, msg: '无需修改' } }
+
+        const res = await db.collection('order').doc(order._id).update({
+            data: {
+                status: status,
+                time_end,
+                payjs_order_id,
+                transaction_id,
+                updateAt: new Date(),
+            }
+        });
+        return { 
+            success: true,
+            order,
+            msg: '修改成功'
+        }
+    }
 };

@@ -16,10 +16,10 @@ const store = {
             isAppInCheck: false,
             freeMemberNeedCount: 10,
             version: {},
+            shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2.png'
         },
 
         goods: [],
-        oneDayPrice: 0.2,
 
         // 学习信息
         curLearnLevel: {},

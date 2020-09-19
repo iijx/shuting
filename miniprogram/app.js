@@ -9,6 +9,7 @@ import create from './lib/westore/create';
 import Models from './models/index';
 import store from './store/index';
 import UniAudio from './lib/uniAudio';
+import Http from './lib/http'
 
 const Vant = { Dialog, Toast, Notify }
 const DB = wx.cloud.database();
@@ -30,6 +31,7 @@ App({
             UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
                 store.data.user = res;
                 store.update();
+                this.learnLog();
             })
             UniApi.appCloud('config', 'get').then(res => {
                 if (res.success) {
@@ -38,7 +40,8 @@ App({
                     store.data.config.iosBuyPrompt = res.iosBuyPrompt || store.data.config.iosBuyPrompt;
                     store.data.config.isAppInCheck = res.isAppInCheck || false;
                     store.data.config.freeMemberNeedCount = res.freeMemberNeedCount || 10;
-                    store.data.oneDayPrice = res.oneDayPrice || 0.2;
+                    store.data.config.shareTimelineBaseImg = res.shareTimelineBaseImg || store.data.config.shareTimelineBaseImg;
+                    store.data.config.androidWithDujuRate = res.androidWithDujuRate || 0;
                     store.update();
                 }
             });
@@ -71,6 +74,22 @@ App({
             })
         }
     },
+    // 学习打点日志
+    learnLog() {
+        if (String(store.data.user.memberType) === '20') {
+            let lastEnterLogTime = parseInt(wx.getStorageSync('l_log_lastEnterTime')) || 0;
+            if (!Util.isSameDay(new Date(), new Date(lastEnterLogTime))) {
+                DB.collection('duju').where({ openid: store.data.user.openid }).update({
+                    data: {
+                        lRecord: DB.command.push(Date.now())
+                    }
+                })
+                wx.setStorage({key: 'l_log_lastEnterTime', data: String(Date.now()) });
+            } else {
+                console.log('今天已经打过点了，无需打点')
+            }
+        }
+    },
     onShow: function (options) {
         // 关于支付
         if (options.referrerInfo && options.referrerInfo.appId === 'wx959c8c1fb2d877b5') { 
@@ -97,6 +116,9 @@ App({
         //     }})
         // }
     },
+    onHide() {
+        this.learnLog();
+    },
     globalData: {
         payjsOrderId: '',
         out_trade_no: '',
@@ -109,6 +131,7 @@ App({
     Vant,
     DB,
     Models,
+    Http,
     uniAudio: new UniAudio(),
     assAudio: new UniAudio(),
     createPage: opt => create(store, {

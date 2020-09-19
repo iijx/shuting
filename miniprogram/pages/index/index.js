@@ -12,7 +12,9 @@ app.createPage({
         index: 6,
         year: 2020
       },
-      labelWeek: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+      labelWeek: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+
+      showShare: false,
   },
 
   /**

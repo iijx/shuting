@@ -144,13 +144,13 @@
 .operator-cell {
     padding-left: 32rpx;
 
-    height: 98rpx;
+    height: 118rpx;
     position: relative;
 }
 .operator-cell.with-border:after {
     position: absolute;
     content: "";
-    left: 0;
+    left: 32rpx;
     right: 0;
     bottom: 0;
     height: 1rpx;

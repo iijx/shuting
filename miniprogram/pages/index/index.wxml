@@ -73,7 +73,7 @@
                 <view class="title">IV. 真题测验</view>
                 <view class="time">
                     <van-icon name="underway-o" color="#bfbfbf"/>
-                    <text class="time-text">12min</text>
+                    <text class="time-text">120min</text>
                 </view>
             </view>
             <image src="/assets/imgs/arrow-right.png" class="icon-share-arrow" mode="widthFix"></image>

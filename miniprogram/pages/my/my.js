@@ -28,7 +28,7 @@ app.createPage({
         })
     },
     onReady: function () {
-
+        app.learnLog();
     },
     onShow: function () {
         this.update().then(() => {
@@ -42,9 +42,14 @@ app.createPage({
             })
         }
     },
-    memberDouble() {
+    toMyDuju() {
         wx.navigateTo({
-            url: '../memberDouble/memberDouble',
+            url: '../myduju/myduju',
+        })
+    },
+    toChecking() {
+        wx.navigateTo({
+            url: '../checking/checking'
         })
     },
     memberBtn() {

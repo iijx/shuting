@@ -10,23 +10,41 @@ app.createPage({
         env: {},
         config: {},
         goods: [],
-        oneDayPrice: 0.2,
+
+        isShowBuyDuju: false,
+        curMemberMode: 'normal', // 'normal' || 'duju'
+
+        dujuPriceStr: '0.00',
+        normalPriceStr: '18.00',
+
     },
     onLoad: function (options) {
         this.updateSignUpNumber();
-        wx.nextTick(() => {
-            let defaultGood = this.data.goods.find(item => item.isRecommend);
-            this.setData({
-                price: defaultGood.price * 100,
-                memberType: String(defaultGood.memberType)
-            })
-        })
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
+        let isShowBuyDuju = wx.getStorageSync('l_isShowBuyDuju') || 0;
+        console.log('isShowBuyDuju', isShowBuyDuju);
+        if (isShowBuyDuju === 0) {
+            console.log(Math.random() * 100, this.data.config.androidWithDujuRate)
+            isShowBuyDuju = (Math.random() * 100) <= this.data.config.androidWithDujuRate ? 1 : -1;
+            console.log((Math.random() * 100) <= this.data.config.androidWithDujuRate)
+            wx.setStorage({ key: 'l_isShowBuyDuju', data: String(isShowBuyDuju)});
+        }
+
+        wx.nextTick(() => {
+            let defaultGood = this.data.goods.find(item => String(item.memberType) === '3');
+            this.data.price = defaultGood.price * 100;
+            this.setData({
+                isShowBuyDuju: String(isShowBuyDuju) === '1',
+                memberType: String(defaultGood.memberType),
+                normalPriceStr: (defaultGood.price).toFixed(2),
+                dujuPriceStr: ((this.data.goods.find(item => String(item.memberType) === '20') || {}).price || 10).toFixed(2)
+            })
+        })
 
     },
     handerBack() {
@@ -34,6 +52,7 @@ app.createPage({
             delta: 1
         })
     },
+    
 
     /**
      * 生命周期函数--监听页面显示
@@ -42,7 +61,6 @@ app.createPage({
         // 标记：已经点击过支付
         if (this.data.paying) {
             console.log('buy on show', app.globalData.paySuccess)
-            let that = this;
             Util.sleep(100).then(res => {
                 console.log('buy on show 100', app.globalData.paySuccess)
                 if (app.globalData.paySuccess) {
@@ -61,7 +79,6 @@ app.createPage({
                             that.setData({ paying: false, })
                             return;
                         };
-                        // UniApi.cloud('getOrderStatus', { out_trade_no })
                         UniApi.appCloud('order', 'getStatus', { out_trade_no }).then(res => {
                             if (String(res.status) === '2') {
                                 Vant.Toast.clear();
@@ -74,10 +91,8 @@ app.createPage({
                                         confirmButtonColor: '#d93043',
                                     }).then(res => {
                                         wx.switchTab({
-                                          url: '' // 指定页面的url
-                                        });({
-                                          url: '../my/my',
-                                        })
+                                          url: '../my/my' // 指定页面的url
+                                        });
                                     })
                                 })
                             } else {
@@ -101,6 +116,20 @@ app.createPage({
                 }
             })
         }
+    },
+    setNormalMembetMode() { 
+        this.data.price = Math.ceil(this.data.normalPriceStr * 100)
+        this.setData({ 
+            curMemberMode: 'normal',
+            memberType: 3
+        }) 
+    },
+    setDujuMembetMode() { 
+        this.data.price = Math.ceil(this.data.dujuPriceStr * 100)
+        this.setData({
+            curMemberMode: 'duju',
+            memberType: 20
+        }) 
     },
     updateSignUpNumber() {
         let baseBumber = 10;
@@ -169,20 +198,6 @@ app.createPage({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
 
     },
 })

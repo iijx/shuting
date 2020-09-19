@@ -12,4 +12,6 @@ export default {
     cdnDomain: 'https://cdnword.iijx.site',
     correctAudioSrc: '/assets/audio/correct.m4a',
     errorAudioSrc: '/assets/audio/error.m4a',
+    
+    baseUrl: 'https://shuting.iijx.site'
 }

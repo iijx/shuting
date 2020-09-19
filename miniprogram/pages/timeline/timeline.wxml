@@ -1,0 +1,12 @@
+<!--pages/timeline/timeline.wxml-->
+<view class="container">
+    <view class="flex1 flex-center title">长按图片，可直接「保存发朋友圈」</view>
+    <view class="flex3 flex-center">
+        <image class="img" show-menu-by-longpress src="{{ loadImagePath }}" />
+    </view>
+    <view class="flex1"></view>
+    <canvas  class="canvas" width="750" height="750" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" canvas-id="canvas"></canvas>
+    <view class="save-btn">
+        <van-button color="#e0475a" block bind:click="saveImg">保存图片</van-button>
+    </view>
+</view>

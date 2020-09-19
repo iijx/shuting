@@ -6,8 +6,8 @@ export default class User {
         this.avatar = opt.avatar || '';
         this.nickName = opt.nickName || '';
         this.proEndDate = opt.proEndDate || new Date('1970-01-01');
+        this.memberType = opt.memberType || 0,
 
-        this.isBuyOver24Hour = opt.isBuyOver24Hour || false;
         this.isPaid = opt.isPaid || false;
     }
 }

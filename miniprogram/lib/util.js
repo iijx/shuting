@@ -283,7 +283,7 @@ export const dateIsBetween = (day, range) => {
  * @param {*} day2
  * -1, 0, 1
  */
-export const compareDateByDay = (day1, day2) => {
+export const compareDate = (day1, day2) => {
     if (day1.setHours(0, 0, 0, 0) === day2.setHours(0, 0, 0, 0)) return 0;
     else return day1 > day2 ? 1 : -1;
 }
@@ -299,4 +299,14 @@ export const getWeekByDate = date => {
       .map((_, i) => {
         return new Date(dateOfToday + (i - dayOfToday) * 1000 * 60 * 60 * 24)
       })
+}
+
+export const getDateByAddDay = (day, addDayNum) => {
+    let t = new Date(day)
+    t.setDate(t.getDate() + addDayNum)
+    return t
+}
+
+export const getNext7dateByDate = date => {
+    return [0, 1, 2, 3, 4, 5, 6].map(i => getDateByAddDay(date, i))
 }

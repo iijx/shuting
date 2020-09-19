@@ -1,0 +1,11 @@
+<!--pages/checking/checking.wxml-->
+<view class="container">
+    <view wx:for="{{ list }}" wx:key="index" >
+        <van-panel title="{{ item.startTimeStr }}" status="状态: {{ item.refundStatus }}" use-footer-slot>
+            <view>{{ item.openid }}</view>
+            <view slot="footer" class="mt_10 mb_10 flex-right">
+                <van-button size="small" type="primary" data-item="{{ item }}" bind:click="ok">通过</van-button>
+            </view>
+        </van-panel>
+    </view>
+</view>

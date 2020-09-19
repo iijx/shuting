@@ -1,174 +1,191 @@
 {
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"enhance": true,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"appid": "wx11a23be8fd1b03f3",
-	"projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
-	"libVersion": "2.10.1",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "pages/learn/learn",
-					"pathName": "pages/learn/learn",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/level",
-					"pathName": "pages/level/level",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/my",
-					"pathName": "pages/my/my",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "summary",
-					"pathName": "pages/summary/summary",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "buy",
-					"pathName": "pages/buy/buy",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "index_from_user",
-					"pathName": "pages/index/index",
-					"query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "version",
-					"pathName": "pages/version/version",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "index_wxST",
-					"pathName": "pages/index/index",
-					"query": "openid=oH3iI5NU9XZO4HFeRDVRQ5N2aHjs",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "temp",
-					"pathName": "pages/temp/temp",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/temp2/temp2",
-					"pathName": "pages/temp2/temp2",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/activity",
-					"pathName": "pages/activity/activity",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/memberDouble",
-					"pathName": "pages/memberDouble/memberDouble",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 13,
-					"name": "pages/article/article",
-					"pathName": "pages/article/article",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "qst",
-					"pathName": "pages/qst/qst",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "papel",
-					"pathName": "pages/papel/papel",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": true,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "appid": "wx11a23be8fd1b03f3",
+  "projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
+  "libVersion": "2.12.2",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/learn/learn",
+          "pathName": "pages/learn/learn",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/level",
+          "pathName": "pages/level/level",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "summary",
+          "pathName": "pages/summary/summary",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "buy",
+          "pathName": "pages/buy/buy",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "index_from_user",
+          "pathName": "pages/index/index",
+          "query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "version",
+          "pathName": "pages/version/version",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "index_wxST",
+          "pathName": "pages/index/index",
+          "query": "openid=oH3iI5NU9XZO4HFeRDVRQ5N2aHjs",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "temp",
+          "pathName": "pages/temp/temp",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/temp2/temp2",
+          "pathName": "pages/temp2/temp2",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/activity",
+          "pathName": "pages/activity/activity",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/memberDouble",
+          "pathName": "pages/memberDouble/memberDouble",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 13,
+          "name": "pages/article/article",
+          "pathName": "pages/article/article",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "qst",
+          "pathName": "pages/qst/qst",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "papel",
+          "pathName": "pages/papel/papel",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/myduju",
+          "pathName": "pages/myduju/myduju",
+          "query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/timeline",
+          "pathName": "pages/timeline/timeline",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

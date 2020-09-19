@@ -10,6 +10,7 @@ page {
 
 .ft_bold { font-weight: bold; }
 
+.ft_10 { font-size: 20rpx; }
 .ft_12 { font-size: 24rpx; }
 .ft_13 { font-size: 26rpx; }
 .ft_14 { font-size: 28rpx; }
@@ -31,7 +32,7 @@ page {
 .mt_5 { margin-top: 10rpx; }
 .mt_6 { margin-top: 12rpx; }
 .mt_7 { margin-top: 14rpx; }
-.m_8 { margin-top: 16rpx; }
+.mt_8 { margin-top: 16rpx; }
 .mt_9 { margin-top: 18rpx; }
 .mt_10 { margin-top: 20rpx; }
 .mt_11 { margin-top: 22rpx; }
@@ -56,6 +57,8 @@ page {
 .mb_20 { margin-bottom: 40rpx; }
 .mb_30 { margin-bottom: 60rpx; }
 .mb_40 { margin-bottom: 80rpx; }
+.mb_50 { margin-bottom: 100rpx; }
+
 
 .mlr_16 {
     margin-left: 32rpx;
@@ -90,6 +93,7 @@ page {
 .flex5 { flex: 5; }
 .flex { display: flex; }
 .flex-col { display: flex; flex-direction: column; }
+.flex-col-center { display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .flex-center { display: flex; justify-content: center; align-items: center; }
 .flex-right { display: flex; justify-content: flex-end; align-items: center; }
 
@@ -138,4 +142,72 @@ page {
 }
 .bg_blue {
     background-color: #4A50F2;
+}
+
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .3);
+    opacity: 0;
+    display: none;
+    transition: opacity 400ms;
+}
+.mask.toggle-show {
+    display: block;
+    opacity: 1;
+}
+.share-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e0e0e0;
+    transition: all 400ms;
+    transform: translate3d(0, 100%, 0);
+}
+.share-sheet.toggle-show {
+    transform: translate3d(0, 0, 0);
+}
+.share-sheet .share-main {
+    background: #f5f5f5;
+    padding: 42rpx 0;
+}
+.share-sheet .share-icon {
+    width: 120rpx;
+    height: 120rpx;
+    background: #fff;
+    display: block;
+    border-radius: 20rpx;
+    border: 1rpx solid #e8e8e8;
+}
+.share-sheet .share-text {
+    color: #4a4a4a;
+    font-size: 24rpx;
+    margin-top: 18rpx;
+}
+.share-sheet .cancel {
+    height: 100rpx;
+    color: #000;
+    font-size: 30rpx;
+    margin-top: 12rpx;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+.com-hover {
+    opacity: .8;
+}
+.no-wx-btn-style {
+    line-height: 1.6 !important;
+    border: none !important;
+}
+.no-wx-btn-style:after {
+    display: none !important;
+}
+
+.strong {
+    font-weight: bold;
 }

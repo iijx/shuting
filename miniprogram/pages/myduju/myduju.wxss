@@ -1,0 +1,69 @@
+/* pages/myduju/myduju.wxss */
+.container {
+    padding: 16rpx;
+    padding-bottom: 80rpx;
+}
+.title {
+    font-size: 30rpx;
+    margin-bottom: 32rpx;
+}
+.content {
+    padding: 26rpx;
+}
+.tips {
+    text-align: center;
+    font-size: 30rpx;
+    color: #000;
+    margin: 24rpx 0;
+    font-weight: bold;
+}
+.duju-week-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+.duju-day {
+    text-align: center;
+    font-size: 24rpx;
+    font-size: 20rpx;
+    width: 72rpx;
+    height: 72rpx;
+    background: #999;
+    color: #fff;
+    line-height: 1.4;
+    border-radius: 50%;
+}
+.duju-day.active {
+    background-color: #00C171;
+}
+.upload-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.upload-share-icon {
+    /* position: absolute; */
+    bottom: 0;
+    right: 0;
+    width: 100rpx;
+    height: 100rpx;
+}
+.share-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+.note-title {
+    font-size: 26rpx;
+    color: #999;
+    margin-bottom: 10rpx;
+}
+.note-item {
+    font-size: 26rpx;
+    color: #999;
+    text-indent: 2px;
+    line-height: 1.6;
+}
+.cl_999 {
+    color: #999;
+}

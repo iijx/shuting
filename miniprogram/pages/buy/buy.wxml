@@ -8,45 +8,51 @@
 	
 		<view class="header">
 			<image class="icon-back-img" bindtap="handerBack" src="../../assets/imgs/icon-left-arrow-white.png" mode="widthFix"></image>
-			<view class="flex1 text-center cl_fff ft_14">开通会员</view>
+			<!-- <view class="flex1 text-center cl_fff ft_14">开通会员</view> -->
 			<view class="icon-back-img"></view>
 		</view>
 		<view class="signUpNum">
-			<view class="signUpNumAnimation">已有 <text class="num">{{signUpNumber}}</text> 位同学加入会员·提升数听力</view>
+			<view class="signUpNumAnimation">已有 <text class="num">{{signUpNumber}}</text> 位同学加入会员 · 提升数听力</view>
 		</view>
 	</view>
 
-	<view class="member-card">
-		<view style="padding: 30rpx;">
-			<cell>
-				<view slot="bd" style="color: #000; font-weight: bold;">选择会员类型</view>
-			</cell>
+	<view class="member-card {{ isShowBuyDuju ? (curMemberMode === 'duju' ? 'duju' : '') : 'no-duju' }}">
+		<view class="member {{ curMemberMode === 'normal' ? 'active' : '' }}" bindtap="setNormalMembetMode">
+			<view class="member-tag">永久会员 Pro</view>
+			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ normalPriceStr }}/永久</view>
 		</view>
-		<van-radio-group value="{{ memberType }}" bind:change="onRadioChange">
-			<van-cell-group border="{{ false }}">
-				<block wx:for="{{ goods }}" wx:key="index" wx:for-item="item">
-					<van-cell clickable data-item="{{ item }}" bind:click="onRadioCellClick" use-label-slot border="{{ index === goods.length -1 ? false : true }}">
-						<view slot="title" class="member-name">{{ item.name }}<text wx:if="{{ item.isRecommend }}" class="cl_red">（推荐）</text></view>
-						<view wx:if="{{ env.platform === 'android' }}" slot="label" class="price">
-							<text>￥{{ item.price }}</text>
-							<text class="old-price">￥{{ item.oldPrice }}</text>
-							<text>　</text>
-							<text wx:if="{{ item.activityNote }}" class="activity-note">{{ item.activityNote }}</text>
-						</view>
-						<view wx:else slot="label" class="price">免费</view>
-						<van-radio slot="right-icon" name="{{ item.memberType + '' }}" checked-color="#5862F6" />
-					</van-cell>
-				</block>
-			</van-cell-group>
-		</van-radio-group>
+		<view wx:if="{{ isShowBuyDuju && env.platform === 'android' }}" class="member {{ curMemberMode === 'duju' ? 'active' : '' }}" bindtap="setDujuMembetMode">
+			<view class="member-tag">笃局会员 Pro</view>
+			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ dujuPriceStr }}(全返)</view>
+		</view>
 	</view>
 
+	<!-- member note -->
+	<view class="member-note">
+		<view class="h_16"></view>
+		<view wx:if="{{ curMemberMode === 'normal' }}" class="note-title mt_40">一次搞定数字听力问题，考试不再丢分！</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="note-item-title">笃局全返说明：</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">会员期为一年，即365天。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，连续学习7天不中断（进入应用即算学习），并转发一次至群或朋友圈。会员费即可全额返还。</view>
+		<view class="note-item-title mb_50">会员权限：</view>
+		<view class="member-note-item">【专项训练】解锁全部单元，各个击破！</view>
+		<view class="member-note-item">【快听默写】解锁全部范围，快速听默写练习！</view>
+		<view class="member-note-item">【真题测验】历届往年真题。涵盖部分省市中考和最近五年高考的数字听力真题！</view>
+	</view>
+
+	<!-- 1. footer buy tab -->
+	<!-- 1.1 ios -->
 	<view class="ios-submit-bar" wx:if="{{ env.platform !== 'android' }}">IOS版小程序，功能暂不支持</view>
+	<!-- 1.2 android -->
 	<view wx:else class="pay-submit-bar">
-		<van-button round block bind:click="onSubmit" color="#5862F6" loading="{{ paying }}">立即支付 ￥{{ price / 100 }}</van-button>
-		<view class="ft_12 text-center mt_6" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属系统正常流程，可放心支付</view>
+		<view class="buy-btn" bindtap="onSubmit">
+			<view class="ft_15">立即开通</view>
+			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
+		</view>
+		<view class="ft_12 text-center mt_12" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属正常流程，可放心支付</view>
 	</view>
 
+	<!-- dialog & toast -->
 	<van-dialog id="van-dialog" />
 	<van-toast id="van-toast" />
 
