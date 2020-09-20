@@ -17,6 +17,8 @@ app.createPage({
         dujuPriceStr: '0.00',
         normalPriceStr: '18.00',
 
+        showShare: false,
+
     },
     onLoad: function (options) {
         this.updateSignUpNumber();
@@ -187,17 +189,10 @@ app.createPage({
         })
     }, 1000),
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    detailRule() {
+        this.setData({ showShare: true })
     },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
+    onCloseShare() {
+        this.setData({ showShare: false })
+    }
 })

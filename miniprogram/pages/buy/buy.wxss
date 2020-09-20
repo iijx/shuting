@@ -192,6 +192,14 @@
     text-decoration: underline;
 }
 
+.duju-rule {
+    text-indent: 2em;
+    color: #3930D7;
+    font-size: 26rpx;
+    text-decoration: underline;
+    text-indent: 2em;
+    margin-top: -24rpx;
+}
 
 
 .member-note {
@@ -369,4 +377,29 @@
 .van-submit-bar__tip {
     background: #f0f3ff !important;
     color: #3930D7 !important;
+}
+.share-sheet {
+    border-top-right-radius: 30rpx;
+    border-top-left-radius: 30rpx;
+    overflow: hidden;
+}
+.share-dialog {
+    color: #4a4a4a;
+    padding: 48rpx 30rpx 32rpx;
+    background-color: #fff;
+    line-height: 1.6;
+}
+.share-dialog .q {
+    margin-bottom: 8rpx;
+    font-size: 30rpx;
+    color: #333;
+    font-weight: bold;
+}
+.share-dialog .a {
+    margin-bottom: 16rpx;
+    font-size: 30rpx;
+}
+.share-sheet-wrap .primary-btn {
+    background-color: #308EEE;
+    color: #fff;
 }

@@ -5,7 +5,7 @@ const Good = require('./models/good');
 const GOODS = [
     new Good('1', 30, 6, 9).setRank(1), // 月会员
     new Good('2', 180, 9.6, 18), // 半年会员
-    new Good('3', 36500, 17, 68).setName('数听永久会员').setRank(3), // 永久会员
+    new Good('3', 36500, 18, 68).setName('数听永久会员').setRank(3), // 永久会员
     new Good('4', 365, 9.6, 36).setActiviteNote('9月特惠 · 再赠90天').setRecommend().setRank(2), // 1年会员
     new Good('6', 365 * 3, 18, 54), // 3年会员
     new Good('10', 0, 0, 0).setCustom(), // 自定义
@@ -33,9 +33,9 @@ module.exports = {
     },
     freeMemberNeedCount: 10,
     iosBuyPrompt: 'IOS小程序版，暂不支持开通',
-    // iosBuyPrompt: 'IOS目前仅「数听英语」公众号下支持开通',
+    // iosBuyPrompt: '会员专项内容，可至「数听英语」公众号下开通会员',
     isAppInCheck: false,
-    shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2.png',
-    androidWithDujuRate: 100,
+    shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2020_09_21.png',
+    androidWithDujuRate: 0,
     dujuRateWhiteList: []
 }

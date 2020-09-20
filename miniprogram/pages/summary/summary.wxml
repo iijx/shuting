@@ -10,10 +10,10 @@
         </view>
         <van-row custom-class="mt_20 w80 blockC">
             <van-col span="11">
-                <van-button custom-class="continue-btn" round plain size="normal" bind:click="toLearnNextSubLevel" color="#a1aaff" block>学习下一小节</van-button>
+                <van-button custom-class="continue-btn" round type="primary" size="normal" bind:click="toLearnCurSubLevel" color="#a1aaff" block>再学一次此节</van-button>
             </van-col>
             <van-col span="11" offset="2">
-                <van-button custom-class="continue-btn" round type="primary" size="normal" bind:click="toLearnCurSubLevel" color="#a1aaff" block>继续学习</van-button>
+                <van-button custom-class="continue-btn" round plain size="normal" bind:click="toLearnNextSubLevel" color="#a1aaff" block>继续下一小节</van-button>
             </van-col>
         </van-row>
         <view class="mt_20 w40 blockC">

@@ -32,8 +32,9 @@
 		<view class="h_16"></view>
 		<view wx:if="{{ curMemberMode === 'normal' }}" class="note-title mt_40">一次搞定数字听力问题，考试不再丢分！</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="note-item-title">笃局全返说明：</view>
-		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">会员期为一年，即365天。</view>
-		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，连续学习7天不中断（进入应用即算学习），并转发一次至群或朋友圈。会员费即可全额返还。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">会员期为一个月。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，连续学习7天不中断，并转发一次至群或朋友圈，会员费即可全额返还。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="duju-rule" bindtap="detailRule"><text>查看详细说明</text></view>
 		<view class="note-item-title mb_50">会员权限：</view>
 		<view class="member-note-item">【专项训练】解锁全部单元，各个击破！</view>
 		<view class="member-note-item">【快听默写】解锁全部范围，快速听默写练习！</view>
@@ -47,7 +48,7 @@
 	<view wx:else class="pay-submit-bar">
 		<view class="buy-btn" bindtap="onSubmit">
 			<view class="ft_15">立即开通</view>
-			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
+			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员·全返' : '永久会员' }}）</view>
 		</view>
 		<view class="ft_12 text-center mt_12" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属正常流程，可放心支付</view>
 	</view>
@@ -55,5 +56,24 @@
 	<!-- dialog & toast -->
 	<van-dialog id="van-dialog" />
 	<van-toast id="van-toast" />
+
+	<view class="share-sheet-wrap">
+        <view class="mask {{ showShare ? 'toggle-show' : '' }}" bind:tap="onCloseShare"></view>
+        <view class="share-sheet {{ showShare ? 'toggle-show' : ''}}">
+            <view class="share-dialog">
+                <view class="q">Q: 真的全额返会员费么？</view>
+                <view class="a">答: 活动真实有效，购买当天开始，连续学习7天不中断，并转发一次至群或朋友圈，会员费即可全额返还。</view>
+                <view class="q">Q: 系统如何判定是否学习？</view>
+                <view class="a">答: 当天进入一次小程序，系统即视为已学习。</view>
+                <view class="q">Q: 系统万一出故障怎么办？</view>
+                <view class="a">答: 联系客服处理，解释权归你所有（目前为止，未收到任何系统问题的反馈）。</view>
+                <view class="q">Q: 全额返还，你们如何赚钱？</view>
+                <view class="a">答: 本活动属于内测活动，目的是拉新用户，而挑战成功需要分享一次应用，返现当是同学的广告代言费了，另外，挑战通过率应该也不会100%，所以也能赚那么一点点。</view>
+                <view class="q">Q: 我应该选择哪种会员？</view>
+                <view class="a">答: 除了可以返现，笃局会员的会员期只有一个月，如果是想短期快速提升下，或对价格非常敏感的同学，建议“笃局全返会员”。而如果想以后随时练练，则更推荐“永久会员”。</view>
+            </view>
+            <view class="cancel flex-center primary-btn" hover-class="opa_6" bind:tap="onCloseShare">好，我知道了</view>
+        </view>
+    </view>
 
 </view>
