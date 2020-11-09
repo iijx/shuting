@@ -21,6 +21,15 @@ wx.loadFontFace({
 
 App({
     onLaunch: function(opt) {
+        wx.getSystemInfo({
+            success (res) {
+                console.log('getSystemInfo', res, Date.now())
+                store.setEnv({
+                    // platform: 'android'
+                    platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
+                })
+            }
+        })
         if (!wx.cloud) {
             console.error('请使用 2.2.3 或以上的基础库以使用云能力');
             wx.showLoading({
@@ -64,14 +73,7 @@ App({
                 store.update();
             })
 
-            wx.getSystemInfo({
-                success (res) {
-                    store.setEnv({
-                        // platform: 'android'
-                        platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
-                    })
-                }
-            })
+            
         }
     },
     // 学习打点日志
@@ -91,6 +93,7 @@ App({
         }
     },
     onShow: function (options) {
+        console.log('onShow options', options);
         // 关于支付
         if (options.referrerInfo && options.referrerInfo.appId === 'wx959c8c1fb2d877b5') { 
           // 还应判断请求路径
@@ -98,6 +101,26 @@ App({
             this.globalData.paySuccess = extraData.success
             this.globalData.payjsOrderId = extraData.payjsOrderId
         }
+
+        // wx.getClipboardData({
+        //     success: res => {
+        //         if (res && res.data && /^[0-9A-Za-z]{6,10}/.test(res.data)) {
+        //             UniApi.appCloud('excCode', 'use', { code: res.data })
+        //                 .then(res => {
+        //                     if (res.success) {
+        //                         Vant.Dialog.alert({
+        //                             message: '恭喜开通会员'
+        //                         });
+        //                         UniApi.appCloud('user', 'get').then(res => {
+        //                             store.data.user = res;
+        //                             store.update();
+        //                         });
+        //                     }
+        //                 })
+        //         } 
+        //     }
+        // })
+
         // 关于翻翻卡
         // if (options.query.fflCardShareOpenid) {
         //     UniApi.cloud('fanfanle', {

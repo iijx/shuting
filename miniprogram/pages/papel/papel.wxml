@@ -12,7 +12,7 @@
             <van-circle value="{{ percent }}" speed="{{ speed }}" size="50" stroke-width="2" layer-color="#f4f4f4" color="#D97630">
                 <view class="flex-center audio-box" bindtap="audioClick">
                     <image wx:if="{{ !isPlaying }}" class="audio-0" src="../../assets/imgs/audio-yellow-0.png"  mode="widthFix"></image>
-                    <image wx:else class="audio-1" src="../../assets/imgs/audio-yellow-1.png"  mode="widthFix"></image>
+                    <image wx:else class="audio-1" src="../../assets/imgs/audio-yellow-1.png" mode="widthFix"></image>
                 </view>
             </van-circle>
         </view>

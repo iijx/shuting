@@ -34,6 +34,12 @@ app.createPage({
         this.update().then(() => {
             this.updateComputed()
         });
+        if (!this.data.user.isPro) {
+            UniApi.appCloud('user', 'get').then(res => {
+                app.Store.data.user = res;
+                app.Store.update();
+            });
+        }
     },
     updateComputed() {
         if (this.data.user.proEndDate) {

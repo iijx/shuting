@@ -26,7 +26,7 @@ module.exports = async (event, context) => {
     console.log('excCode event', event);
     const { method, params = {} } = event;
     const wxContext = cloud.getWXContext()
-    const openid = event.openid || wxContext.OPENID;
+    const openid = params.openid || wxContext.OPENID;
 
     if (method === 'use') {
         const { code } = params;

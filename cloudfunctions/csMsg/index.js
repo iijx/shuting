@@ -10,22 +10,27 @@ cloud.init({
 exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
     console.log(event);
-    await cloud.openapi.customerServiceMessage.send({
-        touser: wxContext.OPENID,
-        msgtype: 'text',
-        text: {
-            content: '数听客服为您服务！  ios 版本若需开通会员，请到「数听英语」同名公众号下开通，小程序版暂不支持！'
-        }
-    })
-
-    // await cloud.openapi.customerServiceMessage.send({
-    //     touser: wxContext.OPENID,
-    //     msgtype: 'image',
-    //     image: {
-    //         // mediaId: 'X5DeEF7Evn9H1JZoNkCm-1gGFDKpSAzbSCq0jbF19R43yUNTdFGn9uJOdoFP5vNk' // dev 
-    //         mediaId: 'dhCP8q4nlYb4oEpxLyGhdauRtZslIMyDXWd23EFZH0oXB8pj76gMSEM_7VbX78b9' // prod
-    //     }
-    // })
-
+    if (event.SessionFrom === 'member') {
+        await cloud.openapi.customerServiceMessage.send({
+            touser: wxContext.OPENID,
+            msgtype: 'link',
+            link: {
+                title: '数听英语 · 开通会员',
+                description: '查看会员计划',
+                url: "https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("http://stcdn.iijx.site/?stid=" + wxContext.OPENID)),
+                thumbUrl: 'https://cdnword.iijx.site/assets/imgs/shuting/icon-shuting.png'
+            }
+        })
+        console.log('url: ')
+        console.log("https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("http://stcdn.iijx.site/?stid=" + wxContext.OPENID)))
+    } else {
+        await cloud.openapi.customerServiceMessage.send({
+            touser: wxContext.OPENID,
+            msgtype: 'text',
+            text: {
+                content: '数听客服为您服务！'
+            }
+        })
+    }
     return 'success'
 }

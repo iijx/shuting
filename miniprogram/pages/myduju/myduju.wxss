@@ -49,6 +49,16 @@
     width: 100rpx;
     height: 100rpx;
 }
+
+.close-icon {
+    position: absolute;
+    top: 16rpx;
+    right: 32rpx;
+}
+.shareImg {
+    max-width: 300rpx;
+    display: block;
+}
 .share-wrap {
     display: flex;
     justify-content: flex-end;

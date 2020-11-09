@@ -1,5 +1,26 @@
 <view wx:if="{{ user.memberType + '' === '20' }}" class="container">
-    <van-panel title="挑战一：连学7天不中断" status="{{ learnStatusText }}">
+    <van-panel title="挑战一：分享好友一起学" status="{{ shareStatusText }}" use-footer-slot>
+        <view class="content">
+            <view class="upload-wrap">
+                <image class="shareImg" wx:if="{{ sharedImg }}" src="{{ sharedImg }}" mode="widthFix"/>
+                <van-icon wx:if="{{ sharedImg }}" class="close-icon" name="cross" size="24" bindtap="deleteShareImg"/>
+                <van-uploader wx:else file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" bind:delete="delete"/>
+            </view>
+            <view class="flex-center cl_aaa ft_14">（上传<text class="strong"> 分享群聊截图 </text> 或 <text class="strong">朋友圈截图</text> 均可）</view>
+            <view class="share-wrap mt_10" bindtap="openShare">
+                <van-button color="#ff9945" size="small" icon="friends-o">立即分享</van-button>
+            </view>
+        </view>
+        <view slot="footer" class="footer">
+            <view class="note">
+                <!-- <view class="note-title">挑战说明:</view> -->
+                <view class="note-item">上传您转发至群或朋友圈的【分享截图】，挑战即可完成。</view>
+                <view class="note-item text-center">（后台会审核哈，不要乱传噢）</view>
+            </view>
+        </view>
+    </van-panel>
+    <view class="h_10"></view>
+    <van-panel title="挑战二：连学7天不中断" status="{{ learnStatusText }}">
         <view class="content">
             <view class="duju-week-wrap">
                 <view class="duju-day flex-center {{ item.isCompleted ? 'active' : '' }}" wx:for="{{ dujuWeek }}" wx:key="index">
@@ -13,33 +34,11 @@
             <van-divider />
             <view class="note">
                 <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item">购买笃局会员当天开始, 连续7天学习不中断，挑战完成;</view>
+                <view class="note-item">购买当天开始, 连学7天不中断，挑战即可完成;</view>
                 <view class="note-item text-center">（每日进入小程序就算学习，同学可要自觉噢～）</view>
             </view>
         </view>
     </van-panel>
-
-    <view class="h_10"></view>
-    <van-panel title="挑战二：分享好友一起学" status="{{ shareStatusText }}" use-footer-slot>
-        <view class="content">
-            <view class="upload-wrap">
-                <image wx:if="{{ sharedImg }}" src="{{ sharedImg }}" />
-                <van-uploader wx:else file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" bind:delete="delete"/>
-            </view>
-            <view class="flex-center cl_aaa ft_14">（上传<text class="strong"> 分享群聊截图 </text> 或 <text class="strong">朋友圈截图</text> 均可）</view>
-            <view class="share-wrap mt_10" bindtap="openShare">
-                <van-button color="#ff9945" size="small" icon="friends-o">立即分享</van-button>
-            </view>
-        </view>
-        <view slot="footer" class="footer">
-            <view class="note">
-                <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item">上传您在群聊或朋友圈的【分享截图】，挑战完成。</view>
-                <view class="note-item text-center">（后台会审核哈，不要乱传噢）</view>
-            </view>
-        </view>
-    </van-panel>
-
     <view class="h_20"></view>
     <van-button color="#00C171" block bindtap="refundBtn">{{
         learnStatus === 'fail' ? '笃局挑战失败' :

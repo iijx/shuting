@@ -59,10 +59,12 @@
 }
 .member-btn {
     margin-top: 48rpx;
-    background: #4A50F2;
-    background: #308EEE;
-    border-radius: 20rpx;
-    line-height: 92rpx;
+    /* background: #4A50F2; */
+    font-size: 24rpx !important;
+    background: #308EEE !important;
+    color: #fff !important;
+    border-radius: 20rpx !important;
+    line-height: 92rpx !important;
     box-shadow: 0px 0px 4px rgba(74, 82, 242, 0.3);
 }
 .activity-btn {

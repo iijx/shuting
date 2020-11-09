@@ -85,7 +85,8 @@ app.createPage({
 				dujuWeek: dujuWeek,
 				todayIsComplete: lRecord.findIndex(ii => Util.isSameDay(new Date(ii), new Date())) >= 0,
 				refundStatus: duju.refundStatus,
-				fileList: [{ url: duju.sharedImg }]
+				fileList: [{ url: duju.sharedImg }],
+				sharedImg: duju.sharedImg || ''
 			});
 	
 			this.setLearnStatusText();
@@ -128,7 +129,12 @@ app.createPage({
 			this.setShareStatusText();
 		})
 	},
-	
+	deleteShareImg() {
+		this.setData({
+			sharedImg: '',
+			fileList: []
+		})
+	},
 	uploadFilePromise(fileName, path) {
 		return wx.cloud.uploadFile({
 		cloudPath: fileName,

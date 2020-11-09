@@ -400,6 +400,6 @@
     font-size: 30rpx;
 }
 .share-sheet-wrap .primary-btn {
-    background-color: #308EEE;
+    background-color: #3930D7;
     color: #fff;
 }
