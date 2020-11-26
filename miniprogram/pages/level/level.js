@@ -17,6 +17,7 @@ app.createPage({
         
     },
     onShow: function () {
+        Store.updateLesson();
         this.update();
     },
     switchShowRecordDetail() {

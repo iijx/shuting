@@ -4,7 +4,7 @@ const { Util, Vant, Store } = app;
 
 app.createPage({
 	data: {
-		user: {},
+		user: new app.Models.User({}),
 		fileList: [],
 		sharedImg: '',
 		dujuWeek: [1, 2, 3, 4, 5, 6, 7].map(i => ({num: i})),

@@ -35,7 +35,7 @@ module.exports = {
     // iosBuyPrompt: 'IOS小程序版，暂不支持开通',
     iosBuyPrompt: '会员专享内容，可至「数听英语」公众号下开通会员',
     isAppInCheck: false,
-    shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2020_09_21.png',
+    shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2020_11_15.png',
     androidWithDujuRate: 100,
     dujuRateWhiteList: []
 }

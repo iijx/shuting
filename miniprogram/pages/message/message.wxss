@@ -1,5 +1,0 @@
-/* pages/message/message.wxss */
-
-.container {
-    padding: 32rpx;
-}

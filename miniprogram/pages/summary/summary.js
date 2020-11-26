@@ -1,6 +1,6 @@
 // pages/summary/summary.js
 const app = getApp();
-const { Util, UniApi, Vant } = app;
+const { Config, Util, UniApi, Vant } = app;
 
 let AudioContext = null;
 
@@ -30,7 +30,7 @@ app.createPage({
      */
     onShow: function () {
         Util.sleep(200).then(() => {
-            AudioContext.src = '/assets/audio/win.m4a';
+            AudioContext.src = `${Config.cdnDomain}/shuting/common/win.m4a`;
             AudioContext.play();
         })
     },

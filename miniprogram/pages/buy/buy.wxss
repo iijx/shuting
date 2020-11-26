@@ -379,16 +379,49 @@
     color: #3930D7 !important;
 }
 .share-sheet {
-    border-top-right-radius: 30rpx;
-    border-top-left-radius: 30rpx;
+    /* border-top-right-radius: 30rpx;
+    border-top-left-radius: 30rpx; */
     overflow: hidden;
 }
 .share-dialog {
     color: #4a4a4a;
-    padding: 48rpx 30rpx 32rpx;
-    background-color: #fff;
+    padding: 1rpx 8rpx 0;
+    background-color: #f0f3ff;
     line-height: 1.6;
+    height: 70vh;
+    max-height: 1000rpx;
+    min-height: 750rpx;
+    box-sizing: border-box;
 }
+.box-item {
+    background-color: #fff;
+    border-radius: 20rpx;
+    padding: 24rpx 12rpx;
+    margin: 24rpx 0;
+}
+.box-item-title {
+    color: #222;
+    font-size: 34rpx;
+    font-weight: bold;
+    padding-left: 24rpx;
+    position: relative;
+}
+.mb14 {
+    margin-bottom: 28rpx;
+}
+.box-item-title:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 6rpx;
+    border-radius: 4rpx;
+    color: #4C4FF2;
+    background-color: #4C4FF2;
+    transform-origin: 0 100%;
+}
+
 .share-dialog .q {
     margin-bottom: 8rpx;
     font-size: 30rpx;
@@ -402,4 +435,68 @@
 .share-sheet-wrap .primary-btn {
     background-color: #3930D7;
     color: #fff;
+}
+
+.refund-list-wrap {
+    height: 560rpx;
+    overflow: hidden;
+}
+.refund-list {
+    animation: iSwiper 30s ease infinite; 
+}
+.refund-item {
+    display: flex;
+    position: relative;
+    height: 140rpx;
+    align-items: center;
+}
+.refund-item:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #d9d9d9;
+    color: #d9d9d9;
+    transform-origin: 0 100%;
+    transform: scaleY(0.5);
+}
+.refund-item .avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 12rpx;
+    display: block;
+}
+.refund-item .nickname {
+    color: #444;
+    font-size: 28rpx;
+    font-weight: bolder;
+}
+.refund-item .num20 {
+    padding: 1px 4px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: #f7572a;
+    border-radius: 6rpx;
+    color: #fff;
+    font-size: 20rpx;
+    font-weight: bold;
+    margin: 4rpx 0 4rpx 20rpx;
+}
+.refund-item .content {
+    color: #4a4a4a;
+    font-size: 26rpx;
+}
+
+@keyframes iSwiper {
+    0%, 20% { transform: translateY(0);}
+    25%, 45% { transform: translateY(-560rpx);}
+    50%, 70% { transform: translateY(-1120rpx);}
+    75%, 95% { transform: translateY(-1680rpx);}
+    100% { transform: translateY(0rpx);}
 }

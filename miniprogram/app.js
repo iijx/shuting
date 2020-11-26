@@ -15,32 +15,27 @@ const Vant = { Dialog, Toast, Notify }
 const DB = wx.cloud.database();
 wx.loadFontFace({
     family: 'PT Mono',
-    source: 'url("https://iijx-cdn.oss-cn-beijing.aliyuncs.com/font/PTM55F.ttf")',
+    source: 'url("https://cdn.iijx.site/font/PTM55F.ttf")',
     success: console.log
 })
 
 App({
     onLaunch: function(opt) {
-        wx.getSystemInfo({
-            success (res) {
-                console.log('getSystemInfo', res, Date.now())
-                store.setEnv({
-                    // platform: 'android'
-                    platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
-                })
-            }
-        })
         if (!wx.cloud) {
             console.error('请使用 2.2.3 或以上的基础库以使用云能力');
             wx.showLoading({
                 title: '请先更新微信',
             })
         } else {
+            this.setSystemInfo();
             // 登录获取用户信息
             UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
                 store.data.user = res;
                 store.update();
                 this.learnLog();
+                if (!res.isPro) {
+                    wx.setStorage({ key: "isPro", data: "false" })
+                }
             })
             UniApi.appCloud('config', 'get').then(res => {
                 if (res.success) {
@@ -68,9 +63,7 @@ App({
                 }, {});
                 
                 store.data.learnRecords = [ ...res[1].learnRecords ];
-                store.updateLesson();
                 store.setCurLearn(res[1].curLearnUnitId)
-                store.update();
             })
 
             
@@ -92,6 +85,28 @@ App({
             }
         }
     },
+    setSystemInfo: (function() {
+        let promise;
+        return function() {
+            if (promise) return promise;
+            promise = new Promise((resolve, reject) => {
+                wx.getSystemInfo({
+                    success: function (res) {
+                        // res.platform = 'ios';
+                        store.setEnv({
+                            // platform: 'android'
+                            platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
+                        })
+                        resolve(res)
+                    },
+                    fail: function() {
+                        reject({})
+                    }
+                })
+            });
+            return promise;
+        }
+    })(),
     onShow: function (options) {
         console.log('onShow options', options);
         // 关于支付
@@ -101,43 +116,35 @@ App({
             this.globalData.paySuccess = extraData.success
             this.globalData.payjsOrderId = extraData.payjsOrderId
         }
-
-        // wx.getClipboardData({
-        //     success: res => {
-        //         if (res && res.data && /^[0-9A-Za-z]{6,10}/.test(res.data)) {
-        //             UniApi.appCloud('excCode', 'use', { code: res.data })
-        //                 .then(res => {
-        //                     if (res.success) {
-        //                         Vant.Dialog.alert({
-        //                             message: '恭喜开通会员'
-        //                         });
-        //                         UniApi.appCloud('user', 'get').then(res => {
-        //                             store.data.user = res;
-        //                             store.update();
-        //                         });
-        //                     }
-        //                 })
-        //         } 
-        //     }
-        // })
-
-        // 关于翻翻卡
-        // if (options.query.fflCardShareOpenid) {
-        //     UniApi.cloud('fanfanle', {
-        //         operate: 'addShare',
-        //         sharedUserOpenid: options.query.fflCardShareOpenid
-        //     })
-        // }
-
-        // // 关于班长邀请
-        // if (options.query.fromOpenid) {
-        //     DB.collection('invite').add({data: {
-        //         inviter: options.query.fromOpenid,
-        //         nickName: '',
-        //         createAt: Date.now(),
-        //         updateAt: Date.now()
-        //     }})
-        // }
+        if (options.scene === 1035) { // 公众号自定义菜单
+            this.setSystemInfo().then(res => {
+                if (res.platform === 'ios' && wx.getStorageSync('isPro') === 'false') {
+                    console.log('检测开没会员');
+                    DB.collection('exchange_code').where({ status: 2 }).get().then(codes => {
+                        if (codes.data.length > 0) {
+                            wx.getClipboardData({
+                                success: res => {
+                                    if (res && res.data && /^[0-9A-Za-z]{6,10}/.test(res.data)) {
+                                        UniApi.appCloud('excCode', 'use', { code: res.data })
+                                            .then(res => {
+                                                if (res.success) {
+                                                    Vant.Dialog.alert({
+                                                        message: '恭喜开通会员'
+                                                    });
+                                                    UniApi.appCloud('user', 'get').then(res => {
+                                                        store.data.user = res;
+                                                        store.update();
+                                                    });
+                                                }
+                                            })
+                                    } 
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     },
     onHide() {
         this.learnLog();

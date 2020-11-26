@@ -50,12 +50,12 @@ app.createPage({
     },
     toMyDuju() {
         wx.navigateTo({
-            url: '../myduju/myduju',
+            url: '../../subpack/myduju/myduju',
         })
     },
     toChecking() {
         wx.navigateTo({
-            url: '../checking/checking'
+            url: '../../subpack/checking/checking'
         })
     },
     memberBtn() {
@@ -93,13 +93,7 @@ app.createPage({
             data: this.data.user.openid,
         })
     },
-    pageToMsg() {
-        wx.navigateTo({
-            url: '../message/message',
-        })
-    },
     link: function(e) {
-        console.log(e)
         wx.navigateTo({
             url: e.currentTarget.dataset.path,
         })

@@ -61,7 +61,7 @@ const store = {
     setUnitLearnData(unitId, data) {
         // 1. 如果要更新的单元刚好是当前单元，则更新当前单元的数据
         if (unitId === this.data.curLearnUnit.unitId) {
-            this.data.curLearnUnit.cNum = data.cNum;
+            this.data.curLearnUnit.cNum = Math.max(this.data.curLearnUnit.cNum, data.cNum);
             this.data.curLearnUnit.eNum = data.eNum;
             this.data.curLearnUnit.score = getScoreByCNum(data.cNum);
         }
@@ -70,7 +70,8 @@ const store = {
         if (index !== -1) {
             this.data.learnRecords[index] = new Models.LearnRecord({
                 ...this.data.learnRecords[index],
-                ...data
+                ...data,
+                cNum: Math.max(this.data.learnRecords[index].cNum, data.cNum)
             });
         } else {
             this.data.learnRecords.push(new Models.LearnRecord({
@@ -92,7 +93,6 @@ const store = {
                     ...u,
                     cNum: uRecord.cNum || 0,
                     score: uRecord.score || 0,
-                    isComplete: uRecord.isComplete || false
                 }
             })
             return {

@@ -8,6 +8,5 @@ export default class LearnRecord {
         this.score = getScoreByCNum(opt.cNum || 0) || opt.score || 0;
         this.cNum = opt.cNum || 0;
         this.eNum = opt.eNum || 0;
-        this.isComplete = this.isComplete || opt.score >= 100 || false;
     }
 }

@@ -8,15 +8,21 @@
         "pages/summary/summary",
         "pages/my/my",
         "pages/buy/buy",
-        "pages/message/message",
-        "pages/exchange/exchange",
-        "pages/version/version",
-        "pages/advice/advice",
-        "pages/activity/activity",
-        "pages/papel/papel",
-        "pages/myduju/myduju",
-        "pages/timeline/timeline",
-        "pages/checking/checking"
+        "pages/papel/papel"
+    ],
+    "subpackages": [
+        {
+            "root": "subpack",
+            "pages": [
+                "myduju/myduju",
+                "timeline/timeline",
+                "checking/checking",
+                "advice/advice",
+                "exchange/exchange",
+                "activity/activity",
+                "version/version"
+            ]
+        }
     ],
     "window": {
         "backgroundColor": "#ECF2F5",

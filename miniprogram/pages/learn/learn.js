@@ -46,24 +46,25 @@ app.createPage({
         AudioContext = wx.createInnerAudioContext();
         this.nextWord();
     },
+    _getRandomIndex123: (() => {
+        let last = 1;
+        return () => {
+            last++;
+            return last % 3 + 1;
+        }
+    })(),
     _genAudioSrcByNumAndType(answer, type) {
         let path = '';
-        if (type === 'number') path = `numberAudio/${answer}.mp3`;
-        else if (type === 'phone') path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/phone${this.data.maxLength}/${answer}.mp3`;
-        else if(type === 'time') {
-            path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/time/${answer}.mp3`;
-        } else if (type === 'year') {
-            path = `yearAudio/${answer}.mp3`;
-        } else if (type === 'pointNum') {
-            path = `shuting/${Math.random() > 0.5 ? 'soundtype1' : 'soundtype2'}/point/${answer}.mp3`;
-        } else if (type === 'week') {
-            return `/assets/audio/week/week_${answer}.mp3`;
-        }
-        else if (type === 'month') {
-            return `/assets/audio/month/month_${answer}.mp3`;
-        }
-        console.log(`${Config.cdnDomain}/assets/audio/${path}`);
-        return `${Config.cdnDomain}/assets/audio/${path}`;
+        const randomIndex = this._getRandomIndex123();
+        if (type === 'number') path = `shuting/eng/number_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'phone') path = `shuting/eng/phone_audio/${answer}_${randomIndex}.mp3`;
+        else if(type === 'time') path = `shuting/eng/time_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'year') path = `shuting/eng/year_audio/${answer}.mp3`;
+        else if (type === 'pointNum') path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'week') path = `shuting/eng/week_audio/week_${answer}.mp3`;
+        else if (type === 'month') path = `shuting/eng/month_audio/month_${answer}.mp3`;
+        console.log(`${Config.cdnDomain}/${path}`)
+        return `${Config.cdnDomain}/${path}`;
     },
     audioPlay() {
         AudioContext.src = this.data.curNumAudioSrc;
@@ -99,26 +100,17 @@ app.createPage({
     _genOneAnswer() {
         let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
         let answer = '';
-        if(type === 'number') {
-            answer = Util.randomOneNum(this.data.maxLength);
-        } else if (type === 'phone'){
-            answer = Util.randomOnePhone(this.data.maxLength)();
-        } else if (type === 'time') {
-            answer = Util.randomOneTime();
-        } else if (type === 'year') {
-            answer = Util.randomOneYear();
-        } else if (type === 'pointNum') {
-            answer = Util.randomPointNumber();
-        } else if (type === 'week') {
-            answer = Util.randomOneWeek();
-        } else if (type === 'month') {
-            answer = Util.randomOneMonth();
-        }
-
+        if(type === 'number') answer = Util.randomOneNum(this.data.maxLength);
+        else if (type === 'phone') answer = Util.randomOnePhone(this.data.maxLength)();
+        else if (type === 'time') answer = Util.randomOneTime();
+        else if (type === 'year') answer = Util.randomOneYear();
+        else if (type === 'pointNum') answer = Util.randomPointNumber();
+        else if (type === 'week') answer = Util.randomOneWeek();
+        else if (type === 'month') answer = Util.randomOneMonth();
+        
         if (answer === this.data.answer) {
             return this._genOneAnswer();
         } else {
-            console.log('_genOneAnswer answer：', answer, type);
             this.data.curNumAudioSrc = this._genAudioSrcByNumAndType(answer, type);
             AudioContext.src = this.data.curNumAudioSrc;
             this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;

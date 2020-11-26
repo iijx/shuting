@@ -1,6 +1,6 @@
 // pages/buy/buy.js
 const app = getApp();
-const { Util, UniApi, Vant } = app;
+const { Util, UniApi, Vant, Config } = app;
 app.createPage({
     data: {
         memberType: "3",
@@ -18,6 +18,28 @@ app.createPage({
         normalPriceStr: '18.00',
 
         showShare: false,
+
+        refundList: [
+            { avatar: '/default/avatar1.png', nickname: '浮云一点白' },
+            { avatar: '/default/avatar2.png', nickname: '好久不见' },
+            { avatar: '/default/avatar3.png', nickname: '小小Jewe' },
+            { avatar: '/default/avatar4.png', nickname: '帅气的小萝卜' },
+            { avatar: '/default/avatar5.png', nickname: '冰糖葫芦' },
+            { avatar: '/default/avatar6.png', nickname: '小烟儿' },
+            { avatar: '/default/avatar7.png', nickname: '清风' },
+            { avatar: '/default/avatar8.png', nickname: 'Yock' },
+            { avatar: '/default/avatar9.png', nickname: '神说我活该' },
+            { avatar: '/default/avatar10.png', nickname: '扬帆起航' },
+            { avatar: '/default/avatar11.png', nickname: '牛奶咖啡😊' },
+            { avatar: '/default/avatar12.png', nickname: '奔跑者' },
+            { avatar: '/default/avatar13.png', nickname: '艾尔莎' },
+            { avatar: '/default/avatar14.png', nickname: '大黄' },
+            { avatar: '/default/avatar15.png', nickname: '小颖颖' },
+            { avatar: '/default/avatar16.png', nickname: 'Fannie' },
+        ].map(i => ({
+            nickname: i.nickname,
+            avatar: `${Config.cdnDomain}${i.avatar}`
+        })).sort((a, b) => Math.random() - 0.5)
 
     },
     onLoad: function (options) {

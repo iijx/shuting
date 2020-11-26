@@ -6,31 +6,38 @@ cloud.init({
     // API 调用都保持和云函数当前所在环境一致
     env: cloud.DYNAMIC_CURRENT_ENV
 })
-
+const sendMember = async (openid) => {
+    await cloud.openapi.customerServiceMessage.send({
+        touser: openid,
+        msgtype: 'link',
+        link: {
+            title: '数听英语 · 开通会员',
+            description: '查看会员计划',
+            url: "https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("http://stcdn.iijx.site/?stid=" + openid)),
+            thumbUrl: 'https://cdnword.iijx.site/assets/imgs/shuting/icon-shuting.png'
+        }
+    })
+}
 exports.main = async (event, context) => {
-    const wxContext = cloud.getWXContext()
     console.log(event);
-    if (event.SessionFrom === 'member') {
-        await cloud.openapi.customerServiceMessage.send({
-            touser: wxContext.OPENID,
-            msgtype: 'link',
-            link: {
-                title: '数听英语 · 开通会员',
-                description: '查看会员计划',
-                url: "https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("http://stcdn.iijx.site/?stid=" + wxContext.OPENID)),
-                thumbUrl: 'https://cdnword.iijx.site/assets/imgs/shuting/icon-shuting.png'
-            }
-        })
-        console.log('url: ')
-        console.log("https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("http://stcdn.iijx.site/?stid=" + wxContext.OPENID)))
-    } else {
-        await cloud.openapi.customerServiceMessage.send({
-            touser: wxContext.OPENID,
-            msgtype: 'text',
-            text: {
-                content: '数听客服为您服务！'
-            }
-        })
+    // event 【user_enter_tempsession】
+    if (event.MsgType === 'event' && event.Event === 'user_enter_tempsession') {
+        if (event.SessionFrom === 'member') {
+            await sendMember(event.FromUserName);
+        }
     }
-    return 'success'
+    // text
+    if (event.MsgType === 'text') {
+        if (event.Content.indexOf('会员') >= 0) {
+            await sendMember(event.FromUserName);
+        }
+        else {
+            return {
+                MsgType: 'transfer_customer_service',
+                ToUserName: event.FromUserName,
+                FromUserName: event.ToUserName,
+                CreateTime: parseInt(+new Date / 1000),
+            }
+        }
+    }
 }

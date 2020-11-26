@@ -1,6 +1,6 @@
 // pages/papel/papel.js
 const app = getApp();
-const { Util, Vant, Store, Config } = app;
+const { Util, Vant, Config } = app;
 import papel from "../../local/papel";
 class QItem {
 	constructor(opt = {}) {
@@ -55,9 +55,8 @@ app.createPage({
 	prePlay() {
 		this.setData({ speed: 25, percent: 100 });
 		let curIndex = this.data.index;
-		Promise.all([ Util.sleep(4000), app.uniAudio.setSrc(`${Config.cdnDomain}/assets/audio/shuting/papel/${this.data.curItem.audio}.m4a`)])
+		Promise.all([ Util.sleep(4000), app.uniAudio.setSrc(`${Config.cdnDomain}/shuting/eng/papel_audio/${this.data.curItem.audio}.m4a`)])
 			.then(() => {
-				console.log("promise.all then");
 				// 如果切换题了，就不用处理了
 				if (curIndex !== this.data.index || !this.data.pageIsActive) return;
 				// 否则，正常流程
@@ -71,7 +70,6 @@ app.createPage({
 				});
 			})
 			.catch((err) => {
-				console.log(12);
 			});
 	},
 	audioClick() {
@@ -104,10 +102,6 @@ app.createPage({
 			curItem: { ...this.data.curItem },
 		});
 	},
-
-	/**
-	 * Lifecycle function--Called when page hide
-	 */
 	onHide: function () {
 		this.data.pageIsActive = false;
 		console.log("onHide");

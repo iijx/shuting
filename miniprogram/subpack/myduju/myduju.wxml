@@ -14,7 +14,7 @@
         <view slot="footer" class="footer">
             <view class="note">
                 <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item">上传您转发至群或朋友圈的【分享截图】，挑战即可完成。</view>
+                <view class="note-item text-center">上传您转发至朋友圈的【分享截图】，挑战即可完成。</view>
                 <view class="note-item text-center">（后台会审核哈，不要乱传噢）</view>
             </view>
         </view>
@@ -34,7 +34,7 @@
             <van-divider />
             <view class="note">
                 <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item">购买当天开始, 连学7天不中断，挑战即可完成;</view>
+                <view class="note-item text-center">购买当天开始, 连学7天不中断，挑战即可完成;</view>
                 <view class="note-item text-center">（每日进入小程序就算学习，同学可要自觉噢～）</view>
             </view>
         </view>

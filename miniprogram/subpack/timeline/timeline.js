@@ -38,10 +38,7 @@ app.createPage({
 		wx.showLoading({ title: '加载中...' });
 		var ctx = wx.createCanvasContext("canvas");
 		this.promiseSystemInfo().then(res => {
-			this.setData({
-				canvasWidth: res.windowWidth,
-				canvasHeight: res.windowWidth,
-			});
+			this.setData({ canvasWidth: res.windowWidth, canvasHeight: res.windowWidth });
 			this.promiseGetImageInfo(this.data.config.shareTimelineBaseImg).then(res => {
 				ctx.drawImage(res.path, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
 				ctx.draw();

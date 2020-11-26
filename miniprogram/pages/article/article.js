@@ -6,11 +6,11 @@ app.createPage({
     arr: [
       '基数词',
       '序数词',
-      '分数小数',
+      '分数',
       '电话',
       '年/月/日',
       '时间',
-      '各种单位',
+      '单位',
     ],
     activeKey: 0,
     monthWords: [...Util.MonthWords].map(i => `${i.word}  /${i.phonetic}/  ${i.mean}`),

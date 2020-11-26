@@ -9,7 +9,7 @@ export default {
     env,
     cloudEnv: env === 'prod' ? ENV_PROD : ENV_DEV,
 
-    cdnDomain: 'https://cdnword.iijx.site',
+    cdnDomain: 'https://cdn.amathclass.cn',
     correctAudioSrc: '/assets/audio/correct.m4a',
     errorAudioSrc: '/assets/audio/error.m4a',
     
