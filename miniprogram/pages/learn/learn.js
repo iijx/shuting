@@ -48,7 +48,7 @@ app.createPage({
         let lastAnswer = -1;
         this.data.preLoadArr = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3].map(i => {
             let answer = this.__genOneAnswer(this.data.type);
-            if (answer === lastAnswer) answer = this.__genOneAnswer();
+            if (answer === lastAnswer) answer = this.__genOneAnswer(this.data.type);
             let audioContext = wx.createInnerAudioContext();
             let src = this._genAudioSrcByNumAndType(answer, this.data.type);
             audioContext.src = src;
@@ -85,6 +85,7 @@ app.createPage({
     },
     audioPlay() {
         AudioContext.src = this.data.curNumAudioSrc;
+        console.log(this.data.curNumAudioSrc);
         AudioContext.play();
     },
     _preStartInit() {
@@ -129,8 +130,8 @@ app.createPage({
         let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
         let { answer, src } = (this.data.preLoadArr.pop() || {});
         if(!answer && answer !== 0) {
-            answer = this.__genOneAnswer(this.data.type);
-            if (answer === this.data.answer) answer = this.__genOneAnswer();
+            answer = this.__genOneAnswer(type);
+            if (answer === this.data.answer) answer = this.__genOneAnswer(type);
             src = this._genAudioSrcByNumAndType(answer, type);
         }
         this.data.curNumAudioSrc = src;
