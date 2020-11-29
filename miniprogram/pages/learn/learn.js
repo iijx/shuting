@@ -44,6 +44,7 @@ app.createPage({
         })
     },
     preLoad() {
+        if (this.data.mode === 'hard') return;
         let lastAnswer = -1;
         this.data.preLoadArr = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3].map(i => {
             let answer = this.__genOneAnswer(this.data.type);
@@ -126,8 +127,12 @@ app.createPage({
     },
     _genOneAnswer() {
         let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
-        let { answer, src } = this.data.preLoadArr.pop();
-        if(!answer && answer !== 0) answer = this.__genOneAnswer(type);
+        let { answer, src } = (this.data.preLoadArr.pop() || {});
+        if(!answer && answer !== 0) {
+            answer = this.__genOneAnswer(this.data.type);
+            if (answer === this.data.answer) answer = this.__genOneAnswer();
+            src = this._genAudioSrcByNumAndType(answer, type);
+        }
         this.data.curNumAudioSrc = src;
         this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
         this.setData({
@@ -188,7 +193,7 @@ app.createPage({
             this.data.answerRecord = ['', '', '', '', ''];
         }
         // 2. 判断全部记录，是否已经有15个，有则完成学习
-        if ((this.data.allAnswerRecord.length) >= 15 && this.data.mode === 'normal') {
+        if ((this.data.allAnswerRecord.length) >= 15 && this.data.mode === 'normal' && !this.data.env.isSingleMode) {
             this.toSummary()
         } else { // 3. 否则，继续学习
             this._preStartInit();

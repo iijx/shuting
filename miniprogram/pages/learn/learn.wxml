@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container flex-col">
-    <view class="feedback-box" bindtap="switchfeedback">反馈</view>
+    <view wx:if="{{ !env.isSingleMode }}" class="feedback-box" bindtap="switchfeedback">反馈</view>
     <view class="flex step-wrap">
         <view wx:for="{{ answerRecord }}" wx:key="index" class="step-item {{ index === 0 ? 'left-radius' : (index === 4 ? 'right-radius' : '') }}">
             <view class="content {{ answerRecord[index] }}"></view>
