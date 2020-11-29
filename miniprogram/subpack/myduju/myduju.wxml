@@ -1,75 +1,79 @@
-<view wx:if="{{ user.memberType + '' === '20' }}" class="container">
-    <van-panel title="挑战一：分享好友一起学" status="{{ shareStatusText }}" use-footer-slot>
-        <view class="content">
-            <view class="upload-wrap">
-                <image class="shareImg" wx:if="{{ sharedImg }}" src="{{ sharedImg }}" mode="widthFix"/>
-                <van-icon wx:if="{{ sharedImg }}" class="close-icon" name="cross" size="24" bindtap="deleteShareImg"/>
-                <van-uploader wx:else file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" bind:delete="delete"/>
-            </view>
-            <view class="flex-center cl_aaa ft_14">（上传<text class="strong"> 分享群聊截图 </text> 或 <text class="strong">朋友圈截图</text> 均可）</view>
-            <view class="share-wrap mt_10" bindtap="openShare">
-                <van-button color="#ff9945" size="small" icon="friends-o">立即分享</van-button>
-            </view>
-        </view>
-        <view slot="footer" class="footer">
-            <view class="note">
-                <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item text-center">上传您转发至朋友圈的【分享截图】，挑战即可完成。</view>
-                <view class="note-item text-center">（后台会审核哈，不要乱传噢）</view>
-            </view>
-        </view>
-    </van-panel>
-    <view class="h_10"></view>
-    <van-panel title="挑战二：连学7天不中断" status="{{ learnStatusText }}">
-        <view class="content">
-            <view class="duju-week-wrap">
-                <view class="duju-day flex-center {{ item.isCompleted ? 'active' : '' }}" wx:for="{{ dujuWeek }}" wx:key="index">
-                    <view>
-                        <view>Day</view>
-                        <view class="ft_13">{{ item.isToday ? '今' : item.num }}</view>
+<view wx:if="{{!env.isSingleMode}}" >
+    <view wx:if="{{ user.memberType + '' === '20' }}" class="container">
+        <van-panel title="挑战一：连学7天不中断" status="{{ learnStatusText }}">
+            <view class="content">
+                <view class="duju-week-wrap">
+                    <view class="duju-day flex-center {{ item.isCompleted ? 'active' : '' }}" wx:for="{{ dujuWeek }}" wx:key="index">
+                        <view>
+                            <view>Day</view>
+                            <view class="ft_13">{{ item.isToday ? '今' : item.num }}</view>
+                        </view>
                     </view>
                 </view>
+                <view class="tips">{{ learnTipText }}</view>
+                <van-divider />
+                <view class="note">
+                    <!-- <view class="note-title">挑战说明:</view> -->
+                    <view class="note-item text-center">购买当天开始, 连学7天不中断，挑战即可完成;</view>
+                    <view class="note-item text-center">（每日进入小程序系统即算学习）</view>
+                </view>
             </view>
-            <view class="tips">{{ learnTipText }}</view>
-            <van-divider />
-            <view class="note">
-                <!-- <view class="note-title">挑战说明:</view> -->
-                <view class="note-item text-center">购买当天开始, 连学7天不中断，挑战即可完成;</view>
-                <view class="note-item text-center">（每日进入小程序就算学习，同学可要自觉噢～）</view>
-            </view>
-        </view>
-    </van-panel>
-    <view class="h_20"></view>
-    <van-button color="#00C171" block bindtap="refundBtn">{{
-        learnStatus === 'fail' ? '笃局挑战失败' :
-        refundStatus === 'unstart' ? '立即全额返现' : 
-        refundStatus === 'checking' ? '返现处理中，请耐心等待' :
-        refundStatus === 'success' ? '已全额返还，记得查收噢～' : ''
-    }}</van-button>
-    <view wx:if="{{ refundStatus === 'checking' }}" class="ft_14 cl_999 flex-center mt_12">（返现统一处理时间：每天晚6:00 ~ 8:00）</view>
+        </van-panel>
+        <view class="h_10"></view>
 
-    <view class="share-sheet-wrap">
-        <view class="mask {{ showShare ? 'toggle-show' : '' }}" bind:tap="onCloseShare"></view>
-        <view class="share-sheet {{ showShare ? 'toggle-show' : ''}}">
-            <view class="flex share-main">
-                <view class="flex1 flex-col-center">
-                    <button open-type="share" class="no-wx-btn-style">
-                        <image class="share-icon" src="http://cdn.iijx.site/img/c18yz.png" />
-                        <view class="share-text">发送给朋友</view>
-                    </button>
+        <van-panel title="挑战二：分享朋友圈" use-footer-slot>
+            <view class="content">
+                <view class="upload-wrap">
+                    <image class="shareImg" src="https://cdn.amathclass.cn/shuting/common/wechat_shuting.jpeg" mode="widthFix"/>
                 </view>
-                <view class="flex1 flex-col-center" bindtap="toTimeline" >
-                    <image class="share-icon" src="http://cdn.iijx.site/img/z8wm7.png" />
-                    <view class="share-text">分享朋友圈</view>
+                
+                <view class="flex-center cl_999 ft_13">长按二维码，添加“数听小助手”微信</view>
+                <view class="flex-center cl_999 ft_13">（仅用于抽查分享朋友圈）</view>
+            </view>
+            <view slot="footer" class="footer">
+                <view class="note">
+                    <!-- <view class="note-item text-center">右上角分享哦</view> -->
+                    <view class="note-item text-center"></view>
                 </view>
             </view>
-            <view class="cancel flex-center" hover-class="opa_6" bind:tap="onCloseShare">取消</view>
-        </view>
+        </van-panel>
+        <view class="h_20"></view>
+        <van-button color="#00C171" block bindtap="refundBtn">{{
+            learnStatus === 'fail' ? '笃局挑战失败' :
+            refundStatus === 'unstart' ? '立即全额返现' : 
+            refundStatus === 'checking' ? '返现处理中，请耐心等待' :
+            refundStatus === 'success' ? '已全额返还，记得查收噢～' : ''
+        }}</van-button>
+        <view wx:if="{{ refundStatus === 'checking' }}" class="ft_14 cl_999 flex-center mt_12">（返现统一处理时间：每天晚6:00 ~ 8:00）</view>
+
+        <!-- <view class="share-sheet-wrap">
+            <view class="mask {{ showShare ? 'toggle-show' : '' }}" bind:tap="onCloseShare"></view>
+            <view class="share-sheet {{ showShare ? 'toggle-show' : ''}}">
+                <view class="flex share-main">
+                    <view class="flex1 flex-col-center">
+                        <button open-type="share" class="no-wx-btn-style">
+                            <image class="share-icon" src="http://cdn.iijx.site/img/c18yz.png" />
+                            <view class="share-text">发送给朋友</view>
+                        </button>
+                    </view>
+                    <view class="flex1 flex-col-center" bindtap="toTimeline" >
+                        <image class="share-icon" src="http://cdn.iijx.site/img/z8wm7.png" />
+                        <view class="share-text">分享朋友圈</view>
+                    </view>
+                </view>
+                <view class="cancel flex-center" hover-class="opa_6" bind:tap="onCloseShare">取消</view>
+            </view>
+        </view> -->
     </view>
+
+    <view wx:else class="container">
+        <van-cell-group >
+            <van-cell title="暂无您的会员信息" value="" />
+        </van-cell-group>
+    </view>
+
 </view>
 
-<view wx:else class="container">
-    <van-cell-group >
-        <van-cell title="暂无您的会员信息" value="" />
-    </van-cell-group>
+<view wx:else bindtap="timelineImgClick">
+    <image src="https://cdn.amathclass.cn/shuting/common/shuting_eng_share_timeline.png" mode="widthFix" style="width: 100%;"/>
 </view>

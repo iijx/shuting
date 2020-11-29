@@ -32,15 +32,15 @@ export default class UniAudio {
         }
     }
     playDD() {
-        this.audioInstance.src = "/assets/audio/dingdong.m4a";
+        this.audioInstance.src = "/assets/audio/dingdong.mp3";
         this.audioInstance.play()
     }
     playCorrect() {
-        this.audioInstance.src = "/assets/audio/correct.m4a";
+        this.audioInstance.src = "/assets/audio/correct.mp3";
         this.audioInstance.play()
     }
     playError() {
-        this.audioInstance.src = "/assets/audio/error.m4a";
+        this.audioInstance.src = "/assets/audio/error.mp3";
         this.audioInstance.play()
     }
     stop() {

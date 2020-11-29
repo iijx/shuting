@@ -14,9 +14,9 @@ class QItem {
 }
 app.createPage({
   	data: {
+		env: { isSingleMode: false },
 		pageIsActive: true,
 		user: new app.Models.User({}),
-		env: {},
 		config: {},
 
 		papelArr: [...papel],

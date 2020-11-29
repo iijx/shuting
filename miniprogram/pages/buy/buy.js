@@ -216,5 +216,6 @@ app.createPage({
     },
     onCloseShare() {
         this.setData({ showShare: false })
-    }
+    },
+    onShareTimeline() {},
 })

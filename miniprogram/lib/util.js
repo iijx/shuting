@@ -1,6 +1,6 @@
 import * as Digit from '../local/digit';
 
-const PointNumLen = Digit.point.length;
+const PointLen = Digit.point.length;
 const TimeNumLen = Digit.time.length;
 /**
  * 生成 [min, max) 范围随机数
@@ -160,8 +160,7 @@ export const randomOneNum = length => {
 export const randomOneYear = () => randomIntegerInRange(1800, 2028);
 
 export const randomPointNumber = () => {
-    // return pointNum[randomIntegerInRange(0, pointNumLen)];
-    return Digit.point[randomIntegerInRange(0, PointNumLen)]
+    return Digit.point[randomIntegerInRange(0, PointLen)]
 }
 
 export const randomOneWeek = () => {

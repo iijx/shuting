@@ -1,11 +1,5 @@
 <!--index.wxml-->
 <view class="container flex-col">
-    <!-- <view class="header">
-        <image class="icon-back-img" bindtap="handerBack" src="../../assets/imgs/icon-left-arrow.png" mode="widthFix"></image>
-        <view class="flex1 text-center ft_14">数听英语</view>
-        <view class="icon-back-img"></view>
-        <text class="feedback" bindtap="switchfeedback">反馈</text>
-    </view> -->
     <view class="feedback-box" bindtap="switchfeedback">反馈</view>
     <view class="flex step-wrap">
         <view wx:for="{{ answerRecord }}" wx:key="index" class="step-item {{ index === 0 ? 'left-radius' : (index === 4 ? 'right-radius' : '') }}">

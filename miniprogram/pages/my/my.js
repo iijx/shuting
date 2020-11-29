@@ -2,7 +2,7 @@ const app = getApp();
 const { Util, UniApi, Vant, Store } = app;
 app.createPage({
     data: {
-        env: {},
+        env: { isSingleMode: false },
         user: new app.Models.User({}),
         remainInviteCount: 0,
         awardedNum: 0,
@@ -12,7 +12,8 @@ app.createPage({
 
         isShowMemberActivity: true
     },
-    onLoad: function (options) {
+    onLoad: function (opt) {
+        if (this.data.env.isSingleMode) return;
         wx.nextTick(() => {
             if (!this.data.user.avatar) {
                 wx.getSetting({
@@ -30,7 +31,9 @@ app.createPage({
     onReady: function () {
         app.learnLog();
     },
-    onShow: function () {
+    onShow(opt) {
+        if (this.data.env.isSingleMode) return;
+
         this.update().then(() => {
             this.updateComputed()
         });

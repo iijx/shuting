@@ -4,6 +4,7 @@ const { Util, Vant, Store } = app;
 
 app.createPage({
 	data: {
+		env: { isSingleMode: false },
 		user: new app.Models.User({}),
 		fileList: [],
 		sharedImg: '',
@@ -19,14 +20,14 @@ app.createPage({
 
 		showShare: false,
 		shareOptions: [
-		{ name: '分享至群聊', openType: 'share' },
-		{ name: '分享到朋友圈', icon: 'http://cdn.iijx.site/img/ngts4.png' },
+			{ name: '分享至群聊', openType: 'share' },
+			{ name: '分享到朋友圈', icon: 'http://cdn.iijx.site/img/ngts4.png' },
 		]
 	},
 	uniqueDateArray(arr = []) {
 		let res = []
 		for (let i = 0; i < arr.length; i++) {
-		if (res.findIndex(item => Util.isSameDay(new Date(item), new Date(arr[i]))) >= 0) {}
+			if (res.findIndex(item => Util.isSameDay(new Date(item), new Date(arr[i]))) >= 0) {}
 		else {
 			res.push(arr[i]);
 		}
@@ -59,6 +60,8 @@ app.createPage({
 		}
 	},
 	onLoad: function (options) {
+		console.log('this.data.env.isSingleMode', this.data.env.isSingleMode)
+		if (this.data.env.isSingleMode) return;
 		app.learnLog();
 		app.UniApi.appCloud('duju', 'get').then(res => {
 		let duju = res.duju;
@@ -145,26 +148,26 @@ app.createPage({
 		if (this.data.refundStatus === 'unstart') {
 		// 1. check 
 		if (this.data.learnStatus === 'fail') wx.showToast({ icon: 'none', title: '笃局失败' })
-		else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战' })
+		else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战一' })
 
-		else if (this.data.shareStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战二' })
-		else if (this.data.shareStatus === 'checking') wx.showToast({ icon: 'none', title: '挑战二审核中' })
+		// else if (this.data.shareStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战二' })
+		// else if (this.data.shareStatus === 'checking') wx.showToast({ icon: 'none', title: '挑战二审核中' })
 
 		else {
 			app.DB.collection('duju').where({ openid: this.data.user.openid }).update({
-			data: {
-				refundStatus: 'checking'
-			}
+				data: {
+					refundStatus: 'checking'
+				}
 			})
 			wx.showToast({ icon: 'success', title: '已提交申请'})
 			this.setData({ refundStatus: 'checking' })
 		}
 		}
 		else if (this.data.refundStatus === 'checking') {
-		wx.showToast({ icon: 'none', title: '审核中'})
+			wx.showToast({ icon: 'none', title: '审核中'})
 		}
 		else if (this.data.refundStatus === 'success') {
-		wx.showToast({ icon: 'success', title: '已返还'})
+			wx.showToast({ icon: 'success', title: '已返还'})
 		}
 	}, 1000),
 	openShare() {
@@ -175,7 +178,7 @@ app.createPage({
 	},
 	toTimeline() {
 		wx.navigateTo({
-		url: '../timeline/timeline' // 指定页面的url
+			url: '../timeline/timeline' // 指定页面的url
 		});
 	},
 })

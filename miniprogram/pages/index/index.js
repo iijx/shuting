@@ -2,6 +2,7 @@ const app = getApp();
 const { Util, Vant, Store } = app;
 app.createPage({
     data: {
+        env: { isSingleMode: false },
         user: new app.Models.User({}),
         curLearnLevel: {},
         curLearnUnit: {},
@@ -16,10 +17,6 @@ app.createPage({
 
         showShare: false,
     },
-
-    /**
-     * Lifecycle function--Called when page load
-     */
     onLoad: function (options) {
         const monthsLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const monthIndex = (new Date()).getMonth();
@@ -53,32 +50,28 @@ app.createPage({
 
     toArticle() {
         wx.navigateTo({
-        url: '../article/article',
+            url: '../article/article',
         })
     },
     toLevel() {
         wx.navigateTo({
-        url: '../level/level',
+            url: '../level/level',
         })
     },
     toQst() {
         wx.navigateTo({
-        url: '../qst/qst',
+            url: '../qst/qst',
         })
     },
     toPapel() {
         wx.navigateTo({
-        url: '../papel/papel',
+            url: '../papel/papel',
         })
     },
 
     onHide: function () {
 
     },
-
-    /**
-     * Lifecycle function--Called when page unload
-     */
     onUnload: function () {
 
     },
@@ -91,7 +84,7 @@ app.createPage({
     onShareAppMessage() {
         return {
             path: `/pages/index/index?fromOpenid=${this.data.user.openid}`,
-            title: '刻意练习 · 提升数听力'
+            title: '刻意练习 · 提升数字英语听力'
         }
     },
 })

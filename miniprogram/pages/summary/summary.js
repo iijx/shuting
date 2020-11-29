@@ -1,4 +1,3 @@
-// pages/summary/summary.js
 const app = getApp();
 const { Config, Util, UniApi, Vant } = app;
 
@@ -17,17 +16,6 @@ app.createPage({
         AudioContext = wx.createInnerAudioContext();
         app.Store.update();
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function () {
         Util.sleep(200).then(() => {
             AudioContext.src = `${Config.cdnDomain}/shuting/common/win.m4a`;
@@ -99,29 +87,5 @@ app.createPage({
                 })
             }
         })
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    onUnload: function () {
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
+    }
 })

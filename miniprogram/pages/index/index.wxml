@@ -1,5 +1,6 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" >
+    <view style="height: {{ env.isSingleMode ? '50px' : 0 }}"></view>
     <view class="top">
         <view class="text1">数听英语 · <text class="sub-text1">专项提升数字英语听力</text></view>
 

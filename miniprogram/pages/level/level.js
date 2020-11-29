@@ -3,6 +3,7 @@ const { Util, Vant, Store } = app;
 
 app.createPage({
     data: {
+        env: { isSingleMode: false },
         user: new app.Models.User({}),
         lesson: [],
         curLearnLevel: {},
@@ -10,7 +11,6 @@ app.createPage({
         monthWords: [...Util.MonthWords],
         weekWords: [...Util.WeekWords],
         config: {},
-        env: {},
         isShowRecordDetail: false
     },
     onLoad: function (options) {
@@ -112,18 +112,5 @@ app.createPage({
         this.setData({
             isShowNote: false,
         })
-    },
-
-    /**
-     * Lifecycle function--Called when page hide
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * Lifecycle function--Called when page unload
-     */
-    onUnload: function () {
     },
 })

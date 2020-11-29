@@ -1,4 +1,4 @@
-<view class="container">
+<view wx:if="{{!env.isSingleMode}}" class="container">
 	<view class="curBook-wrap">
 		<cell>
 			<view slot="bd" class="cl_fff ft_bold">{{ curLearnLevel.title }} · {{ curLearnUnit.title }}</view>
@@ -71,4 +71,8 @@
 	</view>
 
 	<van-dialog id="van-dialog" />
+</view>
+
+<view wx:else bindtap="timelineImgClick">
+    <image src="https://cdn.amathclass.cn/shuting/common/shuting_eng_share_timeline.png" mode="widthFix" style="width: 100%;"/>
 </view>

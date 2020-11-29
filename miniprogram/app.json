@@ -15,12 +15,8 @@
             "root": "subpack",
             "pages": [
                 "myduju/myduju",
-                "timeline/timeline",
                 "checking/checking",
-                "advice/advice",
-                "exchange/exchange",
-                "activity/activity",
-                "version/version"
+                "exchange/exchange"
             ]
         }
     ],
@@ -76,5 +72,7 @@
             }
         ]
     },
+    "lazyCodeLoading": "requiredComponents",
+    "navigationBarFit": "squeezed",
     "sitemapLocation": "sitemap.json"
 }

@@ -4,6 +4,7 @@ let AudioContext = null;
 
 app.createPage({
     data: {
+        env: { isSingleMode: false },
         user: new app.Models.User({}),
         arr: [],
         isPlaying: false,
@@ -62,7 +63,7 @@ app.createPage({
         else if (type === "phone") path = `shuting/eng/phone_audio/${answer}_${randomIndex}.mp3`;
         else if (type === "time") path = `shuting/eng/time_audio/${answer}_${randomIndex}.mp3`;
         else if (type === "year") path = `shuting/eng/year_audio/${answer}.mp3`;
-        else if (type === "pointNum") path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === "point") path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
         else if (type === "week") path = `shuting/eng/week_audio/week_${answer}.mp3`;
         else if (type === "month") path = `shuting/eng/month_audio/month_${answer}.mp3`;
         return `${Config.cdnDomain}/${path}`;
@@ -182,7 +183,7 @@ app.createPage({
         answer = answer.replace(".", ":");
         } else if (type === "year") {
         answer = Util.randomOneYear();
-        } else if (type === "pointNum") {
+        } else if (type === "point") {
         answer = Util.randomPointNumber();
         } else if (type === "week") {
         answer = Util.randomOneWeek();

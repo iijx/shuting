@@ -28,7 +28,7 @@ exports.main = async (event, context) => {
     }
     // text
     if (event.MsgType === 'text') {
-        if (event.Content.indexOf('会员') >= 0) {
+        if (event.Content.indexOf('会员') >= 0 || event.Content.indexOf('1') >= 0) {
             await sendMember(event.FromUserName);
         }
         else {

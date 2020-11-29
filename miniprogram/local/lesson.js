@@ -35,7 +35,7 @@ export default [
         "title": "其它",
         "rank": 3,
         "unitList": [
-            { "levelId": 3, "unitId": 31, "type": "pointNum", "title": "小数", "isPro": true, "rank": 1 },
+            { "levelId": 3, "unitId": 31, "type": "point", "title": "小数", "isPro": true, "rank": 1 },
             { "levelId": 3, "unitId": 32, "type": "year", "title": "年份", "isPro": true, "rank": 2 },
             { "levelId": 3, "unitId": 33, "type": "month", "title": "月份", "isPro": true, "rank": 3 },
             { "levelId": 3, "unitId": 34, "type": "week", "title": "星期", "isPro": true, "rank": 4 },

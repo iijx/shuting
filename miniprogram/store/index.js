@@ -8,7 +8,8 @@ const getScoreByCNum = cNum => {
 const store = {
     data: {
         env: {
-            platform: ''
+            platform: '',
+            isSingleMode: false, // 是否是单页模式（即从朋友圈进入
         },
         user: new Models.User({}),
         config: {
@@ -108,7 +109,7 @@ const store = {
         return {
             imageUrl: 'http://cdnword.iijx.site/assets/imgs/shuting/share1.png',
             path: `/pages/level/level?fromOpenid=${this.data.user.openid}`,
-            title: '刻意练习 · 提升数听力'
+            title: '刻意练习 · 提升数字英语听力'
         }
     }
 }

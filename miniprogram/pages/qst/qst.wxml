@@ -1,4 +1,4 @@
-<view class="flex-col container">
+<view wx:if="{{!env.isSingleMode}}" class="flex-col container">
     <view class="top"></view>
     <view class="main">
         <view class="list">
@@ -38,7 +38,7 @@
                 </cell>
                 <cell custom-class="cell-item border">
                     <view slot="hd">小数</view>
-                    <van-checkbox slot="ft" checked-color="#00aac4" shape="square" name="pointNum" />
+                    <van-checkbox slot="ft" checked-color="#00aac4" shape="square" name="point" />
                 </cell>
                 <cell custom-class="cell-item border">
                     <view slot="hd">电话</view>
@@ -62,4 +62,8 @@
     </van-dialog>
 
     <van-toast id="van-toast" />
+</view>
+
+<view wx:else bindtap="timelineImgClick">
+    <image src="https://cdn.amathclass.cn/shuting/common/shuting_eng_share_timeline.png" mode="widthFix" style="width: 100%;"/>
 </view>

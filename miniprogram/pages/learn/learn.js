@@ -27,8 +27,9 @@ app.createPage({
             { name: '没有声音' },
             { name: '其他' }
         ],
-        env: {},
+        env: { isSingleMode: false },
         curNumAudioSrc: '',
+        preLoadArr: [],
     },
     onLoad: function (opt = {}) {
         Util.sleep(30).then(() => {
@@ -42,9 +43,24 @@ app.createPage({
             this.init();
         })
     },
+    preLoad() {
+        let lastAnswer = -1;
+        this.data.preLoadArr = [1,1,1,1,1,2,2,2,2,2,3,3,3,3,3].map(i => {
+            let answer = this.__genOneAnswer(this.data.type);
+            if (answer === lastAnswer) answer = this.__genOneAnswer();
+            let audioContext = wx.createInnerAudioContext();
+            let src = this._genAudioSrcByNumAndType(answer, this.data.type);
+            audioContext.src = src;
+            return { answer, src, audioContext }
+        });
+    },
     init() {
         AudioContext = wx.createInnerAudioContext();
+        this.preLoad();
         this.nextWord();
+        AudioContext.onError(function(err) {
+            console.log('play err', err);
+        })
     },
     _getRandomIndex123: (() => {
         let last = 1;
@@ -60,10 +76,10 @@ app.createPage({
         else if (type === 'phone') path = `shuting/eng/phone_audio/${answer}_${randomIndex}.mp3`;
         else if(type === 'time') path = `shuting/eng/time_audio/${answer}_${randomIndex}.mp3`;
         else if (type === 'year') path = `shuting/eng/year_audio/${answer}.mp3`;
-        else if (type === 'pointNum') path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'point') path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
         else if (type === 'week') path = `shuting/eng/week_audio/week_${answer}.mp3`;
         else if (type === 'month') path = `shuting/eng/month_audio/month_${answer}.mp3`;
-        console.log(`${Config.cdnDomain}/${path}`)
+        // console.log(`${Config.cdnDomain}/${path}`)
         return `${Config.cdnDomain}/${path}`;
     },
     audioPlay() {
@@ -80,7 +96,7 @@ app.createPage({
         })
     },
     _randomOneType() {
-        const types = ['number', 'phone', 'number', 'time', 'year', 'number', 'pointNum', 'number', 'number', 'month'];
+        const types = ['number', 'phone', 'number', 'time', 'year', 'number', 'point', 'number', 'number', 'month'];
         const phones = [4, 6, 8];
         
         let type = types[Util.randomIntegerInRange(0, types.length)];
@@ -97,36 +113,35 @@ app.createPage({
         return type;
         
     },
-    _genOneAnswer() {
-        let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
+    __genOneAnswer(type) {
         let answer = '';
         if(type === 'number') answer = Util.randomOneNum(this.data.maxLength);
         else if (type === 'phone') answer = Util.randomOnePhone(this.data.maxLength)();
         else if (type === 'time') answer = Util.randomOneTime();
         else if (type === 'year') answer = Util.randomOneYear();
-        else if (type === 'pointNum') answer = Util.randomPointNumber();
+        else if (type === 'point') answer = Util.randomPointNumber();
         else if (type === 'week') answer = Util.randomOneWeek();
         else if (type === 'month') answer = Util.randomOneMonth();
-        
-        if (answer === this.data.answer) {
-            return this._genOneAnswer();
-        } else {
-            this.data.curNumAudioSrc = this._genAudioSrcByNumAndType(answer, type);
-            AudioContext.src = this.data.curNumAudioSrc;
-            this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
-            this.setData({
-                type,
-                answerLength: String(this.data.answer).length,
-                answer: this.data.answer,
-            });
-            this.audioPlay();
-        };
-
+        return answer;
+    },
+    _genOneAnswer() {
+        let type = this.data.mode === 'hard' ? this._randomOneType() : this.data.type;
+        let { answer, src } = this.data.preLoadArr.pop();
+        if(!answer && answer !== 0) answer = this.__genOneAnswer(type);
+        this.data.curNumAudioSrc = src;
+        this.data.answer = type === 'time' ? answer.replace('.', ':') : answer;
+        this.setData({
+            type,
+            answerLength: String(this.data.answer).length,
+            answer: this.data.answer,
+        });
+        this.audioPlay();
     },
     _isCorrect() {
         return String(this.data.inputValue) === String(this.data.answer);
     },
     playResultAudio(isCorrect) {
+        console.log('playResultAudio,', isCorrect)
         return new Promise((resolve, reject) => {
             AudioContext.src = isCorrect ? Config.correctAudioSrc : Config.errorAudioSrc;
             AudioContext.play();
@@ -186,6 +201,9 @@ app.createPage({
         })
     },
     nextWordBtn() {
+        this.playResultAudio(true);
+        // AudioContext.play()
+        return;
         if (this.data.spanClass === 'error') {
             this.nextWord();
         }
@@ -229,18 +247,7 @@ app.createPage({
             this.showAnswer();
         }
     },
-    handerBack() {
-        wx.navigateBack({
-            delta: 1,
-            fail: (err) => {
-                wx.redirectTo({
-                    url: '../level/level'
-                })
-            }
-        })
-    },
     switchfeedback() {
-        console.log(1)
         this.setData({
             isShowFeedBack: !this.data.isShowFeedBack
         })
@@ -257,8 +264,5 @@ app.createPage({
         } else {
             Vant.Toast.success('感谢您的反馈');
         }
-    },
-
-    onUnload: function () {
     },
 })

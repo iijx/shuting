@@ -29,7 +29,7 @@
     "title": "其它",
     "index": 3,
     "children": [
-        { "pLevelId": 3, "levelId": 31, "type": "pointNum", "title": "小数", "isPro": true, "rank": 1 },
+        { "pLevelId": 3, "levelId": 31, "type": "point", "title": "小数", "isPro": true, "rank": 1 },
         { "pLevelId": 3, "levelId": 32, "type": "year", "title": "年份", "isPro": true, "rank": 2 },
         { "pLevelId": 3, "levelId": 33, "type": "month", "title": "月份", "isPro": true, "rank": 3 },
         { "pLevelId": 3, "levelId": 34, "type": "week", "title": "星期", "isPro": true, "rank": 4 },

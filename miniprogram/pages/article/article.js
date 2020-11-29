@@ -3,6 +3,7 @@ const { Util, UniApi, Vant } = app;
 
 app.createPage({
   data: {
+    env: { isSingleMode: false },
     arr: [
       '基数词',
       '序数词',

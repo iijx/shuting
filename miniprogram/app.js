@@ -11,78 +11,87 @@ import store from './store/index';
 import UniAudio from './lib/uniAudio';
 import Http from './lib/http'
 
-const Vant = { Dialog, Toast, Notify }
-const DB = wx.cloud.database();
 wx.loadFontFace({
     family: 'PT Mono',
     source: 'url("https://cdn.iijx.site/font/PTM55F.ttf")',
     success: console.log
 })
 
-App({
+const appData = {
     onLaunch: function(opt) {
-        if (!wx.cloud) {
-            console.error('请使用 2.2.3 或以上的基础库以使用云能力');
-            wx.showLoading({
-                title: '请先更新微信',
-            })
-        } else {
-            this.setSystemInfo();
-            // 登录获取用户信息
-            UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
-                store.data.user = res;
-                store.update();
-                this.learnLog();
-                if (!res.isPro) {
-                    wx.setStorage({ key: "isPro", data: "false" })
-                }
-            })
-            UniApi.appCloud('config', 'get').then(res => {
-                if (res.success) {
-                    store.data.goods = [...res.goods];
-                    store.data.config.version = {...res.version};
-                    store.data.config.iosBuyPrompt = res.iosBuyPrompt || store.data.config.iosBuyPrompt;
-                    store.data.config.isAppInCheck = res.isAppInCheck || false;
-                    store.data.config.freeMemberNeedCount = res.freeMemberNeedCount || 10;
-                    store.data.config.shareTimelineBaseImg = res.shareTimelineBaseImg || store.data.config.shareTimelineBaseImg;
-                    store.data.config.androidWithDujuRate = res.androidWithDujuRate || 0;
-                    store.update();
-                }
-            });
-
-            Promise.all([
-                UniApi.cloud('local', { model: 'lesson' }),
-                UniApi.cloud('local', { model: 'learnInfo' })
-            ]).then(res => {
-                store.data.rawLesson = [...res[0]];
-                store.data.unitMap = res[0].reduce((ac, cur) => {
-                    return cur.unitList.reduce((a, c) => {
-                        a[c.unitId] = { ...c };
-                        return a;
-                    }, ac);
-                }, {});
-                
-                store.data.learnRecords = [ ...res[1].learnRecords ];
-                store.setCurLearn(res[1].curLearnUnitId)
-            })
-
-            
+        console.log('onLaunch', opt)
+        if (!wx.cloud) wx.showLoading({ title: '请先更新微信' })
+        else {
+            if (opt.scene === 1154) {
+                store.setEnv({ isSingleMode: true })
+            } else {
+                this.init(opt);
+            }
         }
+    },
+    init(opt) {
+        this.DB = wx.cloud.database();
+        this.setSystemInfo();
+        this._initUserData(opt);
+        this.Vant = { Dialog, Toast, Notify };
+        
+    },
+    _initUserData(opt) {
+        UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
+            store.data.user = res;
+            store.update();
+            this.learnLog();
+            if (!res.isPro) {
+                wx.setStorage({ key: "isPro", data: "false" })
+            }
+        })
+        UniApi.appCloud('config', 'get').then(res => {
+            if (res.success) {
+                store.data.goods = [...res.goods];
+                store.data.config.version = {...res.version};
+                store.data.config.iosBuyPrompt = res.iosBuyPrompt || store.data.config.iosBuyPrompt;
+                store.data.config.isAppInCheck = res.isAppInCheck || false;
+                store.data.config.freeMemberNeedCount = res.freeMemberNeedCount || 10;
+                store.data.config.shareTimelineBaseImg = res.shareTimelineBaseImg || store.data.config.shareTimelineBaseImg;
+                store.data.config.androidWithDujuRate = res.androidWithDujuRate || 0;
+                store.update();
+            }
+        });
+
+        Promise.all([
+            UniApi.cloud('local', { model: 'lesson' }),
+            UniApi.cloud('local', { model: 'learnInfo' })
+        ]).then(res => {
+            store.data.rawLesson = [...res[0]];
+            store.data.unitMap = res[0].reduce((ac, cur) => {
+                return cur.unitList.reduce((a, c) => {
+                    a[c.unitId] = { ...c };
+                    return a;
+                }, ac);
+            }, {});
+            
+            store.data.learnRecords = [ ...res[1].learnRecords ];
+            store.setCurLearn(res[1].curLearnUnitId)
+        })
     },
     // 学习打点日志
     learnLog() {
+        console.log('learnLog', String(store.data.user.memberType))
         if (String(store.data.user.memberType) === '20') {
+            console.log('learnLog1')
             let lastEnterLogTime = parseInt(wx.getStorageSync('l_log_lastEnterTime')) || 0;
             if (!Util.isSameDay(new Date(), new Date(lastEnterLogTime))) {
-                DB.collection('duju').where({ openid: store.data.user.openid }).update({
+                this.DB.collection('duju').where({ openid: store.data.user.openid }).update({
                     data: {
-                        lRecord: DB.command.push(Date.now())
+                        lRecord: this.DB.command.push(Date.now())
                     }
                 })
                 wx.setStorage({key: 'l_log_lastEnterTime', data: String(Date.now()) });
             } else {
                 console.log('今天已经打过点了，无需打点')
             }
+        } else {
+            console.log('learnLog0')
         }
     },
     setSystemInfo: (function() {
@@ -92,9 +101,8 @@ App({
             promise = new Promise((resolve, reject) => {
                 wx.getSystemInfo({
                     success: function (res) {
-                        // res.platform = 'ios';
+                        // res.platform = 'ios'; 'android'
                         store.setEnv({
-                            // platform: 'android'
                             platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
                         })
                         resolve(res)
@@ -120,7 +128,7 @@ App({
             this.setSystemInfo().then(res => {
                 if (res.platform === 'ios' && wx.getStorageSync('isPro') === 'false') {
                     console.log('检测开没会员');
-                    DB.collection('exchange_code').where({ status: 2 }).get().then(codes => {
+                    this.DB.collection('exchange_code').where({ status: 2 }).get().then(codes => {
                         if (codes.data.length > 0) {
                             wx.getClipboardData({
                                 success: res => {
@@ -158,17 +166,27 @@ App({
     Config,
     UniApi,
     Store: store,
-    Vant,
-    DB,
     Models,
     Http,
     uniAudio: new UniAudio(),
     assAudio: new UniAudio(),
     createPage: opt => create(store, {
-        // 用户点击右上角分享
         onShareAppMessage() {
             return store.getDefaultShareInfo();
         },
+        onShareTimeline() {
+            return {
+                imageUrl: `${Config.cdnDomain}/shuting/common/icon-shuting-eng.png`,
+                title: '刻意练习 · 提升数字英语听力'
+            }
+        },
+        timelineImgClick() {
+            wx.switchTab({
+                url: '../index/index'
+            })
+        },
         ...opt,
     })
-})
+};
+
+App(appData);
