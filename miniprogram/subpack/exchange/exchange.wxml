@@ -1,9 +1,7 @@
 <!--pages/exchange/exchange.wxml-->
 <view class="container">
     <view class="title">兑换码</view>
-    <van-cell-group>
-        <van-field value="{{ value }}" placeholder="请输入兑换码" border="{{ false }}" bind:change="onChange"/>
-    </van-cell-group>
+    <van-field value="{{ value }}" placeholder="请输入兑换码" border="{{ false }}" bind:change="onChange"/>
 
     <view style="height: 34rpx;"></view>
     <van-button type="primary" color="#e0475a" loading="{{ isExchanging }}" round block bind:click="exchange" loading-type="spinner" loading-text="确认兑换">确认兑换</van-button>

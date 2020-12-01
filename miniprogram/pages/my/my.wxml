@@ -96,10 +96,6 @@
     </view>
 
     <van-dialog id="van-dialog"></van-dialog>
-    
-    <!-- 在页面内添加对应的节点 -->
-    <van-notify id="van-notify" />
-
 </view>
 <view wx:else bindtap="timelineImgClick">
     <image src="https://cdn.amathclass.cn/shuting/common/shuting_eng_share_timeline.png" mode="widthFix" style="width: 100%;"/>

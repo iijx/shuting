@@ -4,7 +4,6 @@ import Config from './config.js'
 import UniApi from './lib/uniApi.js'
 import Dialog from '@vant/weapp/dialog/dialog';
 import Toast from '@vant/weapp/toast/toast';
-import Notify from '/@vant/weapp/notify/notify';
 import create from './lib/westore/create';
 import Models from './models/index';
 import store from './store/index';
@@ -33,7 +32,7 @@ const appData = {
         this.DB = wx.cloud.database();
         this.setSystemInfo();
         this._initUserData(opt);
-        this.Vant = { Dialog, Toast, Notify };
+        this.Vant = { Dialog, Toast };
         
     },
     _initUserData(opt) {

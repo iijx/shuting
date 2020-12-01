@@ -243,14 +243,6 @@ app.createPage({
         this.setData({ arr });
     },
     onChange(event) {
-        // let arr = event.detail;
-        // if (!this.data.user.isPro) {
-        //   if (arr.includes('phone') || arr.includes('year') || arr.includes('time')) {
-        //     // Vant.Toast('该选项需开通会员');
-        //     Vant.Notify('通知内容');
-        //     return;
-        //   }
-        // }
         this.setData({
             checkboxArr: event.detail,
         });

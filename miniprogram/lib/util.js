@@ -2,9 +2,7 @@ import * as Digit from '../local/digit';
 
 const PointLen = Digit.point.length;
 const TimeNumLen = Digit.time.length;
-/**
- * 生成 [min, max) 范围随机数
- */
+// 生成 [min, max) 范围随机数
 export const randomIntegerInRange = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 export const sleep = time => new Promise((resolve, reject) => {
