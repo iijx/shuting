@@ -12,7 +12,7 @@ import Http from './lib/http'
 
 wx.loadFontFace({
     family: 'PT Mono',
-    source: 'url("https://cdn.iijx.site/font/PTM55F.ttf")',
+    source: 'url("https://cdn.amathclass.cn/shuting/common/font/PTM55F.ttf")',
     success: console.log
 })
 
@@ -75,9 +75,7 @@ const appData = {
     },
     // 学习打点日志
     learnLog() {
-        console.log('learnLog', String(store.data.user.memberType))
         if (String(store.data.user.memberType) === '20') {
-            console.log('learnLog1')
             let lastEnterLogTime = parseInt(wx.getStorageSync('l_log_lastEnterTime')) || 0;
             if (!Util.isSameDay(new Date(), new Date(lastEnterLogTime))) {
                 this.DB.collection('duju').where({ openid: store.data.user.openid }).update({
