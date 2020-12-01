@@ -67,9 +67,7 @@
     </view>
 
     <view wx:else class="container">
-        <van-cell-group >
-            <van-cell title="暂无您的会员信息" value="" />
-        </van-cell-group>
+        <view>暂无您的会员信息</view>
     </view>
 
 </view>

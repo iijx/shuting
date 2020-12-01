@@ -23,9 +23,9 @@ app.createPage({
 
         isShowFeedBack: false, // 反馈
         feedBackOptions: [
-            { name: '发音不全/不清晰' },
-            { name: '没有声音' },
-            { name: '其他' }
+            { text: '发音不全/不清晰', value: 0 },
+            { text: '没有声音', value: 1 },
+            { text: '其他', value: 2 },
         ],
         env: { isSingleMode: false },
         curNumAudioSrc: '',
@@ -262,7 +262,7 @@ app.createPage({
         app.DB.collection('word_error').add({
             data: {
                 word: this.data.answer,
-                name: e.detail.name
+                name: this.data.feedBackOptions.find(i => i.value === e.detail.value).text
             }
         })
         if (e.detail.name === '没有声音' && this.data.env.platform === 'ios') {
@@ -270,5 +270,6 @@ app.createPage({
         } else {
             Vant.Toast.success('感谢您的反馈');
         }
+        this.switchfeedback();
     },
 })

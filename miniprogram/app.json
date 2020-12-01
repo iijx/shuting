@@ -29,6 +29,7 @@
     },
     "navigateToMiniProgramAppIdList": ["wx959c8c1fb2d877b5"],
     "usingComponents": {
+        "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
         "van-circle": "@vant/weapp/circle",
         "van-progress": "@vant/weapp/progress",
         "van-icon": "@vant/weapp/icon",
@@ -36,12 +37,10 @@
         "van-field": "@vant/weapp/field",
         "van-panel": "@vant/weapp/panel",
         "van-dialog": "@vant/weapp/dialog",
-        "van-action-sheet": "@vant/weapp/action-sheet",
         "van-toast": "@vant/weapp/toast",
         "van-col": "@vant/weapp/col",
         "van-row": "@vant/weapp/row",
         "van-tabs": "@vant/weapp/tabs",
-        "van-uploader": "@vant/weapp/uploader",
         "van-tab": "@vant/weapp/tab",
         "van-cell-group": "@vant/weapp/cell-group",
         "van-cell": "@vant/weapp/cell",
@@ -52,6 +51,9 @@
         "cell": "/components/cell/cell",
         "list": "/components/list/list",
         "radioBtn": "/components/radioButton/radioButton"
+    },
+    "useExtendedLib": {
+        "weui": true
     },
     "tabBar": {
         "color": "#333333",
