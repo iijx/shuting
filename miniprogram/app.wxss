@@ -7,6 +7,7 @@ page {
 
 .cl_fff { color: #fff; }
 .cl_000 { color: #000; }
+.cl_4a4a4a { color: #4a4a4a; }
 
 .ft_bold { font-weight: bold; }
 

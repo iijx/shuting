@@ -58,7 +58,6 @@ app.createPage({
                 url: '../learn/learn',
             })
         })
-        
     },
     memberBtn() {
         if (this.data.env.platform === 'android') {

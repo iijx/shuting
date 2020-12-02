@@ -15,25 +15,11 @@ const GOODS = [
 module.exports = {
     GOODS: [...GOODS],
     goods: GOODS.filter(i => ['1', '3', '4', '20'].includes(i.memberType)).sort((a, b) => a.rank - b.rank),
-    version: {
-        onlineTime: '两周内',
-        status: '开发中...',
-        body: [
-            '10. 增加真题测验【9/11】',
-            '9. 增加快听默写【8/16】',
-            '8. UI 重新改版...【7/25】',
-            '7. 修复小部分4位数音频【6/12】',
-            '6. 学习数字键盘再调整【5/31】',
-            '5. 小节重新排版【3/21】',
-            '4. 新增随机小节【3/21】',
-            '3. 新增月份与星期小节【3/15】',
-            '2. 新增小数点小节【3/15】',
-            '1. 新增年份小节【3/15】',
-        ]
-    },
+    version: {},
     freeMemberNeedCount: 10,
     // iosBuyPrompt: 'IOS小程序版，暂不支持开通',
-    iosBuyPrompt: '会员专享内容，可至「数听英语」公众号下开通会员',
+    iosBuyPrompt: '会员专享内容，请先开通会员',
+    // iosBuyPrompt: '会员专享内容，可至「数听英语」公众号下开通会员',
     isAppInCheck: false,
     shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2020_11_15.png',
     androidWithDujuRate: 100,

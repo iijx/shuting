@@ -10,6 +10,7 @@ export default {
     cloudEnv: env === 'prod' ? ENV_PROD : ENV_DEV,
 
     cdnDomain: 'https://cdn.amathclass.cn',
+    cdnPathPrefix: '/shuting/eng',
     correctAudioSrc: '/assets/audio/correct.mp3',
     errorAudioSrc: '/assets/audio/error.mp3',
     

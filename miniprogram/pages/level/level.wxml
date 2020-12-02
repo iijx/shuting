@@ -66,7 +66,7 @@
 	<view class="buy-btn" wx:if="{{ !user.isPro }}">
 		<van-button wx:if="{{ env.platform === 'android' || config.isAppInCheck }}" icon="point-gift" type="primary" color="#0d6dd4" bind:click="memberBtn">立刻升级</van-button>
 		<button wx:else class="member-btn" open-type="contact" session-from="member">
-			<van-button icon="point-gift" type="primary" color="#0d6dd4">立刻升级</van-button>
+			<van-button icon="point-gift" type="primary" color="#0d6dd4">回复 6 立刻升级</van-button>
 		</button>
 	</view>
 

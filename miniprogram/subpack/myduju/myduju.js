@@ -42,6 +42,14 @@ app.createPage({
 		else if (status === 'success') text = '挑战完成';
 		this.setData({ shareStatusText: text });
 	},
+	copy() {
+		wx.setClipboardData({
+			data: 'iijx24',
+			success() {
+				wx.showToast({ icon: 'success', title: '已复制微信号' })
+			}
+		})
+	},
 	setLearnStatusText() {
 		let status = this.data.learnStatus;
 		let text = '';

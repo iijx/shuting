@@ -73,15 +73,14 @@ app.createPage({
     _genAudioSrcByNumAndType(answer, type) {
         let path = '';
         const randomIndex = this._getRandomIndex123();
-        if (type === 'number') path = `shuting/eng/number_audio/${answer}_${randomIndex}.mp3`;
-        else if (type === 'phone') path = `shuting/eng/phone_audio/${answer}_${randomIndex}.mp3`;
-        else if(type === 'time') path = `shuting/eng/time_audio/${answer}_${randomIndex}.mp3`;
-        else if (type === 'year') path = `shuting/eng/year_audio/${answer}.mp3`;
-        else if (type === 'point') path = `shuting/eng/point_audio/${answer}_${randomIndex}.mp3`;
-        else if (type === 'week') path = `shuting/eng/week_audio/week_${answer}.mp3`;
-        else if (type === 'month') path = `shuting/eng/month_audio/month_${answer}.mp3`;
-        // console.log(`${Config.cdnDomain}/${path}`)
-        return `${Config.cdnDomain}/${path}`;
+        if (type === 'number') path = `number_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'phone') path = `phone_audio/${answer}_${randomIndex}.mp3`;
+        else if(type === 'time') path = `time_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'year') path = `year_audio/${answer}.mp3`;
+        else if (type === 'point') path = `point_audio/${answer}_${randomIndex}.mp3`;
+        else if (type === 'week') path = `week_audio/week_${answer}.mp3`;
+        else if (type === 'month') path = `month_audio/month_${answer}.mp3`;
+        return `${Config.cdnDomain}${Config.cdnPathPrefix}/${path}`;
     },
     audioPlay() {
         AudioContext.src = this.data.curNumAudioSrc;
@@ -207,9 +206,6 @@ app.createPage({
         })
     },
     nextWordBtn() {
-        this.playResultAudio(true);
-        // AudioContext.play()
-        return;
         if (this.data.spanClass === 'error') {
             this.nextWord();
         }
@@ -262,14 +258,11 @@ app.createPage({
         app.DB.collection('word_error').add({
             data: {
                 word: this.data.answer,
-                name: this.data.feedBackOptions.find(i => i.value === e.detail.value).text
+                name: this.data.feedBackOptions.find(i => i.value === e.detail.value).text,
+                platform: this.data.env.platform
             }
         })
-        if (e.detail.name === '没有声音' && this.data.env.platform === 'ios') {
-            Vant.Toast.success('是否打开静音模式');
-        } else {
-            Vant.Toast.success('感谢您的反馈');
-        }
+        Vant.Toast.success('感谢您的反馈');
         this.switchfeedback();
     },
 })

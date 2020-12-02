@@ -33,7 +33,9 @@ const appData = {
         this.setSystemInfo();
         this._initUserData(opt);
         this.Vant = { Dialog, Toast };
-        
+        if(wx.canIUse('setInnerAudioOption')) {
+            wx.setInnerAudioOption({obeyMuteSwitch: false})
+        }
     },
     _initUserData(opt) {
         UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
@@ -87,8 +89,6 @@ const appData = {
             } else {
                 console.log('今天已经打过点了，无需打点')
             }
-        } else {
-            console.log('learnLog0')
         }
     },
     setSystemInfo: (function() {
@@ -98,7 +98,8 @@ const appData = {
             promise = new Promise((resolve, reject) => {
                 wx.getSystemInfo({
                     success: function (res) {
-                        // res.platform = 'ios'; 'android'
+                        // res.platform = 'ios';
+                        // res.platform = 'android';
                         store.setEnv({
                             platform: Config.env === 'dev' ? 'android' : res.platform // 'devtools' || 'android' || 'ios'
                         })

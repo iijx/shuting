@@ -14,7 +14,7 @@
         <!-- 没有付过费 -->
         <view  wx:if="{{ !user.isPro }}" class="text-center">
             <view wx:if="{{ env.platform === 'android' || config.isAppInCheck }}" class="member-btn" bindtap="memberBtn">查看会员计划</view>
-            <button wx:else class="member-btn" open-type="contact" session-from="member">回复 1 查看会员计划</button>
+            <button wx:else class="member-btn" open-type="contact" session-from="member">回复 6 查看会员计划</button>
         </view>
     
         <!-- <view class="row-operaters"> -->

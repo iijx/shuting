@@ -10,6 +10,10 @@
 .content {
     padding: 26rpx;
 }
+.align-self-start {
+    align-self: flex-start;
+    color: #000;
+}
 .tips {
     text-align: center;
     font-size: 30rpx;
@@ -76,4 +80,16 @@
 }
 .cl_999 {
     color: #999;
+}
+.copy {
+    color: #00C171;
+    text-decoration-line: underline;
+}
+
+.activity-header {
+    /* color: coral; */
+}
+.activity-header .panel-index--van-panel__header-value {
+    color: #F20D0D;
+    font-weight: bold;
 }

@@ -24,16 +24,14 @@
         <van-panel title="挑战二：分享朋友圈" use-footer-slot>
             <view class="content">
                 <view class="upload-wrap">
-                    <image class="shareImg" src="https://cdn.amathclass.cn/shuting/common/wechat_shuting.jpeg" mode="widthFix"/>
+                    <image class="shareImg" show-menu-by-longpress src="https://cdn.amathclass.cn/shuting/common/wechat_shuting.jpeg" mode="widthFix"/>
                 </view>
-                
-                <view class="flex-center cl_999 ft_13">长按二维码，添加“数听小助手”微信</view>
-                <view class="flex-center cl_999 ft_13">（仅用于抽查分享朋友圈）</view>
+                <view class="flex-center cl_999 ft_13">长按可保存二维码或<text bindtap="copy" class="copy">复制微信号</text></view>
             </view>
             <view slot="footer" class="footer">
                 <view class="note">
-                    <!-- <view class="note-item text-center">右上角分享哦</view> -->
-                    <view class="note-item text-center"></view>
+                    <view class="note-item text-center">分享后，记得添加“数听小助手”微信哦！</view>
+                    <view class="note-item text-center">（仅用于抽查分享朋友圈）</view>
                 </view>
             </view>
         </van-panel>
@@ -45,25 +43,20 @@
             refundStatus === 'success' ? '已全额返还，记得查收噢～' : ''
         }}</van-button>
         <view wx:if="{{ refundStatus === 'checking' }}" class="ft_14 cl_999 flex-center mt_12">（返现统一处理时间：每天晚6:00 ~ 8:00）</view>
-
-        <!-- <view class="share-sheet-wrap">
-            <view class="mask {{ showShare ? 'toggle-show' : '' }}" bind:tap="onCloseShare"></view>
-            <view class="share-sheet {{ showShare ? 'toggle-show' : ''}}">
-                <view class="flex share-main">
-                    <view class="flex1 flex-col-center">
-                        <button open-type="share" class="no-wx-btn-style">
-                            <image class="share-icon" src="http://cdn.iijx.site/img/c18yz.png" />
-                            <view class="share-text">发送给朋友</view>
-                        </button>
-                    </view>
-                    <view class="flex1 flex-col-center" bindtap="toTimeline" >
-                        <image class="share-icon" src="http://cdn.iijx.site/img/z8wm7.png" />
-                        <view class="share-text">分享朋友圈</view>
-                    </view>
+        
+        <view class="h_20"></view>
+        <van-panel title="额外特别活动" status="点赞送永久兑换码" header-class="activity-header">
+            <view class="content cl_999 pb_20">
+                <view class="flex ft_14">
+                    <view class="flex-hd cl_000">规则：</view>
+                    <view class="flex1 cl_4a4a4a">若好友点赞了您的朋友圈，第5位、第8位、第15位点赞者可获得永久会员兑换码。</view>
                 </view>
-                <view class="cancel flex-center" hover-class="opa_6" bind:tap="onCloseShare">取消</view>
+                <view class="flex ft_14 mt_10">
+                    <view class="flex-hd cl_000">领取：</view>
+                    <view class="flex1 cl_4a4a4a">凭点赞截图，向客服换取兑换码，由您亲自赠送给为您点赞的幸运获奖好友。</view>
+                </view>
             </view>
-        </view> -->
+        </van-panel>
     </view>
 
     <view wx:else class="container">
