@@ -1,10 +1,10 @@
-// pages/myduju/myduju.js
 const app = getApp();
 const { Util, Vant, Store } = app;
 
 app.createPage({
 	data: {
 		env: { isSingleMode: false },
+		config: { likeRule: [] },
 		user: new app.Models.User({}),
 		fileList: [],
 		sharedImg: '',
@@ -156,7 +156,7 @@ app.createPage({
 		if (this.data.refundStatus === 'unstart') {
 		// 1. check 
 		if (this.data.learnStatus === 'fail') wx.showToast({ icon: 'none', title: '笃局失败' })
-		else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战一' })
+		else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战' })
 
 		// else if (this.data.shareStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战二' })
 		// else if (this.data.shareStatus === 'checking') wx.showToast({ icon: 'none', title: '挑战二审核中' })

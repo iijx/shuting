@@ -27,7 +27,6 @@
         "navigationBarTitleText": "数听英语",
         "navigationBarTextStyle": "black"
     },
-    "navigateToMiniProgramAppIdList": ["wx959c8c1fb2d877b5"],
     "usingComponents": {
         "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet",
         "van-circle": "@vant/weapp/circle",

@@ -32,7 +32,7 @@
 		<view wx:if="{{ curMemberMode === 'normal' }}" class="note-title mt_40">一次搞定数字听力问题，考试不再丢分！</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="note-item-title">笃局全返说明：</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">会员期为半年(180天)；</view>
-		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，连续学习7天不中断，并分享一次朋友圈，会员费即可全额返还。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，分享一次至朋友圈(当天)，并连续学习7天不中断，会员费即可全额返还。</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="duju-rule" bindtap="detailRule"><text>查看详细说明</text></view>
 		<view class="note-item-title mb_50">会员权限：</view>
 		<view class="member-note-item">【专项训练】解锁全部单元，各个击破！</view>
@@ -63,7 +63,7 @@
 				<view class="box-item shadow-down-2">
 					<view class="box-item-title mb14">活动说明</view>
 					<view class="q">Q: 真的全额返会员费么？</view>
-					<view class="a">答: 活动真实有效，购买当天开始，连续学习7天不中断，并分享一次至朋友圈，会员费原路全额返还。</view>
+					<view class="a">答: 活动真实有效，购买当天分享一次至朋友圈，并连续学习7天不中断，会员费原路全额返还。</view>
 					<view class="q">Q: 系统如何判定是否学习？</view>
 					<view class="a">答: 当天进入一次小程序，系统即视为当天已学习。</view>
 					<view class="q">Q: 会员时长有多久？</view>

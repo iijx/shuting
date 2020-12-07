@@ -16,21 +16,6 @@
             <view wx:if="{{ env.platform === 'android' || config.isAppInCheck }}" class="member-btn" bindtap="memberBtn">查看会员计划</view>
             <button wx:else class="member-btn" open-type="contact" session-from="member">回复 6 查看会员计划</button>
         </view>
-    
-        <!-- <view class="row-operaters"> -->
-            <!-- <view class="row-item row-item1" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/subpack/version/version">
-                <van-icon name="down" color="#e0475a" size="26px"/>
-                <view class="row-item-text">版本预告</view>
-            </view>
-            <view class="row-item" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/subpack/activity/activity">
-                <van-icon name="point-gift-o" color="#e0475a" size="26px"/>
-                <view class="row-item-text">免费vip</view>
-            </view> -->
-            <!-- <view class="row-item row-item3" hover-class="hover" hover-stay-time="100" bindtap="link" data-path="/subpack/exchange/exchange">
-                <van-icon name="gem-o" color="#e0475a" size="26px"/>
-                <view class="row-item-text">会员兑换码</view>
-            </view> -->
-        <!-- </view> -->
 
         <view wx:if="{{ user.openid === 'oH3iI5LMTT3KdVa6KQV4QHa8ijhM' }}" class="operators">
             <view hover-class="hover" hover-stay-time="100">
@@ -91,7 +76,18 @@
                 </cell>
             </view>
         </view>
-        
+        <view class="h15"></view>
+        <van-divider dashed hairline contentPosition="center" borderColor="rgba(0, 0, 0, .1)">更多学习资源</van-divider>
+        <view class="operators">
+            <view hover-class="hover" hover-stay-time="100">
+                <cell custom-class="operator-cell" bindtap="toMiniP" data-path="shuting_jap">
+                    <view slot="hd" class="flex-center">
+                        <van-icon name="gift-o" color="#e0475a" size="25px"/>
+                    </view>
+                    <view slot="bd" class="operator-cell-body">数听 · 日语版</view>
+                </cell>
+            </view>
+        </view>
         
     </view>
 

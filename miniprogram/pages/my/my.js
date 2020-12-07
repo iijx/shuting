@@ -105,6 +105,18 @@ app.createPage({
     },
     onUnload: function () {
     },
+    toMiniP(e) {
+        const path = e.currentTarget.dataset.path;
+        if (path === 'shuting_eng') {
+            wx.navigateToMiniProgram({
+                appId: 'wx11a23be8fd1b03f3'
+            })
+        } else if(path === 'shuting_jap'){
+            wx.navigateToMiniProgram({
+                appId: 'wx08b74a4a56324394'
+            })
+        }
+    },
     onPullDownRefresh: function () {
         UniApi.appCloud('user', 'get').then(res => {
             Store.data.user = res;

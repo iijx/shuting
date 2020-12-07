@@ -14,14 +14,19 @@ const GOODS = [
 
 module.exports = {
     GOODS: [...GOODS],
-    goods: GOODS.filter(i => ['1', '3', '4', '20'].includes(i.memberType)).sort((a, b) => a.rank - b.rank),
+    goods: GOODS.filter(i => ['3', '20'].includes(i.memberType)).sort((a, b) => a.rank - b.rank),
     version: {},
     freeMemberNeedCount: 10,
-    // iosBuyPrompt: 'IOS小程序版，暂不支持开通',
-    iosBuyPrompt: '会员专享内容，请先开通会员',
+    iosBuyPrompt: 'IOS小程序版，暂不支持开通',
+    // iosBuyPrompt: '会员专享内容，请先开通会员',
     // iosBuyPrompt: '会员专享内容，可至「数听英语」公众号下开通会员',
-    isAppInCheck: false,
+    isAppInCheck: true,
     shareTimelineBaseImg: 'https://cdnword.iijx.site/assets/imgs/shuting/2020_11_15.png',
     androidWithDujuRate: 100,
-    dujuRateWhiteList: []
+    dujuRateWhiteList: [],
+    likeRule: [
+        { title: '活动规则', body: '满3位好友点赞了您的朋友圈，可升级为永久会员（不影响返现）。'},
+        { title: '领取方式', body: '凭点赞截图，找客服升级。'},
+        { title: '活动时间', body: '购买笃局会员后7天内。'},
+    ]
 }
