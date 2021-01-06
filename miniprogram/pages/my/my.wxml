@@ -17,13 +17,24 @@
             <button wx:else class="member-btn" open-type="contact" session-from="member">回复 6 查看会员计划</button>
         </view>
 
-        <view wx:if="{{ user.openid === 'oH3iI5LMTT3KdVa6KQV4QHa8ijhM' }}" class="operators">
+        <view wx:if="{{ user.openid === 'oH3iI5LMTT3KdVa6KQV4QHa8ijhM' || user.openid === 'oH3iI5NU9XZO4HFeRDVRQ5N2aHjs' }}" class="operators">
             <view hover-class="hover" hover-stay-time="100">
                 <cell custom-class="operator-cell"  bind:tap="toChecking">
                     <view slot="hd" class="flex-center">
                         <van-icon name="bulb-o" color="#e0475a" size="26px"/>
                     </view>
                     <view slot="bd" class="operator-cell-body">返现审核</view>
+                </cell>
+            </view>
+        </view>
+
+        <view wx:if="{{ user.openid === 'oH3iI5LMTT3KdVa6KQV4QHa8ijhM' || user.openid === 'oH3iI5NU9XZO4HFeRDVRQ5N2aHjs' }}" class="operators">
+            <view hover-class="hover" hover-stay-time="100">
+                <cell custom-class="operator-cell"  bind:tap="toLongPro">
+                    <view slot="hd" class="flex-center">
+                        <van-icon name="bulb-o" color="#e0475a" size="26px"/>
+                    </view>
+                    <view slot="bd" class="operator-cell-body">设置永久时长</view>
                 </cell>
             </view>
         </view>
@@ -78,13 +89,13 @@
         </view>
         <view class="h15"></view>
         <van-divider dashed hairline contentPosition="center" borderColor="rgba(0, 0, 0, .1)">更多学习资源</van-divider>
-        <view class="operators">
-            <view hover-class="hover" hover-stay-time="100">
-                <cell custom-class="operator-cell" bindtap="toMiniP" data-path="shuting_jap">
+        <view class="operators" wx:if="{{ config.moreMiniP.length > 0 }}">
+            <view hover-class="hover" hover-stay-time="100" wx:for="{{ config.moreMiniP }}" wx:key="appid">
+                <cell custom-class="operator-cell with-border" bindtap="toMiniP" data-appid="{{ item.appid }}">
                     <view slot="hd" class="flex-center">
                         <van-icon name="gift-o" color="#e0475a" size="25px"/>
                     </view>
-                    <view slot="bd" class="operator-cell-body">数听 · 日语版</view>
+                    <view slot="bd" class="operator-cell-body">{{item.title}}</view>
                 </cell>
             </view>
         </view>

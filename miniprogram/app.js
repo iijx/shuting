@@ -56,6 +56,8 @@ const appData = {
                 store.data.config.shareTimelineBaseImg = res.shareTimelineBaseImg || store.data.config.shareTimelineBaseImg;
                 store.data.config.androidWithDujuRate = res.androidWithDujuRate || 0;
                 store.data.config.likeRule = res.likeRule || [];
+                store.data.config.moreMiniP = res.moreMiniP || [];
+
                 store.update();
             }
         });

@@ -75,5 +75,17 @@ module.exports = async function(event, context) {
                 updateAt: new Date(),
             }
         })
+    } else if (method === 'setLongMember') {
+        const { needSetOpenid } = params;
+        let user = await getUser(needSetOpenid);
+        const longTime = 365 * 100;
+        let proEndDate = Date.now() + longTime * 24 * 60 * 60 * 1000;
+        const res = await db.collection('users').doc(user._id).update({
+            data: {
+                isPro: true,
+                proEndDate,
+            }
+        })
+        return { success: true, ...res}
     }
 }

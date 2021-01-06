@@ -1,0 +1,12 @@
+<!--pages/checking/checking.wxml-->
+<view class="container">
+    <view wx:for="{{ list }}" wx:key="index" style="margin-top: 20rpx">
+        <van-panel title="{{ item.time_end }}" status="memberType: {{ item.memberType }}" use-footer-slot>
+            <van-button size="small" type="primary" data-item="{{ item }}" bind:click="lookUser">查看用户</van-button>
+            <view style="padding: 20px">{{ item.openid }}</view>
+            <view slot="footer" class="mt_10 mb_10 flex-right">
+                <van-button size="small" type="primary" data-item="{{ item }}" bind:click="ok">设置永久时长</van-button>
+            </view>
+        </van-panel>
+    </view>
+</view>

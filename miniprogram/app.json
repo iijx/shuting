@@ -16,7 +16,8 @@
             "pages": [
                 "myduju/myduju",
                 "checking/checking",
-                "exchange/exchange"
+                "exchange/exchange",
+                "longPro/longPro"
             ]
         }
     ],

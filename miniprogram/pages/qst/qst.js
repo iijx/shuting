@@ -55,8 +55,10 @@ app.createPage({
         };
     })(),
     _genAudioSrcItem(item) {
+
         let type = item.type;
         let answer = item.word;
+        if (type === 'time') answer = answer.replace(":", ".");
         let path = "";
         const randomIndex = this._getRandomIndex123();
         if (type === "number") path = `shuting/eng/number_audio/${answer}_${randomIndex}.mp3`;
@@ -87,6 +89,7 @@ app.createPage({
                     } else return;
                 }
                 AudioContext.src = index === -1 ? `${Config.cdnDomain}/shuting/common/ding.mp3` : that._genAudioSrcItem(that.data.arr[index]);
+                console.log(index === -1 ? `${Config.cdnDomain}/shuting/common/ding.mp3` : that._genAudioSrcItem(that.data.arr[index]));
                 AudioContext.playbackRate = Number(that.data.speed);
                 AudioContext.play();
                 index += 1;

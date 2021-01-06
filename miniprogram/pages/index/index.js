@@ -21,15 +21,15 @@ app.createPage({
         const monthsLabel = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const monthIndex = (new Date()).getMonth();
         this.setData({
-        curWeek: Util.getWeekByDate(new Date()).map(i => ({
-            num: ('000' + String(i.getDate())).slice(-2),
-            isToday: Util.isToday(i)
-        })),
-        curMonth: {
-            label: monthsLabel[monthIndex],
-            index: monthIndex,
-            year: new Date().getFullYear()
-        }
+            curWeek: Util.getWeekByDate(new Date()).map(i => ({
+                num: ('000' + String(i.getDate())).slice(-2),
+                isToday: Util.isToday(i)
+            })),
+            curMonth: {
+                label: monthsLabel[monthIndex],
+                index: monthIndex,
+                year: new Date().getFullYear()
+            }
         })
     },
 

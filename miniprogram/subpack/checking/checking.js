@@ -37,7 +37,7 @@ app.createPage({
 		}).then(res => {
 			console.log('res', res)
 			if (res.success) {
-				WebGLTexture.showModal({ title: '退款成功', content: '退款成', showCancel: false, })
+				wx.showModal({ title: '退款成功', content: '退款成功', showCancel: false, })
 			}
 		})
 	},

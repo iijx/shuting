@@ -41,6 +41,7 @@ app.createPage({
             UniApi.appCloud('user', 'get').then(res => {
                 app.Store.data.user = res;
                 app.Store.update();
+                this.updateComputed()
             });
         }
     },
@@ -59,6 +60,11 @@ app.createPage({
     toChecking() {
         wx.navigateTo({
             url: '../../subpack/checking/checking'
+        })
+    },
+    toLongPro() {
+        wx.navigateTo({
+            url: '../../subpack/longPro/longPro'
         })
     },
     memberBtn() {
@@ -106,16 +112,10 @@ app.createPage({
     onUnload: function () {
     },
     toMiniP(e) {
-        const path = e.currentTarget.dataset.path;
-        if (path === 'shuting_eng') {
-            wx.navigateToMiniProgram({
-                appId: 'wx11a23be8fd1b03f3'
-            })
-        } else if(path === 'shuting_jap'){
-            wx.navigateToMiniProgram({
-                appId: 'wx08b74a4a56324394'
-            })
-        }
+        const appid = e.currentTarget.dataset.appid;
+        wx.navigateToMiniProgram({
+            appId: appid
+        })
     },
     onPullDownRefresh: function () {
         UniApi.appCloud('user', 'get').then(res => {
