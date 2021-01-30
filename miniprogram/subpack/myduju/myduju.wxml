@@ -1,21 +1,21 @@
 <view wx:if="{{!env.isSingleMode}}" >
     <view wx:if="{{ user.memberType + '' === '20' }}" class="container">
-        <van-panel title="挑战一：购买当天分享朋友圈" use-footer-slot>
+        <van-panel title="挑战一：分享朋友圈(点击右上角三个点即可分享)" use-footer-slot>
             <view class="content">
+                <view class="note">
+                    <view class="note-item text-center">记得添加“数听小助手”微信，发送分享截图哦！</view>
+                </view>
                 <view class="upload-wrap">
                     <image class="shareImg" show-menu-by-longpress src="https://cdn.amathclass.cn/shuting/common/wechat_shuting.jpeg" mode="widthFix"/>
                 </view>
                 <view class="flex-center cl_999 ft_13">长按可保存二维码或<text bindtap="copy" class="copy">复制微信号</text></view>
+                    <view class="note-item text-center">（仅用于审核分享朋友圈）</view>
             </view>
             <view slot="footer" class="footer">
-                <view class="note">
-                    <view class="note-item text-center">分享后，添加“数听小助手”微信，发送截图即可哦！</view>
-                    <view class="note-item text-center">（仅用于抽查分享朋友圈）</view>
-                </view>
             </view>
         </van-panel>
         <view class="h_10"></view>
-        <van-panel title="挑战二：连学7天不中断" status="{{ learnStatusText }}">
+        <van-panel title="挑战二：连学7天不中断">
             <view class="content">
                 <view class="duju-week-wrap">
                     <view class="duju-day flex-center {{ item.isCompleted ? 'active' : '' }}" wx:for="{{ dujuWeek }}" wx:key="index">
@@ -39,12 +39,12 @@
             learnStatus === 'fail' ? '笃局挑战失败' :
             refundStatus === 'unstart' ? '立即全额返现' : 
             refundStatus === 'checking' ? '返现处理中，请耐心等待' :
-            refundStatus === 'success' ? '已全额返还，记得查收噢～' : ''
+            refundStatus === 'success' ? '已获得奖学金' : ''
         }}</van-button>
-        <view wx:if="{{ refundStatus === 'checking' }}" class="ft_14 cl_999 flex-center mt_12">（返现统一处理时间：每天晚6:00 ~ 8:00）</view>
+        <!-- <view wx:if="{{ refundStatus === 'checking' }}" class="ft_14 cl_999 flex-center mt_12">（返现统一处理时间：每天晚6:00 ~ 8:00）</view> -->
         
         <view class="h_20"></view>
-        <van-panel wx:if="{{ config.likeRule.length > 0}}" title="额外限时特别活动" status="点赞送永久兑换码" header-class="activity-header">
+        <van-panel wx:if="{{ config.likeRule.length > 0}}" title="额外限时特别活动" status="点赞送永久会员" header-class="activity-header">
             <view class="content cl_999 pb_20">
                 <view class="flex ft_14 mt_10" wx:for="{{ config.likeRule }}" wx:key="index">
                     <view class="flex-hd cl_000">{{ item.title }}：</view>
@@ -57,6 +57,13 @@
     <view wx:else class="container">
         <view>暂无您的会员信息</view>
     </view>
+
+    <van-dialog use-slot title="恭喜，完成笃局挑战" show="{{ isShowDialog }}">
+        <view class="mt_10 mb_10 flex-col-center">
+            <view class="dialog-note">获得奖学金20元，找她领取👇👇</view>
+            <image class="shareImg" show-menu-by-longpress src="https://cdn.amathclass.cn/shuting/common/wechat_shuting.jpeg" mode="widthFix"/>
+        </view>
+    </van-dialog>
 
 </view>
 

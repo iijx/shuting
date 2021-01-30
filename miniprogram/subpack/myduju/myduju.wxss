@@ -93,3 +93,6 @@
     color: #F20D0D;
     font-weight: bold;
 }
+.dialog-note {
+    color: #ee0a24;
+}

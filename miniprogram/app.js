@@ -39,6 +39,7 @@ const appData = {
     },
     _initUserData(opt) {
         UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
+            wx.setStorage({ key: 'user', data: JSON.stringify(new Models.User(res))})
             store.data.user = res;
             store.update();
             this.learnLog();

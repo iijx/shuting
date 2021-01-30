@@ -146,7 +146,9 @@ app.createPage({
 	},
 
 	nextQ() {
-		if (this.data.index <= this.data.papelArr.length) {
+		// console.log(this.data.index, this.data.papelArr.length);
+		// if (this.data.index <= this.data.papelArr.length) {
+		if (this.data.index < 29) {
 			if (this.data.index >= 2 && !this.data.user.isPro) {
 				this.showMember();
 			} else {

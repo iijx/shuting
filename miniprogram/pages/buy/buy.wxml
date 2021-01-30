@@ -22,7 +22,7 @@
 		</view>
 		<view wx:if="{{ isShowBuyDuju && env.platform === 'android' }}" class="member {{ curMemberMode === 'duju' ? 'active' : '' }}" bindtap="setDujuMembetMode">
 			<view class="member-tag">笃局会员 Pro</view>
-			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ dujuPriceStr }}(全返)</view>
+			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ dujuPriceStr }}(返现金20元)</view>
 		</view>
 	</view>
 
@@ -30,9 +30,9 @@
 	<view class="member-note">
 		<view class="h_16"></view>
 		<view wx:if="{{ curMemberMode === 'normal' }}" class="note-title mt_40">一次搞定数字听力问题，考试不再丢分！</view>
-		<view wx:if="{{ curMemberMode === 'duju' }}" class="note-item-title">笃局全返说明：</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="note-item-title">说明：</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">会员期为半年(180天)；</view>
-		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">购买当天开始，分享一次至朋友圈(当天)，并连续学习7天不中断，会员费即可全额返还。</view>
+		<view wx:if="{{ curMemberMode === 'duju' }}" class="member-note-item">分享小程序至朋友圈一次，并连续学习7天不中断，即可获得20元奖学金。</view>
 		<view wx:if="{{ curMemberMode === 'duju' }}" class="duju-rule" bindtap="detailRule"><text>查看详细说明</text></view>
 		<view class="note-item-title mb_50">会员权限：</view>
 		<view class="member-note-item">【专项训练】解锁全部单元，各个击破！</view>
@@ -47,7 +47,7 @@
 	<view wx:else class="pay-submit-bar">
 		<view class="buy-btn" bindtap="onSubmit">
 			<view class="ft_15">立即开通</view>
-			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员·全返' : '永久会员' }}）</view>
+			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
 		</view>
 		<view class="ft_12 text-center mt_12" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属正常流程，可放心支付</view>
 	</view>
@@ -62,14 +62,14 @@
             <scroll-view class="share-dialog" scroll-y>
 				<view class="box-item shadow-down-2">
 					<view class="box-item-title mb14">活动说明</view>
-					<view class="q">Q: 真的全额返会员费么？</view>
-					<view class="a">答: 活动真实有效，购买当天分享一次至朋友圈，并连续学习7天不中断，会员费原路全额返还。</view>
+					<view class="q">Q: 真的可以获得20元奖学金么？</view>
+					<view class="a">答: 活动真实有效，购买当天分享小程序至朋友圈（分享一次即可，后续无需分享），并连续学习7天不中断，即可获得现金奖学金20元。</view>
 					<view class="q">Q: 系统如何判定是否学习？</view>
 					<view class="a">答: 当天进入一次小程序，系统即视为当天已学习。</view>
 					<view class="q">Q: 会员时长有多久？</view>
-					<view class="a">答: 会员时长为半年(180天)，与挑战是否成功没有关系。</view>
+					<view class="a">答: 会员时长为半年，与笃局是否成功没有关系。</view>
 					<view class="q">Q: 我应该选择哪种会员？</view>
-					<view class="a">答: 除了可以返现，笃局会员的会员期只有半年，如果是想短期快速提升下，或对价格非常敏感的同学，建议“笃局会员”。而如果想以后随时练练，则更推荐“永久会员”。</view>
+					<view class="a">答: 除了可以获得奖学金，笃局会员的会员期为半年，如果是想短期快速提升下，或对价格非常敏感的同学，建议“笃局会员”。而如果想以后随时练练，则更推荐“永久会员”。</view>
 				</view>
 
 				<view class="box-item shadow-down-2">
@@ -83,7 +83,7 @@
 										<view class="nickname">{{ item.nickname }}</view>
 										<view class="num20" wx:if="{{ env.platform === 'android' }}">+20元</view>
 									</view>
-									<view class="content" wx:if="{{ env.platform === 'android' }}">完成7天学习挑战，并分享朋友圈，已全额返还20元！</view>
+									<view class="content" wx:if="{{ env.platform === 'android' }}">完成7天学习挑战，已获得奖学金20元！</view>
 								</view>
 							</view>
 						</view>

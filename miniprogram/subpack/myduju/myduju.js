@@ -19,10 +19,11 @@ app.createPage({
 		refundStatus: 'unstart',
 
 		showShare: false,
-		shareOptions: [
-			{ name: '分享至群聊', openType: 'share' },
-			{ name: '分享到朋友圈', icon: 'http://cdn.iijx.site/img/ngts4.png' },
-		]
+		isShowDialog: false,
+		// shareOptions: [
+		// 	{ name: '分享至群聊', openType: 'share' },
+		// 	{ name: '分享到朋友圈', icon: 'http://cdn.iijx.site/img/ngts4.png' },
+		// ]
 	},
 	uniqueDateArray(arr = []) {
 		let res = []
@@ -68,7 +69,6 @@ app.createPage({
 		}
 	},
 	onLoad: function (options) {
-		console.log('this.data.env.isSingleMode', this.data.env.isSingleMode)
 		if (this.data.env.isSingleMode) return;
 		app.learnLog();
 		app.UniApi.appCloud('duju', 'get').then(res => {
@@ -103,7 +103,6 @@ app.createPage({
 			this.setLearnStatusText();
 			this.setShareStatusText();
 			this.setLearnTip()
-			console.log('duju', duju)
 		} else {
 			wx.showModal({
 				title: '提示',
@@ -154,28 +153,27 @@ app.createPage({
 	},
 	refundBtn: Util.throttle(function() {
 		if (this.data.refundStatus === 'unstart') {
-		// 1. check 
-		if (this.data.learnStatus === 'fail') wx.showToast({ icon: 'none', title: '笃局失败' })
-		else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战' })
-
-		// else if (this.data.shareStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战二' })
-		// else if (this.data.shareStatus === 'checking') wx.showToast({ icon: 'none', title: '挑战二审核中' })
-
-		else {
-			app.DB.collection('duju').where({ openid: this.data.user.openid }).update({
-				data: {
-					refundStatus: 'checking'
-				}
-			})
-			wx.showToast({ icon: 'success', title: '已提交申请'})
-			this.setData({ refundStatus: 'checking' })
-		}
+			// 1. check 
+			if (this.data.learnStatus === 'fail') wx.showToast({ icon: 'none', title: '笃局失败' })
+			else if (this.data.learnStatus === 'pending') wx.showToast({ icon: 'none', title: '请先完成挑战' })
+			else {
+				this.setData({ isShowDialog: true })
+			}
+			// else {
+			// 	app.DB.collection('duju').where({ openid: this.data.user.openid }).update({
+			// 		data: {
+			// 			refundStatus: 'checking'
+			// 		}
+			// 	})
+			// 	wx.showToast({ icon: 'success', title: '已提交申请'})
+			// 	this.setData({ refundStatus: 'checking' })
+			// }
 		}
 		else if (this.data.refundStatus === 'checking') {
 			wx.showToast({ icon: 'none', title: '审核中'})
 		}
 		else if (this.data.refundStatus === 'success') {
-			wx.showToast({ icon: 'success', title: '已返还'})
+			wx.showToast({ icon: 'success', title: '奖学金已到账'})
 		}
 	}, 1000),
 	openShare() {

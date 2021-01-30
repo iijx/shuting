@@ -28,7 +28,7 @@ exports.main = async (event, context) => {
     }
     // text
     if (event.MsgType === 'text') {
-        if (event.Content.indexOf('会员') >= 0 || event.Content.indexOf('1') >= 0 || event.Content.indexOf('6') >= 0 || event.Content.indexOf('升级') >= 0 || event.Content.indexOf('vip') >= 0 || event.Content.indexOf('Vip') >= 0 || event.Content.indexOf('VIP' || event.Content.indexOf('解锁') >= 0) >= 0) {
+        if (event.Content.indexOf('开通') >= 0 || event.Content.indexOf('会员') >= 0 || event.Content.indexOf('1') >= 0 || event.Content.indexOf('6') >= 0 || event.Content.indexOf('升级') >= 0 || event.Content.indexOf('vip') >= 0 || event.Content.indexOf('Vip') >= 0 || event.Content.indexOf('VIP' || event.Content.indexOf('解锁') >= 0) >= 0) {
             await sendMember(event.FromUserName);
         }
         else {

@@ -18,7 +18,7 @@
         "checkSiteMap": true,
         "uploadWithSourceMap": true,
         "compileHotReLoad": false,
-        "useMultiFrameRuntime": false,
+        "useMultiFrameRuntime": true,
         "useApiHook": true,
         "babelSetting": {
             "ignore": [],
@@ -32,7 +32,8 @@
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true
+        "minifyWXSS": true,
+        "useApiHostProcess": false
     },
     "appid": "wx11a23be8fd1b03f3",
     "projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",

@@ -19,6 +19,13 @@
                 "exchange/exchange",
                 "longPro/longPro"
             ]
+        },
+        {
+            "root": "unusepack",
+            "pages": [
+                "unuse/unuse",
+                "unuse1/unuse1"
+            ]
         }
     ],
     "window": {

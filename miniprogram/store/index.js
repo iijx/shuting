@@ -5,13 +5,15 @@ const getScoreByCNum = cNum => {
     return Math.min(10, cNum) * 5 + Math.max(0, cNum - 10) * 10
 }
 
+
 const store = {
     data: {
         env: {
             platform: '',
             isSingleMode: false, // 是否是单页模式（即从朋友圈进入
         },
-        user: new Models.User({}),
+        user: new Models.User(JSON.parse(wx.getStorageSync('user') || '{}')),
+        // user: new Models.User({}),
         config: {
             iosBuyPrompt: 'IOS小程序版，暂不支持开通会员功能',
             isAppInCheck: false,
