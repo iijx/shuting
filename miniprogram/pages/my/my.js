@@ -45,6 +45,11 @@ app.createPage({
             });
         }
     },
+    memberDouble() {
+        wx.navigateTo({
+            url: '../memberDouble/memberDouble',
+        })
+    },
     updateComputed() {
         if (this.data.user.proEndDate) {
             this.setData({

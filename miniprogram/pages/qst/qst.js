@@ -182,7 +182,6 @@ app.createPage({
         answer = Util.randomOnePhone(len)();
         } else if (type === "time") {
         answer = Util.randomOneTime();
-        console.log("time answer", answer);
         answer = answer.replace(".", ":");
         } else if (type === "year") {
         answer = Util.randomOneYear();
@@ -237,10 +236,15 @@ app.createPage({
                 word: this._genOneAnswer(i),
             };
         });
-
+        console.log(arr);
+        // 生成10个item
         for (let i = arr.length; i < 10; i++) {
             let type = allTypes[Math.floor(Math.random() * allTypes.length + 1) - 1];
-            arr.push({ type, word: this._genOneAnswer(type) });
+            let word = this._genOneAnswer(type)
+            if (arr.findIndex(iii => iii.type === type && word === iii.word) >= 0) {
+                word = this._genOneAnswer(type)
+            }
+            arr.push({ type, word });
         }
 
         this.setData({ arr });

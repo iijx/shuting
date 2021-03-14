@@ -51,6 +51,14 @@
                     <view slot="hd">年份</view>
                     <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#00aac4" shape="square" name="year" />
                 </cell>
+                <cell custom-class="cell-item border">
+                    <view slot="hd">月份</view>
+                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#00aac4" shape="square" name="month" />
+                </cell>
+                <cell custom-class="cell-item border">
+                    <view slot="hd">星期</view>
+                    <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#00aac4" shape="square" name="week" />
+                </cell>
                 <cell custom-class="cell-item">
                     <view slot="hd">时间</view>
                     <van-checkbox slot="ft" disabled="{{ !user.isPro }}" checked-color="#00aac4" shape="square" name="time" />

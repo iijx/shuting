@@ -38,6 +38,7 @@ const appData = {
         }
     },
     _initUserData(opt) {
+        wx.showLoading();
         UniApi.appCloud('user', 'get', { fromOpenid: opt.query.fromOpenid || '', openid: opt.query.openid || '' }).then(res => {
             wx.setStorage({ key: 'user', data: JSON.stringify(new Models.User(res))})
             store.data.user = res;
@@ -48,6 +49,7 @@ const appData = {
             }
         })
         UniApi.appCloud('config', 'get').then(res => {
+            console.log([...res.goods])
             if (res.success) {
                 store.data.goods = [...res.goods];
                 store.data.config.version = {...res.version};
@@ -67,6 +69,7 @@ const appData = {
             UniApi.cloud('local', { model: 'lesson' }),
             UniApi.cloud('local', { model: 'learnInfo' })
         ]).then(res => {
+            wx.hideLoading();
             store.data.rawLesson = [...res[0]];
             store.data.unitMap = res[0].reduce((ac, cur) => {
                 return cur.unitList.reduce((a, c) => {
@@ -77,6 +80,9 @@ const appData = {
             
             store.data.learnRecords = [ ...res[1].learnRecords ];
             store.setCurLearn(res[1].curLearnUnitId)
+        }).catch(err => {
+            wx.hideLoading();
+            this._initUserData(opt);
         })
     },
     // 学习打点日志

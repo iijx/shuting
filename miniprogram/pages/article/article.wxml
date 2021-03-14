@@ -103,7 +103,7 @@
             <view class="content">
                 <view class="h2">年份</view>
                 <view class="p">年份有两种读法，以<text class="code">2019</text>为例：</view>
-                <view><text class="strong">① 两位一读:</text> 读成 <text class="code">twenty eighteen</text></view>
+                <view><text class="strong">① 两位一读:</text> 读成 <text class="code">twenty nighteen</text></view>
                 <view><text class="strong">② 当数字读:</text> 读成<text class="code">two thousand and nighteen</text></view>
                 <view class="h2">月份</view>
                 <list data="{{ monthWords }}"></list>

@@ -46,7 +46,7 @@ export default [
 {
     id: 3019,
     q: "",
-    o: ["A.At Gate 2.", "B.At Gate 5.", "C.At Gate 15.", "D.At Gate 30."],
+    o: ["A. At Gate 2.", "B. At Gate 5.", "C. At Gate 15.", "D. At Gate 30."],
     answer: 2,
     audio: 3019,
     origin: [
@@ -60,7 +60,7 @@ export default [
 {
     id: 3020,
     q: "",
-    o: ["A.100 pounds.", "B. 200 pounds.", "C. 700 pounds.", "D. 600 pounds. "],
+    o: ["A. 100 pounds.", "B. 200 pounds.", "C. 700 pounds.", "D. 600 pounds. "],
     answer: 3,
     audio: 3020,
     origin: [

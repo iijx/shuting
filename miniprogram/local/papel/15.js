@@ -18,7 +18,7 @@ export default [
 {
     id: 3012,
     q: 'When will the conference begin?',
-    a: ["A. At 7:30", "B. At 8:30", "C. At 9:00"],
+    o: ["A. At 7:30", "B. At 8:30", "C. At 9:00"],
     answer: 3,
     audio: 3012,
     orgin: [
