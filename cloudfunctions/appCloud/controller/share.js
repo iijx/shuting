@@ -38,9 +38,10 @@ module.exports = async function(event, context) {
                 console.log(res);
             })
         
-        let proEndDate = Math.max(Date.now(), curUser.proEndDate) + Utils.getMemberDayByType(curUser.memberType) * 24 * 60 * 60 * 1000;
+        let proEndDate = Math.max(Date.now(), curUser.proEndDate) + 36500 * 24 * 60 * 60 * 1000;
         await db.collection('users').doc(curUser._id).update({
             data: {
+                memberType: 3,
                 proEndDate,
                 updateAt: new Date(),
             }
