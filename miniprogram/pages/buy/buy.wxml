@@ -15,14 +15,14 @@
 		</view>
 	</view>
 
-	<view class="member-card {{ isShowBuyDuju ? (curMemberMode === 'duju' ? 'duju' : '') : 'no-duju' }}">
-		<view class="member {{ curMemberMode === 'normal' ? 'active' : '' }}" bindtap="setNormalMembetMode">
-			<view class="member-tag">永久会员 Pro</view>
-			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ normalPriceStr }}/永久</view>
+	<view class="member-card {{ curMemberMode }}">
+		<view class="member {{ curMemberMode === 'item1' ? 'active' : '' }}" bindtap="setNormalMembetMode">
+			<view class="member-tag">一年会员 Pro</view>
+			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ normalPriceStr }}/年度</view>
 		</view>
-		<view wx:if="{{ isShowBuyDuju && env.platform === 'android' }}" class="member {{ curMemberMode === 'duju' ? 'active' : '' }}" bindtap="setDujuMembetMode">
-			<view class="member-tag">笃局会员 Pro</view>
-			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ dujuPriceStr }}(返现金20元)</view>
+		<view class="member {{ curMemberMode === 'item2' ? 'active' : '' }}" bindtap="setDujuMembetMode">
+			<view class="member-tag">永久会员 Pro</view>
+			<view wx:if="{{ env.platform === 'android' }}" class="ft_12 mt_6">￥{{ dujuPriceStr }}/永久</view>
 		</view>
 	</view>
 
@@ -47,7 +47,7 @@
 	<view wx:else class="pay-submit-bar">
 		<view class="buy-btn" bindtap="onSubmit">
 			<view class="ft_15">立即开通</view>
-			<view class="ft_13">￥{{ curMemberMode === 'duju' ? dujuPriceStr : normalPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
+			<view class="ft_13">￥{{ curMemberMode === 'item1' ? normalPriceStr : dujuPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
 		</view>
 		<view class="ft_12 text-center mt_12" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属正常流程，可放心支付</view>
 	</view>

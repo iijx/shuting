@@ -12,7 +12,7 @@ app.createPage({
         goods: [],
 
         isShowBuyDuju: false,
-        curMemberMode: 'normal', // 'normal' || 'duju'
+        curMemberMode: 'item1', // 'item1' || 'item2'
 
         dujuPriceStr: '0.00',
         normalPriceStr: '18.00',
@@ -50,23 +50,23 @@ app.createPage({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-        let isShowBuyDuju = wx.getStorageSync('l_isShowBuyDuju') || 0;
-        console.log('isShowBuyDuju', isShowBuyDuju);
-        if (isShowBuyDuju === 0) {
-            console.log(Math.random() * 100, this.data.config.androidWithDujuRate)
-            isShowBuyDuju = (Math.random() * 100) <= this.data.config.androidWithDujuRate ? 1 : -1;
-            console.log((Math.random() * 100) <= this.data.config.androidWithDujuRate)
-            wx.setStorage({ key: 'l_isShowBuyDuju', data: String(isShowBuyDuju)});
-        }
+        // let isShowBuyDuju = wx.getStorageSync('l_isShowBuyDuju') || 0;
+        // console.log('isShowBuyDuju', isShowBuyDuju);
+        // if (isShowBuyDuju === 0) {
+        //     console.log(Math.random() * 100, this.data.config.androidWithDujuRate)
+        //     isShowBuyDuju = (Math.random() * 100) <= this.data.config.androidWithDujuRate ? 1 : -1;
+        //     console.log((Math.random() * 100) <= this.data.config.androidWithDujuRate)
+        //     wx.setStorage({ key: 'l_isShowBuyDuju', data: String(isShowBuyDuju)});
+        // }
 
         wx.nextTick(() => {
-            let defaultGood = this.data.goods.find(item => String(item.memberType) === '3');
+            let defaultGood = this.data.goods.find(item => String(item.memberType) === '4');
             this.data.price = defaultGood.price * 100;
             this.setData({
-                isShowBuyDuju: String(isShowBuyDuju) === '1',
+                // isShowBuyDuju: String(isShowBuyDuju) === '1',
                 memberType: String(defaultGood.memberType),
                 normalPriceStr: (defaultGood.price).toFixed(2),
-                dujuPriceStr: ((this.data.goods.find(item => String(item.memberType) === '20') || {}).price || 10).toFixed(2)
+                dujuPriceStr: ((this.data.goods.find(item => String(item.memberType) === '3') || {}).price || 10).toFixed(2)
             })
         })
 
@@ -144,15 +144,15 @@ app.createPage({
     setNormalMembetMode() { 
         this.data.price = Math.ceil(this.data.normalPriceStr * 100)
         this.setData({ 
-            curMemberMode: 'normal',
-            memberType: 3
+            curMemberMode: 'item1',
+            memberType: 4
         }) 
     },
     setDujuMembetMode() { 
         this.data.price = Math.ceil(this.data.dujuPriceStr * 100)
         this.setData({
-            curMemberMode: 'duju',
-            memberType: 20
+            curMemberMode: 'item2',
+            memberType: 3
         }) 
     },
     updateSignUpNumber() {

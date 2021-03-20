@@ -84,7 +84,6 @@ app.createPage({
     },
     audioPlay() {
         AudioContext.src = this.data.curNumAudioSrc;
-        console.log(this.data.curNumAudioSrc);
         AudioContext.play();
     },
     _preStartInit() {
@@ -146,11 +145,13 @@ app.createPage({
         return String(this.data.inputValue) === String(this.data.answer);
     },
     playResultAudio(isCorrect) {
-        console.log('playResultAudio,', isCorrect)
         return new Promise((resolve, reject) => {
             AudioContext.src = isCorrect ? Config.correctAudioSrc : Config.errorAudioSrc;
+            AudioContext.onEnded(() => resolve());
+            AudioContext.onError(() => resolve());
+            AudioContext.onStop(() => resolve());
             AudioContext.play();
-            Util.sleep(isCorrect ? 1200 : 700).then(() => resolve());
+            // Util.sleep(isCorrect ? 1500 : 1000).then(() => resolve());
         })
     },
     showAnswer() {

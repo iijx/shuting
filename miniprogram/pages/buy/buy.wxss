@@ -133,11 +133,11 @@
     transform: rotate(45deg) translateY(8px);
     transition: left 400ms;
 }
-.member-card.duju:after {
+.member-card.item2:after {
     left: 75%;
 }
-.member-card.no-duju:after {
-    left: 50%;
+.member-card.item1:after {
+    left: 25%;
 }
 .member {
     flex: 1;

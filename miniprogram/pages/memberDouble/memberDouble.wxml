@@ -23,7 +23,7 @@
                 <view>1. 邀请 5 位好友进入，可立即升级永久会员；</view>
                 <view>2. 好友进入小程序，即算邀请成功，无需购买；</view>
                 <view>3. 每位用户仅一次活动机会；</view>
-                <view class="cl_red ft_bold">4. 仅限购买后7日内邀请才会生效。</view>
+                <view class="cl_red ft_bold">4. 仅限购买后7日内的邀请有效。</view>
             </view>
         </view>
 
