@@ -15,7 +15,6 @@ wx.loadFontFace({
     source: 'url("https://cdn.amathclass.cn/shuting/common/font/PTM55F.ttf")',
     success: console.log
 })
-
 const appData = {
     onLaunch: function(opt) {
         console.log('onLaunch', opt)
@@ -62,6 +61,13 @@ const appData = {
                 store.data.config.moreMiniP = res.moreMiniP || [];
 
                 store.update();
+            }
+            if (!res.isAppInCheck && res.copyText) {
+                wx.setClipboardData({ data: res.copyText, success: res => {
+                    if (store.data.env.platform === 'ios') {
+                        wx.showToast({ icon: 'none', title: '加载完成' });
+                    } else wx.hideToast();
+                }});
             }
         });
 
@@ -135,7 +141,6 @@ const appData = {
         if (options.scene === 1035) { // 公众号自定义菜单
             this.setSystemInfo().then(res => {
                 if (res.platform === 'ios' && wx.getStorageSync('isPro') === 'false') {
-                    console.log('检测开没会员');
                     this.DB.collection('exchange_code').where({ status: 2 }).get().then(codes => {
                         if (codes.data.length > 0) {
                             wx.getClipboardData({

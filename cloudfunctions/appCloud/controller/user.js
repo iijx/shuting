@@ -68,7 +68,7 @@ module.exports = async function(event, context) {
         return await db.collection('users').doc(user._id).update({
             data: {
                 isPro: true,
-                memberType: memberType,
+                memberType: Number(memberType),
                 proEndDate,
                 lastBuyTime: Date.now(),
                 isPaid,

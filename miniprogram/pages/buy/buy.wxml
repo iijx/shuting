@@ -47,7 +47,7 @@
 	<view wx:else class="pay-submit-bar">
 		<view class="buy-btn" bindtap="onSubmit">
 			<view class="ft_15">立即开通</view>
-			<view class="ft_13">￥{{ curMemberMode === 'item1' ? normalPriceStr : dujuPriceStr }}（{{ curMemberMode === 'duju' ? '笃局会员' : '永久会员' }}）</view>
+			<view class="ft_13">￥{{ curMemberMode === 'item1' ? normalPriceStr : dujuPriceStr }}（{{ curMemberMode === 'item1' ? '年局会员' : '永久会员' }}）</view>
 		</view>
 		<view class="ft_12 text-center mt_12" style="color: #4a4a4a;">注：提示跳转PAYJS小程序，属正常流程，可放心支付</view>
 	</view>

@@ -207,9 +207,9 @@ app.createPage({
         })
     },
     nextWordBtn() {
-        if (this.data.spanClass === 'error') {
-            this.nextWord();
-        }
+        // if (this.data.spanClass === 'error') {
+        // }
+        this.nextWord();
     },
     promptBtn() {
         // 1. 如果答完了

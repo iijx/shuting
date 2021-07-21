@@ -52,7 +52,7 @@
 							<view class="unit-title">{{ unit.title }} </view>
 							<view class="unit-status">{{ unit.cNum >= 15 ? '已完成' : ( curLearnUnit.unitId === unit.unitId ? '学习中...' : '未完成')}}</view>
 						</view>
-						<view style="flex: 1">
+						<view style="flex: 1;">
 							<image wx:if="{{ unit.isPro && !user.isPro}}" class="lock" src="/assets/imgs/article_lock.png"></image>
 						</view>
 						<view class="unit-select-btn" data-level="{{ unit }}" bindtap="selectBtn">{{ unit.cNum >= 15 ? '复习' : '学习' }}</view>
