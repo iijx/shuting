@@ -34,7 +34,19 @@ module.exports = async function(event, context) {
     if (method === 'get') {
         if (!curUser) {
             curUser = await createUser(openid);
-            if (params.fromOpenid && params.fromOpenid !== openid) {
+            let fromOpenid = params.fromOpenid;
+            const timeline = params.timeline || {};
+            // 有可能是从朋友圈来的
+            if (!fromOpenid && timeline.batteryLevel) {
+                const bindRes = await db.collection('bind').where({
+                    moniDeviceId: timeline.moniDeviceId,
+                    batteryLevel: timeline.batteryLevel,
+                    timestamp: _.gt(timeline.timestamp - 1000 * 10)
+                }).limit(1).get().then(res => res.data[0]);
+                console.log('bindRes', bindRes);
+                if (bindRes) fromOpenid = bindRes.fromOpenid || '';
+            }
+            if (fromOpenid && fromOpenid !== openid) {
                 await db.collection('weapp_share').where({ openid: params.fromOpenid })
                     .update({ data: { invitedUser: _.addToSet(openid)}})
                     .then(async res => {
@@ -65,7 +77,7 @@ module.exports = async function(event, context) {
         const { memberType, isPaid, memberDay, openid } = params;
         let user = await getUser(openid);
         let proEndDate = Date.now() + memberDay * 24 * 60 * 60 * 1000;
-        return await db.collection('users').doc(user._id).update({
+        await db.collection('users').doc(user._id).update({
             data: {
                 isPro: true,
                 memberType: Number(memberType),
@@ -75,6 +87,7 @@ module.exports = async function(event, context) {
                 updateAt: new Date(),
             }
         })
+        return { success: true, data: user }
     } else if (method === 'setLongMember') {
         const { needSetOpenid } = params;
         let user = await getUser(needSetOpenid);

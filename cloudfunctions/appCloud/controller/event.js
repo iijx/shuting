@@ -3,6 +3,7 @@ const cloud = require('wx-server-sdk')
 const userController = require('./user.js')
 const orderController = require('./order.js')
 const Duju = require('../models/duju.js');
+const appConfig = require('../appConfig.js');
 // 初始化 cloud
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV // API 调用都保持和云函数当前所在环境一致
@@ -52,6 +53,26 @@ module.exports = async (event, context) => {
             const res = await db.collection('duju').add({ data: duju });
             return res;
         }
-        else return userRes;
+
+        // 4. 邀请人得到奖励
+        const fromOpenidRes = await db.collection('weapp_share').where({ invitedUser: openid }).limit(1).get().then(res => res.data[0]);
+        console.log('第四步', fromOpenidRes, userRes, attach);
+        if (fromOpenidRes) {
+            const { memberType } = attach;
+            const cash = appConfig.awardPlan.find(i => String(i.memberType) === String(memberType)).cash;
+            await db.collection('weapp_share').doc(fromOpenidRes._id).update({
+                data: {
+                    awardRecords: db.command.push({
+                        nickName: userRes.data.nickName,
+                        avatarUrl: userRes.data.avatarUrl,
+                        memberType: Number(memberType),
+                        cash,
+                        createAt: new Date()
+                    }),
+                    totalMoney: db.command.inc(cash),
+                }
+            })
+        }
+        return userRes;
     }
 }

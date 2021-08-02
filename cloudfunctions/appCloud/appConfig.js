@@ -35,5 +35,15 @@ module.exports = {
         { title: '数听 · 日语版', appid: 'wx08b74a4a56324394' },
         // { title: '100种省钱方法', appid: 'wxcf148695ed647944' },
         // { title: '挑选有术', appid: 'wx936535a6fec653af' },
+    ],
+    awardPlan: [
+        {
+            memberType: 4,
+            cash: 5,
+        },
+        {
+            memberType: 3,
+            cash: 8,
+        },
     ]
 }

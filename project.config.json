@@ -25,14 +25,11 @@
             "disablePlugins": [],
             "outputPath": ""
         },
-        "bundle": false,
         "useIsolateContext": true,
         "useCompilerModule": true,
         "userConfirmedUseCompilerModuleSwitch": false,
-        "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true,
         "useApiHostProcess": false
     },
     "appid": "wx11a23be8fd1b03f3",
