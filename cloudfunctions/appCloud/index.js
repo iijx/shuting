@@ -7,6 +7,7 @@ const excCodeController = require('./controller/excCode.js')
 const shareController = require('./controller/share.js')
 const dujuController = require('./controller/duju.js')
 const eventController = require('./controller/event.js')
+const awardController = require('./controller/award.js')
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
@@ -24,10 +25,10 @@ exports.main = async (event, context) => {
   else if (model === 'share') return await shareController(event, context);
   else if (model === 'duju') return await dujuController(event, context);
   else if (model === 'event') return await eventController(event, context);
-
+  else if (model === 'award') return await awardController(event, context);
+  else if (model === 'user_award') return await awardController(event, context);
   return {
     success: false,
     msg: '未知请求'
   }
-
 }

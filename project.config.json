@@ -20,168 +20,155 @@
         "compileHotReLoad": false,
         "useMultiFrameRuntime": true,
         "useApiHook": true,
+        "useApiHostProcess": true,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
         "useIsolateContext": true,
-        "useCompilerModule": true,
-        "userConfirmedUseCompilerModuleSwitch": false,
+        "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "useApiHostProcess": false
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "minifyWXML": true,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false,
+        "lazyloadPlaceholderEnable": false,
+        "uglifyFileName": false,
+        "useStaticServer": true,
+        "ignoreUploadUnusedFiles": true
     },
     "appid": "wx11a23be8fd1b03f3",
     "projectname": "%E6%95%B0%E5%90%AC%E8%8B%B1%E8%AF%AD",
     "libVersion": "2.14.0",
     "simulatorType": "wechat",
     "simulatorPluginLibVersion": {},
-    "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+    "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
     "condition": {
-        "search": {
-            "list": []
-        },
-        "conversation": {
-            "list": []
-        },
-        "plugin": {
-            "list": []
-        },
-        "game": {
-            "list": []
-        },
-        "gamePlugin": {
-            "list": []
-        },
         "miniprogram": {
             "list": [
                 {
-                    "id": -1,
                     "name": "pages/learn/learn",
                     "pathName": "pages/learn/learn",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/level",
                     "pathName": "pages/level/level",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/my",
                     "pathName": "pages/my/my",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "summary",
                     "pathName": "pages/summary/summary",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "buy",
                     "pathName": "pages/buy/buy",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": 5,
                     "name": "index_from_user",
                     "pathName": "pages/index/index",
                     "query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "version",
                     "pathName": "pages/version/version",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "index_wxST",
                     "pathName": "pages/index/index",
                     "query": "openid=oH3iI5NU9XZO4HFeRDVRQ5N2aHjs",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/index",
                     "pathName": "pages/index/index",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "temp",
                     "pathName": "pages/temp/temp",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/temp2/temp2",
                     "pathName": "pages/temp2/temp2",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/activity",
                     "pathName": "pages/activity/activity",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/memberDouble",
                     "pathName": "pages/memberDouble/memberDouble",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": 13,
                     "name": "pages/article/article",
                     "pathName": "pages/article/article",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "qst",
                     "pathName": "pages/qst/qst",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "papel",
                     "pathName": "pages/papel/papel",
                     "query": "",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/myduju",
                     "pathName": "pages/myduju/myduju",
                     "query": "fromOpenid=oH3iI5CSNqbwXKq_0J7DjuT0Qscw",
                     "scene": null
                 },
                 {
-                    "id": -1,
                     "name": "pages/timeline",
                     "pathName": "pages/timeline/timeline",
+                    "query": "",
                     "scene": null
                 }
             ]
         }
-    }
+    },
+    "compileType": "miniprogram",
+    "srcMiniprogramRoot": "miniprogram/",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    },
+    "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html"
 }

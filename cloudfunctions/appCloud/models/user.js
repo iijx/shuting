@@ -7,6 +7,8 @@ module.exports = class User {
         this.proEndDate = 0;
         this.memberType = -1;
         this.isPaid = false;
+        this.appuuid = opt.appuuid || '';
+        this.isRobot = opt.isRobot || false;
         
         this.createAt = Date.now();
         this.updateAt = Date.now();

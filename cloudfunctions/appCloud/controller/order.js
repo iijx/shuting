@@ -11,20 +11,16 @@ cloud.init({
 const db = cloud.database();
 
 // 生成订单
-const genOrder = async function(openid, memberType, memberDay) {
+const genOrder = async function(openid, memberType) {
     let good = GOODS.find(item => String(item.memberType) === String(memberType));
     if (!good) good = GOODS[3]; // 若没找到商品，默认终身会员（做兼容处理，一般不会出现
-    // 如果是自定义会员，单独处理一下
-    if (good.isCustom) {
-        good.totalFee = Math.round(memberDay * 20);
-        good.title = `数听自定义${memberDay}天会员`;
-        good.memberDay = memberDay;
-    }
+   
 
     const order = new Order({
         total_fee: good.totalFee,
         openid,
         body: good.title,
+        memberType: good.memberType,
         attach: JSON.stringify({
             memberType: good.memberType,
             memberDay: good.memberDay

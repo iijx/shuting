@@ -18,26 +18,41 @@ const sendMember = async (openid) => {
         }
     })
 }
+
+const sendMember2 = async (openid) => {
+    await cloud.openapi.customerServiceMessage.send({
+        touser: openid,
+        msgtype: 'link',
+        link: {
+            title: '数听英语 · 开通会员',
+            description: '查看会员计划',
+            url: "https://payjs.cn/api/openid?mchid=1578310381&callback_url=".concat(encodeURIComponent("https://pay.amathclass.cn/#/pages/shutingbuy/shutingbuy?appOpenid=" + openid)),
+            thumbUrl: 'https://cdnword.iijx.site/assets/imgs/shuting/icon-shuting.png'
+        }
+    })
+}
+
 exports.main = async (event, context) => {
     console.log(event);
     // event 【user_enter_tempsession】
     if (event.MsgType === 'event' && event.Event === 'user_enter_tempsession') {
         if (event.SessionFrom === 'member') {
-            await sendMember(event.FromUserName);
+            await sendMember2(event.FromUserName);
         }
     }
     // text
     if (event.MsgType === 'text') {
-        if (event.Content.indexOf('开通') >= 0 || event.Content.indexOf('会员') >= 0 || event.Content.indexOf('1') >= 0 || event.Content.indexOf('6') >= 0 || event.Content.indexOf('升级') >= 0 || event.Content.indexOf('vip') >= 0 || event.Content.indexOf('Vip') >= 0 || event.Content.indexOf('VIP' || event.Content.indexOf('解锁') >= 0) >= 0) {
-            await sendMember(event.FromUserName);
+        if (event.Content.trim() === '6') {
+            await sendMember2(event.FromUserName);
         }
-        else {
-            return {
-                MsgType: 'transfer_customer_service',
-                ToUserName: event.FromUserName,
-                FromUserName: event.ToUserName,
-                CreateTime: parseInt(+new Date / 1000),
-            }
+        // if (event.Content.trim() === '7') {
+        //     await sendMember2(event.FromUserName);
+        // }
+        return {
+            MsgType: 'transfer_customer_service',
+            ToUserName: event.FromUserName,
+            FromUserName: event.ToUserName,
+            CreateTime: parseInt(+new Date / 1000),
         }
     }
 }

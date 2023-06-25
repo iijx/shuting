@@ -11,6 +11,7 @@ module.exports = class Order {
         this.openid = opt.openid;
         this.body = opt.body || '数听会员';
         this.total_fee = opt.total_fee;
+        this.memberType = opt.memberType;
         this.status = 1; // 1 未支付，2 已支付， 3，已退款
         this.out_trade_no = this.genOrderNum();
         this.transaction_id = ''; // 微信订单号
